@@ -1,0 +1,17 @@
+# Ignore artifacts:
+build
+coverage
+.next
+out
+.yarn
+.github
+.env*
+.eslintrc.json
+.gitignore
+.yarnrc.yml
+next-env.d.ts
+next-env.d
+package*
+tsconfig.json
+yarn.lock
+next.config.js

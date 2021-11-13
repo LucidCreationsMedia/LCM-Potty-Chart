@@ -1,0 +1,42 @@
+{
+  "private": true,
+  "name": "lucid-creations-media-potty-chart",
+  "homepage": "https://github.com/LucidCreationsMedia/",
+  "version": "0.1.0",
+  "author": {
+    "name": "Lucid Creations Media",
+    "url": "https://lucidcreations.media",
+    "email": "social@lucidcreations.media"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "pretty": "prettier --write ."
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.7.1",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@iconify/react": "^3.1.0",
+    "@types/react": "^17.0.34",
+    "framer-motion": "^5.3.0",
+    "next": "12.0.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sharp": "^0.29.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "eslint": "<8.0.0",
+    "eslint-config-next": "12.0.3",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.4.1",
+    "typescript": "4.4.4"
+  },
+  "packageManager": "yarn@3.1.0"
+}
