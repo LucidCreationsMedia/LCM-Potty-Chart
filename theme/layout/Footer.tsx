@@ -80,13 +80,15 @@ const Footer = (): JSX.Element => {
             </Link>
           </MotionBox> */}
           <Text color="brand.footerText" fontSize="xs">
-            &copy; 2021 - {new Date().getFullYear()}
+            &copy;
+            {" 2021 - "}
+            {new Date().getFullYear()}
             <Link
               href="https://lucidcreations.media"
               rel="noopener"
               target="_blank"
             >
-              Lucid Creations Media
+              {" Lucid Creations Media"}
             </Link>
           </Text>
         </VStack>

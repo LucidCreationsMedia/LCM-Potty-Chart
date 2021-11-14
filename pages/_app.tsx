@@ -5,10 +5,7 @@ import AppTheme from "../theme/AppTheme";
 import Layout from "../theme/layout/Layout";
 import Head from "next/head";
 
-function LCMPottyChart({
-  Component,
-  pageProps,
-}: AppProps): JSX.Element {
+function LCMPottyChart({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider theme={AppTheme}>
       <Layout {...pageProps}>
