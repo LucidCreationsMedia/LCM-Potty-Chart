@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Button, HStack, Link } from "@chakra-ui/react";
 import navItems, { NavItem } from "./navItems";
 
-const DesktopNav: FC<DesktopNavProps> = () => {
+const DesktopNav = (): JSX.Element => {
   return (
     <HStack
       as="nav"
