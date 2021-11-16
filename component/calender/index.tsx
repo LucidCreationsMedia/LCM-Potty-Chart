@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import { endOfMonth, getDate } from 'date-fns';
+import { endOfMonth, getDate } from "date-fns";
 
 const Calender = (): JSX.Element => {
-  const today = new Date;
+  const today = new Date();
 
   const endOfCurrMonth = endOfMonth(today);
   const lastDay = getDate(endOfCurrMonth);
 
-  console.info(`This month has ${lastDay} days.`);
+  // console.info(`This month has ${lastDay} days.`);
 
   const daysArr = [];
   for (let i = daysArr.length; i < lastDay; i++) {
