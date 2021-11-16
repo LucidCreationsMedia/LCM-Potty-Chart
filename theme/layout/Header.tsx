@@ -13,34 +13,23 @@ import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
 const Header = (): JSX.Element => {
-  // Sticky Navbar, Scroll Direction, and Back to Top Button Visibility
-  const [stickyNavbar, setStickyNavbar] = useState<boolean>(false);
+  // Add transparency while not at the top of the page.
+  const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
   const lastScroll = useRef<number>(0);
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down" | "top">(
-    "top"
-  );
-  // const [scroll, setScroll] = useState<number>(0);
 
   const handleScroll = (): void => {
     // Sticky Nav
     if (window.scrollY >= 20) {
-      setStickyNavbar(true);
+      setTransparentNavbar(true);
     } else {
-      setStickyNavbar(false);
+      setTransparentNavbar(false);
     }
 
-    // Scroll Direction
+    // Scroll Position.
     const currentScroll =
       window.scrollY || window.pageYOffset || document.body.scrollTop;
 
-    if (currentScroll > lastScroll.current) {
-      setScrollDirection("down");
-    } else if (currentScroll <= 20) {
-      setScrollDirection("top");
-    } else {
-      setScrollDirection("up");
-    }
-
+    // Update Scroll Position Reference
     lastScroll.current = currentScroll <= 0 ? 0 : currentScroll;
     // setScroll(lastScroll.current = currentScroll <= 0 ? 0 : currentScroll)
   };
@@ -85,29 +74,22 @@ const Header = (): JSX.Element => {
       boxShadow={
         open
           ? "none"
-          : stickyNavbar
-          ? "rgba(0, 134, 255, 0.75) 0px 0px 15px, rgba(0, 134, 255, 0.5) 0px 0px 3px 1px"
-          : "none"
+          : "rgba(0, 134, 255, 0.75) 0px 0px 15px, rgba(0, 134, 255, 0.5) 0px 0px 3px 1px"
       }
       bg={
         open
           ? "brand.main"
-          : stickyNavbar
-          ? "rgba(49, 56, 220, 0.9)"
-          : "transparent"
-      }
-      d={
-        scrollDirection === "up" || scrollDirection === "top" ? "block" : "none"
+          : transparentNavbar
+            ? "rgba(49, 56, 220, 0.9)"
+            : "brand.main"
       }
       transition=".5s ease"
       borderRadius="0px 0px 10px 10px"
       _hover={{
-        bg: open ? "brand.main" : stickyNavbar ? "brand.main" : "transparent",
+        bg: "brand.main",
         boxShadow: open
           ? "none"
-          : stickyNavbar
-          ? "rgba(0, 134, 255, 0.9) 0px 0px 15px, rgba(0, 134, 255, 0.7) 0px 0px 3px 1px"
-          : "none",
+          : "rgba(0, 134, 255, 0.9) 0px 0px 15px, rgba(0, 134, 255, 0.7) 0px 0px 3px 1px",
       }}
       h={open ? "125px" : "auto"}
     >
@@ -142,7 +124,7 @@ const Header = (): JSX.Element => {
                 LCM Potty Chart
               </Heading>
             </Box>
-            <DesktopNav sticky={stickyNavbar} />
+            <DesktopNav />
           </HStack>
           <Menu isLazy lazyBehavior="unmount" isOpen={open}>
             <MenuButton
@@ -154,9 +136,11 @@ const Header = (): JSX.Element => {
               onMouseLeave={() => setHover(false)}
               d={{ base: "inline-flex", lg: "none" }}
               variant="mobileNav"
-              bg={stickyNavbar ? "transparent" : "rgba(255, 255, 255, .15)"}
+              bg={
+                transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"
+              }
               type="button"
-              border={stickyNavbar ? "1px solid #0068ff" : "none"}
+              border={transparentNavbar ? "1px solid #0068ff" : "none"}
               id="mobile-menu-button"
             />
             <MobileNav updateOpen={setOpen} />
