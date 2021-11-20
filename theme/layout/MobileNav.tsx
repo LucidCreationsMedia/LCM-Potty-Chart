@@ -36,7 +36,7 @@ const MobileNav: FC<MobileNavProps> = ({ updateOpen }: MobileNavProps) => {
               backgroundColor: "none",
             }}
             _focus={{
-              backgroundColor: "none"
+              backgroundColor: "none",
             }}
           >
             <Link onClick={() => updateOpen(false)} href={navItem[1]}>

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Button, HStack, Link } from "@chakra-ui/react";
 import navItems, { NavItem } from "./navItems";
 
