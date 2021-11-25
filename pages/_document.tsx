@@ -40,8 +40,8 @@ class Document extends NextDocument {
           <meta name="page-type" content="Calender" />
           <meta name="audience" content="18+" />
           <meta name="robots" content="index, follow" />
-          <html lang="en" />
         </Head>
+        <html lang="en" />
         <body>
           <ColorModeScript
             initialColorMode={AppTheme.config.initialColorMode}
