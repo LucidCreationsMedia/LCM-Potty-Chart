@@ -7,12 +7,17 @@ import {
   Flex,
   Menu,
   MenuButton,
+  VStack,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
 const Header = (): JSX.Element => {
+  const appName = "LCM Potty Chart"
+  const appVersion = "v0.0.2.3-pre-alpha"
+
+
   // Add transparency while not at the top of the page.
   const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
   const lastScroll = useRef<number>(0);
@@ -80,8 +85,8 @@ const Header = (): JSX.Element => {
         open
           ? "brand.main"
           : transparentNavbar
-          ? "rgba(49, 56, 220, 0.9)"
-          : "brand.main"
+            ? "rgba(49, 56, 220, 0.9)"
+            : "brand.main"
       }
       transition=".5s ease"
       borderRadius="0px 0px 10px 10px"
@@ -94,7 +99,7 @@ const Header = (): JSX.Element => {
       h={open ? "125px" : "auto"}
     >
       {/* Logo | Site Name */}
-      <Flex
+      <HStack
         width="100%"
         justifyContent={{ base: "flex-start", sm: "center" }}
         alignItems="center"
@@ -103,15 +108,19 @@ const Header = (): JSX.Element => {
         position="absolute"
         ml={4}
         d={{ base: "flex", lg: "none" }}
+        spacing="5px"
       >
-        <Heading as="h1" fontSize="lg">
-          LCM Potty Chart
+        <Heading as="h1" size="md">
+          {appName}
         </Heading>
-      </Flex>
+        <Heading color="whiteAlpha.500" as="h2" size="sm">
+          {appVersion}
+        </Heading>
+      </HStack>
 
       {/* Desktop Nav Items and Mobile Menu Button */}
       <Box h="auto" w="100%" px={4}>
-        <Flex h={12} alignItems={"center"} justifyContent={"space-between"}>
+        <Flex h={12} alignItems="center" justifyContent="space-between" >
           <HStack
             w="100%"
             h="auto"
@@ -120,9 +129,19 @@ const Header = (): JSX.Element => {
           >
             <Box w="auto" d={{ base: "flex", lg: "none " }}></Box>
             <Box w="100%" d={{ base: "none", lg: "flex" }} m="auto">
-              <Heading as="h1" size="md">
-                LCM Potty Chart
-              </Heading>
+              <HStack
+                width="100%"
+                alignItems="center"
+                height="auto"
+                spacing="5px"
+              >
+                <Heading as="h1" size="md">
+                  {appName}
+                </Heading>
+                <Heading color="whiteAlpha.500" as="h2" size="sm">
+                  {appVersion}
+                </Heading>
+              </HStack>
             </Box>
             <DesktopNav />
           </HStack>
