@@ -1,19 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React/*, { useEffect, useRef, useState }*/ from "react";
 import {
   Box,
-  // HStack,
   Text,
   VStack,
   Link,
-  // Icon,
+  HStack,
   // Image,
-  // Button,
-  // BoxProps,
+  Button,
+  BoxProps,
 } from "@chakra-ui/react";
+import { Icon } from "@iconify/react";
 // import BackToTopButton from "./BackToTopButton";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 
-// export const MotionBox = motion<BoxProps>(Box);
+export const MotionBox = motion<BoxProps>(Box);
 
 const Footer = (): JSX.Element => {
   // const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
@@ -52,18 +52,7 @@ const Footer = (): JSX.Element => {
         justifyItems="center"
         justifyContent="center"
       >
-        {/* <HStack color="brand.footerText" spacing={2}>
-          <Text fontSize="xl">Deployed by</Text>
-          <Link
-            aria-label="Vercel"
-            href="https://vercel.com/"
-            rel="noopener"
-            target="_blank"
-          >
-            <Icon fontSize="1.75rem" icon="logos:vercel" />
-          </Link>
-        </HStack> */}
-        <VStack spacing={2}>
+        <VStack spacing={4}>
           {/* <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             <Link
               href="https://github.com/LucidCreationsMedia"
@@ -79,16 +68,47 @@ const Footer = (): JSX.Element => {
               </Button>
             </Link>
           </MotionBox> */}
+          <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <Link
+              href="https://lucidcreations.media/introducing-code-name-potty-chart/"
+              target="_blank"
+              rel="noopener"
+            >
+              <Button
+                color="whiteAlpha"
+                variant="credits"
+              >
+                More About This App
+              </Button>
+            </Link>
+          </MotionBox>
+          <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <Link
+              href="https://www.patreon.com/bePatron?u=15380906"
+              target="_blank"
+              rel="noopener"
+            >
+              <Button
+                color="whiteAlpha"
+                background="#FF424D"
+                variant="credits"
+                leftIcon={<Icon icon="ri:patreon-fill" />}
+              >
+                Fund This App
+              </Button>
+            </Link>
+          </MotionBox>
           <Text color="brand.footerText" fontSize="xs">
             &copy;
             {" 2021 - "}
             {new Date().getFullYear()}
+            {" "}
             <Link
               href="https://lucidcreations.media"
               rel="noopener"
               target="_blank"
             >
-              {" Lucid Creations Media"}
+              {"Lucid Creations Media"}
             </Link>
           </Text>
         </VStack>
