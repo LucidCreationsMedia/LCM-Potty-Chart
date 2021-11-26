@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { endOfMonth, getDate } from "date-fns";
-import CalenderNav from "./nav";
+import CalenderNav from "./CalenderNav";
 
 const Calender = (): JSX.Element => {
   const today = new Date();

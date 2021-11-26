@@ -1,7 +1,7 @@
 import React from "react";
 import { Heading, HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
-import { format } from "date-fns/esm";
+import { format } from "date-fns";
 
 const CalenderNav = (): JSX.Element => {
   const today = new Date();
