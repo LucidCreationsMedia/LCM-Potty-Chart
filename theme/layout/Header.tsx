@@ -15,7 +15,7 @@ import MobileNav from "./MobileNav";
 
 const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart"
-  const appVersion = "v0.0.2.4-pre-alpha"
+  const appVersion = "v0.0.2.5-pre-alpha"
 
 
   // Add transparency while not at the top of the page.
