@@ -119,53 +119,51 @@ const Header = (): JSX.Element => {
       </HStack>
 
       {/* Desktop Nav Items and Mobile Menu Button */}
-      <Box h="auto" w="100%" px={4}>
-        <Flex h={12} alignItems="center" justifyContent="space-between" >
-          <HStack
-            w="100%"
-            h="auto"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Box w="auto" d={{ base: "flex", lg: "none " }}></Box>
-            <Box w="100%" d={{ base: "none", lg: "flex" }} m="auto">
-              <HStack
-                width="100%"
-                alignItems="center"
-                height="auto"
-                spacing="5px"
-              >
-                <Heading as="h1" size="md">
-                  {appName}
-                </Heading>
-                <Heading color="whiteAlpha.500" as="h2" size="sm">
-                  {appVersion}
-                </Heading>
-              </HStack>
-            </Box>
-            <DesktopNav />
-          </HStack>
-          <Menu isLazy lazyBehavior="unmount" isOpen={open}>
-            <MenuButton
-              as={IconButton}
-              aria-label="Mobile Menu"
-              icon={menuIcon()}
-              onClick={() => setOpen(!open)}
-              onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}
-              d={{ base: "inline-flex", lg: "none" }}
-              variant="mobileNav"
-              bg={
-                transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"
-              }
-              type="button"
-              border={transparentNavbar ? "1px solid #0068ff" : "none"}
-              id="mobile-menu-button"
-            />
-            <MobileNav updateOpen={setOpen} />
-          </Menu>
-        </Flex>
-      </Box>
+      <HStack w="100%" px={4} h={12} alignItems="center" justifyContent="space-between" >
+        <HStack
+          w="100%"
+          h="auto"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Box w="auto" d={{ base: "flex", lg: "none " }}></Box>
+          <Box w="100%" d={{ base: "none", lg: "flex" }} m="auto">
+            <HStack
+              width="100%"
+              alignItems="center"
+              height="auto"
+              spacing="5px"
+            >
+              <Heading as="h1" size="md">
+                {appName}
+              </Heading>
+              <Heading color="whiteAlpha.500" as="h2" size="sm">
+                {appVersion}
+              </Heading>
+            </HStack>
+          </Box>
+          <DesktopNav />
+        </HStack>
+        <Menu isLazy lazyBehavior="unmount" isOpen={open}>
+          <MenuButton
+            as={IconButton}
+            aria-label="Mobile Menu"
+            icon={menuIcon()}
+            onClick={() => setOpen(!open)}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            d={{ base: "inline-flex", lg: "none" }}
+            variant="mobileNav"
+            bg={
+              transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"
+            }
+            type="button"
+            border={transparentNavbar ? "1px solid #0068ff" : "none"}
+            id="mobile-menu-button"
+          />
+          <MobileNav updateOpen={setOpen} />
+        </Menu>
+      </HStack>
     </Box>
   );
 };
