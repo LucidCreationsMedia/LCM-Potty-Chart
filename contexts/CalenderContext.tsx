@@ -74,7 +74,6 @@ const CalenderContextProvider = ({
         populateDays();
       }
     }
-
   }, [selectedMonth, endOfSelectedMonth]);
 
   // Update end of month.
