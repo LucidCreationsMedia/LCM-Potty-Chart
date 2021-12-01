@@ -14,9 +14,8 @@ import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
 const Header = (): JSX.Element => {
-  const appName = "LCM Potty Chart"
-  const appVersion = "v0.0.2.5-pre-alpha"
-
+  const appName = "LCM Potty Chart";
+  const appVersion = "v0.0.2.6-pre-alpha";
 
   // Add transparency while not at the top of the page.
   const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
@@ -85,8 +84,8 @@ const Header = (): JSX.Element => {
         open
           ? "brand.main"
           : transparentNavbar
-            ? "rgba(49, 56, 220, 0.9)"
-            : "brand.main"
+          ? "rgba(49, 56, 220, 0.9)"
+          : "brand.main"
       }
       transition=".5s ease"
       borderRadius="0px 0px 10px 10px"
@@ -119,7 +118,13 @@ const Header = (): JSX.Element => {
       </HStack>
 
       {/* Desktop Nav Items and Mobile Menu Button */}
-      <HStack w="100%" px={4} h={12} alignItems="center" justifyContent="space-between" >
+      <HStack
+        w="100%"
+        px={4}
+        h={12}
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <HStack
           w="100%"
           h="auto"
@@ -154,9 +159,7 @@ const Header = (): JSX.Element => {
             onMouseLeave={() => setHover(false)}
             d={{ base: "inline-flex", lg: "none" }}
             variant="mobileNav"
-            bg={
-              transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"
-            }
+            bg={transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"}
             type="button"
             border={transparentNavbar ? "1px solid #0068ff" : "none"}
             id="mobile-menu-button"

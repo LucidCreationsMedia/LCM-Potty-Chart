@@ -1,4 +1,4 @@
-import React/*, { useEffect, useRef, useState }*/ from "react";
+import React /*, { useEffect, useRef, useState }*/ from "react";
 import {
   Box,
   Text,
@@ -74,10 +74,7 @@ const Footer = (): JSX.Element => {
               target="_blank"
               rel="noopener"
             >
-              <Button
-                color="whiteAlpha"
-                variant="credits"
-              >
+              <Button color="whiteAlpha" variant="credits">
                 More About This App
               </Button>
             </Link>
@@ -101,8 +98,7 @@ const Footer = (): JSX.Element => {
           <Text color="brand.footerText" fontSize="xs">
             &copy;
             {" 2021 - "}
-            {new Date().getFullYear()}
-            {" "}
+            {new Date().getFullYear()}{" "}
             <Link
               href="https://lucidcreations.media"
               rel="noopener"
