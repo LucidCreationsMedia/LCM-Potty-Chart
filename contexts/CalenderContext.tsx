@@ -11,18 +11,20 @@ type days =
   | "Friday"
   | "Saturday";
 
+  interface DaysOfWeek {
+    startOfWeek: {
+      Sunday: days[];
+      Monday: days[];
+    };
+  }
+
 interface CalenderContextState {
   today: Date;
   selectedMonth: Date;
-  endOfCurrMonth: Date;
-  lastDay: number;
   daysOfMonth: [number] | [null];
-  daysOfWeek: {
-    startOfWeek: {
-      Sunday: [days];
-      Monday: [days];
-    };
-  };
+  daysOfWeek: DaysOfWeek;
+  prevMonth: () => void;
+  nextMonth: () => void;
 }
 
 const CalenderContext = createContext({} as CalenderContextState);
@@ -77,7 +79,7 @@ const CalenderContextProvider = ({
   }, [selectedMonth]);
 
   // Calender Layout
-  const daysOfWeek = {
+  const daysOfWeek: DaysOfWeek = {
     startOfWeek: {
       Sunday: [
         "Sunday",
@@ -125,6 +127,7 @@ const CalenderContextProvider = ({
     daysOfMonth,
     daysOfWeek,
     prevMonth,
+    nextMonth,
   };
 
   return (
