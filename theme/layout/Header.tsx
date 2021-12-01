@@ -4,10 +4,8 @@ import {
   HStack,
   Box,
   IconButton,
-  Flex,
   Menu,
   MenuButton,
-  VStack,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import DesktopNav from "./DesktopNav";
@@ -15,7 +13,7 @@ import MobileNav from "./MobileNav";
 
 const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart";
-  const appVersion = "v0.0.2.6-pre-alpha";
+  const appVersion = "v0.0.3.0-pre-alpha";
 
   // Add transparency while not at the top of the page.
   const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
@@ -108,6 +106,9 @@ const Header = (): JSX.Element => {
         ml={4}
         d={{ base: "flex", lg: "none" }}
         spacing="5px"
+        _hover={{
+          cursor: "default",
+        }}
       >
         <Heading as="h1" size="md">
           {appName}
@@ -138,6 +139,9 @@ const Header = (): JSX.Element => {
               alignItems="center"
               height="auto"
               spacing="5px"
+              _hover={{
+                cursor: "default",
+              }}
             >
               <Heading as="h1" size="md">
                 {appName}
