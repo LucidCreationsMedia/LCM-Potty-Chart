@@ -33,11 +33,8 @@ const CalenderContextProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  // Today's date
-  const [today] = useState<Date>(new Date());
-
   // Selected month & year
-  const [selectedMonth, setSelectedMonth] = useState<Date>(today);
+  const [selectedMonth, setSelectedMonth] = useState<Date>(new Date());
   const [endOfSelectedMonth, SetEndOfSelectedDMonth] = useState<number>(
     getDate(endOfMonth(selectedMonth))
   );
