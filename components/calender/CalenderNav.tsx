@@ -16,7 +16,13 @@ const CalenderNav = (): JSX.Element => {
         icon={<Icon icon="akar-icons:chevron-left" />}
         onClick={() => prevMonth()}
       />
-      <Heading w="100%" h="auto">
+      <Heading
+        w="100%"
+        h="auto"
+        _hover={{
+          cursor: "default",
+        }}
+      >
         {currentMonth}
       </Heading>
       <IconButton
