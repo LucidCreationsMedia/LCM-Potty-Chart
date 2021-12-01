@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
-import { endOfMonth, getDate } from "date-fns";
+import { endOfMonth, getDate, sub, add } from "date-fns";
 // TODO: import types
 
 type days =
@@ -46,6 +46,7 @@ const CalenderContextProvider = ({
 
   const [daysOfMonth, setDaysOfMonth] = useState<[number] | [null]>([null]);
 
+  // Populate days of the month and update them when the month changes.
   useEffect(() => {
     if (
       lastDayOfSelectedMonth !== daysOfMonth[daysOfMonth.length - 1] ||
@@ -63,6 +64,17 @@ const CalenderContextProvider = ({
       setDaysOfMonth(newDaysOfMonth);
     }
   }, [selectedMonth, lastDayOfCurrMonth]);
+
+  // Update selected month sates when the selected month is updated.
+  useEffect(() => {
+    if (endOfSelectedMonth !== endOfMonth(selectedMonth)) {
+      SetEndOfSelectedDMonth(endOfMonth(selectedMonth));
+    }
+
+    if (lastDayOfSelectedMonth !== getDate(endOfSelectedMonth)) {
+      setLastDayOfSelectedMonth(getDate(endOfSelectedMonth));
+    }
+  }, [selectedMonth]);
 
   // Calender Layout
   const daysOfWeek = {
@@ -91,7 +103,21 @@ const CalenderContextProvider = ({
   //TODO: Create an object of arrays that will align with the days on the week. Make two sets for each start of the week setting.
 
   // Navigation
-  const prevMonth = (): void => {};
+  const prevMonth = (): void => {
+    const newMonth = sub(today, {
+      years: 1,
+    });
+
+    setSelectedMonth(newMonth);
+  };
+
+  const nextMonth = (): void => {
+    const newMonth = add(today, {
+      years: 1,
+    });
+
+    setSelectedMonth(newMonth);
+  };
 
   const calenderContextValues = {
     today,
