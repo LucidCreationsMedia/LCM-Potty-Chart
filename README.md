@@ -65,7 +65,7 @@ I cannot guarantee functionality or stability if used on other OSs Ubuntu versio
 After cloning the app you will need to install the dependencies and packages. The app uses Yarn v2. Run this command to install using Yarn v2:
 
 ```
-Yarn install
+yarn install
 ```
 
 ### Upgrading Packages
