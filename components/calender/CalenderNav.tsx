@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Heading, HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { format } from "date-fns";
+import { CalenderContext } from "../../contexts/CalenderContext";
 
 const CalenderNav = (): JSX.Element => {
-  const today = new Date();
+  const { today } = useContext(CalenderContext);
 
   const currentMonth = format(today, "LLLL uuuu");
 
