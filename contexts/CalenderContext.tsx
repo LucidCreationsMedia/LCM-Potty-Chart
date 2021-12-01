@@ -20,7 +20,7 @@ interface DaysOfWeek {
 
 interface CalenderContextState {
   selectedMonth: Date;
-  daysOfMonth: [number] | [null];
+  daysOfMonth: [number];
   daysOfWeek: DaysOfWeek;
   prevMonth: () => void;
   nextMonth: () => void;
@@ -38,42 +38,49 @@ const CalenderContextProvider = ({
 
   // Selected month & year
   const [selectedMonth, setSelectedMonth] = useState<Date>(today);
-  const [endOfSelectedMonth, SetEndOfSelectedDMonth] = useState<Date>(
-    endOfMonth(selectedMonth)
-  );
-  const [lastDayOfSelectedMonth, setLastDayOfSelectedMonth] = useState<number>(
-    getDate(endOfSelectedMonth)
+  const [endOfSelectedMonth, SetEndOfSelectedDMonth] = useState<number>(
+    getDate(endOfMonth(selectedMonth))
   );
 
-  const [daysOfMonth, setDaysOfMonth] = useState<[number] | [null]>([null]);
+  const [daysOfMonth, setDaysOfMonth] = useState<[number]>([0]);
 
-  // Populate days of the month and update them when the month changes.
-  useEffect(() => {
-    if (
-      lastDayOfSelectedMonth !== daysOfMonth[daysOfMonth.length - 1] ||
-      daysOfMonth === null
-    ) {
-      const newDaysOfMonth: [number] = [0];
-      for (let i = daysOfMonth.length; i < lastDayOfSelectedMonth; i++) {
-        if (newDaysOfMonth.length === 1) {
-          newDaysOfMonth[0] = 1;
-        }
+  // Update or populate the days of the month.
+  const populateDays = (): void => {
+    let newDaysOfMonth: [number] = [...daysOfMonth];
 
-        newDaysOfMonth.push(newDaysOfMonth.length + 1);
-      }
-
-      setDaysOfMonth(newDaysOfMonth);
+    if (newDaysOfMonth.length > 1) {
+      newDaysOfMonth = [0];
     }
-  }, [selectedMonth, lastDayOfSelectedMonth]);
+
+    for (let i = 1; i < endOfSelectedMonth; i++) {
+      if (newDaysOfMonth[i - 1] === 0) {
+        newDaysOfMonth[i - 1] = i;
+      } else {
+        newDaysOfMonth.push(i + 1);
+      }
+    }
+
+    setDaysOfMonth(newDaysOfMonth);
+  };
 
   // Update selected month sates when the selected month is updated.
+
+  // Update days of month.
   useEffect(() => {
-    if (endOfSelectedMonth !== endOfMonth(selectedMonth)) {
-      SetEndOfSelectedDMonth(endOfMonth(selectedMonth));
+    if (daysOfMonth === null) {
+      populateDays();
+    } else {
+      if (daysOfMonth[daysOfMonth.length - 1] !== endOfSelectedMonth) {
+        populateDays();
+      }
     }
 
-    if (lastDayOfSelectedMonth !== getDate(endOfSelectedMonth)) {
-      setLastDayOfSelectedMonth(getDate(endOfSelectedMonth));
+  }, [selectedMonth, endOfSelectedMonth]);
+
+  // Update end of month.
+  useEffect(() => {
+    if (endOfSelectedMonth !== getDate(endOfMonth(selectedMonth))) {
+      SetEndOfSelectedDMonth(getDate(endOfMonth(selectedMonth)));
     }
   }, [selectedMonth]);
 
