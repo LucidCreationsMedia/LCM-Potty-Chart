@@ -37,8 +37,12 @@ const CalenderContextProvider = ({
 
   // Selected month & year
   const [selectedMonth, setSelectedMonth] = useState<Date>(today);
-  const [endOfSelectedMonth, SetEndOfSelectedDMonth] = useState<Date>(endOfMonth(selectedMonth));
-  const [lastDayOfSelectedMonth, setLastDayOfSelectedMonth] = useState<number>(getDate(endOfSelectedMonth));
+  const [endOfSelectedMonth, SetEndOfSelectedDMonth] = useState<Date>(
+    endOfMonth(selectedMonth)
+  );
+  const [lastDayOfSelectedMonth, setLastDayOfSelectedMonth] = useState<number>(
+    getDate(endOfSelectedMonth)
+  );
 
   const [daysOfMonth, setDaysOfMonth] = useState<[number] | [null]>([null]);
 
@@ -87,16 +91,14 @@ const CalenderContextProvider = ({
   //TODO: Create an object of arrays that will align with the days on the week. Make two sets for each start of the week setting.
 
   // Navigation
-  const prevMonth = (): void => {
-    
-  }
+  const prevMonth = (): void => {};
 
   const calenderContextValues = {
     today,
     selectedMonth,
     daysOfMonth,
     daysOfWeek,
-    prevMonth
+    prevMonth,
   };
 
   return (
