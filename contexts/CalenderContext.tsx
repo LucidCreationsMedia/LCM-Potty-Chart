@@ -11,15 +11,14 @@ type days =
   | "Friday"
   | "Saturday";
 
-  interface DaysOfWeek {
-    startOfWeek: {
-      Sunday: days[];
-      Monday: days[];
-    };
-  }
+interface DaysOfWeek {
+  startOfWeek: {
+    Sunday: days[];
+    Monday: days[];
+  };
+}
 
 interface CalenderContextState {
-  today: Date;
   selectedMonth: Date;
   daysOfMonth: [number] | [null];
   daysOfWeek: DaysOfWeek;
@@ -65,7 +64,7 @@ const CalenderContextProvider = ({
 
       setDaysOfMonth(newDaysOfMonth);
     }
-  }, [selectedMonth, lastDayOfCurrMonth]);
+  }, [selectedMonth, lastDayOfSelectedMonth]);
 
   // Update selected month sates when the selected month is updated.
   useEffect(() => {
@@ -106,23 +105,22 @@ const CalenderContextProvider = ({
 
   // Navigation
   const prevMonth = (): void => {
-    const newMonth = sub(today, {
-      years: 1,
+    const newMonth = sub(selectedMonth, {
+      months: 1,
     });
 
     setSelectedMonth(newMonth);
   };
 
   const nextMonth = (): void => {
-    const newMonth = add(today, {
-      years: 1,
+    const newMonth = add(selectedMonth, {
+      months: 1,
     });
 
     setSelectedMonth(newMonth);
   };
 
   const calenderContextValues = {
-    today,
     selectedMonth,
     daysOfMonth,
     daysOfWeek,
