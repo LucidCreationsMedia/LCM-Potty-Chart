@@ -18,13 +18,17 @@ The types of progress can be anything from:
 - Other Habit Tracking
 - Learning New Skills
   - Dedicating certain amount of hours a day to a new skill or talent
-- Whatever else a little would want to track
+- Whatever else a little and big would want to track
 
-Positive days will be given "stars" and happy designs where negative days will be given rain clouds or sad designs.
+Positive days will be given "stars" or happy designs where negative days will be given rain clouds or sad designs.
 
 A big will be able to track as many littles as they desire and can create multiple charts for each little they have. How you use the charts and trackers is up to you.
 
 Give descriptions to each sticker you use and make a list of rules for each chart and how to earn the stars and what would result in a rain cloud.
+
+Send encouraging messages to your little.
+
+Track your friends progress and allow your friends to track your progress.
 
 # Technologies
 
