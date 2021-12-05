@@ -2,7 +2,7 @@
   "private": true,
   "name": "lucid-creations-media-potty-chart",
   "homepage": "https://lucidcreations.media/introducing-code-name-potty-chart/",
-  "version": "0.0.3.2-pre-alpha",
+  "version": "0.0.3.3-pre-alpha",
   "author": {
     "name": "Lucid Creations Media",
     "url": "https://lucidcreations.media",
@@ -22,7 +22,7 @@
     "@types/react": "^17.0.37",
     "date-fns": "^2.27.0",
     "framer-motion": "^5.3.3",
-    "next": "12.0.4",
+    "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "sharp": "^0.29.3"
@@ -36,7 +36,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.5.0",
+    "prettier": "^2.5.1",
     "typescript": "4.4.4"
   },
   "packageManager": "yarn@3.1.0"
