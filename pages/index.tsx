@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box } from "@chakra-ui/react";
 import Calender from "../components/calender";
 import { CalenderContextProvider } from "../contexts/CalenderContext";
+import { format } from "date-fns";
+
+interface UpdateCalendarProps {
+  year: number;
+  month: number;
+  day: number;
+}
 
 const IndexPage = (): JSX.Element => {
+  const date = useRef<UpdateCalendarProps>({
+    year: parseInt(format(new Date(), "y")),
+    month: parseInt(format(new Date(), "d")),
+    day: parseInt(format(new Date(), "L")),
+  });
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>
-        <Calender date={{ year: 2021, month: 12, day: 1 }} />
+        <Calender {...date.current} />
       </CalenderContextProvider>
     </Box>
   );
