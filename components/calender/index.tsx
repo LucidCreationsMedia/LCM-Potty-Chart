@@ -22,7 +22,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
         console.warn("Invalid date format: ", newDate);
       }
     }
-  }, [daysOfMonth, daysOfWeek, newDate]);
+  }, [daysOfMonth, daysOfWeek, newDate, setDate]);
 
   // Simulated user settings context
   const userSettings = {
