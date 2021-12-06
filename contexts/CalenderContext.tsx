@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
-import { endOfMonth, getDate, sub, add } from "date-fns";
+import { endOfMonth, getDate, sub, add, compareAsc } from "date-fns";
 // TODO: import types
 
 type days =
@@ -18,12 +18,16 @@ interface DaysOfWeek {
   };
 }
 
+interface UpdateCalendarProps {
+  year: number;
+  month: number;
+  day: number;
+}
 interface CalenderContextState {
-  selectedMonth: Date;
+  selectedDate: Date;
   daysOfMonth: [number];
   daysOfWeek: DaysOfWeek;
-  prevMonth: () => void;
-  nextMonth: () => void;
+  setDate: (date: UpdateCalendarProps) => boolean;
 }
 
 const CalenderContext = createContext({} as CalenderContextState);
@@ -34,9 +38,9 @@ const CalenderContextProvider = ({
   children: ReactNode;
 }): JSX.Element => {
   // Selected month & year
-  const [selectedMonth, setSelectedMonth] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [endOfSelectedMonth, SetEndOfSelectedDMonth] = useState<number>(
-    getDate(endOfMonth(selectedMonth))
+    getDate(endOfMonth(selectedDate))
   );
 
   const [daysOfMonth, setDaysOfMonth] = useState<[number]>([0]);
@@ -71,14 +75,14 @@ const CalenderContextProvider = ({
         populateDays();
       }
     }
-  }, [selectedMonth, endOfSelectedMonth]);
+  }, [selectedDate, endOfSelectedMonth]);
 
   // Update end of month.
   useEffect(() => {
-    if (endOfSelectedMonth !== getDate(endOfMonth(selectedMonth))) {
-      SetEndOfSelectedDMonth(getDate(endOfMonth(selectedMonth)));
+    if (endOfSelectedMonth !== getDate(endOfMonth(selectedDate))) {
+      SetEndOfSelectedDMonth(getDate(endOfMonth(selectedDate)));
     }
-  }, [selectedMonth]);
+  }, [selectedDate]);
 
   // Calender Layout
   const daysOfWeek: DaysOfWeek = {
@@ -107,28 +111,26 @@ const CalenderContextProvider = ({
   //TODO: Create an object of arrays that will align with the days on the week. Make two sets for each start of the week setting.
 
   // Navigation
-  const prevMonth = (): void => {
-    const newMonth = sub(selectedMonth, {
-      months: 1,
-    });
+  const setDate = (input: UpdateCalendarProps): boolean => {
+    const { year, month: inputMonth, day } = input;
 
-    setSelectedMonth(newMonth);
-  };
+    if (!year || !inputMonth || day < 0 || day > 31) {
+      return false;
+    } else {
+      const month = inputMonth - 1;
+      const customDate: Date = new Date(year, month, day);
 
-  const nextMonth = (): void => {
-    const newMonth = add(selectedMonth, {
-      months: 1,
-    });
-
-    setSelectedMonth(newMonth);
+      if (compareAsc(customDate, selectedDate) !== 0) {
+        setSelectedDate(customDate);
+      }
+    }
   };
 
   const calenderContextValues = {
-    selectedMonth,
+    selectedDate,
     daysOfMonth,
     daysOfWeek,
-    prevMonth,
-    nextMonth,
+    setDate,
   };
 
   return (

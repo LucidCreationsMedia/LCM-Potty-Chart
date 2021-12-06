@@ -1,10 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
 
-const Calender = (): JSX.Element => {
-  const { daysOfMonth, daysOfWeek } = useContext(CalenderContext);
+interface UpdateCalendarProps {
+  year: number;
+  month: number;
+  day: number;
+}
+
+const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
+  const { daysOfMonth, daysOfWeek, setDate } = useContext(CalenderContext);
+
+  useEffect(() => {
+    if (newDate) {
+      const { year, month, day } = newDate;
+
+      if (year > 0 && month > 0 && day > 0) {
+        setDate(newDate);
+      } else {
+        console.warn("Invalid date format: ", newDate);
+      }
+    }
+  }, [daysOfMonth, daysOfWeek, newDate, setDate]);
 
   // Simulated user settings context
   const userSettings = {
