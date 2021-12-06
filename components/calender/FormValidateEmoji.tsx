@@ -32,4 +32,4 @@ const FormValidateEmoji: FC<FormValidateEmojiProps> = ({
   return validations[`${type}`];
 };
 
-export default FormValidateEmoji
+export default FormValidateEmoji;
