@@ -30,18 +30,18 @@ const DateRoute: React.FC<unknown> = () => {
       year: 0,
       month: 0,
       day: 0,
-    }
+    };
 
     if (/^(19|20)\d{2}$/.test(`${dateArr[0]}`)) {
       date.year = dateArr[0];
     }
 
-    if ((dateArr[1] > 0) || (dateArr[1] <= 12)) {
-      date.month = dateArr[1]
+    if (dateArr[1] > 0 || dateArr[1] <= 12) {
+      date.month = dateArr[1];
     }
 
-    if (dateArr[2] && ((dateArr[2] > 0) || (dateArr[2] <= 31))) {
-      date.day = dateArr[2]
+    if (dateArr[2] && (dateArr[2] > 0 || dateArr[2] <= 31)) {
+      date.day = dateArr[2];
     } else if (!dateArr[2]) {
       date.day = 1;
     }
@@ -58,7 +58,7 @@ const DateRoute: React.FC<unknown> = () => {
       const parsedSlug = slug.map((e) => {
         return parseInt(e);
       });
-      setDate({...validateDateInput(parsedSlug)});
+      setDate({ ...validateDateInput(parsedSlug) });
     }
   }, [slug]);
 
