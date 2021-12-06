@@ -26,6 +26,7 @@ import {
 } from "formik";
 import { format } from "date-fns";
 import { CalenderContext } from "../../contexts/CalenderContext";
+import FormValidateEmoji from "./FormValidateEmoji";
 
 interface UpdateCalendarProps {
   year: number;
@@ -129,7 +130,7 @@ const DatePicker = (): JSX.Element => {
   const initRef = useRef();
 
   return (
-    <Popover placement="bottom" initialFocusRef={initRef}>
+    <Popover w="100%" h="auto" placement="bottom" initialFocusRef={initRef}>
       <PopoverTrigger>
         <Button border="none" variant="outline">
           <Heading w="100%" h="auto">
@@ -179,6 +180,10 @@ const DatePicker = (): JSX.Element => {
                   spacing={6}
                   py={4}
                 >
+                  <Heading as="h4" size="sm" fontWeight="semibold">
+                    Required fields indicated with{" "}
+                    <FormValidateEmoji type="Required" />
+                  </Heading>
                   <Field name="date" validate={validateDate}>
                     {({ field, form }: FieldProps) => (
                       <FormControl
@@ -196,10 +201,10 @@ const DatePicker = (): JSX.Element => {
                           <HStack
                             alignContent="center"
                             alignItems="center"
-                            pl={6}
+                            pl={4}
                             w="100%"
                             h="auto"
-                            spacing={0}
+                            spacing={2}
                           >
                             <FormLabel fontWeight="semibold" htmlFor="date">
                               {"Date:"}
@@ -214,15 +219,24 @@ const DatePicker = (): JSX.Element => {
                               textAlign="center"
                               {...(!form.errors.date && form.touched.date
                                 ? {
+                                  borderColor: "brand.valid",
+                                  boxShadow: "0 0 0 1px #00c17c",
+                                  _hover: {
                                     borderColor: "brand.valid",
                                     boxShadow: "0 0 0 1px #00c17c",
-                                    _hover: {
-                                      borderColor: "brand.valid",
-                                      boxShadow: "0 0 0 1px #00c17c",
-                                    },
-                                  }
+                                  },
+                                }
                                 : "")}
                             />
+                            {!form.touched.date && (
+                              <FormValidateEmoji type="Required" />
+                            )}
+                            {form.errors.name && form.touched.date && (
+                              <FormValidateEmoji type="Error" />
+                            )}
+                            {!form.errors.name && form.touched.date && (
+                              <FormValidateEmoji type="Valid" />
+                            )}
                           </HStack>
                           <FormErrorMessage>
                             {form.errors.date}

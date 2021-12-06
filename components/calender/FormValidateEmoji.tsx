@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 
-interface EmojiValidateEmojiProps {
+interface FormValidateEmojiProps {
   type: string;
 }
 
-const EmojiValidateEmoji: FC<EmojiValidateEmojiProps> = ({
+const FormValidateEmoji: FC<FormValidateEmojiProps> = ({
   type,
-}: EmojiValidateEmojiProps) => {
+}: FormValidateEmojiProps) => {
   interface Validations {
     [key: string]: JSX.Element;
   }
@@ -32,4 +32,4 @@ const EmojiValidateEmoji: FC<EmojiValidateEmojiProps> = ({
   return validations[`${type}`];
 };
 
-export default EmojiValidateEmoji;
+export default FormValidateEmoji
