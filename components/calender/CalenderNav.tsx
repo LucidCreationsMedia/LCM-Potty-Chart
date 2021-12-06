@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
-import { Heading, HStack, IconButton } from "@chakra-ui/react";
+import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { sub, add, format } from "date-fns";
 import { CalenderContext } from "../../contexts/CalenderContext";
+import DatePicker from "./DatePicker";
 
 const CalenderNav = (): JSX.Element => {
   const { selectedDate } = useContext(CalenderContext);
-
-  const currentMonth = format(selectedDate, "LLLL uuuu");
 
   const router = useRouter();
 
@@ -32,7 +31,7 @@ const CalenderNav = (): JSX.Element => {
 
       router.push(`/calendar/${year}/${month}`);
     }
-  }
+  };
 
   return (
     <HStack spacing={10} as="nav" w="auto" h="10vh" textAlign="center">
@@ -41,20 +40,11 @@ const CalenderNav = (): JSX.Element => {
         icon={<Icon icon="akar-icons:chevron-left" />}
         onClick={() => handleNavButtons("prev")}
       />
-      <Heading
-        w="100%"
-        h="auto"
-        _hover={{
-          cursor: "default",
-        }}
-      >
-        {currentMonth}
-      </Heading>
+      <DatePicker />
       <IconButton
         aria-label="Next Month"
         icon={<Icon icon="akar-icons:chevron-right" />}
         onClick={() => handleNavButtons("next")}
-
       />
     </HStack>
   );
