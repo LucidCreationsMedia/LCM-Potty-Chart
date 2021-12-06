@@ -130,7 +130,7 @@ const DatePicker = (): JSX.Element => {
   const initRef = useRef();
 
   return (
-    <Popover w="100%" h="auto" placement="bottom" initialFocusRef={initRef}>
+    <Popover placement="bottom" initialFocusRef={initRef}>
       <PopoverTrigger>
         <Button border="none" variant="outline">
           <Heading w="100%" h="auto">
@@ -219,13 +219,13 @@ const DatePicker = (): JSX.Element => {
                               textAlign="center"
                               {...(!form.errors.date && form.touched.date
                                 ? {
-                                  borderColor: "brand.valid",
-                                  boxShadow: "0 0 0 1px #00c17c",
-                                  _hover: {
                                     borderColor: "brand.valid",
                                     boxShadow: "0 0 0 1px #00c17c",
-                                  },
-                                }
+                                    _hover: {
+                                      borderColor: "brand.valid",
+                                      boxShadow: "0 0 0 1px #00c17c",
+                                    },
+                                  }
                                 : "")}
                             />
                             {!form.touched.date && (
