@@ -43,22 +43,18 @@ const CalenderContextProvider = ({
     getDate(endOfMonth(selectedDate))
   );
 
-  const [daysOfMonth, setDaysOfMonth] = useState<[number]>([0]);
+  const [daysOfMonth, setDaysOfMonth] = useState<[number]>([1]);
 
   // Update or populate the days of the month.
   const populateDays = (): void => {
     let newDaysOfMonth: [number] = [...daysOfMonth];
 
     if (newDaysOfMonth.length > 1) {
-      newDaysOfMonth = [0];
+      newDaysOfMonth = [1];
     }
 
     for (let i = 1; i < endOfSelectedMonth; i++) {
-      if (newDaysOfMonth[i - 1] === 0) {
-        newDaysOfMonth[i - 1] = i;
-      } else {
-        newDaysOfMonth.push(i + 1);
-      }
+      newDaysOfMonth.push(i + 1);
     }
 
     setDaysOfMonth(newDaysOfMonth);
