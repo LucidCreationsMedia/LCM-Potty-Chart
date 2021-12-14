@@ -42,10 +42,9 @@ interface Calendar {
 // Will replace all states and be used in redis as a form of memoization.
 interface MonthInfo {
   date: Date;
-  format: string;
   layout: Calendar;
-  startDay: string;
-  endDay: string;
+  startWeekday: string;
+  endWeekday: string;
   days: number;
 }
 
@@ -107,8 +106,6 @@ const CalenderContextProvider = ({
     getDate(endOfMonth(sub(selectedDate, { months: 1 })))
   );
   // Add start of selected month and start of next month, including day of week and numerical day.
-
-  const [calendar, setCalendar] = useState<Calendar>({} as Calendar);
 
   // TODO: Remove this state and all referenced to it once the date alignment algorithm is complete.
   const [daysOfMonth, setDaysOfMonth] = useState<[number]>([1]);
