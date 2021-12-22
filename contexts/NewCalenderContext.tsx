@@ -1,8 +1,15 @@
 import React, { createContext, useState, ReactNode } from "react";
-import { format, endOfMonth, getDate, compareAsc } from "date-fns";
+import {
+  format,
+  startOfMonth,
+  endOfMonth,
+  getDate,
+  sub,
+  compareAsc,
+} from "date-fns";
 // TODO: import types
 
-type days =
+type Days =
   | "Sunday"
   | "Monday"
   | "Tuesday"
@@ -11,16 +18,13 @@ type days =
   | "Friday"
   | "Saturday";
 
-interface DaysOfWeek {
-  startOfWeek: {
-    Sunday: days[];
-    Monday: days[];
-  };
-}
+type DaysOfWeek = Days[];
 
-interface UpdateCalendarProps {
-  direction: "next" | "prev";
-  date: Date;
+interface WeekDays {
+  startOfWeek: {
+    sunday: DaysOfWeek;
+    monday: DaysOfWeek;
+  };
 }
 
 interface Month {
@@ -32,153 +36,135 @@ interface Month {
   week6: Date[];
 }
 
-interface Calendar {
-  startOfWeek: {
-    Sunday: Month;
-    Monday: Month;
-  };
-}
-
-// Will replace all states and be used in redis as a form of memoization.
 interface MonthInfo {
   date: Date;
   title: string;
-  layout: Calendar;
-  startWeekday: number;
-  endWeekday: number;
+  startDay: string;
+  endDay: string;
   days: number;
+  prevMonth: {
+    date: Date;
+    endDay: number;
+    days: number;
+  };
 }
 
-interface CurrentMonth {
-  prev: MonthInfo;
-  curr: MonthInfo;
-  next: MonthInfo;
-}
-
-interface CalenderMemoize {
-  String: CurrentMonth;
+interface MonthContext extends MonthInfo {
+  startOfWeek: {
+    sunday: {
+      layout: DaysOfWeek;
+      month: Month;
+    };
+    monday: {
+      layout: DaysOfWeek;
+      month: Month;
+    };
+  };
 }
 
 interface CalenderContextState {
-  selectedDate: Date;
-  monthInfo: MonthInfo;
-  setDate: (date: UpdateCalendarProps) => boolean;
+  selectedMonth: MonthContext;
 }
 
-const CalenderContext = createContext({} as CalenderContextState);
+const NewCalenderContext = createContext({} as CalenderContextState);
 
-const CalenderContextProvider = ({
+const NewCalenderContextProvider = ({
   children,
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  const indexToDay = {
+  const weekDays: WeekDays = {
     startOfWeek: {
-      Sunday: {
-        0: "Sunday",
-        1: "Monday",
-        2: "Tuesday",
-        3: "Wednesday",
-        4: "Thursday",
-        5: "Friday",
-        6: "Saturday",
+      sunday: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      monday: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+    },
+  };
+
+  const ISOToIndex = {
+    startOfWeek: {
+      sunday: {
+        Sun: 0,
+        Mon: 1,
+        Tue: 2,
+        Wed: 3,
+        Thu: 4,
+        Fri: 5,
+        Sat: 6,
       },
-      Monday: {
-        0: "Monday",
-        1: "Tuesday",
-        2: "Wednesday",
-        3: "Thursday",
-        4: "Friday",
-        5: "Saturday",
-        6: "Sunday",
+      monday: {
+        Mon: 0,
+        Tue: 1,
+        Wed: 2,
+        Thu: 3,
+        Fri: 4,
+        Sat: 5,
+        Sun: 6,
       },
     },
   };
 
-  // Selected month & year
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  // All the info for the current month
-  const [monthInfo, setMonthInfo] = useState<MonthInfo>({
-    date: new Date(),
+  const [selectedDate, setSelectedMonth] = useState<Date>(new Date());
+  const [prevMonth, setPrevMonth] = useState<Date>(
+    sub(selectedDate, { months: 1 })
+  );
+  const [selectedMonthInfo, setSelectedMonthInfo] = useState<MonthContext>({
+    date: selectedDate,
     title: format(selectedDate, "LLLL uuuu"),
-    layout: {} as Calendar,
-    startWeekday: 1,
-    endWeekday: 2,
-    days: getDate(endOfMonth(selectedDate))
-  })
-
-  // TODO: Repalce this with the new date alignment algorithm. That adds the date weeks obj to the layout key in the monthInfo context.
-  // Update or populate the days of the month.
-  const populateDays = (): void => {
-    // let newDaysOfMonth: [number] = [...daysOfMonth];
-
-    // if (newDaysOfMonth.length > 1) {
-    //   newDaysOfMonth = [1];
-    // }
-
-    // for (let i = 1; i < endOfSelectedMonth; i++) {
-    //   newDaysOfMonth.push(i + 1);
-    // }
-
-    // setDaysOfMonth(newDaysOfMonth);
-  };
-
-  // Calender Layout
-  const daysOfWeek: DaysOfWeek = {
-    startOfWeek: {
-      Sunday: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      Monday: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
+    startDay: format(startOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
+    endDay: format(endOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
+    days: getDate(endOfMonth(selectedDate)),
+    prevMonth: {
+      date: prevMonth,
+      endDay: getDate(endOfMonth(prevMonth)),
+      days: getDate(endOfMonth(prevMonth)),
     },
-  };
+    startOfWeek: {
+      sunday: {
+        layout: weekDays.startOfWeek.sunday,
+        month: {} as Month,
+      },
+      monday: {
+        layout: weekDays.startOfWeek.monday,
+        month: {} as Month,
+      },
+    },
+  });
 
-  //TODO: Update nav to switch between the prev and next date or take in a custom date.
+  //TODO: Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
 
-  // Navigation
-  const setDate = (input: UpdateCalendarProps): boolean => {
-    // const { year, month: inputMonth, day } = input;
+  //TODO: Update the MonthInfo to use the new month population function on first render.
 
-    // if (!year || !inputMonth || day < 0 || day > 31) {
-    //   return false;
-    // } else {
-    //   const month = inputMonth - 1;
-    //   const customDate: Date = new Date(year, month, day);
+  //TODO: Add a new navigation function that will take in either a direction (next, prev) or a date to go directly to. That will update the selected month and trigger the use effects below.
 
-    //   if (compareAsc(customDate, selectedDate) !== 0) {
-    //     setSelectedDate(customDate);
-    //   }
-    // }
-  };
+  //TODO: Add a function that will update the MonthInfo state when the selected month changes. This should use the populate month function that will be made above.
 
-  //TODO: Add some functions that will update the MonthInfo state when the month changes. Each function should take care of each key in the context.
+  //TODO: Add a useEffect that will trigger the update function(s) to run when the selected date is updated.
 
   const calenderContextValues = {
-    selectedDate,
-    monthInfo,
-    daysOfWeek,
-    setDate,
+    selectedMonthInfo,
   };
 
   return (
-    <CalenderContext.Provider value={calenderContextValues}>
+    <NewCalenderContext.Provider value={calenderContextValues}>
       {children}
-    </CalenderContext.Provider>
+    </NewCalenderContext.Provider>
   );
 };
 
-export { CalenderContextProvider, CalenderContext };
+export { NewCalenderContextProvider, NewCalenderContext };
