@@ -87,8 +87,7 @@ const Footer = (): JSX.Element => {
             >
               <Button
                 color="whiteAlpha"
-                background="#FF424D"
-                variant="credits"
+                variant="patreon"
                 leftIcon={<Icon icon="ri:patreon-fill" />}
               >
                 Fund This App
