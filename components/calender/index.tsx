@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
+import NewContext from "./NewContext";
 
 interface UpdateCalendarProps {
   year: number;
@@ -32,6 +33,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
 
   return (
     <VStack h="100vh" w="100%">
+      <NewContext />
       <CalenderNav />
       <HStack
         px={6}
