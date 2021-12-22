@@ -29,6 +29,7 @@ const AppTheme = extendTheme({
       footer: "#0097a7",
       footerText: "black",
       content: "#2d3748",
+      patreon: "#FF424D",
     },
   },
   styles: {

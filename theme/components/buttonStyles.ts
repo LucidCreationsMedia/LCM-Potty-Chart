@@ -157,6 +157,18 @@ const buttonStyles = {
         border: "1px solid #0068ff",
       },
     }),
+    patreon: (props: Dict<never> | StyleFunctionProps) => ({
+      bg: "brand.patreon",
+      fontSize: "lg",
+      p: 3,
+      color: "whiteAlpha",
+      _hover: {
+        bg: mode(
+          whiten("brand.patreon", 20),
+          darken("brand.patreon", 20)
+        )(props),
+      },
+    }),
   },
   // default values for `size` and `variant`
   defaultProps: {},
