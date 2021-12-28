@@ -4,8 +4,11 @@ import {
   startOfMonth,
   endOfMonth,
   getDate,
+  add,
   sub,
-  compareAsc,
+  set,
+  isAfter,
+  isBefore
 } from "date-fns";
 // TODO: import types
 
@@ -97,25 +100,23 @@ const NewCalenderContextProvider = ({
   };
 
   const ISOToIndex = {
-    startOfWeek: {
-      sunday: {
-        Sun: 0,
-        Mon: 1,
-        Tue: 2,
-        Wed: 3,
-        Thu: 4,
-        Fri: 5,
-        Sat: 6,
-      },
-      monday: {
-        Mon: 0,
-        Tue: 1,
-        Wed: 2,
-        Thu: 3,
-        Fri: 4,
-        Sat: 5,
-        Sun: 6,
-      },
+    sunday: {
+      Sun: 0,
+      Mon: 1,
+      Tue: 2,
+      Wed: 3,
+      Thu: 4,
+      Fri: 5,
+      Sat: 6,
+    },
+    monday: {
+      Mon: -1,
+      Tue: 0,
+      Wed: 1,
+      Thu: 2,
+      Fri: 3,
+      Sat: 4,
+      Sun: 5,
     },
   };
 
@@ -147,6 +148,97 @@ const NewCalenderContextProvider = ({
   });
 
   //TODO: Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
+
+  const isOverflow = (selectedDate: Date, currDate: Date) => {
+    let flag = false;
+    const start = startOfMonth(selectedDate);
+    const end = endOfMonth(selectedDate);
+
+    if (isBefore(currDate, start) || isAfter(currDate, end)) {
+      flag = true;
+    }
+
+    return flag;
+  }
+
+  const populateMonth = (
+    selectedDate: Date,
+    startOfMonth: string,
+    prevMonth: {
+      date: Date;
+      endDay: number;
+      days: number;
+    }
+  ): void => {
+    const sundays = {
+      week1: new Array(7).fill(null),
+      week2: new Array(7).fill(null),
+      week3: new Array(7).fill(null),
+      week4: new Array(7).fill(null),
+      week5: new Array(7).fill(null),
+      week6: new Array(7).fill(null),
+    };
+
+    const sunStartDay =
+      prevMonth.endDay - (ISOToIndex.sunday[startOfMonth] - 1);
+
+    let sunCurrDate = set(sub(selectedDate, { months: 1 }), {
+      date: sunStartDay,
+    });
+
+    for (let week in sundays) {
+      const thisWeek = sundays[week];
+
+      thisWeek.forEach((e, i, a) => {
+        const day = {
+          isOverflow: isOverflow(selectedDate, sunCurrDate),
+          date: sunCurrDate,
+        };
+        sunCurrDate = add(sunCurrDate, { days: 1 })
+
+        sundays[week][i] = day;
+      });
+    }
+
+    const mondays = {
+      week1: new Array(7).fill(null),
+      week2: new Array(7).fill(null),
+      week3: new Array(7).fill(null),
+      week4: new Array(7).fill(null),
+      week5: new Array(7).fill(null),
+      week6: new Array(7).fill(null),
+    };
+
+    const monStartDay =
+      prevMonth.endDay - (ISOToIndex.monday[startOfMonth]);
+    // console.log(`Start date: ${monStartDay}`);
+
+    let monCurrDate = set(sub(selectedDate, { months: 1 }), {
+      date: monStartDay,
+    });
+    // console.log(`Start date: ${currDate}`);
+
+    for (let week in mondays) {
+      const thisWeek = mondays[week];
+
+      thisWeek.forEach((e, i, a) => {
+        const day = {
+          isOverflow: isOverflow(selectedDate, monCurrDate),
+          date: monCurrDate,
+        };
+        monCurrDate = add(monCurrDate, { days: 1 })
+
+        mondays[week][i] = day;
+      });
+    }
+    console.log("mondays after loop and map", mondays);
+  };
+
+  populateMonth(
+    selectedDate,
+    format(startOfMonth(selectedDate), "iii"),
+    selectedMonthInfo.prevMonth
+  );
 
   //TODO: Update the MonthInfo to use the new month population function on first render.
 
