@@ -8,7 +8,7 @@ import {
   sub,
   set,
   isAfter,
-  isBefore
+  isBefore,
 } from "date-fns";
 // TODO: import types
 
@@ -147,9 +147,10 @@ const NewCalenderContextProvider = ({
     },
   });
 
-  //TODO: Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
+  //TODO Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
 
-  const isOverflow = (selectedDate: Date, currDate: Date) => {
+  // Checks if the date is before or after the current month.
+  const isOverflow = (selectedDate: Date, currDate: Date): boolean => {
     let flag = false;
     const start = startOfMonth(selectedDate);
     const end = endOfMonth(selectedDate);
@@ -159,17 +160,18 @@ const NewCalenderContextProvider = ({
     }
 
     return flag;
-  }
+  };
 
+  // Populates the month.
   const populateMonth = (
     selectedDate: Date,
     startOfMonth: string,
     prevMonth: {
-      date: Date;
       endDay: number;
-      days: number;
     }
   ): void => {
+    const { endDay: endLastMonth } = prevMonth;
+
     const sundays = {
       week1: new Array(7).fill(null),
       week2: new Array(7).fill(null),
@@ -179,8 +181,7 @@ const NewCalenderContextProvider = ({
       week6: new Array(7).fill(null),
     };
 
-    const sunStartDay =
-      prevMonth.endDay - (ISOToIndex.sunday[startOfMonth] - 1);
+    const sunStartDay = endLastMonth - (ISOToIndex.sunday[startOfMonth] - 1);
 
     let sunCurrDate = set(sub(selectedDate, { months: 1 }), {
       date: sunStartDay,
@@ -194,7 +195,7 @@ const NewCalenderContextProvider = ({
           isOverflow: isOverflow(selectedDate, sunCurrDate),
           date: sunCurrDate,
         };
-        sunCurrDate = add(sunCurrDate, { days: 1 })
+        sunCurrDate = add(sunCurrDate, { days: 1 });
 
         sundays[week][i] = day;
       });
@@ -209,14 +210,11 @@ const NewCalenderContextProvider = ({
       week6: new Array(7).fill(null),
     };
 
-    const monStartDay =
-      prevMonth.endDay - (ISOToIndex.monday[startOfMonth]);
-    // console.log(`Start date: ${monStartDay}`);
+    const monStartDay = endLastMonth - ISOToIndex.monday[startOfMonth];
 
     let monCurrDate = set(sub(selectedDate, { months: 1 }), {
       date: monStartDay,
     });
-    // console.log(`Start date: ${currDate}`);
 
     for (let week in mondays) {
       const thisWeek = mondays[week];
@@ -226,13 +224,14 @@ const NewCalenderContextProvider = ({
           isOverflow: isOverflow(selectedDate, monCurrDate),
           date: monCurrDate,
         };
-        monCurrDate = add(monCurrDate, { days: 1 })
+        monCurrDate = add(monCurrDate, { days: 1 });
 
         mondays[week][i] = day;
       });
     }
-    console.log("mondays after loop and map", mondays);
   };
+
+  //TODO: Add output typing and move the invocation into the monthInfo state, removing any unended info from the state.
 
   populateMonth(
     selectedDate,
