@@ -103,7 +103,12 @@ const NewCalenderContextProvider = ({
 
   //TODO Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
 
-  // Checks if the date is before or after the current month.
+  /**
+   * Using date-fns, this function checks if currDate is within the month of selectedDate or not.
+   * @param {Date} selectedDate The current month.
+   * @param {Date} currDate The date to be compared to the selected month.
+   * @returns True if currDate is outside of the month of selectedDate, false if otherwise.
+   */
   const isOverflow = (selectedDate: Date, currDate: Date): boolean => {
     let flag = false;
     const start = startOfMonth(selectedDate);
@@ -166,7 +171,7 @@ const NewCalenderContextProvider = ({
       const thisWeek = sundays[week];
 
       thisWeek.forEach((e, i, a) => {
-        const day: MonthDay= {
+        const day: MonthDay = {
           isOverflow: isOverflow(selectedDate, sunCurrDate),
           date: sunCurrDate
         };
@@ -219,7 +224,7 @@ const NewCalenderContextProvider = ({
     return output;
   };
 
-  //TODO: Add output typing and move the invocation into the monthInfo state, removing any unended info from the state.
+  //TODO Add output typing and move the invocation into the monthInfo state, removing any unended info from the state.
 
   // populateMonth(
   //   selectedDate,
@@ -234,8 +239,8 @@ const NewCalenderContextProvider = ({
   const [selectedMonthInfo, setSelectedMonthInfo] = useState<MonthContext>({
     date: selectedDate,
     title: format(selectedDate, "LLLL uuuu"),
-    startDay: format(startOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
-    endDay: format(endOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
+    startDay: format(startOfMonth(selectedDate), "iii"), // TODO Update to use the ISOToIndex dynamically with the user's start day preferences.
+    endDay: format(endOfMonth(selectedDate), "iii"), // TODO Update to use the ISOToIndex dynamically with the user's start day preferences.
     days: getDate(endOfMonth(selectedDate)),
     prevMonth: {
       date: prevMonth,
