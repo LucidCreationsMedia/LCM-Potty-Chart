@@ -54,19 +54,19 @@ interface MonthInfo {
   };
 }
 
-interface MonthContext extends MonthInfo {
-  layout: {
-    sunday: {
-      layout: DaysOfWeek;
-      header: String;
-      month: Month;
-    };
-    monday: {
-      layout: DaysOfWeek;
-      header: String;
-      month: Month;
-    };
+interface MonthLayout {
+  sunday: {
+    layout: DaysOfWeek;
+    month: Month;
   };
+  monday: {
+    layout: DaysOfWeek;
+    month: Month;
+  };
+}
+
+interface MonthContext extends MonthInfo {
+  layout: MonthLayout;
 }
 
 interface CalenderContextState {
@@ -101,34 +101,6 @@ const NewCalenderContextProvider = ({
     ]
   };
 
-  const [selectedDate, setSelectedMonth] = useState<Date>(new Date());
-  const [prevMonth, setPrevMonth] = useState<Date>(
-    sub(selectedDate, { months: 1 })
-  );
-  const [selectedMonthInfo, setSelectedMonthInfo] = useState<MonthContext>({
-    date: selectedDate,
-    title: format(selectedDate, "LLLL uuuu"),
-    startDay: format(startOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
-    endDay: format(endOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
-    days: getDate(endOfMonth(selectedDate)),
-    prevMonth: {
-      date: prevMonth,
-      endDay: getDate(endOfMonth(prevMonth))
-    },
-    layout: {
-      sunday: {
-        layout: weekDays.sunday,
-        header: "Month title here",
-        month: {} as Month
-      },
-      monday: {
-        layout: weekDays.monday,
-        header: "Month title here",
-        month: {} as Month
-      }
-    }
-  });
-
   //TODO Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
 
   // Checks if the date is before or after the current month.
@@ -151,7 +123,7 @@ const NewCalenderContextProvider = ({
     prevMonth: {
       endDay: number;
     }
-  ): void => {
+  ): MonthLayout => {
     const { endDay: endLastMonth } = prevMonth;
 
     const ISOToIndex = {
@@ -194,7 +166,7 @@ const NewCalenderContextProvider = ({
       const thisWeek = sundays[week];
 
       thisWeek.forEach((e, i, a) => {
-        const day = {
+        const day: MonthDay= {
           isOverflow: isOverflow(selectedDate, sunCurrDate),
           date: sunCurrDate
         };
@@ -223,7 +195,7 @@ const NewCalenderContextProvider = ({
       const thisWeek = mondays[week];
 
       thisWeek.forEach((e, i, a) => {
-        const day = {
+        const day: MonthDay = {
           isOverflow: isOverflow(selectedDate, monCurrDate),
           date: monCurrDate
         };
@@ -232,15 +204,51 @@ const NewCalenderContextProvider = ({
         mondays[week][i] = day;
       });
     }
+
+    const output = {
+      sunday: {
+        layout: weekDays.sunday,
+        month: sundays
+      },
+      monday: {
+        layout: weekDays.monday,
+        month: mondays
+      }
+    };
+
+    return output;
   };
 
   //TODO: Add output typing and move the invocation into the monthInfo state, removing any unended info from the state.
 
-  populateMonth(
-    selectedDate,
-    format(startOfMonth(selectedDate), "iii"),
-    selectedMonthInfo.prevMonth
+  // populateMonth(
+  //   selectedDate,
+  //   format(startOfMonth(selectedDate), "iii"),
+  //   selectedMonthInfo.prevMonth
+  // );
+
+  const [selectedDate, setSelectedMonth] = useState<Date>(new Date());
+  const [prevMonth, setPrevMonth] = useState<Date>(
+    sub(selectedDate, { months: 1 })
   );
+  const [selectedMonthInfo, setSelectedMonthInfo] = useState<MonthContext>({
+    date: selectedDate,
+    title: format(selectedDate, "LLLL uuuu"),
+    startDay: format(startOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
+    endDay: format(endOfMonth(selectedDate), "iii"), // TODO: Update to use the ISOToIndex dynamically with the user's start day preferences.
+    days: getDate(endOfMonth(selectedDate)),
+    prevMonth: {
+      date: prevMonth,
+      endDay: getDate(endOfMonth(prevMonth))
+    },
+    layout: populateMonth(
+      selectedDate,
+      format(startOfMonth(selectedDate), "iii"),
+      {
+        endDay: getDate(endOfMonth(prevMonth))
+      }
+    )
+  });
 
   //TODO: Update the MonthInfo to use the new month population function on first render.
 
