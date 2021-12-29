@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
+import { NewCalenderContextProvider } from "../../contexts/NewCalenderContext";
 
 interface UpdateCalendarProps {
   year: number;
@@ -71,7 +72,9 @@ const DateRoute: React.FC<unknown> = () => {
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>
-        <Calender {...date} />
+        <NewCalenderContextProvider>
+          <Calender {...date} />
+        </NewCalenderContextProvider>
       </CalenderContextProvider>
     </Box>
   );

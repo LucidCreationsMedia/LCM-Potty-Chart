@@ -25,8 +25,8 @@ import {
   FieldProps
 } from "formik";
 import { format } from "date-fns";
-import { CalenderContext } from "../../contexts/CalenderContext";
 import FormValidateEmoji from "./FormValidateEmoji";
+import { NewCalenderContext } from "../../contexts/NewCalenderContext";
 
 interface UpdateCalendarProps {
   year: number;
@@ -35,9 +35,7 @@ interface UpdateCalendarProps {
 }
 
 const DatePicker = (): JSX.Element => {
-  const { selectedDate } = useContext(CalenderContext);
-
-  const currentMonth = format(selectedDate, "LLLL uuuu");
+  const { title } = useContext(NewCalenderContext);
 
   const router = useRouter();
 
@@ -134,7 +132,7 @@ const DatePicker = (): JSX.Element => {
       <PopoverTrigger>
         <Button border="none" variant="outline">
           <Heading w="100%" h="auto">
-            {currentMonth}
+            {title}
           </Heading>
         </Button>
       </PopoverTrigger>

@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { sub, add, format } from "date-fns";
-import { CalenderContext } from "../../contexts/CalenderContext";
 import DatePicker from "./DatePicker";
+import { NewCalenderContext } from "../../contexts/NewCalenderContext";
 
 const CalenderNav = (): JSX.Element => {
-  const { selectedDate } = useContext(CalenderContext);
+  const { selectedDate } = useContext(NewCalenderContext);
 
   const router = useRouter();
 

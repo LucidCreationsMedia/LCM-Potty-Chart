@@ -4,11 +4,14 @@ import {
   startOfMonth,
   endOfMonth,
   getDate,
+  getMonth,
+  getYear,
   add,
   sub,
   set,
   isAfter,
-  isBefore
+  isBefore,
+  compareAsc
 } from "date-fns";
 // TODO: import types
 
@@ -62,10 +65,17 @@ interface MonthContext extends MonthInfo {
   layout: MonthLayout;
 }
 
+interface UpdateCalendarProps {
+  year: number;
+  month: number;
+  day: number;
+}
+
 interface CalenderContextState {
   selectedDate: Date;
   title: string;
   layout: MonthLayout;
+  updateDate: (input: UpdateCalendarProps) => void;
 }
 
 const NewCalenderContext = createContext({} as CalenderContextState);
@@ -163,10 +173,10 @@ const NewCalenderContextProvider = ({
       date: sunStartDay
     });
 
-    for (let week in sundays) {
+    for (const week in sundays) {
       const thisWeek = sundays[week];
 
-      thisWeek.forEach((e, i, a) => {
+      thisWeek.forEach((e, i) => {
         const day: MonthDay = {
           isOverflow: isOverflow(selectedDate, sunCurrDate),
           date: sunCurrDate
@@ -194,10 +204,10 @@ const NewCalenderContextProvider = ({
       date: monStartDay
     });
 
-    for (let week in mondays) {
+    for (const week in mondays) {
       const thisWeek = mondays[week];
 
-      thisWeek.forEach((e, i, a) => {
+      thisWeek.forEach((e, i) => {
         const day: MonthDay = {
           isOverflow: isOverflow(selectedDate, monCurrDate),
           date: monCurrDate
@@ -224,33 +234,47 @@ const NewCalenderContextProvider = ({
     return output;
   };
 
-  //TODO Add output typing and move the invocation into the monthInfo state, removing any unended info from the state.
-
-  // populateMonth(
-  //   selectedDate,
-  //   format(startOfMonth(selectedDate), "iii"),
-  //   selectedMonthInfo.prevMonth
-  // );
-
-  const [selectedDate, setSelectedMonth] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedDateInfo, setSelectedMonthInfo] = useState<MonthContext>({
     date: selectedDate,
     title: format(selectedDate, "LLLL uuuu"),
     layout: populateMonth(selectedDate)
   });
 
-  //TODO: Update the MonthInfo to use the new month population function on first render.
+  //TODO Update the MonthInfo to use the new month population function on first render.
+
+  //TODO Add a function that will update the MonthInfo state when the selected month changes. This should use the populate month function that will be made above.
+  const updateDateInfo = (newDate: Date) => {
+    const output = { ...selectedDateInfo };
+    output.date = newDate;
+    output.title = format(newDate, "LLLL uuuu");
+    output.layout = populateMonth(newDate);
+
+    setSelectedMonthInfo(output);
+  };
 
   //TODO: Add a new navigation function that will take in either a direction (next, prev) or a date to go directly to. That will update the selected month and trigger the use effects below.
+  const updateDate = (input: UpdateCalendarProps) => {
+    const { year, month: inputMonth, day } = input;
 
-  //TODO: Add a function that will update the MonthInfo state when the selected month changes. This should use the populate month function that will be made above.
+    if (!year || !inputMonth || day < 0 || day > 31) {
+      return false;
+    } else {
+      const month = inputMonth - 1;
+      const customDate: Date = new Date(year, month, day);
 
-  //TODO: Add a useEffect that will trigger the update function(s) to run when the selected date is updated.
+      if (compareAsc(customDate, selectedDate) !== 0) {
+        setSelectedDate(customDate);
+        updateDateInfo(customDate);
+      }
+    }
+  };
 
   const calenderContextValues = {
-    selectedDate: selectedDate,
+    selectedDate,
     title: selectedDateInfo.title,
-    layout: selectedDateInfo.layout
+    layout: selectedDateInfo.layout,
+    updateDate
   };
 
   return (

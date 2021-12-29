@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
-import { CalenderContext } from "../../contexts/CalenderContext";
 import { NewCalenderContext } from "../../contexts/NewCalenderContext";
 import { getDate } from "date-fns";
 // TODO: import types
@@ -13,20 +12,19 @@ interface UpdateCalendarProps {
 }
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { daysOfMonth, daysOfWeek, setDate } = useContext(CalenderContext);
-  const { layout } = useContext(NewCalenderContext);
+  const { layout, updateDate } = useContext(NewCalenderContext);
 
   useEffect(() => {
     if (newDate) {
       const { year, month, day } = newDate;
 
       if (year > 0 && month > 0 && day > 0) {
-        setDate(newDate);
+        updateDate(newDate);
       } else {
         console.warn("Invalid date format: ", newDate);
       }
     }
-  }, [daysOfMonth, daysOfWeek, newDate, setDate]);
+  }, [newDate, updateDate]);
 
   // Simulated user settings context
   const userSettings = {
@@ -39,7 +37,6 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
 
   return (
     <VStack h="100vh" w="100%">
-      {/* <NewContext /> */}
       <CalenderNav />
       <HStack
         px={6}
