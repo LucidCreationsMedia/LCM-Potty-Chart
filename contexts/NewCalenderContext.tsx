@@ -49,11 +49,11 @@ interface MonthInfo {
 
 interface MonthLayout {
   sunday: {
-    layout: DaysOfWeek;
+    weekdays: DaysOfWeek;
     month: Month;
   };
   monday: {
-    layout: DaysOfWeek;
+    weekdays: DaysOfWeek;
     month: Month;
   };
 }
@@ -63,7 +63,9 @@ interface MonthContext extends MonthInfo {
 }
 
 interface CalenderContextState {
-  selectedMonth: MonthContext;
+  selectedDate: Date;
+  title: string;
+  layout: MonthLayout;
 }
 
 const NewCalenderContext = createContext({} as CalenderContextState);
@@ -210,11 +212,11 @@ const NewCalenderContextProvider = ({
 
     const output = {
       sunday: {
-        layout: weekDays.sunday,
+        weekdays: weekDays.sunday,
         month: sundays
       },
       monday: {
-        layout: weekDays.monday,
+        weekdays: weekDays.monday,
         month: mondays
       }
     };
@@ -231,10 +233,7 @@ const NewCalenderContextProvider = ({
   // );
 
   const [selectedDate, setSelectedMonth] = useState<Date>(new Date());
-  const [prevMonth, setPrevMonth] = useState<Date>(
-    sub(selectedDate, { months: 1 })
-  );
-  const [selectedMonthInfo, setSelectedMonthInfo] = useState<MonthContext>({
+  const [selectedDateInfo, setSelectedMonthInfo] = useState<MonthContext>({
     date: selectedDate,
     title: format(selectedDate, "LLLL uuuu"),
     layout: populateMonth(selectedDate)
@@ -249,7 +248,9 @@ const NewCalenderContextProvider = ({
   //TODO: Add a useEffect that will trigger the update function(s) to run when the selected date is updated.
 
   const calenderContextValues = {
-    selectedMonthInfo
+    selectedDate: selectedDate,
+    title: selectedDateInfo.title,
+    layout: selectedDateInfo.layout
   };
 
   return (

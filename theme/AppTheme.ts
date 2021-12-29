@@ -1,5 +1,5 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import { createBreakpoints } from "@chakra-ui/theme-tools";
+// import { createBreakpoints } from "@chakra-ui/theme-tools";
 import buttons from "./components/buttonStyles";
 
 const config: ThemeConfig = {
@@ -20,6 +20,7 @@ const AppTheme = extendTheme({
   colors: {
     brand: {
       main: "#3138dc",
+      mainInactive: "#181d8f",
       primary: "#0068ff",
       secondary: "#0086ff",
       hover: "#00aec1",

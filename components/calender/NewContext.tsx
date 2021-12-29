@@ -3,12 +3,11 @@ import { Box, Text } from "@chakra-ui/react";
 import { NewCalenderContext } from "../../contexts/NewCalenderContext";
 
 const NewContext = (): JSX.Element => {
-  const { selectedMonthInfo } = useContext(NewCalenderContext);
-  const { date } = selectedMonthInfo;
+  const { selectedDate } = useContext(NewCalenderContext);
 
   return (
     <Box>
-      <Text>{`New Context Was Provided. Selected date is ${date}`}</Text>
+      <Text>{`New Context Was Provided. Selected date is ${selectedDate}`}</Text>
     </Box>
   );
 };

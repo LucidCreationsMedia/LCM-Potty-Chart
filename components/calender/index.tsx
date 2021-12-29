@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
-import NewContext from "./NewContext";
+import { NewCalenderContext } from "../../contexts/NewCalenderContext";
+import { getDate } from "date-fns";
 
 interface UpdateCalendarProps {
   year: number;
@@ -12,6 +13,7 @@ interface UpdateCalendarProps {
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { daysOfMonth, daysOfWeek, setDate } = useContext(CalenderContext);
+  const { layout } = useContext(NewCalenderContext);
 
   useEffect(() => {
     if (newDate) {
@@ -31,9 +33,12 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
     startOfWeek: "Sunday"
   };
 
+  const currMonth = layout[`${userSettings.startOfWeek.toLowerCase()}`];
+  const { month, weekdays } = currMonth;
+
   return (
     <VStack h="100vh" w="100%">
-      <NewContext />
+      {/* <NewContext /> */}
       <CalenderNav />
       <HStack
         px={6}
@@ -44,7 +49,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
         alignContent="center"
         alignItems="center"
       >
-        {daysOfWeek.startOfWeek[userSettings.startOfWeek].map((weekDay) => {
+        {weekdays.map((weekDay) => {
           return (
             <Box
               d="flex"
@@ -73,20 +78,27 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
         // alignContent="center"
         alignItems="center"
       >
-        {daysOfMonth.map((monthDay) => {
-          return (
-            <Box
-              bg="transparent"
-              border="2px solid #0068ff"
-              w="100%"
-              h="100%"
-              key={monthDay}
-            >
-              <Text w="100%" h="100%">
-                {`Day ${monthDay}`}
-              </Text>
-            </Box>
-          );
+        {Object.keys(month).map((week) => {
+          const thisWeek = month[week];
+
+          return thisWeek.map((day) => {
+            const { date, isOverflow } = day;
+
+            return (
+              <Box
+                bg="transparent"
+                color={isOverflow ? "gray.600" : "whiteAlpha"}
+                border={isOverflow ? "2px solid #181d8f" : "2px solid #0068ff"}
+                w="100%"
+                h="100%"
+                key={date}
+              >
+                <Text w="100%" h="100%">
+                  {`Day ${getDate(date)}`}
+                </Text>
+              </Box>
+            );
+          });
         })}
       </SimpleGrid>
     </VStack>
