@@ -115,7 +115,9 @@ const NewCalenderContextProvider = ({
   };
 
   /**
-   * A function that will return a month layout when given a date. It produces an object with 6 weeks that include overflow from the previous and next month with all dates aligned with the day of the week.
+   * A function that will return a month layout when given a date. It produces
+   * an object with 6 weeks that include overflow from the previous and next month
+   * with all dates aligned with the day of the week.
    * @param selectedDate The date of the month to generate a month layout for.
    */
   const populateMonth = (selectedDate: Date): MonthLayout => {
