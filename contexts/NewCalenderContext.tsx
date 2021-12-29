@@ -24,19 +24,22 @@ type Days =
 type DaysOfWeek = Days[];
 
 interface WeekDays {
-  startOfWeek: {
-    sunday: DaysOfWeek;
-    monday: DaysOfWeek;
-  };
+  sunday: DaysOfWeek;
+  monday: DaysOfWeek;
+}
+
+interface MonthDay {
+  isOverflow: boolean;
+  date: Date;
 }
 
 interface Month {
-  week1: Date[];
-  week2: Date[];
-  week3: Date[];
-  week4: Date[];
-  week5: Date[];
-  week6: Date[];
+  week1: MonthDay[];
+  week2: MonthDay[];
+  week3: MonthDay[];
+  week4: MonthDay[];
+  week5: MonthDay[];
+  week6: MonthDay[];
 }
 
 interface MonthInfo {
@@ -48,18 +51,19 @@ interface MonthInfo {
   prevMonth: {
     date: Date;
     endDay: number;
-    days: number;
   };
 }
 
 interface MonthContext extends MonthInfo {
-  startOfWeek: {
+  layout: {
     sunday: {
       layout: DaysOfWeek;
+      header: String;
       month: Month;
     };
     monday: {
       layout: DaysOfWeek;
+      header: String;
       month: Month;
     };
   };
@@ -77,26 +81,24 @@ const NewCalenderContextProvider = ({
   children: ReactNode;
 }): JSX.Element => {
   const weekDays: WeekDays = {
-    startOfWeek: {
-      sunday: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      monday: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ]
-    }
+    sunday: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    monday: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ]
   };
 
   const [selectedDate, setSelectedMonth] = useState<Date>(new Date());
@@ -111,16 +113,17 @@ const NewCalenderContextProvider = ({
     days: getDate(endOfMonth(selectedDate)),
     prevMonth: {
       date: prevMonth,
-      endDay: getDate(endOfMonth(prevMonth)),
-      days: getDate(endOfMonth(prevMonth))
+      endDay: getDate(endOfMonth(prevMonth))
     },
-    startOfWeek: {
+    layout: {
       sunday: {
-        layout: weekDays.startOfWeek.sunday,
+        layout: weekDays.sunday,
+        header: "Month title here",
         month: {} as Month
       },
       monday: {
-        layout: weekDays.startOfWeek.monday,
+        layout: weekDays.monday,
+        header: "Month title here",
         month: {} as Month
       }
     }
