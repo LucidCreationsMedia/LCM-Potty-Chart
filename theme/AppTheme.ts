@@ -20,7 +20,6 @@ const AppTheme = extendTheme({
   colors: {
     brand: {
       main: "#3138dc",
-      mainInactive: "#181d8f",
       primary: "#0068ff",
       secondary: "#0086ff",
       hover: "#00aec1",
