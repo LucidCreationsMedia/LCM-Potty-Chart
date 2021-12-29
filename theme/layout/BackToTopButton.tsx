@@ -14,7 +14,11 @@ const BackToTopButton: FC<BackToTopButtonProps> = ({
       d={show ? "flex" : "none"}
       pos="fixed"
       top="85vh"
-      right={{ base: "1.25rem", sm: "2rem", md: "3rem" }}
+      right={{
+        base: "1.25rem",
+        sm: "2rem",
+        md: "3rem"
+      }}
     >
       <Link href="/#top">
         <Button variant="backToTop">

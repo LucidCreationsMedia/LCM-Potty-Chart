@@ -165,7 +165,11 @@ const DatePicker = (): JSX.Element => {
                 });
             }}
           >
-            {(formProps: FormikProps<{ date: string }>) => (
+            {(
+              formProps: FormikProps<{
+                date: string;
+              }>
+            ) => (
               <Form
                 style={{
                   width: "100%",

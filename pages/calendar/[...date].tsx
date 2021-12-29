@@ -58,7 +58,9 @@ const DateRoute: React.FC<unknown> = () => {
       const parsedSlug = slug.map((e) => {
         return parseInt(e);
       });
-      setDate({ ...validateDateInput(parsedSlug) });
+      setDate({
+        ...validateDateInput(parsedSlug)
+      });
     }
   }, [slug]);
 

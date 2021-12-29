@@ -98,7 +98,10 @@ const Header = (): JSX.Element => {
       {/* Logo | Site Name */}
       <HStack
         width="100%"
-        justifyContent={{ base: "flex-start", sm: "center" }}
+        justifyContent={{
+          base: "flex-start",
+          sm: "center"
+        }}
         alignItems="center"
         height={12}
         top={0}
@@ -161,7 +164,10 @@ const Header = (): JSX.Element => {
             onClick={() => setOpen(!open)}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            d={{ base: "inline-flex", lg: "none" }}
+            d={{
+              base: "inline-flex",
+              lg: "none"
+            }}
             variant="mobileNav"
             bg={transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"}
             type="button"

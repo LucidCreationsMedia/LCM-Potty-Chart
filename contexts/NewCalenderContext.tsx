@@ -45,13 +45,6 @@ interface Month {
 interface MonthInfo {
   date: Date;
   title: string;
-  startDay: string;
-  endDay: string;
-  days: number;
-  prevMonth: {
-    date: Date;
-    endDay: number;
-  };
 }
 
 interface MonthLayout {
@@ -121,15 +114,13 @@ const NewCalenderContextProvider = ({
     return flag;
   };
 
-  // Populates the month.
-  const populateMonth = (
-    selectedDate: Date,
-    startOfMonth: string,
-    prevMonth: {
-      endDay: number;
-    }
-  ): MonthLayout => {
-    const { endDay: endLastMonth } = prevMonth;
+  /**
+   * A function that will return a month layout when given a date. It produces an object with 6 weeks that include overflow from the previous and next month with all dates aligned with the day of the week.
+   * @param selectedDate The date of the month to generate a month layout for.
+   */
+  const populateMonth = (selectedDate: Date): MonthLayout => {
+    const endLastMonth = getDate(endOfMonth(sub(selectedDate, { months: 1 })));
+    const startOfSelectedMonth = format(startOfMonth(selectedDate), "iii");
 
     const ISOToIndex = {
       sunday: {
@@ -161,7 +152,8 @@ const NewCalenderContextProvider = ({
       week6: new Array(7).fill(null)
     };
 
-    const sunStartDay = endLastMonth - (ISOToIndex.sunday[startOfMonth] - 1);
+    const sunStartDay =
+      endLastMonth - (ISOToIndex.sunday[startOfSelectedMonth] - 1);
 
     let sunCurrDate = set(sub(selectedDate, { months: 1 }), {
       date: sunStartDay
@@ -175,7 +167,9 @@ const NewCalenderContextProvider = ({
           isOverflow: isOverflow(selectedDate, sunCurrDate),
           date: sunCurrDate
         };
-        sunCurrDate = add(sunCurrDate, { days: 1 });
+        sunCurrDate = add(sunCurrDate, {
+          days: 1
+        });
 
         sundays[week][i] = day;
       });
@@ -190,7 +184,7 @@ const NewCalenderContextProvider = ({
       week6: new Array(7).fill(null)
     };
 
-    const monStartDay = endLastMonth - ISOToIndex.monday[startOfMonth];
+    const monStartDay = endLastMonth - ISOToIndex.monday[startOfSelectedMonth];
 
     let monCurrDate = set(sub(selectedDate, { months: 1 }), {
       date: monStartDay
@@ -204,7 +198,9 @@ const NewCalenderContextProvider = ({
           isOverflow: isOverflow(selectedDate, monCurrDate),
           date: monCurrDate
         };
-        monCurrDate = add(monCurrDate, { days: 1 });
+        monCurrDate = add(monCurrDate, {
+          days: 1
+        });
 
         mondays[week][i] = day;
       });
@@ -239,20 +235,7 @@ const NewCalenderContextProvider = ({
   const [selectedMonthInfo, setSelectedMonthInfo] = useState<MonthContext>({
     date: selectedDate,
     title: format(selectedDate, "LLLL uuuu"),
-    startDay: format(startOfMonth(selectedDate), "iii"), // TODO Update to use the ISOToIndex dynamically with the user's start day preferences.
-    endDay: format(endOfMonth(selectedDate), "iii"), // TODO Update to use the ISOToIndex dynamically with the user's start day preferences.
-    days: getDate(endOfMonth(selectedDate)),
-    prevMonth: {
-      date: prevMonth,
-      endDay: getDate(endOfMonth(prevMonth))
-    },
-    layout: populateMonth(
-      selectedDate,
-      format(startOfMonth(selectedDate), "iii"),
-      {
-        endDay: getDate(endOfMonth(prevMonth))
-      }
-    )
+    layout: populateMonth(selectedDate)
   });
 
   //TODO: Update the MonthInfo to use the new month population function on first render.
