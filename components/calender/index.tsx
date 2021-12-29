@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
@@ -35,8 +35,17 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const currMonth = layout[`${userSettings.startOfWeek.toLowerCase()}`];
   const { month, weekdays } = currMonth;
 
+  const [height, setHeight] = useState<string>("0px");
+
+  useEffect(() => {
+    if (window) {
+      const height = window.innerHeight - 60;
+      setHeight(`${height}px`);
+    }
+  }, [])
+
   return (
-    <VStack h="100vh" w="100%">
+    <VStack h={height} w="100%">
       <CalenderNav />
       <HStack
         px={6}
