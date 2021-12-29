@@ -5,7 +5,7 @@ import {
   Box,
   IconButton,
   Menu,
-  MenuButton,
+  MenuButton
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import DesktopNav from "./DesktopNav";
@@ -54,7 +54,7 @@ const Header = (): JSX.Element => {
     const iconType = {
       default: <Icon icon="bx:bx-menu-alt-right" />,
       hover: <Icon icon="bx:bx-menu" />,
-      open: <Icon icon="bx:bx-x" />,
+      open: <Icon icon="bx:bx-x" />
     };
 
     if (open) {
@@ -91,7 +91,7 @@ const Header = (): JSX.Element => {
         bg: "brand.main",
         boxShadow: open
           ? "none"
-          : "rgba(0, 134, 255, 0.9) 0px 0px 15px, rgba(0, 134, 255, 0.7) 0px 0px 3px 1px",
+          : "rgba(0, 134, 255, 0.9) 0px 0px 15px, rgba(0, 134, 255, 0.7) 0px 0px 3px 1px"
       }}
       h={open ? "125px" : "auto"}
     >
@@ -107,7 +107,7 @@ const Header = (): JSX.Element => {
         d={{ base: "flex", lg: "none" }}
         spacing="5px"
         _hover={{
-          cursor: "default",
+          cursor: "default"
         }}
       >
         <Heading as="h1" size="md">
@@ -140,7 +140,7 @@ const Header = (): JSX.Element => {
               height="auto"
               spacing="5px"
               _hover={{
-                cursor: "default",
+                cursor: "default"
               }}
             >
               <Heading as="h1" size="md">

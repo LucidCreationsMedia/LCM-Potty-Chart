@@ -7,7 +7,7 @@ interface BackToTopButtonProps {
 }
 
 const BackToTopButton: FC<BackToTopButtonProps> = ({
-  show,
+  show
 }: BackToTopButtonProps) => {
   return (
     <Flex

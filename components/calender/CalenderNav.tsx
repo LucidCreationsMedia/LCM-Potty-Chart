@@ -14,7 +14,7 @@ const CalenderNav = (): JSX.Element => {
   const handleNavButtons = (direction: "next" | "prev") => {
     if (direction === "next") {
       const newMonth = add(selectedDate, {
-        months: 1,
+        months: 1
       });
 
       const year = format(newMonth, "y");
@@ -23,7 +23,7 @@ const CalenderNav = (): JSX.Element => {
       router.push(`/calendar/${year}/${month}`);
     } else if (direction === "prev") {
       const newMonth = sub(selectedDate, {
-        months: 1,
+        months: 1
       });
 
       const year = format(newMonth, "y");

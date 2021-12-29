@@ -8,7 +8,7 @@ import {
   sub,
   set,
   isAfter,
-  isBefore,
+  isBefore
 } from "date-fns";
 // TODO: import types
 
@@ -72,7 +72,7 @@ interface CalenderContextState {
 const NewCalenderContext = createContext({} as CalenderContextState);
 
 const NewCalenderContextProvider = ({
-  children,
+  children
 }: {
   children: ReactNode;
 }): JSX.Element => {
@@ -85,7 +85,7 @@ const NewCalenderContextProvider = ({
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday",
+        "Saturday"
       ],
       monday: [
         "Monday",
@@ -94,30 +94,9 @@ const NewCalenderContextProvider = ({
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday",
-      ],
-    },
-  };
-
-  const ISOToIndex = {
-    sunday: {
-      Sun: 0,
-      Mon: 1,
-      Tue: 2,
-      Wed: 3,
-      Thu: 4,
-      Fri: 5,
-      Sat: 6,
-    },
-    monday: {
-      Mon: -1,
-      Tue: 0,
-      Wed: 1,
-      Thu: 2,
-      Fri: 3,
-      Sat: 4,
-      Sun: 5,
-    },
+        "Sunday"
+      ]
+    }
   };
 
   const [selectedDate, setSelectedMonth] = useState<Date>(new Date());
@@ -133,18 +112,18 @@ const NewCalenderContextProvider = ({
     prevMonth: {
       date: prevMonth,
       endDay: getDate(endOfMonth(prevMonth)),
-      days: getDate(endOfMonth(prevMonth)),
+      days: getDate(endOfMonth(prevMonth))
     },
     startOfWeek: {
       sunday: {
         layout: weekDays.startOfWeek.sunday,
-        month: {} as Month,
+        month: {} as Month
       },
       monday: {
         layout: weekDays.startOfWeek.monday,
-        month: {} as Month,
-      },
-    },
+        month: {} as Month
+      }
+    }
   });
 
   //TODO Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
@@ -172,19 +151,40 @@ const NewCalenderContextProvider = ({
   ): void => {
     const { endDay: endLastMonth } = prevMonth;
 
+    const ISOToIndex = {
+      sunday: {
+        Sun: 0,
+        Mon: 1,
+        Tue: 2,
+        Wed: 3,
+        Thu: 4,
+        Fri: 5,
+        Sat: 6
+      },
+      monday: {
+        Mon: -1,
+        Tue: 0,
+        Wed: 1,
+        Thu: 2,
+        Fri: 3,
+        Sat: 4,
+        Sun: 5
+      }
+    };
+
     const sundays = {
       week1: new Array(7).fill(null),
       week2: new Array(7).fill(null),
       week3: new Array(7).fill(null),
       week4: new Array(7).fill(null),
       week5: new Array(7).fill(null),
-      week6: new Array(7).fill(null),
+      week6: new Array(7).fill(null)
     };
 
     const sunStartDay = endLastMonth - (ISOToIndex.sunday[startOfMonth] - 1);
 
     let sunCurrDate = set(sub(selectedDate, { months: 1 }), {
-      date: sunStartDay,
+      date: sunStartDay
     });
 
     for (let week in sundays) {
@@ -193,7 +193,7 @@ const NewCalenderContextProvider = ({
       thisWeek.forEach((e, i, a) => {
         const day = {
           isOverflow: isOverflow(selectedDate, sunCurrDate),
-          date: sunCurrDate,
+          date: sunCurrDate
         };
         sunCurrDate = add(sunCurrDate, { days: 1 });
 
@@ -207,13 +207,13 @@ const NewCalenderContextProvider = ({
       week3: new Array(7).fill(null),
       week4: new Array(7).fill(null),
       week5: new Array(7).fill(null),
-      week6: new Array(7).fill(null),
+      week6: new Array(7).fill(null)
     };
 
     const monStartDay = endLastMonth - ISOToIndex.monday[startOfMonth];
 
     let monCurrDate = set(sub(selectedDate, { months: 1 }), {
-      date: monStartDay,
+      date: monStartDay
     });
 
     for (let week in mondays) {
@@ -222,7 +222,7 @@ const NewCalenderContextProvider = ({
       thisWeek.forEach((e, i, a) => {
         const day = {
           isOverflow: isOverflow(selectedDate, monCurrDate),
-          date: monCurrDate,
+          date: monCurrDate
         };
         monCurrDate = add(monCurrDate, { days: 1 });
 
@@ -248,7 +248,7 @@ const NewCalenderContextProvider = ({
   //TODO: Add a useEffect that will trigger the update function(s) to run when the selected date is updated.
 
   const calenderContextValues = {
-    selectedMonthInfo,
+    selectedMonthInfo
   };
 
   return (

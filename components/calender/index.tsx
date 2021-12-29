@@ -28,7 +28,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   // Simulated user settings context
   const userSettings = {
     theme: "default",
-    startOfWeek: "Sunday",
+    startOfWeek: "Sunday"
   };
 
   return (

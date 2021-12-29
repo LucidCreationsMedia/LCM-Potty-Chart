@@ -68,7 +68,7 @@ interface CalenderContextState {
 const CalenderContext = createContext({} as CalenderContextState);
 
 const CalenderContextProvider = ({
-  children,
+  children
 }: {
   children: ReactNode;
 }): JSX.Element => {
@@ -81,7 +81,7 @@ const CalenderContextProvider = ({
         3: "Wednesday",
         4: "Thursday",
         5: "Friday",
-        6: "Saturday",
+        6: "Saturday"
       },
       Monday: {
         0: "Monday",
@@ -90,9 +90,9 @@ const CalenderContextProvider = ({
         3: "Thursday",
         4: "Friday",
         5: "Saturday",
-        6: "Sunday",
-      },
-    },
+        6: "Sunday"
+      }
+    }
   };
 
   // Selected month & year
@@ -157,7 +157,7 @@ const CalenderContextProvider = ({
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday",
+        "Saturday"
       ],
       Monday: [
         "Monday",
@@ -166,9 +166,9 @@ const CalenderContextProvider = ({
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday",
-      ],
-    },
+        "Sunday"
+      ]
+    }
   };
 
   //TODO: Create an object of arrays that will align with the days on the week. Make two sets for each start of the week setting.
@@ -193,7 +193,7 @@ const CalenderContextProvider = ({
     selectedDate,
     daysOfMonth,
     daysOfWeek,
-    setDate,
+    setDate
   };
 
   return (

@@ -14,7 +14,7 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import {
   Formik,
@@ -22,7 +22,7 @@ import {
   FormikProps,
   Form,
   Field,
-  FieldProps,
+  FieldProps
 } from "formik";
 import { format } from "date-fns";
 import { CalenderContext } from "../../contexts/CalenderContext";
@@ -57,7 +57,7 @@ const DatePicker = (): JSX.Element => {
         const date: UpdateCalendarProps = {
           year: parseInt(dateArr[0]),
           month: parseInt(dateArr[1]),
-          day: parseInt(dateArr[2]),
+          day: parseInt(dateArr[2])
         };
 
         if (!/^(19|20)\d{2}$/.test(`${date.year}`)) {
@@ -97,7 +97,7 @@ const DatePicker = (): JSX.Element => {
           const date: UpdateCalendarProps = {
             year: parseInt(dateArr[0]),
             month: parseInt(dateArr[1]),
-            day: parseInt(dateArr[2]),
+            day: parseInt(dateArr[2])
           };
 
           return resolve(router.push(`/calendar/${date.year}/${date.month}`));
@@ -116,15 +116,15 @@ const DatePicker = (): JSX.Element => {
     bg: "gray.900",
     borderColor: "white",
     _placeholder: {
-      color: "white",
+      color: "white"
     },
     _focus: {
       bg: "#000",
       color: "#FFF",
       borderColor: "#63b3ed",
       boxShadow: "0 0 0 1px #63b3ed",
-      zIndex: "1",
-    },
+      zIndex: "1"
+    }
   };
 
   const initRef = useRef();
@@ -148,7 +148,7 @@ const DatePicker = (): JSX.Element => {
         <PopoverBody textAlign="center">
           <Formik
             initialValues={{
-              date: "",
+              date: ""
             }}
             onSubmit={(data, actions) => {
               handleSubmit(data)
@@ -156,8 +156,8 @@ const DatePicker = (): JSX.Element => {
                   actions.setSubmitting(false);
                   actions.resetForm({
                     values: {
-                      date: "",
-                    },
+                      date: ""
+                    }
                   });
                 })
                 .catch(() => {
@@ -169,7 +169,7 @@ const DatePicker = (): JSX.Element => {
               <Form
                 style={{
                   width: "100%",
-                  height: "auto",
+                  height: "auto"
                 }}
               >
                 <VStack
@@ -223,8 +223,8 @@ const DatePicker = (): JSX.Element => {
                                     boxShadow: "0 0 0 1px #00c17c",
                                     _hover: {
                                       borderColor: "brand.valid",
-                                      boxShadow: "0 0 0 1px #00c17c",
-                                    },
+                                      boxShadow: "0 0 0 1px #00c17c"
+                                    }
                                   }
                                 : "")}
                             />
