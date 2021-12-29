@@ -4,10 +4,10 @@ import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { sub, add, format } from "date-fns";
 import DatePicker from "./DatePicker";
-import { NewCalenderContext } from "../../contexts/NewCalenderContext";
+import { CalenderContext } from "../../contexts/CalenderContext";
 
 const CalenderNav = (): JSX.Element => {
-  const { selectedDate } = useContext(NewCalenderContext);
+  const { selectedDate } = useContext(CalenderContext);
 
   const router = useRouter();
 

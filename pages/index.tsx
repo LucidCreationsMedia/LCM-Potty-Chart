@@ -3,7 +3,6 @@ import { Box } from "@chakra-ui/react";
 import Calender from "../components/calender";
 import { CalenderContextProvider } from "../contexts/CalenderContext";
 import { format } from "date-fns";
-import { NewCalenderContextProvider } from "../contexts/NewCalenderContext";
 
 interface UpdateCalendarProps {
   year: number;
@@ -20,9 +19,7 @@ const IndexPage = (): JSX.Element => {
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>
-        <NewCalenderContextProvider>
-          <Calender {...date.current} />
-        </NewCalenderContextProvider>
+        <Calender {...date.current} />
       </CalenderContextProvider>
     </Box>
   );

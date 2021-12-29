@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
-import { NewCalenderContext } from "../../contexts/NewCalenderContext";
+import { CalenderContext } from "../../contexts/CalenderContext";
 import { getDate } from "date-fns";
 // TODO: import types
 
@@ -12,7 +12,7 @@ interface UpdateCalendarProps {
 }
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { layout, updateDate } = useContext(NewCalenderContext);
+  const { layout, updateDate } = useContext(CalenderContext);
 
   useEffect(() => {
     if (newDate) {

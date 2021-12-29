@@ -24,9 +24,8 @@ import {
   Field,
   FieldProps
 } from "formik";
-import { format } from "date-fns";
 import FormValidateEmoji from "./FormValidateEmoji";
-import { NewCalenderContext } from "../../contexts/NewCalenderContext";
+import { CalenderContext } from "../../contexts/CalenderContext";
 
 interface UpdateCalendarProps {
   year: number;
@@ -35,7 +34,7 @@ interface UpdateCalendarProps {
 }
 
 const DatePicker = (): JSX.Element => {
-  const { title } = useContext(NewCalenderContext);
+  const { title } = useContext(CalenderContext);
 
   const router = useRouter();
 
