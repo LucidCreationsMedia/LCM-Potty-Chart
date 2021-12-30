@@ -2,6 +2,9 @@ import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
+import { getDate, sub, add, getYear, getMonth } from "date-fns";
+import { useRouter } from "next/router";
+// TODO: import types
 
 interface UpdateCalendarProps {
   year: number;
@@ -10,28 +13,32 @@ interface UpdateCalendarProps {
 }
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { daysOfMonth, daysOfWeek, setDate } = useContext(CalenderContext);
+  const { selectedDate, layout, updateDate } = useContext(CalenderContext);
+  const router = useRouter();
 
   useEffect(() => {
     if (newDate) {
       const { year, month, day } = newDate;
 
       if (year > 0 && month > 0 && day > 0) {
-        setDate(newDate);
+        updateDate(newDate);
       } else {
         console.warn("Invalid date format: ", newDate);
       }
     }
-  }, [daysOfMonth, daysOfWeek, newDate, setDate]);
+  }, [newDate, updateDate]);
 
   // Simulated user settings context
   const userSettings = {
     theme: "default",
-    startOfWeek: "Sunday",
+    startOfWeek: "Sunday"
   };
 
+  const currMonth = layout[`${userSettings.startOfWeek.toLowerCase()}`];
+  const { month, weekdays } = currMonth;
+
   return (
-    <VStack h="100vh" w="100%">
+    <VStack h="91vh" w="100%">
       <CalenderNav />
       <HStack
         px={6}
@@ -42,7 +49,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
         alignContent="center"
         alignItems="center"
       >
-        {daysOfWeek.startOfWeek[userSettings.startOfWeek].map((weekDay) => {
+        {weekdays.map((weekDay) => {
           return (
             <Box
               d="flex"
@@ -71,20 +78,52 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
         // alignContent="center"
         alignItems="center"
       >
-        {daysOfMonth.map((monthDay) => {
-          return (
-            <Box
-              bg="transparent"
-              border="2px solid #0068ff"
-              w="100%"
-              h="100%"
-              key={monthDay}
-            >
-              <Text w="100%" h="100%">
-                {`Day ${monthDay}`}
-              </Text>
-            </Box>
-          );
+        {Object.keys(month).map((week) => {
+          const thisWeek = month[week];
+
+          return thisWeek.map((day) => {
+            const { date, isOverflow, overflowDirection } = day;
+
+            return (
+              <Box
+                bg="transparent"
+                color={isOverflow ? "gray.600" : "whiteAlpha"}
+                border={isOverflow ? "2px solid #181d8f" : "2px solid #0068ff"}
+                w="100%"
+                h="100%"
+                key={date}
+                {...(isOverflow && {
+                  _hover: {
+                    cursor: "pointer"
+                  }
+                })}
+                {...(isOverflow && {
+                  onClick: () => {
+                    if (overflowDirection === "next") {
+                      console.log(overflowDirection);
+                      const newMonth = add(selectedDate, { months: 1 });
+
+                      const year = getYear(newMonth);
+                      const month = getMonth(newMonth) + 1;
+
+                      router.push(`/calendar/${year}/${month}`);
+                    } else if (overflowDirection === "prev") {
+                      const newMonth = sub(selectedDate, { months: 1 });
+
+                      const year = getYear(newMonth);
+                      const month = getMonth(newMonth) + 1;
+
+                      router.push(`/calendar/${year}/${month}`);
+                    }
+                  }
+                })}
+              >
+                <Text w="100%" h="100%">
+                  {`Day ${getDate(date)}`}
+                </Text>
+              </Box>
+            );
+          });
         })}
       </SimpleGrid>
     </VStack>

@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { sub, add, format } from "date-fns";
-import { CalenderContext } from "../../contexts/CalenderContext";
 import DatePicker from "./DatePicker";
+import { CalenderContext } from "../../contexts/CalenderContext";
 
 const CalenderNav = (): JSX.Element => {
   const { selectedDate } = useContext(CalenderContext);
@@ -14,7 +14,7 @@ const CalenderNav = (): JSX.Element => {
   const handleNavButtons = (direction: "next" | "prev") => {
     if (direction === "next") {
       const newMonth = add(selectedDate, {
-        months: 1,
+        months: 1
       });
 
       const year = format(newMonth, "y");
@@ -23,7 +23,7 @@ const CalenderNav = (): JSX.Element => {
       router.push(`/calendar/${year}/${month}`);
     } else if (direction === "prev") {
       const newMonth = sub(selectedDate, {
-        months: 1,
+        months: 1
       });
 
       const year = format(newMonth, "y");

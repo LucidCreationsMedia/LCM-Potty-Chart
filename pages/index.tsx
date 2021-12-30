@@ -14,8 +14,9 @@ const IndexPage = (): JSX.Element => {
   const date = useRef<UpdateCalendarProps>({
     year: parseInt(format(new Date(), "y")),
     month: parseInt(format(new Date(), "M")),
-    day: parseInt(format(new Date(), "d")),
+    day: parseInt(format(new Date(), "d"))
   });
+
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>

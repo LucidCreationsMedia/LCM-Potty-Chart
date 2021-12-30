@@ -1,19 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   Heading,
   HStack,
   Box,
   IconButton,
   Menu,
-  MenuButton,
+  MenuButton
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
+import appLogo from "../../public/images/logo.svg";
 
 const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart";
-  const appVersion = "v0.0.5.2-pre-alpha";
+  const appVersion = "v0.0.6.0-pre-alpha";
 
   // Add transparency while not at the top of the page.
   const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
@@ -54,7 +56,7 @@ const Header = (): JSX.Element => {
     const iconType = {
       default: <Icon icon="bx:bx-menu-alt-right" />,
       hover: <Icon icon="bx:bx-menu" />,
-      open: <Icon icon="bx:bx-x" />,
+      open: <Icon icon="bx:bx-x" />
     };
 
     if (open) {
@@ -91,14 +93,17 @@ const Header = (): JSX.Element => {
         bg: "brand.main",
         boxShadow: open
           ? "none"
-          : "rgba(0, 134, 255, 0.9) 0px 0px 15px, rgba(0, 134, 255, 0.7) 0px 0px 3px 1px",
+          : "rgba(0, 134, 255, 0.9) 0px 0px 15px, rgba(0, 134, 255, 0.7) 0px 0px 3px 1px"
       }}
       h={open ? "125px" : "auto"}
     >
       {/* Logo | Site Name */}
       <HStack
         width="100%"
-        justifyContent={{ base: "flex-start", sm: "center" }}
+        justifyContent={{
+          base: "flex-start",
+          sm: "center"
+        }}
         alignItems="center"
         height={12}
         top={0}
@@ -107,9 +112,11 @@ const Header = (): JSX.Element => {
         d={{ base: "flex", lg: "none" }}
         spacing="5px"
         _hover={{
-          cursor: "default",
+          cursor: "default"
         }}
       >
+        <Image height="30px" width="30px" src={appLogo} alt="App Logo" />
+
         <Heading as="h1" size="md">
           {appName}
         </Heading>
@@ -140,9 +147,10 @@ const Header = (): JSX.Element => {
               height="auto"
               spacing="5px"
               _hover={{
-                cursor: "default",
+                cursor: "default"
               }}
             >
+              <Image height="30px" width="30px" src={appLogo} alt="App Logo" />
               <Heading as="h1" size="md">
                 {appName}
               </Heading>
@@ -161,7 +169,10 @@ const Header = (): JSX.Element => {
             onClick={() => setOpen(!open)}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            d={{ base: "inline-flex", lg: "none" }}
+            d={{
+              base: "inline-flex",
+              lg: "none"
+            }}
             variant="mobileNav"
             bg={transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"}
             type="button"

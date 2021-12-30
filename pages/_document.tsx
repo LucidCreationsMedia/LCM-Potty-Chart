@@ -13,8 +13,8 @@ class Document extends NextDocument {
       <Html>
         <Head>
           <meta name="theme-color" content="#3138dc" />
-          <link rel="icon" href="/images/favicon.svg" sizes="32x32 192x192" />
-          <link rel="apple-touch-icon" href="/images/favicon.svg" />
+          <link rel="icon" href="/images/logo.svg" sizes="32x32 192x192" />
+          <link rel="apple-touch-icon" href="/images/logo.svg" />
           <meta property="og:title" content="LCM Potty Chart" />
           <meta name="og:description" content={description} />
           <meta property="og:type" content="Progress Tracking" />

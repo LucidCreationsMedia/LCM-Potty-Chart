@@ -5,7 +5,7 @@ interface FormValidateEmojiProps {
 }
 
 const FormValidateEmoji: FC<FormValidateEmojiProps> = ({
-  type,
+  type
 }: FormValidateEmojiProps) => {
   interface Validations {
     [key: string]: JSX.Element;
@@ -26,7 +26,7 @@ const FormValidateEmoji: FC<FormValidateEmojiProps> = ({
       <span role="img" aria-label="Check">
         ✔
       </span>
-    ),
+    )
   };
 
   return validations[`${type}`];

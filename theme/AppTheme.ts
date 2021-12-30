@@ -1,10 +1,10 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import { createBreakpoints } from "@chakra-ui/theme-tools";
+// import { createBreakpoints } from "@chakra-ui/theme-tools";
 import buttons from "./components/buttonStyles";
 
 const config: ThemeConfig = {
   initialColorMode: "dark",
-  useSystemColorMode: false,
+  useSystemColorMode: false
 };
 
 // const breakpoints = createBreakpoints({
@@ -29,19 +29,19 @@ const AppTheme = extendTheme({
       footer: "#0097a7",
       footerText: "black",
       content: "#2d3748",
-      patreon: "#FF424D",
-    },
+      patreon: "#FF424D"
+    }
   },
   styles: {
     global: {
       body: {
-        bg: "gray.900",
-      },
-    },
+        bg: "gray.900"
+      }
+    }
   },
   components: {
-    Button: buttons,
-  },
+    Button: buttons
+  }
   // breakpoints,
 });
 

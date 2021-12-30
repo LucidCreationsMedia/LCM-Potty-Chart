@@ -3,7 +3,7 @@ import {
   darken,
   mode,
   StyleFunctionProps,
-  whiten,
+  whiten
 } from "@chakra-ui/theme-tools";
 import { Dict } from "@chakra-ui/utils";
 
@@ -22,8 +22,8 @@ const buttonStyles = {
         bg: mode(
           whiten("brand.primary", 20),
           darken("brand.primary", 20)
-        )(props),
-      },
+        )(props)
+      }
     }),
     contactSecondary: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "brand.primary",
@@ -33,8 +33,8 @@ const buttonStyles = {
         bg: mode(
           whiten("brand.primary", 20),
           darken("brand.primary", 20)
-        )(props),
-      },
+        )(props)
+      }
     }),
     project: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "transparent",
@@ -50,8 +50,8 @@ const buttonStyles = {
           darken("brand.secondary", 20)
         )(props),
         boxShadow:
-          "rgba(0, 104, 255, 0.5) 0px 0px 15px, rgba(0, 104, 255, 0.3) 0px 0px 3px 1px",
-      },
+          "rgba(0, 104, 255, 0.5) 0px 0px 15px, rgba(0, 104, 255, 0.3) 0px 0px 3px 1px"
+      }
     }),
     nav: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "transparent",
@@ -61,16 +61,16 @@ const buttonStyles = {
         bg: mode(
           whiten("brand.secondary", 20),
           darken("brand.secondary", 20)
-        )(props),
-      },
+        )(props)
+      }
     }),
     stickyNav: (/* props: Dict<never> | StyleFunctionProps */) => ({
       bg: "transparent",
       fontSize: "md",
       px: "2",
       _hover: {
-        textDecoration: "underline",
-      },
+        textDecoration: "underline"
+      }
     }),
     credits: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "brand.main",
@@ -78,8 +78,8 @@ const buttonStyles = {
       p: 3,
       color: "whiteAlpha",
       _hover: {
-        bg: mode(whiten("brand.main", 20), darken("brand.main", 20))(props),
-      },
+        bg: mode(whiten("brand.main", 20), darken("brand.main", 20))(props)
+      }
     }),
     backToTop: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "rgba(23, 25, 35, 0.5)",
@@ -98,8 +98,8 @@ const buttonStyles = {
         boxShadow:
           "rgba(0, 104, 255, 0.5) 0px 0px 15px, rgba(0, 104, 255, 0.3) 0px 0px 3px 1px",
         color: "whiteAlpha.900",
-        border: "1px solid rgba(0, 134, 255, 1)",
-      },
+        border: "1px solid rgba(0, 134, 255, 1)"
+      }
     }),
     collapse: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "transparent",
@@ -114,8 +114,8 @@ const buttonStyles = {
           darken("brand.secondary", 20)
         )(props),
         color: "whiteAlpha.900",
-        textDecoration: "none",
-      },
+        textDecoration: "none"
+      }
     }),
     submit: (props: Dict<never> | StyleFunctionProps) => ({
       fontSize: "lg",
@@ -132,9 +132,9 @@ const buttonStyles = {
           )(props),
           boxShadow:
             "rgba(252, 129, 129, .95) 0px 0px 15px, rgba(252, 129, 129, 0.75) 0px 0px 3px 1px",
-          border: "1px solid #FC8181",
-        },
-      },
+          border: "1px solid #FC8181"
+        }
+      }
     }),
     mobileNav: (props: Dict<never> | StyleFunctionProps) => ({
       // bg: "transparent",
@@ -148,14 +148,14 @@ const buttonStyles = {
           darken("brand.secondary", 20)
         )(props),
         boxShadow:
-          "rgba(0, 134, 255, 0.5) 0px 0px 15px, rgba(0, 134, 255, 0.3) 0px 0px 3px 1px",
+          "rgba(0, 134, 255, 0.5) 0px 0px 15px, rgba(0, 134, 255, 0.3) 0px 0px 3px 1px"
       },
       _expanded: {
         bg: "brand.primary",
         boxShadow:
           "rgba(0, 134, 255, 0.5) 0px 0px 15px, rgba(0, 134, 255, 0.3) 0px 0px 3px 1px",
-        border: "1px solid #0068ff",
-      },
+        border: "1px solid #0068ff"
+      }
     }),
     patreon: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "brand.patreon",
@@ -166,12 +166,12 @@ const buttonStyles = {
         bg: mode(
           whiten("brand.patreon", 20),
           darken("brand.patreon", 20)
-        )(props),
-      },
-    }),
+        )(props)
+      }
+    })
   },
   // default values for `size` and `variant`
-  defaultProps: {},
+  defaultProps: {}
 };
 
 export default buttonStyles;

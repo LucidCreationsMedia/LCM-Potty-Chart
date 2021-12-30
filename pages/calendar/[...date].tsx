@@ -22,14 +22,14 @@ const DateRoute: React.FC<unknown> = () => {
       return {
         year: 0,
         month: 0,
-        day: 0,
+        day: 0
       };
     }
 
     const date = {
       year: 0,
       month: 0,
-      day: 0,
+      day: 0
     };
 
     if (/^(19|20)\d{2}$/.test(`${dateArr[0]}`)) {
@@ -58,7 +58,9 @@ const DateRoute: React.FC<unknown> = () => {
       const parsedSlug = slug.map((e) => {
         return parseInt(e);
       });
-      setDate({ ...validateDateInput(parsedSlug) });
+      setDate({
+        ...validateDateInput(parsedSlug)
+      });
     }
   }, [slug]);
 

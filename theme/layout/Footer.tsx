@@ -7,7 +7,7 @@ import {
   HStack,
   // Image,
   Button,
-  BoxProps,
+  BoxProps
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 // import BackToTopButton from "./BackToTopButton";
