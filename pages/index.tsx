@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Box } from "@chakra-ui/react";
 import Calender from "../components/calender";
 import { CalenderContextProvider } from "../contexts/CalenderContext";

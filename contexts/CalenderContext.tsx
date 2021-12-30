@@ -31,6 +31,7 @@ interface WeekDays {
 
 interface MonthDay {
   isOverflow: boolean;
+  overflowDirection: "prev" | "next" | null;
   date: Date;
 }
 
@@ -112,16 +113,30 @@ const CalenderContextProvider = ({
    * @param {Date} currDate The date to be compared to the selected month.
    * @returns True if currDate is outside of the month of selectedDate, false if otherwise.
    */
-  const isOverflow = (selectedDate: Date, currDate: Date): boolean => {
+  const isOverflow = (
+    selectedDate: Date,
+    currDate: Date
+  ): {
+    isOverflow: boolean;
+    overflowDirection: "prev" | "next" | null;
+  } => {
     let flag = false;
+    let direction: "next" | "prev" | null = null;
+
     const start = startOfMonth(selectedDate);
     const end = endOfMonth(selectedDate);
 
-    if (isBefore(currDate, start) || isAfter(currDate, end)) {
+    if (isBefore(currDate, start)) {
       flag = true;
+      direction = "prev";
     }
 
-    return flag;
+    if (isAfter(currDate, end)) {
+      flag = true;
+      direction = "next";
+    }
+
+    return { isOverflow: flag, overflowDirection: direction };
   };
 
   /**
@@ -175,8 +190,9 @@ const CalenderContextProvider = ({
       const thisWeek = sundays[week];
 
       thisWeek.forEach((e, i) => {
+        const overflowInfo = isOverflow(selectedDate, sunCurrDate);
         const day: MonthDay = {
-          isOverflow: isOverflow(selectedDate, sunCurrDate),
+          ...overflowInfo,
           date: sunCurrDate
         };
         sunCurrDate = add(sunCurrDate, {

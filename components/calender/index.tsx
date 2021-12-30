@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
-import { getDate } from "date-fns";
+import { getDate, sub, add, getYear, getMonth } from "date-fns";
+import { useRouter } from "next/router";
 // TODO: import types
 
 interface UpdateCalendarProps {
@@ -12,7 +13,8 @@ interface UpdateCalendarProps {
 }
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { layout, updateDate } = useContext(CalenderContext);
+  const { selectedDate, layout, updateDate } = useContext(CalenderContext);
+  const router = useRouter();
 
   useEffect(() => {
     if (newDate) {
@@ -42,7 +44,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
       const height = window.innerHeight - 60;
       setHeight(`${height}px`);
     }
-  }, [])
+  }, []);
 
   return (
     <VStack h={height} w="100%">
@@ -89,7 +91,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
           const thisWeek = month[week];
 
           return thisWeek.map((day) => {
-            const { date, isOverflow } = day;
+            const { date, isOverflow, overflowDirection } = day;
 
             return (
               <Box
@@ -99,6 +101,26 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 w="100%"
                 h="100%"
                 key={date}
+                {...(isOverflow && {
+                  onClick: () => {
+                    if (overflowDirection === "next") {
+                      console.log(overflowDirection);
+                      const newMonth = add(selectedDate, { months: 1 });
+
+                      const year = getYear(newMonth);
+                      const month = getMonth(newMonth) + 1;
+
+                      router.push(`/calendar/${year}/${month}`);
+                    } else if (overflowDirection === "prev") {
+                      const newMonth = sub(selectedDate, { months: 1 });
+
+                      const year = getYear(newMonth);
+                      const month = getMonth(newMonth) + 1;
+
+                      router.push(`/calendar/${year}/${month}`);
+                    }
+                  }
+                })}
               >
                 <Text w="100%" h="100%">
                   {`Day ${getDate(date)}`}
