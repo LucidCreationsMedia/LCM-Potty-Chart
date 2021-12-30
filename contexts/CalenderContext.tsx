@@ -191,6 +191,7 @@ const CalenderContextProvider = ({
 
       thisWeek.forEach((e, i) => {
         const overflowInfo = isOverflow(selectedDate, sunCurrDate);
+
         const day: MonthDay = {
           ...overflowInfo,
           date: sunCurrDate
@@ -222,8 +223,10 @@ const CalenderContextProvider = ({
       const thisWeek = mondays[week];
 
       thisWeek.forEach((e, i) => {
+        const overflowInfo = isOverflow(selectedDate, sunCurrDate);
+
         const day: MonthDay = {
-          isOverflow: isOverflow(selectedDate, monCurrDate),
+          ...overflowInfo,
           date: monCurrDate
         };
         monCurrDate = add(monCurrDate, {

@@ -102,6 +102,11 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 h="100%"
                 key={date}
                 {...(isOverflow && {
+                  _hover: {
+                    cursor: "pointer"
+                  }
+                })}
+                {...(isOverflow && {
                   onClick: () => {
                     if (overflowDirection === "next") {
                       console.log(overflowDirection);
