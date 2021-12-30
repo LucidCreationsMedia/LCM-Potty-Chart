@@ -37,17 +37,8 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const currMonth = layout[`${userSettings.startOfWeek.toLowerCase()}`];
   const { month, weekdays } = currMonth;
 
-  const [height, setHeight] = useState<string>("0px");
-
-  useEffect(() => {
-    if (window) {
-      const height = window.innerHeight - 60;
-      setHeight(`${height}px`);
-    }
-  }, []);
-
   return (
-    <VStack h={height} w="100%">
+    <VStack h="91vh" w="100%">
       <CalenderNav />
       <HStack
         px={6}
