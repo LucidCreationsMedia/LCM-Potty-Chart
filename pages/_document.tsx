@@ -7,18 +7,20 @@ const description =
   // "Behavior and progress tracker for ABDLs and babyfurs alike. Track multiple littles and create any trackers you would like.";
   "Pre-alpha preview of the behavior and progress tracker for ABDLs and babyfurs.";
 
+const logo = "/images/logo.svg";
+
 class Document extends NextDocument {
   render(): JSX.Element {
     return (
       <Html>
         <Head>
           <meta name="theme-color" content="#3138dc" />
-          <link rel="icon" href="/images/logo.svg" sizes="32x32 192x192" />
-          <link rel="apple-touch-icon" href="/images/logo.svg" />
+          <link rel="icon" href={logo} sizes="32x32 192x192" />
+          <link rel="apple-touch-icon" href={logo} />
           <meta property="og:title" content="LCM Potty Chart" />
           <meta name="og:description" content={description} />
           <meta property="og:type" content="Progress Tracking" />
-          <meta property="og:image" content="/images/logo.jpg" />
+          <meta property="og:image" content={logo} />
           <meta property="og:image:type" content="image/jpeg" />
           <meta property="og:image:alt" content="LCM Potty Chart Logo" />
           <meta property="og:url" content="https://lucidcreations.media" />
@@ -26,7 +28,7 @@ class Document extends NextDocument {
           <meta property="title" content="LCM Potty Chart" />
           <meta name="description" content={description} />
           <meta property="type" content="Progress Tracking" />
-          <meta property="image" content="/images/logojpg" />
+          <meta property="image" content={logo} />
           <meta property="image:type" content="image/jpeg" />
           <meta property="image:alt" content="LCM Potty Chart Logo" />
           <meta property="url" content="https://https://lucidcreations.media" />
