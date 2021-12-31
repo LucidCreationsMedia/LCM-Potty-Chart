@@ -7,7 +7,7 @@ const description =
   // "Behavior and progress tracker for ABDLs and babyfurs alike. Track multiple littles and create any trackers you would like.";
   "Pre-alpha preview of the behavior and progress tracker for ABDLs and babyfurs.";
 
-const logo = "/images/logo.svg";
+const logo = "/images/logo.png";
 
 class Document extends NextDocument {
   render(): JSX.Element {
@@ -21,7 +21,7 @@ class Document extends NextDocument {
           <meta name="og:description" content={description} />
           <meta property="og:type" content="Progress Tracking" />
           <meta property="og:image" content={logo} />
-          <meta property="og:image:type" content="image/svg" />
+          <meta property="og:image:type" content="image/png" />
           <meta property="og:image:alt" content="LCM Potty Chart Logo" />
           <meta property="og:url" content="https://lucidcreations.media" />
           <meta name="twitter:card" content="summary_large_image" />
@@ -29,7 +29,7 @@ class Document extends NextDocument {
           <meta name="description" content={description} />
           <meta property="type" content="Progress Tracking" />
           <meta property="image" content={logo} />
-          <meta property="image:type" content="image/svg" />
+          <meta property="image:type" content="image/png" />
           <meta property="image:alt" content="LCM Potty Chart Logo" />
           <meta property="url" content="https://https://lucidcreations.media" />
           <meta httpEquiv="content-language" content="en_US" />
