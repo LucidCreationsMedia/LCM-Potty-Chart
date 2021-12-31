@@ -21,7 +21,7 @@ class Document extends NextDocument {
           <meta name="og:description" content={description} />
           <meta property="og:type" content="Progress Tracking" />
           <meta property="og:image" content={logo} />
-          <meta property="og:image:type" content="image/jpeg" />
+          <meta property="og:image:type" content="image/svg" />
           <meta property="og:image:alt" content="LCM Potty Chart Logo" />
           <meta property="og:url" content="https://lucidcreations.media" />
           <meta name="twitter:card" content="summary_large_image" />
@@ -29,7 +29,7 @@ class Document extends NextDocument {
           <meta name="description" content={description} />
           <meta property="type" content="Progress Tracking" />
           <meta property="image" content={logo} />
-          <meta property="image:type" content="image/jpeg" />
+          <meta property="image:type" content="image/svg" />
           <meta property="image:alt" content="LCM Potty Chart Logo" />
           <meta property="url" content="https://https://lucidcreations.media" />
           <meta httpEquiv="content-language" content="en_US" />
