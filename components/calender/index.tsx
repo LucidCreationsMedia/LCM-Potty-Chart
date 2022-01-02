@@ -4,6 +4,7 @@ import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
 import { getDate, sub, add, getYear, getMonth } from "date-fns";
 import { useRouter } from "next/router";
+import AddSticker from "./modals/AddSticker";
 // TODO: import types
 
 interface UpdateCalendarProps {
@@ -119,6 +120,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 })}
               >
                 <Text w="100%" h="100%">
+                  {!isOverflow && <AddSticker />}
                   {`Day ${getDate(date)}`}
                 </Text>
               </Box>

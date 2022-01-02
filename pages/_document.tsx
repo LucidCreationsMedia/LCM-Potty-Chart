@@ -7,7 +7,7 @@ const description =
   // "Behavior and progress tracker for ABDLs and babyfurs alike. Track multiple littles and create any trackers you would like.";
   "Pre-alpha preview of the behavior and progress tracker for ABDLs and babyfurs.";
 
-const logo = "images/logo.svg"
+const logo = "images/logo.svg";
 const logoOG = "/images/logo.png";
 
 class Document extends NextDocument {
