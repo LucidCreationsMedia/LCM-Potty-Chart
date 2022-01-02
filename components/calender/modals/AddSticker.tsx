@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
+  ModalFooter
   // Lorem
 } from "@chakra-ui/react";
 import React, { Fragment, useState } from "react";
@@ -23,8 +23,7 @@ const AddSticker = (): JSX.Element => {
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-          </ModalBody>
+          <ModalBody></ModalBody>
 
           <ModalFooter>
             <Button
