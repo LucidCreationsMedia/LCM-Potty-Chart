@@ -131,7 +131,7 @@ const CalenderContextProvider = ({
         const overflowInfo = isOverflow(selectedDate, sunCurrDate);
         const stickerDay = overflowInfo.isOverflow
           ? null
-          : stickersMonth[getDate(sunCurrDate)];
+          : stickersMonth[getDate(sunCurrDate) - 1];
 
         const day: MonthDay = {
           ...overflowInfo,
@@ -169,7 +169,7 @@ const CalenderContextProvider = ({
         const overflowInfo = isOverflow(selectedDate, monCurrDate);
         const stickerDay = overflowInfo.isOverflow
           ? null
-          : stickersMonth[getDate(monCurrDate)];
+          : stickersMonth[getDate(monCurrDate) - 1];
 
         const day: MonthDay = {
           ...overflowInfo,
