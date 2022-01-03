@@ -87,9 +87,6 @@ const CalenderContextProvider = ({
     const endLastMonth = getDate(endOfMonth(sub(selectedDate, { months: 1 })));
     const startOfSelectedMonth = format(startOfMonth(selectedDate), "iii");
 
-    // console.log(stickersMonth);
-    console.log(stickersSeeder());
-
     const ISOToIndex = {
       sunday: {
         Sun: 0,
@@ -132,11 +129,14 @@ const CalenderContextProvider = ({
 
       thisWeek.forEach((e, i) => {
         const overflowInfo = isOverflow(selectedDate, sunCurrDate);
+        const stickerDay = overflowInfo.isOverflow
+          ? null
+          : stickersMonth[getDate(sunCurrDate)];
 
         const day: MonthDay = {
           ...overflowInfo,
           date: sunCurrDate,
-          // sticker: stickersMonth[getDate(sunCurrDate)].sticker
+          sticker: stickerDay ? stickerDay.sticker : null
         };
 
         sunCurrDate = add(sunCurrDate, {
@@ -166,12 +166,15 @@ const CalenderContextProvider = ({
       const thisWeek = mondays[week];
 
       thisWeek.forEach((e, i) => {
-        const overflowInfo = isOverflow(selectedDate, sunCurrDate);
+        const overflowInfo = isOverflow(selectedDate, monCurrDate);
+        const stickerDay = overflowInfo.isOverflow
+          ? null
+          : stickersMonth[getDate(monCurrDate)];
 
         const day: MonthDay = {
           ...overflowInfo,
           date: monCurrDate,
-          // sticker: stickersMonth[getDate(monCurrDate)].sticker
+          sticker: stickerDay ? stickerDay.sticker : null
         };
 
         monCurrDate = add(monCurrDate, {
