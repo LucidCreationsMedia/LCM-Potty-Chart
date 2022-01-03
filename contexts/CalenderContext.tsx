@@ -11,6 +11,7 @@ import {
   isBefore,
   compareAsc
 } from "date-fns";
+import stickersSeeder from "../data/stickerSeeder";
 
 const CalenderContext = createContext({} as CalenderContextState);
 
@@ -39,8 +40,6 @@ const CalenderContextProvider = ({
       "Sunday"
     ]
   };
-
-  //TODO Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
 
   /**
    * Using date-fns, this function checks if currDate is within the month of selectedDate or not.
@@ -74,6 +73,10 @@ const CalenderContextProvider = ({
     return { isOverflow: flag, overflowDirection: direction };
   };
 
+  const [stickersMonth, setStickersMonth] = useState<StickerDays>(
+    stickersSeeder()
+  );
+
   /**
    * A function that will return a month layout when given a date. It produces
    * an object with 6 weeks that include overflow from the previous and next month
@@ -83,6 +86,9 @@ const CalenderContextProvider = ({
   const populateMonth = (selectedDate: Date): MonthLayout => {
     const endLastMonth = getDate(endOfMonth(sub(selectedDate, { months: 1 })));
     const startOfSelectedMonth = format(startOfMonth(selectedDate), "iii");
+
+    // console.log(stickersMonth);
+    console.log(stickersSeeder());
 
     const ISOToIndex = {
       sunday: {
@@ -129,8 +135,10 @@ const CalenderContextProvider = ({
 
         const day: MonthDay = {
           ...overflowInfo,
-          date: sunCurrDate
+          date: sunCurrDate,
+          // sticker: stickersMonth[getDate(sunCurrDate)].sticker
         };
+
         sunCurrDate = add(sunCurrDate, {
           days: 1
         });
@@ -162,8 +170,10 @@ const CalenderContextProvider = ({
 
         const day: MonthDay = {
           ...overflowInfo,
-          date: monCurrDate
+          date: monCurrDate,
+          // sticker: stickersMonth[getDate(monCurrDate)].sticker
         };
+
         monCurrDate = add(monCurrDate, {
           days: 1
         });
