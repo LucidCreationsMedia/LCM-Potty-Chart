@@ -29,10 +29,19 @@ interface WeekDays {
   monday: DaysOfWeek;
 }
 
-interface MonthDay {
+interface Sticker {
+  date: Date;
+  sticker: -2 | -1 | 0 | 1 | 2 | null;
+}
+
+interface MonthSticker {
+  date: Date;
+  month: Sticker[];
+}
+
+interface MonthDay extends Sticker {
   isOverflow: boolean;
   overflowDirection: "prev" | "next" | null;
-  date: Date;
 }
 
 interface Month {
