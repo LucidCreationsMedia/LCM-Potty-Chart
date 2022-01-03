@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import { add, getYear, getMonth, sub, getDate } from "date-fns";
+import { add, getYear, getMonth, sub, getDate,format } from "date-fns";
 import router from "next/router";
 import React, { Fragment } from "react";
 import AddSticker from "./modals/AddSticker";
@@ -19,7 +19,7 @@ const Day = (
           border={isOverflow ? "2px solid #181d8f" : "2px solid #0068ff"}
           w="100%"
           h="100%"
-          key={date}
+          key={format(date, "P")}
           {...(isOverflow && {
             _hover: {
               cursor: "pointer"

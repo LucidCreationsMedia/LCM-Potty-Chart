@@ -1,4 +1,4 @@
-import { getDaysInMonth, getYear, getMonth, isBefore, setDate } from "date-fns";
+import { getDaysInMonth, isBefore, setDate } from "date-fns";
 
 /**
  * This seeder is to simulate the date and sticker info from the database.
