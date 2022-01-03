@@ -6,11 +6,6 @@ import { getDaysInMonth, getYear, getMonth, isBefore } from "date-fns";
  * the day before the current date, leaving the rest of the month empty.
  */
 
-interface Sticker {
-  date: Date;
-  sticker: -2 | -1 | 0 | 1 | 2 | null;
-}
-
 const generateSticker = (): -2 | -1 | 0 | 1 | 2 => {
   const stickerPossibility = [-2, -1, 0, 1, 2];
   const sticker = Math.floor(Math.random() * stickerPossibility.length);
