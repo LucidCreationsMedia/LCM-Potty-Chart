@@ -206,9 +206,6 @@ const CalenderContextProvider = ({
     layout: populateMonth(selectedDate)
   });
 
-  //TODO Update the MonthInfo to use the new month population function on first render.
-
-  //TODO Add a function that will update the MonthInfo state when the selected month changes. This should use the populate month function that will be made above.
   /**
    * Updates the selectedDateInfo state when given a date.
    * @param {Date} newDate The date to set the selectedDateInfo state to.
@@ -222,7 +219,6 @@ const CalenderContextProvider = ({
     setSelectedMonthInfo(output);
   };
 
-  //TODO: Add a new navigation function that will take in either a direction (next, prev) or a date to go directly to. That will update the selected month and trigger the use effects below.
   /**
    * Updated the selectedDate state when given the appropriate object.
    * @param {UpdateCalendarProps} input An object with year, month,
