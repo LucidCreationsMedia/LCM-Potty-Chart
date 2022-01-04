@@ -2,9 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
-import { getDate, sub, add, getYear, getMonth } from "date-fns";
-import { useRouter } from "next/router";
-import AddSticker from "./modals/AddSticker";
+import { format } from "date-fns";
+import Day from "./Day";
 // TODO: import types
 
 interface UpdateCalendarProps {
@@ -15,7 +14,6 @@ interface UpdateCalendarProps {
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { selectedDate, layout, updateDate } = useContext(CalenderContext);
-  const router = useRouter();
 
   useEffect(() => {
     if (newDate) {
@@ -82,48 +80,56 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
         {Object.keys(month).map((week) => {
           const thisWeek = month[week];
 
-          return thisWeek.map((day) => {
-            const { date, isOverflow, overflowDirection } = day;
+          return thisWeek.map((day: MonthDay) => {
+            const { sticker, date, isOverflow, overflowDirection } = day;
 
             return (
-              <Box
-                bg="transparent"
-                color={isOverflow ? "gray.600" : "whiteAlpha"}
-                border={isOverflow ? "2px solid #181d8f" : "2px solid #0068ff"}
-                w="100%"
-                h="100%"
-                key={date}
-                {...(isOverflow && {
-                  _hover: {
-                    cursor: "pointer"
-                  }
-                })}
-                {...(isOverflow && {
-                  onClick: () => {
-                    if (overflowDirection === "next") {
-                      console.log(overflowDirection);
-                      const newMonth = add(selectedDate, { months: 1 });
+              <Day
+                isOverflow={isOverflow}
+                overflowDirection={overflowDirection}
+                sticker={sticker}
+                date={date}
+                selectedDate={selectedDate}
+                key={format(date, "P")}
+              />
+              // <Box
+              //   bg="transparent"
+              //   color={isOverflow ? "gray.600" : "whiteAlpha"}
+              //   border={isOverflow ? "2px solid #181d8f" : "2px solid #0068ff"}
+              //   w="100%"
+              //   h="100%"
+              //   key={date}
+              //   {...(isOverflow && {
+              //     _hover: {
+              //       cursor: "pointer"
+              //     }
+              //   })}
+              //   {...(isOverflow && {
+              //     onClick: () => {
+              //       if (overflowDirection === "next") {
+              //         console.log(overflowDirection);
+              //         const newMonth = add(selectedDate, { months: 1 });
 
-                      const year = getYear(newMonth);
-                      const month = getMonth(newMonth) + 1;
+              //         const year = getYear(newMonth);
+              //         const month = getMonth(newMonth) + 1;
 
-                      router.push(`/calendar/${year}/${month}`);
-                    } else if (overflowDirection === "prev") {
-                      const newMonth = sub(selectedDate, { months: 1 });
+              //         router.push(`/calendar/${year}/${month}`);
+              //       } else if (overflowDirection === "prev") {
+              //         const newMonth = sub(selectedDate, { months: 1 });
 
-                      const year = getYear(newMonth);
-                      const month = getMonth(newMonth) + 1;
+              //         const year = getYear(newMonth);
+              //         const month = getMonth(newMonth) + 1;
 
-                      router.push(`/calendar/${year}/${month}`);
-                    }
-                  }
-                })}
-              >
-                <Text w="100%" h="100%">
-                  {!isOverflow && <AddSticker />}
-                  {`Day ${getDate(date)}`}
-                </Text>
-              </Box>
+              //         router.push(`/calendar/${year}/${month}`);
+              //       }
+              //     }
+              //   })}
+              // >
+              //   <Text w="100%" h="100%">
+              //     {!isOverflow && <AddSticker />}
+              //     {`Day ${getDate(date)}`}
+              //   </Text>
+              // </Box>
             );
           });
         })}

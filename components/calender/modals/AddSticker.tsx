@@ -16,7 +16,10 @@ const AddSticker = (): JSX.Element => {
 
   return (
     <Fragment>
-      <Button onClick={() => setIsOpen(!isOpen)}>Open Modal</Button>
+      {/**
+       * TODO: Add prop that will be the trigger for opening the modal.
+       * <Button onClick={() => setIsOpen(!isOpen)}>Open Modal</Button>
+       */}
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(!isOpen)}>
         <ModalOverlay />
