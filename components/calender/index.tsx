@@ -6,12 +6,6 @@ import { format } from "date-fns";
 import Day from "./Day";
 // TODO: import types
 
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
-
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { selectedDate, layout, updateDate } = useContext(CalenderContext);
 

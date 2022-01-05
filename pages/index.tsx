@@ -4,12 +4,6 @@ import Calender from "../components/calender";
 import { CalenderContextProvider } from "../contexts/CalenderContext";
 import { format } from "date-fns";
 
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
-
 const IndexPage = (): JSX.Element => {
   const date = useRef<UpdateCalendarProps>({
     year: parseInt(format(new Date(), "y")),

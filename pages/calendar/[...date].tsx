@@ -5,12 +5,6 @@ import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
 
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
-
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
   const { date: slug } = router.query;

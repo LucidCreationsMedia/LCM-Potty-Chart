@@ -66,6 +66,12 @@ interface UpdateCalendarProps {
   day: number;
 }
 
+interface UpdateCalendarProps {
+  year: number;
+  month: number;
+  day: number;
+}
+
 interface CalenderContextState {
   selectedDate: Date;
   title: string;
