@@ -18,8 +18,25 @@ interface AddStickerProps {
   date: Date;
 }
 
+/**
+ * Handles adding and modifying the stickers for the given month.
+ * @param props the props for this component.
+ * @param {boolean} props.isOpen tells the component when the modal should be open.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.updateIsOpen used to close the modal.
+ * @param {date} props.date the date for which the sticker will be added or modified.
+ */
 const AddSticker = (props: AddStickerProps): JSX.Element => {
   const { isOpen, updateIsOpen, date } = props;
+
+  // TODO: Import the stickers array from the calender context.
+
+  // TODO: Add a function that will add or update the sticker for the current date.
+
+  /**
+   * TODO: Add logic into the contents of the modal to show messages if the selected date is out of range.
+   * Show a message when a date in the future is selected.
+   * Show a message when a date before the current date is selected.
+   */
 
   return (
     <Fragment>

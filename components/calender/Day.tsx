@@ -12,6 +12,15 @@ interface DayProps {
   selectedDate: Date;
 }
 
+/**
+ * The individual days in the calender component.
+ * @param props the props for this component.
+ * @param {boolean} props.isOverflow is the current date being given before or after the current month.
+ * @param {"next" | "prev" | null} props.overflowDirection the direction the overflow is. This will navigate the calender forward or backwards 1 month.
+ * @param {-2 | -1 | 0 | 1 | 2 | null} props.sticker the sticker for this date.
+ * @param {date} props.date the date for this day.
+ * @param {date} props.selectedDate the date for the selected month.
+ */
 const Day = (props: DayProps): JSX.Element => {
   const { isOverflow, overflowDirection, /*sticker,*/ date, selectedDate } =
     props;
@@ -35,6 +44,7 @@ const Day = (props: DayProps): JSX.Element => {
     }
   };
 
+  // This handles the modal for this date.
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
