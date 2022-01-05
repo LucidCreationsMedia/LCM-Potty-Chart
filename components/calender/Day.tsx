@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import { add, getYear, getMonth, sub, getDate } from "date-fns";
 import router from "next/router";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import AddSticker from "./modals/AddSticker";
 
 interface DayProps {
@@ -35,6 +35,8 @@ const Day = (props: DayProps): JSX.Element => {
     }
   };
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <Fragment>
       {isOverflow && (
@@ -61,13 +63,10 @@ const Day = (props: DayProps): JSX.Element => {
           border="2px solid #0068ff"
           w="100%"
           h="100%"
-          /**
-           * TODO: Add an onClick that will trigger the opening of a modal.
-           * Update the modal to take in an isOpen bool that will handle the open state.
-           */
+          onClick={() => setIsOpen(true)}
         >
           <Text>{`Day ${getDate(date)}`}</Text>
-          <AddSticker />
+          <AddSticker date={date} isOpen={isOpen} updateIsOpen={setIsOpen} />
         </Box>
       )}
     </Fragment>

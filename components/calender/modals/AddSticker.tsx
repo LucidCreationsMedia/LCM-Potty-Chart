@@ -6,25 +6,37 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter
-  // Lorem
+  ModalFooter,
+  Heading
 } from "@chakra-ui/react";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
+import { format } from "date-fns";
 
-const AddSticker = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+interface AddStickerProps {
+  isOpen: boolean;
+  updateIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  date: Date;
+}
+
+const AddSticker = (props: AddStickerProps): JSX.Element => {
+  const { isOpen, updateIsOpen, date } = props;
 
   return (
     <Fragment>
-      {/**
-       * TODO: Add prop that will be the trigger for opening the modal.
-       * <Button onClick={() => setIsOpen(!isOpen)}>Open Modal</Button>
-       */}
-
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(!isOpen)}>
+      <Modal
+        isCentered
+        isOpen={isOpen}
+        onClose={() => updateIsOpen(!isOpen)}
+        motionPreset="slideInBottom"
+        scrollBehavior="inside"
+      >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>
+            <Heading textAlign="center" as="h2" size="md" w="100%">
+              {format(date, "LLLL do, y")}
+            </Heading>
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody></ModalBody>
 
@@ -32,7 +44,7 @@ const AddSticker = (): JSX.Element => {
             <Button
               colorScheme="blue"
               mr={3}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => updateIsOpen(!isOpen)}
             >
               Close
             </Button>
