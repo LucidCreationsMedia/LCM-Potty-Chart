@@ -62,6 +62,12 @@ const DateRoute: React.FC<unknown> = () => {
     return <ErrorPage statusCode={404} />;
   }
 
+  /**
+   * TODO: Update to disallow navigation in the future and too far in the past.
+   * Update so that a date given in the future take the user to /now to today's date.
+   * Update so that a date given beyond the last valid date will bring the user to the last month that has stickers within it.
+   */
+
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>

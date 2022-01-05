@@ -47,6 +47,12 @@ const Day = (props: DayProps): JSX.Element => {
   // This handles the modal for this date.
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  /**
+   * TODO: Add logic to remove the onClick within overflow dates.
+   * Do not give dates for the next month an onClick.
+   * Do not give dates in the past an onClick there is nothing before that month.
+   */
+
   return (
     <Fragment>
       {isOverflow && (

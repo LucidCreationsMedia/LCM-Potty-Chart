@@ -219,6 +219,17 @@ const CalenderContextProvider = ({
     setSelectedMonthInfo(output);
   };
 
+  // TODO: Add a function that validated if a date has at least one sticker in it. Use that within the nav function.
+
+  // TODO: Add a function that will give the closest date, if available, when the nav func detects an empty month.
+  // Use the account creation date to aid with this.
+
+  /**
+   * TODO: Add logic that prevents navigation to the future and too far in the past.
+   * Update to use a promise and return appropriate errors. Display those errors on the front end.
+   * Update the use of this function on the front to handle the fails of the promise.
+   */
+
   /**
    * Updated the selectedDate state when given the appropriate object.
    * @param {UpdateCalendarProps} input An object with year, month,
