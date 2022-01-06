@@ -219,6 +219,8 @@ const CalenderContextProvider = ({
     setSelectedMonthInfo(output);
   };
 
+  // TODO: Make a function that will give the valid date range for the front end. Either starting at the account creation or the oldest month with stickers.
+
   // TODO: Add a function that validated if a date has at least one sticker in it. Use that within the nav function.
 
   // TODO: Add a function that will give the closest date, if available, when the nav func detects an empty month.
@@ -229,6 +231,8 @@ const CalenderContextProvider = ({
    * Update to use a promise and return appropriate errors. Display those errors on the front end.
    * Update the use of this function on the front to handle the fails of the promise.
    */
+
+  // TODO: Update the calender update function that will take in a direction so that the the navigation buttons will take the user to the next month with stickers. Assuming there was a gap with empty months.
 
   /**
    * Updated the selectedDate state when given the appropriate object.
