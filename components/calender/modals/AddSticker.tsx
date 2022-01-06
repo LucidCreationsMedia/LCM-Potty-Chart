@@ -25,9 +25,11 @@ interface AddStickerProps {
  * @param {React.Dispatch<React.SetStateAction<boolean>>} props.updateIsOpen used to close the modal.
  * @param {date} props.date the date for which the sticker will be added or modified.
  */
-const AddSticker = (props: AddStickerProps): JSX.Element => {
-  const { isOpen, updateIsOpen, date } = props;
-
+const AddSticker = ({
+  isOpen,
+  updateIsOpen,
+  date
+}: AddStickerProps): JSX.Element => {
   // TODO: Import the stickers array from the calender context.
 
   // TODO: Add a function that will add or update the sticker for the current date.

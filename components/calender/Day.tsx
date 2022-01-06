@@ -3,6 +3,7 @@ import { add, getYear, getMonth, sub, getDate } from "date-fns";
 import router from "next/router";
 import React, { Fragment, useState } from "react";
 import AddSticker from "./modals/AddSticker";
+import DemoStickers from "./stickers/DemoStickers";
 
 interface DayProps {
   isOverflow?: boolean;
@@ -21,10 +22,13 @@ interface DayProps {
  * @param {date} props.date the date for this day.
  * @param {date} props.selectedDate the date for the selected month.
  */
-const Day = (props: DayProps): JSX.Element => {
-  const { isOverflow, overflowDirection, /*sticker,*/ date, selectedDate } =
-    props;
-
+const Day = ({
+  isOverflow,
+  overflowDirection,
+  sticker,
+  date,
+  selectedDate
+}: DayProps): JSX.Element => {
   const handleNav = (direction: "next" | "prev") => {
     if (direction === "next") {
       console.log(overflowDirection);
@@ -68,8 +72,17 @@ const Day = (props: DayProps): JSX.Element => {
           onClick={() => handleNav(overflowDirection)}
         >
           <Text w="100%" h="100%">
-            {`Day ${getDate(date)}`}
+            {`${getDate(date)}`}
           </Text>
+          {sticker !== null ? (
+            <Box fontSize="1.5rem">
+              <DemoStickers stickerVal={sticker} />
+            </Box>
+          ) : (
+            <Box fontSize="1.5rem">
+              <span aria-label="spacer">&nbsp;</span>
+            </Box>
+          )}
         </Box>
       )}
       {!isOverflow && (
@@ -81,7 +94,16 @@ const Day = (props: DayProps): JSX.Element => {
           h="100%"
           onClick={() => setIsOpen(true)}
         >
-          <Text>{`Day ${getDate(date)}`}</Text>
+          <Text>{`${getDate(date)}`}</Text>
+          {sticker !== null ? (
+            <Box fontSize="1.5rem">
+              <DemoStickers stickerVal={sticker} />
+            </Box>
+          ) : (
+            <Box fontSize="1.5rem">
+              <span aria-label="spacer">&nbsp;</span>
+            </Box>
+          )}
           <AddSticker date={date} isOpen={isOpen} updateIsOpen={setIsOpen} />
         </Box>
       )}

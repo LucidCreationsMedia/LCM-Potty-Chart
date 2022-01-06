@@ -86,44 +86,6 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 selectedDate={selectedDate}
                 key={format(date, "P")}
               />
-              // <Box
-              //   bg="transparent"
-              //   color={isOverflow ? "gray.600" : "whiteAlpha"}
-              //   border={isOverflow ? "2px solid #181d8f" : "2px solid #0068ff"}
-              //   w="100%"
-              //   h="100%"
-              //   key={date}
-              //   {...(isOverflow && {
-              //     _hover: {
-              //       cursor: "pointer"
-              //     }
-              //   })}
-              //   {...(isOverflow && {
-              //     onClick: () => {
-              //       if (overflowDirection === "next") {
-              //         console.log(overflowDirection);
-              //         const newMonth = add(selectedDate, { months: 1 });
-
-              //         const year = getYear(newMonth);
-              //         const month = getMonth(newMonth) + 1;
-
-              //         router.push(`/calendar/${year}/${month}`);
-              //       } else if (overflowDirection === "prev") {
-              //         const newMonth = sub(selectedDate, { months: 1 });
-
-              //         const year = getYear(newMonth);
-              //         const month = getMonth(newMonth) + 1;
-
-              //         router.push(`/calendar/${year}/${month}`);
-              //       }
-              //     }
-              //   })}
-              // >
-              //   <Text w="100%" h="100%">
-              //     {!isOverflow && <AddSticker />}
-              //     {`Day ${getDate(date)}`}
-              //   </Text>
-              // </Box>
             );
           });
         })}
