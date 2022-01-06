@@ -69,7 +69,8 @@ const Day = ({
           _hover={{
             cursor: "pointer",
             background: "gray.700",
-            color: "gray.200"
+            border: "1px solid #FFF",
+            color: "whiteAlpha.900"
           }}
           onClick={() => handleNav(overflowDirection)}
           spacing="0.5rem"
@@ -94,7 +95,6 @@ const Day = ({
       {!isOverflow && (
         <VStack
           bg="transparent"
-          color="whiteAlpha"
           border="1px solid #0068ff"
           w="100%"
           h="100%"
@@ -104,7 +104,8 @@ const Day = ({
           pt={2}
           _hover={{
             cursor: "pointer",
-            background: "gray.700"
+            background: "gray.700",
+            border: "1px solid #FFF"
           }}
         >
           <Text
