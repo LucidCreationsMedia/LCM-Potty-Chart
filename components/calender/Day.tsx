@@ -1,5 +1,5 @@
-import { Box, Text } from "@chakra-ui/react";
-import { add, getYear, getMonth, sub, getDate } from "date-fns";
+import { Box, Text, VStack } from "@chakra-ui/react";
+import { add, getYear, getMonth, sub, getDate, isSameDay } from "date-fns";
 import router from "next/router";
 import React, { Fragment, useState } from "react";
 import AddSticker from "./modals/AddSticker";
@@ -60,18 +60,24 @@ const Day = ({
   return (
     <Fragment>
       {isOverflow && (
-        <Box
+        <VStack
           bg="transparent"
           color="gray.600"
-          border="2px solid #181d8f"
+          border="1px solid #181d8f"
           w="100%"
           h="100%"
           _hover={{
-            cursor: "pointer"
+            cursor: "pointer",
+            background: "gray.700",
+            color: "gray.200"
           }}
           onClick={() => handleNav(overflowDirection)}
+          spacing="0.5rem"
+          alignContent="center"
+          justifyContent="flex-start"
+          pt={2}
         >
-          <Text w="100%" h="100%">
+          <Text w="auto" h="auto">
             {`${getDate(date)}`}
           </Text>
           {sticker !== null ? (
@@ -83,18 +89,39 @@ const Day = ({
               <span aria-label="spacer">&nbsp;</span>
             </Box>
           )}
-        </Box>
+        </VStack>
       )}
       {!isOverflow && (
-        <Box
+        <VStack
           bg="transparent"
           color="whiteAlpha"
-          border="2px solid #0068ff"
+          border="1px solid #0068ff"
           w="100%"
           h="100%"
           onClick={() => setIsOpen(true)}
+          alignContent="center"
+          justifyContent="flex-start"
+          pt={2}
+          _hover={{
+            cursor: "pointer",
+            background: "gray.700"
+          }}
         >
-          <Text>{`${getDate(date)}`}</Text>
+          <Text
+            p={
+              isSameDay(new Date(), date)
+                ? getDate(date) > 10
+                  ? "4px 8px"
+                  : "2px 10px"
+                : "auto"
+            }
+            h="auto"
+            w="auto"
+            border={isSameDay(new Date(), date) ? "1px solid #0068ff" : "0px"}
+            borderRadius={isSameDay(new Date(), date) ? "100px" : "0px"}
+          >
+            {`${getDate(date)}`}
+          </Text>
           {sticker !== null ? (
             <Box fontSize="1.5rem">
               <DemoStickers stickerVal={sticker} />
@@ -105,7 +132,7 @@ const Day = ({
             </Box>
           )}
           <AddSticker date={date} isOpen={isOpen} updateIsOpen={setIsOpen} />
-        </Box>
+        </VStack>
       )}
     </Fragment>
   );
