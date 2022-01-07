@@ -14,9 +14,11 @@ interface WeekDays {
   monday: DaysOfWeek;
 }
 
+type StickerVal = -2 | -1 | 0 | 1 | 2 | null;
+
 interface Sticker {
   date: Date;
-  sticker: -2 | -1 | 0 | 1 | 2 | null;
+  sticker: StickerVal;
 }
 
 type StickerDays = Sticker[];

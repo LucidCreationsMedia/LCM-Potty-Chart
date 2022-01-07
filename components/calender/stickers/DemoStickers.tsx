@@ -3,7 +3,7 @@ import React, { FC } from "react";
 // TODO: When themes are made import the theme from user settings context. Refactor to use whatever those SVGs are.
 
 interface DemoStickersProps {
-  stickerVal: 2 | 1 | 0 | -1 | -2;
+  stickerVal: StickerVal;
 }
 
 const DemoStickers: FC<DemoStickersProps> = ({

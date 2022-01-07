@@ -8,7 +8,7 @@ import DemoStickers from "./stickers/DemoStickers";
 interface DayProps {
   isOverflow?: boolean;
   overflowDirection?: "next" | "prev" | null;
-  sticker: -2 | -1 | 0 | 1 | 2 | null;
+  sticker: StickerVal;
   date: Date;
   selectedDate: Date;
 }
@@ -18,7 +18,7 @@ interface DayProps {
  * @param props the props for this component.
  * @param {boolean} props.isOverflow is the current date being given before or after the current month.
  * @param {"next" | "prev" | null} props.overflowDirection the direction the overflow is. This will navigate the calender forward or backwards 1 month.
- * @param {-2 | -1 | 0 | 1 | 2 | null} props.sticker the sticker for this date.
+ * @param {StickerVal} props.sticker the sticker for this date.
  * @param {date} props.date the date for this day.
  * @param {date} props.selectedDate the date for the selected month.
  */
