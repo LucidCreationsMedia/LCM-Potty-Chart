@@ -14,7 +14,7 @@ const buttonStyles = {
   sizes: {},
   // styles for different visual variants ("outline", "solid")
   variants: {
-    contactPrimary: (props: Dict<never> | StyleFunctionProps) => ({
+    primary: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "rgba(255, 255, 255, .15)",
       fontSize: "xl",
       p: "2",
@@ -25,7 +25,7 @@ const buttonStyles = {
         )(props)
       }
     }),
-    contactSecondary: (props: Dict<never> | StyleFunctionProps) => ({
+    secondary: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "brand.primary",
       fontSize: "xl",
       p: "2",
@@ -33,6 +33,18 @@ const buttonStyles = {
         bg: mode(
           whiten("brand.primary", 20),
           darken("brand.primary", 20)
+        )(props)
+      }
+    }),
+    stickerButton: (props: Dict<never> | StyleFunctionProps) => ({
+      bg: "transparent",
+      fontSize: "4rem",
+      px: 2,
+      py: 14,
+      _hover: {
+        bg: mode(
+          whiten("brand.secondary", 20),
+          darken("brand.secondary", 20)
         )(props)
       }
     }),

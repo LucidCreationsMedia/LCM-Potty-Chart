@@ -7,10 +7,13 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  Heading
+  Heading,
+  HStack,
+  VStack
 } from "@chakra-ui/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { format } from "date-fns";
+import DemoStickers from "../stickers/DemoStickers";
 
 interface AddStickerProps {
   isOpen: boolean;
@@ -40,6 +43,8 @@ const AddSticker = ({
    * Show a message when a date before the current date is selected.
    */
 
+  const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
+
   return (
     <Fragment>
       <Modal
@@ -48,17 +53,52 @@ const AddSticker = ({
         onClose={() => updateIsOpen(!isOpen)}
         motionPreset="slideInBottom"
         scrollBehavior="inside"
+        size="lg"
       >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Heading textAlign="center" as="h2" size="md" w="100%">
-              {format(date, "LLLL do, y")}
+            <Heading textAlign="center" as="h2" size="md" w="100%" h="auto">
+              {`Which sticker did you earn for ${format(date, "LLL d, y")}?`}
             </Heading>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
-
+          <ModalBody>
+            <VStack>
+              <HStack
+                w="100%"
+                h="auto"
+                justifyContent="center"
+                alignContent="center"
+                spacing={6}
+              >
+                <Button
+                  border={selectedSticker === 1 ? "1px solid #FFF" : "opx"}
+                  bg={selectedSticker === 1 && "gray.800"}
+                  onClick={() => setSelectedSticker(1)}
+                  variant="stickerButton"
+                >
+                  <DemoStickers stickerVal={1} />
+                </Button>
+                <Button
+                  border={selectedSticker === 0 ? "1px solid #FFF" : "opx"}
+                  bg={selectedSticker === 0 && "gray.800"}
+                  onClick={() => setSelectedSticker(0)}
+                  variant="stickerButton"
+                >
+                  <DemoStickers stickerVal={0} />
+                </Button>
+                <Button
+                  border={selectedSticker === -1 ? "1px solid #FFF" : "opx"}
+                  bg={selectedSticker === -1 && "gray.800"}
+                  onClick={() => setSelectedSticker(-1)}
+                  variant="stickerButton"
+                >
+                  <DemoStickers stickerVal={-1} />
+                </Button>
+              </HStack>
+            </VStack>
+          </ModalBody>
           <ModalFooter>
             <Button
               colorScheme="blue"
