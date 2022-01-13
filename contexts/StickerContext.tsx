@@ -12,6 +12,10 @@ const StickersContextProvider = ({
     stickersSeeder()
   );
 
+  // TODO: Add stickers functions here. (Add and edit stickers).
+
+  // TODO: Add stickers validation function here.
+
   const stickersContextValues = {
     stickersMonth
   };
