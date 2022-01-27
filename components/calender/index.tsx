@@ -4,7 +4,6 @@ import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
 import { format } from "date-fns";
 import Day from "./Day";
-// TODO: import types
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { selectedDate, layout, updateDate } = useContext(CalenderContext);

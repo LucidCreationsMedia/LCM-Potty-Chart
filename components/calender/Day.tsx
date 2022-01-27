@@ -55,6 +55,7 @@ const Day = ({
    * TODO: Add logic to remove the onClick within overflow dates.
    * Do not give dates for the next month an onClick.
    * Do not give dates in the past an onClick there is nothing before that month.
+   * (Creation date of a chart)
    */
 
   return (

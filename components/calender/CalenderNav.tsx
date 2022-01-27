@@ -37,6 +37,7 @@ const CalenderNav = (): JSX.Element => {
    * TODO: Add logic to remove the nav buttons.
    * Do not show next button for current month.
    * Do not show prev when there is nothing left to see in the past.
+   * (Creation date of a chart)
    */
 
   return (

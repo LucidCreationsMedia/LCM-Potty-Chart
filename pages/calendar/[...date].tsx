@@ -65,7 +65,8 @@ const DateRoute: React.FC<unknown> = () => {
   /**
    * TODO: Update to disallow navigation in the future and too far in the past.
    * Update so that a date given in the future take the user to /now to today's date.
-   * Update so that a date given beyond the last valid date will bring the user to the last month that has stickers within it.
+   * Update so that a date given beyond the last valid date will bring the user to the
+   * last month that has stickers within it (When filter is enabled) or to the creation date of the chart..
    */
 
   return (

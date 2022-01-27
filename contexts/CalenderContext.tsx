@@ -219,20 +219,20 @@ const CalenderContextProvider = ({
     setSelectedMonthInfo(output);
   };
 
-  // TODO: Make a function that will give the valid date range for the front end. Either starting at the account creation or the oldest month with stickers.
+  // TODO: Make a function that will give the valid date range for the front end. Either starting at the chart creation date or the oldest month with stickers (when enabled in filters).
 
-  // TODO: Add a function that validated if a date has at least one sticker in it. Use that within the nav function.
+  // TODO: Add a function that validated if a date has at least one sticker in it. Use that within the nav function (when filter is enabled).
 
   // TODO: Add a function that will give the closest date, if available, when the nav func detects an empty month.
-  // Use the account creation date to aid with this.
+  // Use the chart creation date to aid with this. (When filter is enabled)
 
   /**
-   * TODO: Add logic that prevents navigation to the future and too far in the past.
+   * TODO: Add logic that prevents navigation to the future and too far in the past. (Use chart creation date)
    * Update to use a promise and return appropriate errors. Display those errors on the front end.
    * Update the use of this function on the front to handle the fails of the promise.
    */
 
-  // TODO: Update the calender update function that will take in a direction so that the the navigation buttons will take the user to the next month with stickers. Assuming there was a gap with empty months.
+  // TODO: (When filter is enabled) Update the calender update function that will take in a direction so that the the navigation buttons will take the user to the next month with stickers. Assuming there was a gap with empty months.
 
   /**
    * Updated the selectedDate state when given the appropriate object.
