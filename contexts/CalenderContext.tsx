@@ -73,9 +73,7 @@ const CalenderContextProvider = ({
     return { isOverflow: flag, overflowDirection: direction };
   };
 
-  const [stickersMonth, setStickersMonth] = useState<StickerDays>(
-    stickersSeeder()
-  );
+  const [month /*, setMonth*/] = useState<StickerDays>(stickersSeeder());
 
   /**
    * A function that will return a month layout when given a date. It produces
@@ -131,12 +129,11 @@ const CalenderContextProvider = ({
         const overflowInfo = isOverflow(selectedDate, sunCurrDate);
         const stickerDay = overflowInfo.isOverflow
           ? null
-          : stickersMonth[getDate(sunCurrDate) - 1];
+          : month[getDate(sunCurrDate) - 1];
 
         const day: MonthDay = {
           ...overflowInfo,
-          date: sunCurrDate,
-          sticker: stickerDay ? stickerDay.sticker : null
+          date: sunCurrDate
         };
 
         sunCurrDate = add(sunCurrDate, {
@@ -169,12 +166,11 @@ const CalenderContextProvider = ({
         const overflowInfo = isOverflow(selectedDate, monCurrDate);
         const stickerDay = overflowInfo.isOverflow
           ? null
-          : stickersMonth[getDate(monCurrDate) - 1];
+          : month[getDate(monCurrDate) - 1];
 
         const day: MonthDay = {
           ...overflowInfo,
-          date: monCurrDate,
-          sticker: stickerDay ? stickerDay.sticker : null
+          date: monCurrDate
         };
 
         monCurrDate = add(monCurrDate, {
