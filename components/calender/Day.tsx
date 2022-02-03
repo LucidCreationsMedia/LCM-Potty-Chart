@@ -1,7 +1,8 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
-import { add, getYear, getMonth, sub, getDate, isSameDay } from "date-fns";
+import { add, getYear, getMonth, sub, getDate, isSameDay, isBefore, endOfDay } from "date-fns";
 import router from "next/router";
 import React, { Fragment, useState } from "react";
+import { StickersContextProvider } from "../../contexts/StickerContext";
 import AddSticker from "./modals/AddSticker";
 import DemoStickers from "./stickers/DemoStickers";
 
@@ -58,6 +59,8 @@ const Day = ({
    * (Creation date of a chart)
    */
 
+  // TODO: When the valid date range is created, disallow pointer cursor outside of the date range.
+
   return (
     <Fragment>
       {isOverflow && (
@@ -68,7 +71,7 @@ const Day = ({
           w="100%"
           h="100%"
           _hover={{
-            cursor: "pointer",
+            cursor: isBefore(date, endOfDay(new Date)) ? "pointer" : "default",
             background: "gray.700",
             border: "1px solid #FFF",
             color: "whiteAlpha.900"
@@ -104,7 +107,7 @@ const Day = ({
           justifyContent="flex-start"
           pt={2}
           _hover={{
-            cursor: "pointer",
+            cursor: isBefore(date, endOfDay(new Date)) ? "pointer" : "default",
             background: "gray.700",
             border: "1px solid #FFF"
           }}
@@ -133,7 +136,13 @@ const Day = ({
               <span aria-label="spacer">&nbsp;</span>
             </Box>
           )}
-          <AddSticker date={date} isOpen={isOpen} updateIsOpen={setIsOpen} />
+          <StickersContextProvider>
+            {isBefore(date, endOfDay(new Date)) &&
+              (
+                <AddSticker date={date} isOpen={isOpen} updateIsOpen={setIsOpen} />
+              )
+            }
+          </StickersContextProvider>
         </VStack>
       )}
     </Fragment>
