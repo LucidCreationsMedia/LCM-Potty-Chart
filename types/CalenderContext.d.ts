@@ -14,21 +14,8 @@ interface WeekDays {
   monday: DaysOfWeek;
 }
 
-type StickerVal = -2 | -1 | 0 | 1 | 2 | null;
-
-interface Sticker {
+interface MonthDay {
   date: Date;
-  sticker: StickerVal;
-}
-
-type StickerDays = Sticker[];
-
-interface MonthSticker {
-  date: Date;
-  month: Sticker[];
-}
-
-interface MonthDay extends Sticker {
   isOverflow: boolean;
   overflowDirection: "prev" | "next" | null;
 }
@@ -60,12 +47,6 @@ interface MonthLayout {
 
 interface MonthContext extends MonthInfo {
   layout: MonthLayout;
-}
-
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
 }
 
 interface UpdateCalendarProps {
