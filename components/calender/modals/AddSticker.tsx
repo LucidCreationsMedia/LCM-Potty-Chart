@@ -11,9 +11,10 @@ import {
   HStack,
   VStack
 } from "@chakra-ui/react";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { format } from "date-fns";
 import DemoStickers from "../stickers/DemoStickers";
+import { StickersContext } from "../../../contexts/StickerContext";
 
 interface AddStickerProps {
   isOpen: boolean;
@@ -44,6 +45,20 @@ const AddSticker = ({
    */
 
   const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
+
+  const { addEditSticker } = useContext(StickersContext);
+
+  const handleSubmit = () => {
+    if (selectedSticker !== null) {
+      addEditSticker(date, selectedSticker);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedSticker !== null) {
+      addEditSticker(date, selectedSticker);
+    }
+  }, [selectedSticker]);
 
   return (
     <Fragment>
