@@ -2,11 +2,13 @@ import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
-import { format } from "date-fns";
+import { StickersContext } from "../../contexts/StickerContext";
+import { format, isSameDay } from "date-fns";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { selectedDate, layout, updateDate } = useContext(CalenderContext);
+  const { stickersMonth } = useContext(StickersContext);
 
   useEffect(() => {
     if (newDate) {
@@ -30,6 +32,10 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { month, weekdays } = currMonth;
 
   // TODO: Move the weekdays into it's own component for responsiveness.
+
+  useEffect(() => {
+    console.log("Stickers month updated");
+  }, [stickersMonth]);
 
   return (
     <VStack h="91vh" w="100%">
@@ -67,7 +73,19 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
             const thisWeek = month[week];
 
             return thisWeek.map((day: MonthDay) => {
-              const { sticker, date, isOverflow, overflowDirection } = day;
+              const { date, isOverflow, overflowDirection } = day;
+
+              let sticker = null;
+
+              let id = "";
+
+              stickersMonth.map((stickerDay) => {
+                if (isSameDay(stickerDay.date, date)) {
+                  sticker = stickerDay.sticker;
+
+                  id = stickerDay.id;
+                }
+              });
 
               return (
                 <Day
@@ -76,7 +94,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                   sticker={sticker}
                   date={date}
                   selectedDate={selectedDate}
-                  key={format(date, "P")}
+                  key={id}
                 />
               );
             });
