@@ -1,5 +1,14 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
-import { add, getYear, getMonth, sub, getDate, isSameDay, isBefore, endOfDay } from "date-fns";
+import {
+  add,
+  getYear,
+  getMonth,
+  sub,
+  getDate,
+  isSameDay,
+  isBefore,
+  endOfDay
+} from "date-fns";
 import router from "next/router";
 import React, { Fragment, useState } from "react";
 import { StickersContextProvider } from "../../contexts/StickerContext";
@@ -71,7 +80,9 @@ const Day = ({
           w="100%"
           h="100%"
           _hover={{
-            cursor: isBefore(date, endOfDay(new Date)) ? "pointer" : "default",
+            cursor: isBefore(date, endOfDay(new Date()))
+              ? "pointer"
+              : "default",
             background: "gray.700",
             border: "1px solid #FFF",
             color: "whiteAlpha.900"
@@ -107,7 +118,9 @@ const Day = ({
           justifyContent="flex-start"
           pt={2}
           _hover={{
-            cursor: isBefore(date, endOfDay(new Date)) ? "pointer" : "default",
+            cursor: isBefore(date, endOfDay(new Date()))
+              ? "pointer"
+              : "default",
             background: "gray.700",
             border: "1px solid #FFF"
           }}
@@ -137,11 +150,13 @@ const Day = ({
             </Box>
           )}
           <StickersContextProvider>
-            {isBefore(date, endOfDay(new Date)) &&
-              (
-                <AddSticker date={date} isOpen={isOpen} updateIsOpen={setIsOpen} />
-              )
-            }
+            {isBefore(date, endOfDay(new Date())) && (
+              <AddSticker
+                date={date}
+                isOpen={isOpen}
+                updateIsOpen={setIsOpen}
+              />
+            )}
           </StickersContextProvider>
         </VStack>
       )}
