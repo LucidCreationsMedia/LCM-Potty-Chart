@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
+import { StickersContextProvider } from "../../contexts/StickerContext";
 
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
@@ -72,7 +73,9 @@ const DateRoute: React.FC<unknown> = () => {
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>
-        <Calender {...date} />
+        <StickersContextProvider>
+          <Calender {...date} />
+        </StickersContextProvider>
       </CalenderContextProvider>
     </Box>
   );
