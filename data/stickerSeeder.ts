@@ -31,7 +31,9 @@ const stickersSeeder = (): StickerDays => {
 
     const newSticker: Sticker = {
       date: currDate,
-      sticker: isBefore(currDate, now) ? generateSticker() : null
+      sticker: isBefore(currDate, now) ? generateSticker() : null,
+      edited: false,
+      manual: false
     };
 
     stickers.push(newSticker);
