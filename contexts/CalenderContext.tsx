@@ -11,71 +11,6 @@ import {
   isBefore,
   compareAsc
 } from "date-fns";
-// TODO: import types
-
-type Days =
-  | "Sunday"
-  | "Monday"
-  | "Tuesday"
-  | "Wednesday"
-  | "Thursday"
-  | "Friday"
-  | "Saturday";
-
-type DaysOfWeek = Days[];
-
-interface WeekDays {
-  sunday: DaysOfWeek;
-  monday: DaysOfWeek;
-}
-
-interface MonthDay {
-  isOverflow: boolean;
-  overflowDirection: "prev" | "next" | null;
-  date: Date;
-}
-
-interface Month {
-  week1: MonthDay[];
-  week2: MonthDay[];
-  week3: MonthDay[];
-  week4: MonthDay[];
-  week5: MonthDay[];
-  week6: MonthDay[];
-}
-
-interface MonthInfo {
-  date: Date;
-  title: string;
-}
-
-interface MonthLayout {
-  sunday: {
-    weekdays: DaysOfWeek;
-    month: Month;
-  };
-  monday: {
-    weekdays: DaysOfWeek;
-    month: Month;
-  };
-}
-
-interface MonthContext extends MonthInfo {
-  layout: MonthLayout;
-}
-
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
-
-interface CalenderContextState {
-  selectedDate: Date;
-  title: string;
-  layout: MonthLayout;
-  updateDate: (input: UpdateCalendarProps) => void;
-}
 
 const CalenderContext = createContext({} as CalenderContextState);
 
@@ -104,8 +39,6 @@ const CalenderContextProvider = ({
       "Sunday"
     ]
   };
-
-  //TODO Add a function that will populate the "MONTH" layout for the context. It should take in the start of the week (Sunday, Monday) and output the appropriate layout based on that preference.
 
   /**
    * Using date-fns, this function checks if currDate is within the month of selectedDate or not.
@@ -196,6 +129,7 @@ const CalenderContextProvider = ({
           ...overflowInfo,
           date: sunCurrDate
         };
+
         sunCurrDate = add(sunCurrDate, {
           days: 1
         });
@@ -223,12 +157,13 @@ const CalenderContextProvider = ({
       const thisWeek = mondays[week];
 
       thisWeek.forEach((e, i) => {
-        const overflowInfo = isOverflow(selectedDate, sunCurrDate);
+        const overflowInfo = isOverflow(selectedDate, monCurrDate);
 
         const day: MonthDay = {
           ...overflowInfo,
           date: monCurrDate
         };
+
         monCurrDate = add(monCurrDate, {
           days: 1
         });
@@ -258,9 +193,6 @@ const CalenderContextProvider = ({
     layout: populateMonth(selectedDate)
   });
 
-  //TODO Update the MonthInfo to use the new month population function on first render.
-
-  //TODO Add a function that will update the MonthInfo state when the selected month changes. This should use the populate month function that will be made above.
   /**
    * Updates the selectedDateInfo state when given a date.
    * @param {Date} newDate The date to set the selectedDateInfo state to.
@@ -274,7 +206,21 @@ const CalenderContextProvider = ({
     setSelectedMonthInfo(output);
   };
 
-  //TODO: Add a new navigation function that will take in either a direction (next, prev) or a date to go directly to. That will update the selected month and trigger the use effects below.
+  // TODO: Make a function that will give the valid date range for the front end. Either starting at the chart creation date or the oldest month with stickers (when enabled in filters).
+
+  // TODO: Add a function that validated if a date has at least one sticker in it. Use that within the nav function (when filter is enabled).
+
+  // TODO: Add a function that will give the closest date, if available, when the nav func detects an empty month.
+  // Use the chart creation date to aid with this. (When filter is enabled)
+
+  /**
+   * TODO: Add logic that prevents navigation to the future and too far in the past. (Use chart creation date)
+   * Update to use a promise and return appropriate errors. Display those errors on the front end.
+   * Update the use of this function on the front to handle the fails of the promise.
+   */
+
+  // TODO: (When filter is enabled) Update the calender update function that will take in a direction so that the the navigation buttons will take the user to the next month with stickers. Assuming there was a gap with empty months.
+
   /**
    * Updated the selectedDate state when given the appropriate object.
    * @param {UpdateCalendarProps} input An object with year, month,

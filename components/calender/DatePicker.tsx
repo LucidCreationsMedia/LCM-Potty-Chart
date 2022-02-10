@@ -27,12 +27,6 @@ import {
 import FormValidateEmoji from "./FormValidateEmoji";
 import { CalenderContext } from "../../contexts/CalenderContext";
 
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
-
 const DatePicker = (): JSX.Element => {
   const { title } = useContext(CalenderContext);
 

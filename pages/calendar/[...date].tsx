@@ -4,12 +4,7 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
-
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
+import { StickersContextProvider } from "../../contexts/StickerContext";
 
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
@@ -68,10 +63,19 @@ const DateRoute: React.FC<unknown> = () => {
     return <ErrorPage statusCode={404} />;
   }
 
+  /**
+   * TODO: Update to disallow navigation in the future and too far in the past.
+   * Update so that a date given in the future take the user to /now to today's date.
+   * Update so that a date given beyond the last valid date will bring the user to the
+   * last month that has stickers within it (When filter is enabled) or to the creation date of the chart..
+   */
+
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>
-        <Calender {...date} />
+        <StickersContextProvider>
+          <Calender {...date} />
+        </StickersContextProvider>
       </CalenderContextProvider>
     </Box>
   );

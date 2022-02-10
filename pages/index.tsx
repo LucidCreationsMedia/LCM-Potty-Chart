@@ -1,14 +1,9 @@
 import React, { useRef } from "react";
 import { Box } from "@chakra-ui/react";
 import Calender from "../components/calender";
+import { StickersContextProvider } from "../contexts/StickerContext";
 import { CalenderContextProvider } from "../contexts/CalenderContext";
 import { format } from "date-fns";
-
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
 
 const IndexPage = (): JSX.Element => {
   const date = useRef<UpdateCalendarProps>({
@@ -19,9 +14,11 @@ const IndexPage = (): JSX.Element => {
 
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
-      <CalenderContextProvider>
-        <Calender {...date.current} />
-      </CalenderContextProvider>
+      <StickersContextProvider>
+        <CalenderContextProvider>
+          <Calender {...date.current} />
+        </CalenderContextProvider>
+      </StickersContextProvider>
     </Box>
   );
 };

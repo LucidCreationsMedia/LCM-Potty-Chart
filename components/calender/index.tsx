@@ -1,20 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import CalenderNav from "./CalenderNav";
+import { isSameDay, format } from "date-fns";
 import { CalenderContext } from "../../contexts/CalenderContext";
-import { getDate, sub, add, getYear, getMonth } from "date-fns";
-import { useRouter } from "next/router";
-// TODO: import types
-
-interface UpdateCalendarProps {
-  year: number;
-  month: number;
-  day: number;
-}
+import { StickersContext } from "../../contexts/StickerContext";
+import CalenderNav from "./CalenderNav";
+import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { selectedDate, layout, updateDate } = useContext(CalenderContext);
-  const router = useRouter();
+  const { stickersMonth } = useContext(StickersContext);
 
   useEffect(() => {
     if (newDate) {
@@ -34,98 +28,81 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
     startOfWeek: "Sunday"
   };
 
-  const currMonth = layout[`${userSettings.startOfWeek.toLowerCase()}`];
+  const currMonth: WeekLayout =
+    layout[`${userSettings.startOfWeek.toLowerCase()}`];
   const { month, weekdays } = currMonth;
+
+  // TODO: Move the weekdays into it's own component for responsiveness.
 
   return (
     <VStack h="91vh" w="100%">
       <CalenderNav />
-      <HStack
-        px={6}
-        spacing={2}
-        // bg="brand.main"
-        w="100%"
-        h="auto"
-        alignContent="center"
-        alignItems="center"
-      >
-        {weekdays.map((weekDay) => {
-          return (
-            <Box
-              d="flex"
-              alignContent="center"
-              alignItems="center"
-              bg="transparent"
-              border="2px solid #0068ff"
-              w="100%"
-              h={10}
-              key={weekDay}
-            >
-              <Text w="100%" h="auto">
-                {weekDay}
-              </Text>
-            </Box>
-          );
-        })}
-      </HStack>
-      <SimpleGrid
-        px={6}
-        spacing={2}
-        // bg="brand.main"
-        w="100%"
-        h="100%"
-        columns={7}
-        // alignContent="center"
-        alignItems="center"
-      >
-        {Object.keys(month).map((week) => {
-          const thisWeek = month[week];
-
-          return thisWeek.map((day) => {
-            const { date, isOverflow, overflowDirection } = day;
-
+      <VStack h="100%" w="100%" spacing={0}>
+        <HStack
+          px={6}
+          spacing={0}
+          w="100%"
+          h="auto"
+          alignContent="center"
+          alignItems="center"
+        >
+          {weekdays.map((weekDay) => {
             return (
               <Box
+                d="flex"
+                alignContent="center"
+                alignItems="center"
                 bg="transparent"
-                color={isOverflow ? "gray.600" : "whiteAlpha"}
-                border={isOverflow ? "2px solid #181d8f" : "2px solid #0068ff"}
+                border="1px solid #0068ff"
                 w="100%"
-                h="100%"
-                key={date}
-                {...(isOverflow && {
-                  _hover: {
-                    cursor: "pointer"
-                  }
-                })}
-                {...(isOverflow && {
-                  onClick: () => {
-                    if (overflowDirection === "next") {
-                      console.log(overflowDirection);
-                      const newMonth = add(selectedDate, { months: 1 });
-
-                      const year = getYear(newMonth);
-                      const month = getMonth(newMonth) + 1;
-
-                      router.push(`/calendar/${year}/${month}`);
-                    } else if (overflowDirection === "prev") {
-                      const newMonth = sub(selectedDate, { months: 1 });
-
-                      const year = getYear(newMonth);
-                      const month = getMonth(newMonth) + 1;
-
-                      router.push(`/calendar/${year}/${month}`);
-                    }
-                  }
-                })}
+                h={10}
+                key={weekDay}
               >
-                <Text w="100%" h="100%">
-                  {`Day ${getDate(date)}`}
+                <Text w="100%" h="auto">
+                  {weekDay}
                 </Text>
               </Box>
             );
-          });
-        })}
-      </SimpleGrid>
+          })}
+        </HStack>
+        <SimpleGrid px={6} w="100%" h="100%" columns={7} alignItems="center">
+          {Object.keys(month).map((week) => {
+            const thisWeek = month[week];
+
+            return thisWeek.map((day: MonthDay) => {
+              const { date, isOverflow, overflowDirection } = day;
+
+              let sticker = null;
+
+              let id = "";
+
+              stickersMonth.map((stickerDay) => {
+                if (isSameDay(stickerDay.date, date)) {
+                  sticker = stickerDay.sticker;
+
+                  id = stickerDay.id;
+                }
+              });
+
+              return (
+                <Day
+                  isOverflow={isOverflow}
+                  overflowDirection={overflowDirection}
+                  sticker={sticker}
+                  date={date}
+                  selectedDate={selectedDate}
+                  key={
+                    id.length
+                      ? id
+                      : format(date, "yyyyddLL") +
+                        `/${sticker === null ? 0 : sticker}`
+                  }
+                />
+              );
+            });
+          })}
+        </SimpleGrid>
+      </VStack>
     </VStack>
   );
 };
