@@ -61,6 +61,8 @@ const Day = ({
   // This handles the modal for this date.
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const [stickerState, setStickerState] = useState<StickerVal>(sticker);
+
   /**
    * TODO: Add logic to remove the onClick within overflow dates.
    * Do not give dates for the next month an onClick.
@@ -96,15 +98,12 @@ const Day = ({
           <Text w="auto" h="auto">
             {`${getDate(date)}`}
           </Text>
-          {sticker !== null ? (
-            <Box fontSize="1.5rem">
-              <DemoStickers stickerVal={sticker} />
-            </Box>
-          ) : (
-            <Box fontSize="1.5rem">
-              <span aria-label="spacer">&nbsp;</span>
-            </Box>
-          )}
+          <Box
+            key={stickerState === null ? Math.random() : stickerState}
+            fontSize="1.5rem"
+          >
+            <DemoStickers stickerVal={stickerState} />
+          </Box>
         </VStack>
       )}
       {!isOverflow && (
@@ -140,21 +139,19 @@ const Day = ({
           >
             {`${getDate(date)}`}
           </Text>
-          {sticker !== null ? (
-            <Box fontSize="1.5rem">
-              <DemoStickers stickerVal={sticker} />
-            </Box>
-          ) : (
-            <Box fontSize="1.5rem">
-              <span aria-label="spacer">&nbsp;</span>
-            </Box>
-          )}
+          <Box
+            key={stickerState === null ? Math.random() : stickerState}
+            fontSize="1.5rem"
+          >
+            <DemoStickers stickerVal={stickerState} />
+          </Box>
           <StickersContextProvider>
             {isBefore(date, endOfDay(new Date())) && (
               <AddSticker
                 date={date}
                 isOpen={isOpen}
                 updateIsOpen={setIsOpen}
+                updateSticker={setStickerState}
               />
             )}
           </StickersContextProvider>

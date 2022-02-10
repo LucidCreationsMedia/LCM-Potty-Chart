@@ -1,6 +1,6 @@
 interface StickersContextState {
   stickersMonth: StickerDays;
-  addEditSticker: (date: Date, sticker: ValidStickerVal) => void;
+  addEditSticker: (date: Date, sticker: ValidStickerVal) => Sticker;
 }
 
 type StickerVal = -2 | -1 | 0 | 1 | 2 | null;

@@ -34,15 +34,14 @@ interface MonthInfo {
   title: string;
 }
 
+interface WeekLayout {
+  weekdays: DaysOfWeek;
+  month: Month;
+}
+
 interface MonthLayout {
-  sunday: {
-    weekdays: DaysOfWeek;
-    month: Month;
-  };
-  monday: {
-    weekdays: DaysOfWeek;
-    month: Month;
-  };
+  sunday: WeekLayout;
+  monday: WeekLayout;
 }
 
 interface MonthContext extends MonthInfo {

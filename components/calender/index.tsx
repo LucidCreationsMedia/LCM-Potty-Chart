@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import CalenderNav from "./CalenderNav";
+import { isSameDay, format } from "date-fns";
 import { CalenderContext } from "../../contexts/CalenderContext";
 import { StickersContext } from "../../contexts/StickerContext";
-import { isSameDay } from "date-fns";
+import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
@@ -28,14 +28,11 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
     startOfWeek: "Sunday"
   };
 
-  const currMonth = layout[`${userSettings.startOfWeek.toLowerCase()}`];
+  const currMonth: WeekLayout =
+    layout[`${userSettings.startOfWeek.toLowerCase()}`];
   const { month, weekdays } = currMonth;
 
   // TODO: Move the weekdays into it's own component for responsiveness.
-
-  useEffect(() => {
-    console.log("Stickers month updated");
-  }, [stickersMonth]);
 
   return (
     <VStack h="91vh" w="100%">
@@ -94,7 +91,12 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                   sticker={sticker}
                   date={date}
                   selectedDate={selectedDate}
-                  key={id}
+                  key={
+                    id.length
+                      ? id
+                      : format(date, "yyyyddLL") +
+                        `/${sticker === null ? 0 : sticker}`
+                  }
                 />
               );
             });

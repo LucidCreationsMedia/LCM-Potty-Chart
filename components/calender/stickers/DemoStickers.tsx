@@ -9,6 +9,9 @@ interface DemoStickersProps {
 const DemoStickers: FC<DemoStickersProps> = ({
   stickerVal
 }: DemoStickersProps) => {
+  if (stickerVal === null) {
+    return <span aria-label="spacer">&nbsp;</span>;
+  }
   interface StickerToEmoji {
     [key: string]: JSX.Element;
   }

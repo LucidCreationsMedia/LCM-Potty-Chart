@@ -14,8 +14,8 @@ const StickersContextProvider = ({
   );
 
   // TODO: Add stickers functions here. (Add and edit stickers).
-  const addEditSticker = (date: Date, sticker: ValidStickerVal): void => {
-    const newStickersMonth = [...stickersMonth];
+  const addEditSticker = (date: Date, sticker: ValidStickerVal): Sticker => {
+    const newStickersMonth = stickersMonth.slice();
     const index = getDate(date) - 1;
     const currDate = newStickersMonth[index];
 
@@ -35,11 +35,13 @@ const StickersContextProvider = ({
       sticker: sticker,
       edited: edited,
       manual: false
-    }
+    };
 
     newStickersMonth[index] = newSticker;
 
-    setStickersMonth(newStickersMonth);
+    setStickersMonth(newStickersMonth.slice());
+
+    return newSticker;
   };
 
   // TODO: Add stickers validation function here.
