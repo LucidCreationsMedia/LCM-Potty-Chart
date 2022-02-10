@@ -102,7 +102,9 @@ const Day = ({
             key={stickerState === null ? Math.random() : stickerState}
             fontSize="1.5rem"
           >
-            <DemoStickers stickerVal={stickerState} />
+            <DemoStickers
+              stickerVal={stickerState === null ? null : stickerState}
+            />
           </Box>
         </VStack>
       )}
@@ -143,7 +145,9 @@ const Day = ({
             key={stickerState === null ? Math.random() : stickerState}
             fontSize="1.5rem"
           >
-            <DemoStickers stickerVal={stickerState} />
+            <DemoStickers
+              stickerVal={stickerState === null ? null : stickerState}
+            />
           </Box>
           <StickersContextProvider>
             {isBefore(date, endOfDay(new Date())) && (

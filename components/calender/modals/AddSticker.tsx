@@ -64,7 +64,6 @@ const AddSticker = ({
 
   // TODO: Invalidate submit button if the selected sticker is the same as the current sticker.
 
-
   // TODO: Display the current sticker above the selection screen if a current sticker exists.
 
   // TODO: Invalidate the button for the current sticker and gray it out.
