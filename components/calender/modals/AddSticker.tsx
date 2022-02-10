@@ -11,7 +11,7 @@ import {
   HStack,
   VStack
 } from "@chakra-ui/react";
-import React, { Fragment, useState, useContext, useEffect } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { format } from "date-fns";
 import DemoStickers from "../stickers/DemoStickers";
 import { StickersContext } from "../../../contexts/StickerContext";
