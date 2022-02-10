@@ -62,11 +62,15 @@ const AddSticker = ({
     handleClose();
   };
 
-  // useEffect(() => {
-  //   if (selectedSticker !== null) {
-  //     addEditSticker(date, selectedSticker);
-  //   }
-  // }, [selectedSticker]);
+  // TODO: Invalidate submit button if the selected sticker is the same as the current sticker.
+
+
+  // TODO: Display the current sticker above the selection screen if a current sticker exists.
+
+  // TODO: Invalidate the button for the current sticker and gray it out.
+
+  // TODO: Trigger a warning if the date is in the past showing the sticker change.
+  // ! DO NOT update the sticker state or trigger the edd/edit function until that new warning is accepted.
 
   return (
     <Fragment>
