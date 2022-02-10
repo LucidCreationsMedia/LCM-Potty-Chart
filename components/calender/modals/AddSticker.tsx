@@ -48,24 +48,29 @@ const AddSticker = ({
 
   const { addEditSticker } = useContext(StickersContext);
 
-  const handleSubmit = () => {
-    if (selectedSticker !== null) {
-      addEditSticker(date, selectedSticker);
-    }
+  const handleClose = () => {
+    setSelectedSticker(null);
+    updateIsOpen(false);
+  }
+
+  const handleSubmit = (sticker) => {
+    addEditSticker(date, sticker);
+    handleClose();
   };
 
-  useEffect(() => {
-    if (selectedSticker !== null) {
-      addEditSticker(date, selectedSticker);
-    }
-  }, [selectedSticker]);
+
+  // useEffect(() => {
+  //   if (selectedSticker !== null) {
+  //     addEditSticker(date, selectedSticker);
+  //   }
+  // }, [selectedSticker]);
 
   return (
     <Fragment>
       <Modal
         isCentered
         isOpen={isOpen}
-        onClose={() => updateIsOpen(!isOpen)}
+        onClose={() => handleClose()}
         motionPreset="slideInBottom"
         scrollBehavior="inside"
         size="lg"
@@ -116,13 +121,14 @@ const AddSticker = ({
           </ModalBody>
           <ModalFooter>
             <Button
-              colorScheme="blue"
-              mr={3}
-              onClick={() => updateIsOpen(!isOpen)}
+              variant="primary"
+              isDisabled={selectedSticker === null}
+              // mr={3}
+              onClick={() => handleSubmit(selectedSticker)}
             >
-              Close
+              {"Submit"}
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            {/* <Button variant="ghost">Secondary Action</Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>
