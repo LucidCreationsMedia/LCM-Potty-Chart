@@ -11,7 +11,6 @@ import {
   isBefore,
   compareAsc
 } from "date-fns";
-import stickersSeeder from "../data/stickerSeeder";
 
 const CalenderContext = createContext({} as CalenderContextState);
 
@@ -73,8 +72,6 @@ const CalenderContextProvider = ({
     return { isOverflow: flag, overflowDirection: direction };
   };
 
-  const [month /*, setMonth*/] = useState<StickerDays>(stickersSeeder());
-
   /**
    * A function that will return a month layout when given a date. It produces
    * an object with 6 weeks that include overflow from the previous and next month
@@ -127,9 +124,6 @@ const CalenderContextProvider = ({
 
       thisWeek.forEach((e, i) => {
         const overflowInfo = isOverflow(selectedDate, sunCurrDate);
-        const stickerDay = overflowInfo.isOverflow
-          ? null
-          : month[getDate(sunCurrDate) - 1];
 
         const day: MonthDay = {
           ...overflowInfo,
@@ -164,9 +158,6 @@ const CalenderContextProvider = ({
 
       thisWeek.forEach((e, i) => {
         const overflowInfo = isOverflow(selectedDate, monCurrDate);
-        const stickerDay = overflowInfo.isOverflow
-          ? null
-          : month[getDate(monCurrDate) - 1];
 
         const day: MonthDay = {
           ...overflowInfo,
