@@ -79,9 +79,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
 
               let id = "";
 
-              const stickerMonthID = Object.keys(stickersMonth)[0]
-
-              stickersMonth[stickerMonthID].map((stickerDay) => {
+              stickersMonth.map((stickerDay) => {
                 if (isSameDay(stickerDay.date, date)) {
                   sticker = stickerDay.sticker;
 
