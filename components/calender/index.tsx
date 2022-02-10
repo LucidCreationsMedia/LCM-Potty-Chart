@@ -3,7 +3,7 @@ import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import CalenderNav from "./CalenderNav";
 import { CalenderContext } from "../../contexts/CalenderContext";
 import { StickersContext } from "../../contexts/StickerContext";
-import { format, isSameDay } from "date-fns";
+import { isSameDay } from "date-fns";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
@@ -79,7 +79,9 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
 
               let id = "";
 
-              stickersMonth.map((stickerDay) => {
+              const stickerMonthID = Object.keys(stickersMonth)[0]
+
+              stickersMonth[stickerMonthID].map((stickerDay) => {
                 if (isSameDay(stickerDay.date, date)) {
                   sticker = stickerDay.sticker;
 
