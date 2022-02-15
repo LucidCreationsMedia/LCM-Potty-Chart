@@ -2498,7 +2498,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.27.0, eslint-plugin-react@npm:^7.27.1":
+"eslint-plugin-react@npm:<7.28.0, eslint-plugin-react@npm:^7.27.0":
   version: 7.27.1
   resolution: "eslint-plugin-react@npm:7.27.1"
   dependencies:
@@ -2796,7 +2796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^6.2.4":
+"framer-motion@npm:<6.2.5":
   version: 6.2.4
   resolution: "framer-motion@npm:6.2.4"
   dependencies:
@@ -3585,10 +3585,10 @@ __metadata:
     eslint-config-next: 12.0.10
     eslint-config-prettier: ^8.3.0
     eslint-plugin-jsx-a11y: ^6.5.1
-    eslint-plugin-react: ^7.27.1
+    eslint-plugin-react: <7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     formik: ^2.2.9
-    framer-motion: ^6.2.4
+    framer-motion: <6.2.5
     next: 12.0.10
     prettier: ^2.5.1
     react: 17.0.2
