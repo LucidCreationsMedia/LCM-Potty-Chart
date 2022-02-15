@@ -391,9 +391,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/media-query@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@chakra-ui/media-query@npm:2.0.1"
+"@chakra-ui/media-query@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/media-query@npm:2.0.2"
   dependencies:
     "@chakra-ui/react-env": 1.1.4
     "@chakra-ui/utils": 1.10.2
@@ -401,7 +401,7 @@ __metadata:
     "@chakra-ui/system": ">=1.0.0"
     "@chakra-ui/theme": ">=1.0.0"
     react: ">=16.8.6"
-  checksum: a2b9c4a654ef3e3afe4344cc05cff473fa6af02291af655774106c6786726b614bf7948a51f6a9c62c6e6c07b86c5d83945ec80a2d48c908ccea67f63c4ca8c9
+  checksum: 89f4a1c7178962fa693b9e95ced9e4d56a2d4e1fa098619b9f21e592592adf003d5838bdfcf59c97fe4eaf296047f5dd347c2e1377cb8d6b691a75375dc18a89
   languageName: node
   linkType: hard
 
@@ -591,9 +591,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/react@npm:^1.8.3":
-  version: 1.8.3
-  resolution: "@chakra-ui/react@npm:1.8.3"
+"@chakra-ui/react@npm:^1.8.4":
+  version: 1.8.4
+  resolution: "@chakra-ui/react@npm:1.8.4"
   dependencies:
     "@chakra-ui/accordion": 1.4.6
     "@chakra-ui/alert": 1.3.5
@@ -613,7 +613,7 @@ __metadata:
     "@chakra-ui/input": 1.4.1
     "@chakra-ui/layout": 1.7.4
     "@chakra-ui/live-region": 1.1.4
-    "@chakra-ui/media-query": 2.0.1
+    "@chakra-ui/media-query": 2.0.2
     "@chakra-ui/menu": 1.8.6
     "@chakra-ui/modal": 1.10.7
     "@chakra-ui/number-input": 1.4.2
@@ -626,11 +626,11 @@ __metadata:
     "@chakra-ui/radio": 1.4.7
     "@chakra-ui/react-env": 1.1.4
     "@chakra-ui/select": 1.2.6
-    "@chakra-ui/skeleton": 1.2.9
+    "@chakra-ui/skeleton": 1.2.10
     "@chakra-ui/slider": 1.5.6
     "@chakra-ui/spinner": 1.2.4
     "@chakra-ui/stat": 1.2.5
-    "@chakra-ui/switch": 1.3.5
+    "@chakra-ui/switch": 1.3.6
     "@chakra-ui/system": 1.10.3
     "@chakra-ui/table": 1.3.4
     "@chakra-ui/tabs": 1.6.5
@@ -648,7 +648,7 @@ __metadata:
     framer-motion: 3.x || 4.x || 5.x || 6.x
     react: ">=16.8.6"
     react-dom: ">=16.8.6"
-  checksum: 10efcb69d16043590e29d8d376e957a79a1474cae5fe2e9ce473951d7350cf783bcf347c67e2d1987097ef0d1fd37ae335f24f20a8770928908f3ec0f16a64e2
+  checksum: 2c2f38b4d4b5ddf593ebb853659f12a49b933a4d293ea1d068ae5690155f2c9d1ff1e2ac2ea87a777f935462f8813a7ae43422986884ee83a7b8ba5070682ade
   languageName: node
   linkType: hard
 
@@ -665,12 +665,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/skeleton@npm:1.2.9":
-  version: 1.2.9
-  resolution: "@chakra-ui/skeleton@npm:1.2.9"
+"@chakra-ui/skeleton@npm:1.2.10":
+  version: 1.2.10
+  resolution: "@chakra-ui/skeleton@npm:1.2.10"
   dependencies:
     "@chakra-ui/hooks": 1.8.2
-    "@chakra-ui/media-query": 2.0.1
+    "@chakra-ui/media-query": 2.0.2
     "@chakra-ui/system": 1.10.3
     "@chakra-ui/utils": 1.10.2
   peerDependencies:
@@ -678,7 +678,7 @@ __metadata:
     "@emotion/react": ^11.0.0
     "@emotion/styled": ^11.0.0
     react: ">=16.8.6"
-  checksum: 3d1b469e0d5b8d5e3666a35798a4807ee6e378c6786b9fe63c63592537d21cde4830eb6d7cf1cce5ea0a3592290f98ba714f8a9aaf4908c17fcba2b7c05afa15
+  checksum: 52cecf407eaddad6cbc3373a6677a2b54b37fd4dcb66769657b19196e2d0bffae3e6ef37a12f2ed8cc0890c026d1792b4961e4869706ba713e8f472fb4ad7675
   languageName: node
   linkType: hard
 
@@ -733,9 +733,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/switch@npm:1.3.5":
-  version: 1.3.5
-  resolution: "@chakra-ui/switch@npm:1.3.5"
+"@chakra-ui/switch@npm:1.3.6":
+  version: 1.3.6
+  resolution: "@chakra-ui/switch@npm:1.3.6"
   dependencies:
     "@chakra-ui/checkbox": 1.6.5
     "@chakra-ui/utils": 1.10.2
@@ -743,7 +743,7 @@ __metadata:
     "@chakra-ui/system": ">=1.0.0"
     framer-motion: 3.x || 4.x || 5.x || 6.x
     react: ">=16.8.6"
-  checksum: 3e1ff1a0aa480a6b8567931a77a0e91a390ee7b7e6dd57d1417ac1e8f79ca1fb95ff99f11f0192b462414e8155b021379af070d96b47b761c32a294ab29284ba
+  checksum: 18d6f056994741cdfeb7ffb20f778f17b9fc7b9dd39c62d7d991096f87405d03b12fc0ddbd4be752cb9c4ec8cb1ea4bbf391389321aa7f1aae582f4db210006c
   languageName: node
   linkType: hard
 
@@ -3573,7 +3573,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "lucid-creations-media-potty-chart@workspace:."
   dependencies:
-    "@chakra-ui/react": ^1.8.3
+    "@chakra-ui/react": ^1.8.4
     "@emotion/react": ^11.7.1
     "@emotion/styled": ^11.6.0
     "@iconify/react": ^3.1.3
