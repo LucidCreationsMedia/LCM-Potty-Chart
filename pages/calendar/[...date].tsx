@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { endOfMonth, getDay } from "date-fns";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
 import { StickersContextProvider } from "../../contexts/StickerContext";
+import { es } from "date-fns/locale";
 
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
   const { date: slug } = router.query;
 
   const [date, setDate] = useState<UpdateCalendarProps | null>(null);
+
+  const [error, setError] = useState<boolean>(false);
 
   const validateDateInput = (dateArr: number[]): UpdateCalendarProps => {
     if (!(dateArr.length >= 2) && !(dateArr.length <= 3)) {
@@ -31,21 +35,28 @@ const DateRoute: React.FC<unknown> = () => {
       date.year = dateArr[0];
     }
 
-    if (dateArr[1] > 0 || dateArr[1] <= 12) {
+    if (dateArr[1] > 0 && dateArr[1] <= 12) {
       date.month = dateArr[1];
     }
 
-    if (dateArr[2] && (dateArr[2] > 0 || dateArr[2] <= 31)) {
-      date.day = dateArr[2];
-    } else if (!dateArr[2]) {
-      date.day = 1;
+    if (date.month && date.year) {
+      const lastDay = getDay(endOfMonth(new Date(date.year, date.month - 1, 1)))
+      if (dateArr[2] && (dateArr[2] > 0 && dateArr[2] <= lastDay)) {
+        date.day = dateArr[2];
+      } else if (!dateArr[2]) {
+        date.day = 1;
+      }
+    } else {
+      return date;
     }
+
 
     return date;
   };
 
   useEffect(() => {
     if (slug && slug.length === 1 && slug[0] !== "now") {
+      setError(true);
       return console.warn("improper date input");
     }
 
@@ -53,9 +64,16 @@ const DateRoute: React.FC<unknown> = () => {
       const parsedSlug = slug.map((e) => {
         return parseInt(e);
       });
-      setDate({
-        ...validateDateInput(parsedSlug)
-      });
+
+      const newDate = validateDateInput(parsedSlug);
+
+      if (newDate.year === 0 || newDate.month === 0 || newDate.day === 0) {
+        setError(true);
+      } else {
+        setDate({
+          ...validateDateInput(parsedSlug)
+        });
+      }
     }
   }, [slug]);
 
@@ -70,15 +88,16 @@ const DateRoute: React.FC<unknown> = () => {
    * last month that has stickers within it (When filter is enabled) or to the creation date of the chart..
    */
 
-  return (
-    <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
+  return error ?
+    (<ErrorPage statusCode={404} />)
+    :
+    (<Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>
         <StickersContextProvider>
           <Calender {...date} />
         </StickersContextProvider>
       </CalenderContextProvider>
-    </Box>
-  );
+    </Box>)
 };
 
 export default DateRoute;
