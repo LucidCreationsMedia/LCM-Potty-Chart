@@ -6,7 +6,6 @@ import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
 import { StickersContextProvider } from "../../contexts/StickerContext";
-import { es } from "date-fns/locale";
 
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
@@ -40,8 +39,10 @@ const DateRoute: React.FC<unknown> = () => {
     }
 
     if (date.month && date.year) {
-      const lastDay = getDay(endOfMonth(new Date(date.year, date.month - 1, 1)))
-      if (dateArr[2] && (dateArr[2] > 0 && dateArr[2] <= lastDay)) {
+      const lastDay = getDay(
+        endOfMonth(new Date(date.year, date.month - 1, 1))
+      );
+      if (dateArr[2] && dateArr[2] > 0 && dateArr[2] <= lastDay) {
         date.day = dateArr[2];
       } else if (!dateArr[2]) {
         date.day = 1;
@@ -49,7 +50,6 @@ const DateRoute: React.FC<unknown> = () => {
     } else {
       return date;
     }
-
 
     return date;
   };
@@ -88,16 +88,17 @@ const DateRoute: React.FC<unknown> = () => {
    * last month that has stickers within it (When filter is enabled) or to the creation date of the chart..
    */
 
-  return error ?
-    (<ErrorPage statusCode={404} />)
-    :
-    (<Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
+  return error ? (
+    <ErrorPage statusCode={404} />
+  ) : (
+    <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <CalenderContextProvider>
         <StickersContextProvider>
           <Calender {...date} />
         </StickersContextProvider>
       </CalenderContextProvider>
-    </Box>)
+    </Box>
+  );
 };
 
 export default DateRoute;
