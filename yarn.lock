@@ -2800,9 +2800,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:<6.2.5":
-  version: 6.2.4
-  resolution: "framer-motion@npm:6.2.4"
+"framer-motion@npm:^6.2.8":
+  version: 6.2.8
+  resolution: "framer-motion@npm:6.2.8"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     framesync: 6.0.1
@@ -2811,12 +2811,12 @@ __metadata:
     style-value-types: 5.0.0
     tslib: ^2.1.0
   peerDependencies:
-    react: ">=16.8 || ^17.0.0"
-    react-dom: ">=16.8 || ^17.0.0"
+    react: ">=16.8 || ^17.0.0 || ^18.0.0"
+    react-dom: ">=16.8 || ^17.0.0 || ^18.0.0"
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: 71b2fefba015812bfbb9041a5a7aebabb0181a58f33467a45c91746d25db50dd2dcb79e5d90c7d329acb45cab259e8cb503d8a0b5406f4615dfca739c91edd25
+  checksum: d84b716ab5e9480804856088551dbb493092e63625fe2d29c05ce734025d3e5cfded223443c604e807e8fca09064282aed9fb05f3ff590c9fb6ff4502f1ca1a6
   languageName: node
   linkType: hard
 
@@ -3585,7 +3585,7 @@ __metadata:
     eslint-plugin-react: <7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     formik: ^2.2.9
-    framer-motion: <6.2.5
+    framer-motion: ^6.2.8
     next: 12.1.0
     prettier: ^2.5.1
     react: 17.0.2
