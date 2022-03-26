@@ -1,7 +1,4 @@
-import {
-  startOfMonth,
-  endOfMonth
-} from "date-fns";
+import { startOfMonth, endOfMonth } from "date-fns";
 
 interface ValidDateRange {
   start: Date;
@@ -19,4 +16,4 @@ const validDateRange = (): ValidDateRange => {
   };
 };
 
-export default validDateRange
+export default validDateRange;

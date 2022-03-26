@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { endOfMonth, getDay } from "date-fns";
-import findValidDateRange from "../../lib/findValidDateRange"
+// import findValidDateRange from "../../lib/findValidDateRange";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
@@ -12,8 +12,8 @@ const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
   const { date: slug } = router.query;
 
-  const validDateRange = findValidDateRange();
-  const { start: validStart, end: validEnd } = validDateRange;
+  // const validDateRange = findValidDateRange();
+  // const { start: validStart, end: validEnd } = validDateRange;
 
   const [date, setDate] = useState<UpdateCalendarProps | null>(null);
 
@@ -62,7 +62,8 @@ const DateRoute: React.FC<unknown> = () => {
 
   // }
 
-  useEffect(() => {2
+  useEffect(() => {
+    2;
     if (slug && slug.length === 1 && slug[0] !== "now") {
       setError(true);
       return console.warn("improper date input");
@@ -83,9 +84,7 @@ const DateRoute: React.FC<unknown> = () => {
         });
       }
     }
-
-    console.info("Context:", calenderContext)
-  }, [slug, calenderContext]);
+  }, [slug]);
 
   if (router.isFallback) {
     return <ErrorPage statusCode={404} />;

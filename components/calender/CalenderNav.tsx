@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { sub, add, format, isSameMonth } from "date-fns";
-import findValidDateRange from "../../lib/findValidDateRange"
+import findValidDateRange from "../../lib/findValidDateRange";
 import DatePicker from "./DatePicker";
 import { CalenderContext } from "../../contexts/CalenderContext";
 
