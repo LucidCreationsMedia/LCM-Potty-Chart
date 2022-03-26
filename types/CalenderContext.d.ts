@@ -48,11 +48,6 @@ interface MonthContext extends MonthInfo {
   layout: MonthLayout;
 }
 
-interface ValidDateRange {
-  start: Date;
-  end: Date;
-}
-
 interface UpdateCalendarProps {
   year: number;
   month: number;

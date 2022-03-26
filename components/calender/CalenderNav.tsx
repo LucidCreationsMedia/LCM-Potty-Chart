@@ -3,11 +3,14 @@ import { useRouter } from "next/router";
 import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { sub, add, format, isSameMonth } from "date-fns";
+import findValidDateRange from "../../lib/findValidDateRange"
 import DatePicker from "./DatePicker";
 import { CalenderContext } from "../../contexts/CalenderContext";
 
 const CalenderNav = (): JSX.Element => {
-  const { selectedDate, validDateRange } = useContext(CalenderContext);
+  const { selectedDate } = useContext(CalenderContext);
+
+  const validDateRange = findValidDateRange();
   const { start: validStart, end: validEnd } = validDateRange;
 
   const router = useRouter();
