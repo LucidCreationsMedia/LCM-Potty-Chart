@@ -3,13 +3,15 @@ import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
   endOfMonth,
-  getDay
-  // getMonth,
-  // getYear,
-  // isAfter,
-  // isBefore
+  getDate,
+  getDay,
+  getMonth,
+  getYear,
+  isAfter,
+  isBefore,
+  isSameMonth
 } from "date-fns";
-// import findValidDateRange from "../../lib/findValidDateRange";
+import findValidDateRange from "../../lib/findValidDateRange";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { CalenderContextProvider } from "../../contexts/CalenderContext";
@@ -22,6 +24,9 @@ const DateRoute: React.FC<unknown> = () => {
   const [date, setDate] = useState<UpdateCalendarProps | null>(null);
 
   const [error, setError] = useState<boolean>(false);
+
+  const dateRange = useRef(findValidDateRange());
+  const validDateRange = Object.assign({}, dateRange.current);
 
   const validateDateInput = (dateArr: number[]): UpdateCalendarProps => {
     if (!(dateArr.length >= 2) && !(dateArr.length <= 3)) {
@@ -65,41 +70,30 @@ const DateRoute: React.FC<unknown> = () => {
   /**
    * ! This function does not work as is. It is causing infinite loops whe used within the useEffect.
    */
-  // const validateDateRange = (slugDate: Date): void => {
-  //   const { start: validStart, end: validEnd } = validDateRange;
+  const validateDateRange = (
+    slugDate: Date
+  ): [Date, "after" | "before" | "valid"] => {
+    const { start: validStart, end: validEnd } = validDateRange;
 
-  //   // Check if the slug date is beyond the valid end date.
-  //   if (isAfter(slugDate, validEnd)) {
-  //     // router.push("/calender/now");
-  //     console.warn(
-  //       "Slug date is after the valid date range for this calendar!!!"
-  //     );
-  //     // Check if the slug is before the valid start date.
-  //   } else if (isBefore(slugDate, validStart)) {
-  //     console.warn(
-  //       "Slug date is before the valid date range for this calendar!!!"
-  //     );
-  //     router.push(`/${getYear(validStart)}/${getMonth(validStart) + 1}`);
-  //   } else {
-  //     console.info(
-  //       "Slug date is within the valid date range for this calendar."
-  //     );
-  //   }
-  // };
-
-  // Keeping track of the slug, if it is valid.
-  const parsedSlug = useRef<number[] | null>(null);
-
-  const checkNewSlug = (
-    currSlug: number[],
-    prevSlug: number[]
-  ): boolean | null => {
-    if (currSlug[0] === prevSlug[0] && currSlug[1] === prevSlug[1]) {
-      return false;
-    } else if (currSlug[0] !== prevSlug[0] || currSlug[1] !== prevSlug[1]) {
-      return true;
+    // Check if the slug date is beyond the valid end date.
+    if (isAfter(slugDate, validEnd)) {
+      // router.push("/calender/now");
+      console.warn(
+        "Slug date is after the valid date range for this calendar!!!"
+      );
+      return [validEnd, "after"];
+      // Check if the slug is before the valid start date.
+    } else if (isBefore(slugDate, validStart)) {
+      console.warn(
+        "Slug date is before the valid date range for this calendar!!!"
+      );
+      return [validStart, "before"];
+      // router.push(`/${getYear(validStart)}/${getMonth(validStart) + 1}`);
     } else {
-      return null;
+      console.info(
+        "Slug date is within the valid date range for this calendar."
+      );
+      return [slugDate, "valid"];
     }
   };
 
@@ -110,46 +104,76 @@ const DateRoute: React.FC<unknown> = () => {
       const length = slug.length;
 
       // Parsing the slug to convert it from strings to numbers.
-      const newParsedSlug = slug.map((e) => {
+      const parsedSlug = slug.map((e) => {
         return parseInt(e);
       });
 
-      // Checking if the new slug is different from the previous slug.
-      if (checkNewSlug(newParsedSlug, parsedSlug.current)) {
-        // Checking if the slug is not "now" when the length is 1.
-        // ! Update this to include a check for "today".
-        if (length === 1 && slug[0] !== "now") {
+      // Checking if the slug is not "now" when the length is 1.
+      // ! Update this to include a check for "today".
+      if (length === 1 && slug[0] !== "now") {
+        setError(true);
+        return console.warn("improper date input:", slug);
+      }
+
+      // Checking if the slug has 2 to 3 numbers within the array. year/month/day.
+      if (length >= 2 && slug.length <= 3) {
+        // Validate that the date is valid.
+        const newDate = validateDateInput(parsedSlug);
+
+        // If anything is invalid the year/day/month would be set to 0. This checks for the invalid condition.
+        if (newDate.year === 0 || newDate.month === 0 || newDate.day === 0) {
           setError(true);
-          return console.warn("improper date input:", slug);
-        }
+          // Set the date to the valid date.
+        } else {
+          // TODO: Make sure the date is within the valid range using the validateDateRange function.
+          const validDate = new Date(
+            newDate.year,
+            newDate.month - 1,
+            newDate.day
+          );
 
-        // Checking if the slug has 2 to 3 numbers within the array. year/month/day.
-        if (length >= 2 && slug.length <= 3) {
-          // Validate that the date is valid.
-          const newDate = validateDateInput(newParsedSlug);
+          const validDateWithinRange = validateDateRange(validDate)[0];
 
-          // If anything is invalid the year/day/month would be set to 0. This checks for the invalid condition.
-          if (newDate.year === 0 || newDate.month === 0 || newDate.day === 0) {
-            setError(true);
-            // Set the date to the valid date.
-          } else {
-            // TODO: Make sure the date is within the valid range using the validateDateRange function.
-            // const slugDate = new Date(
-            //   newDate.year,
-            //   newDate.month - 1,
-            //   newDate.day
-            // );
-            // console.info("Slug date:", slugDate);
-            // validateDateRange(slugDate);
-
-            setDate({
-              ...validateDateInput(newParsedSlug)
-            });
-          }
+          setDate({
+            ...{
+              year: getYear(validDateWithinRange),
+              month: getMonth(validDateWithinRange) + 1,
+              day: getDate(validDateWithinRange)
+            }
+          });
         }
       }
     }
   }, [slug]);
+
+  useEffect(() => {
+    // Check is slug and date are valid.
+    if (slug && date && date !== null) {
+      // Check if the slug is an array and has a length of 2.
+      if (Array.isArray(slug) && slug.length === 2) {
+        const dateState = new Date(date.year, date.month - 1, date.day);
+
+        const parsedSlug = slug.map((e) => {
+          return parseInt(e);
+        });
+        const slugDate = new Date(parsedSlug[0], parsedSlug[1] - 1, 1);
+
+        if (!isSameMonth(dateState, slugDate)) {
+          const validDateWithinRange = validateDateRange(dateState);
+
+          if (validDateRange[1] === "after") {
+            router.push("/now");
+          } else {
+            router.push(
+              `/${getYear(validDateWithinRange[0])}/${getMonth(
+                validDateWithinRange[0]
+              )}`
+            );
+          }
+        }
+      }
+    }
+  }, [date]);
 
   if (router.isFallback) {
     return <ErrorPage statusCode={404} />;

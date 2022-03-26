@@ -1,4 +1,4 @@
-import { startOfMonth, endOfMonth } from "date-fns";
+import { startOfMonth, endOfMonth, subMonths } from "date-fns";
 
 interface ValidDateRange {
   start: Date;
@@ -11,7 +11,7 @@ interface ValidDateRange {
  */
 const findValidDateRange = (): ValidDateRange => {
   const currDate = new Date(); // Current date.
-  const startDate = startOfMonth(currDate); // Will eventually be the creation date of the account or the creation date the selected chart. Whichever is older.
+  const startDate = subMonths(startOfMonth(currDate), 1); // Will eventually be the creation date of the account or the creation date the selected chart. Whichever is older.
   const endDate = endOfMonth(currDate); // Always needs to be the last day on the current month within the current year.
 
   return {
