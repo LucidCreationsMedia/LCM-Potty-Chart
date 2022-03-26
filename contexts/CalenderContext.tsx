@@ -208,6 +208,19 @@ const CalenderContextProvider = ({
 
   // TODO: Make a function that will give the valid date range for the front end. Either starting at the chart creation date or the oldest month with stickers (when enabled in filters).
 
+  const setValidDateRange = (): ValidDateRange => {
+    const currDate = new Date(); // Current date.
+    const startDate = startOfMonth(currDate); // Will eventually be the creation date of the account or the creation date of the oldest chart within the account. Whichever is older.
+    const endDate = endOfMonth(currDate); // Always needs to be the last day on the current month within the current year.
+
+    return {
+      start: startDate,
+      end: endDate
+    };
+  };
+
+  const [validDateRange] = useState<ValidDateRange>(setValidDateRange());
+
   // TODO: Add a function that validated if a date has at least one sticker in it. Use that within the nav function (when filter is enabled).
 
   // TODO: Add a function that will give the closest date, if available, when the nav func detects an empty month.
@@ -246,6 +259,7 @@ const CalenderContextProvider = ({
     selectedDate,
     title: selectedDateInfo.title,
     layout: selectedDateInfo.layout,
+    validDateRange,
     updateDate
   };
 

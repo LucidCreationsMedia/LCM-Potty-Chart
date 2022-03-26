@@ -48,6 +48,11 @@ interface MonthContext extends MonthInfo {
   layout: MonthLayout;
 }
 
+interface ValidDateRange {
+  start: Date;
+  end: Date;
+}
+
 interface UpdateCalendarProps {
   year: number;
   month: number;
@@ -58,5 +63,6 @@ interface CalenderContextState {
   selectedDate: Date;
   title: string;
   layout: MonthLayout;
+  validDateRange: ValidDateRange;
   updateDate: (input: UpdateCalendarProps) => void;
 }
