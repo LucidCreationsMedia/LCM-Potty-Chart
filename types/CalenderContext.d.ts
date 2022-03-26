@@ -58,6 +58,5 @@ interface CalenderContextState {
   selectedDate: Date;
   title: string;
   layout: MonthLayout;
-  validDateRange: ValidDateRange;
   updateDate: (input: UpdateCalendarProps) => void;
 }

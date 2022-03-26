@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
-import { sub, add, format, isSameMonth } from "date-fns";
+import { format, isSameMonth, addMonths, subMonths } from "date-fns";
 import findValidDateRange from "../../lib/findValidDateRange";
 import DatePicker from "./DatePicker";
 import { CalenderContext } from "../../contexts/CalenderContext";
@@ -17,18 +17,14 @@ const CalenderNav = (): JSX.Element => {
 
   const handleNavButtons = (direction: "next" | "prev") => {
     if (direction === "next") {
-      const newMonth = add(selectedDate, {
-        months: 1
-      });
+      const newMonth = addMonths(selectedDate, 1);
 
       const year = format(newMonth, "y");
       const month = format(newMonth, "L");
 
       router.push(`/calendar/${year}/${month}`);
     } else if (direction === "prev") {
-      const newMonth = sub(selectedDate, {
-        months: 1
-      });
+      const newMonth = subMonths(selectedDate, 1);
 
       const year = format(newMonth, "y");
       const month = format(newMonth, "L");

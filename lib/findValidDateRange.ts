@@ -5,9 +5,13 @@ interface ValidDateRange {
   end: Date;
 }
 
-const validDateRange = (): ValidDateRange => {
+/**
+ * A function that will determine the valid date range for the navigation of the charts.
+ * @returns An object with a start and end key with the given date for the start and end of the range.
+ */
+const findValidDateRange = (): ValidDateRange => {
   const currDate = new Date(); // Current date.
-  const startDate = startOfMonth(currDate); // Will eventually be the creation date of the account or the creation date of the oldest chart within the account. Whichever is older.
+  const startDate = startOfMonth(currDate); // Will eventually be the creation date of the account or the creation date the selected chart. Whichever is older.
   const endDate = endOfMonth(currDate); // Always needs to be the last day on the current month within the current year.
 
   return {
@@ -16,4 +20,4 @@ const validDateRange = (): ValidDateRange => {
   };
 };
 
-export default validDateRange;
+export default findValidDateRange;

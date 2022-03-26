@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { endOfMonth, getDay } from "date-fns";
+import {
+  endOfMonth,
+  getDay
+  // getMonth,
+  // getYear,
+  // isAfter,
+  // isBefore
+} from "date-fns";
 // import findValidDateRange from "../../lib/findValidDateRange";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
@@ -11,9 +18,6 @@ import { StickersContextProvider } from "../../contexts/StickerContext";
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
   const { date: slug } = router.query;
-
-  // const validDateRange = findValidDateRange();
-  // const { start: validStart, end: validEnd } = validDateRange;
 
   const [date, setDate] = useState<UpdateCalendarProps | null>(null);
 
@@ -58,30 +62,64 @@ const DateRoute: React.FC<unknown> = () => {
     return date;
   };
 
-  // const validateDateRange = () => {
+  /**
+   * ! This function does not work as is. It is causing infinite loops whe used within the useEffect.
+   */
+  // const validateDateRange = (slugDate: Date): void => {
+  //   const { start: validStart, end: validEnd } = validDateRange;
 
-  // }
+  //   // Check if the slug date is beyond the valid end date.
+  //   if (isAfter(slugDate, validEnd)) {
+  //     // router.push("/calender/now");
+  //     console.warn(
+  //       "Slug date is after the valid date range for this calendar!!!"
+  //     );
+  //     // Check if the slug is before the valid start date.
+  //   } else if (isBefore(slugDate, validStart)) {
+  //     console.warn(
+  //       "Slug date is before the valid date range for this calendar!!!"
+  //     );
+  //     router.push(`/${getYear(validStart)}/${getMonth(validStart) + 1}`);
+  //   } else {
+  //     console.info(
+  //       "Slug date is within the valid date range for this calendar."
+  //     );
+  //   }
+  // };
 
   useEffect(() => {
-    2;
-    if (slug && slug.length === 1 && slug[0] !== "now") {
-      setError(true);
-      return console.warn("improper date input");
-    }
+    console.log("Use Effect");
 
-    if (slug && Array.isArray(slug) && slug.length >= 2 && slug.length <= 3) {
-      const parsedSlug = slug.map((e) => {
-        return parseInt(e);
-      });
-
-      const newDate = validateDateInput(parsedSlug);
-
-      if (newDate.year === 0 || newDate.month === 0 || newDate.day === 0) {
+    if (slug && Array.isArray(slug)) {
+      const length = slug.length;
+      if (length === 1 && slug[0] !== "now") {
         setError(true);
-      } else {
-        setDate({
-          ...validateDateInput(parsedSlug)
+        return console.warn("improper date input:", slug);
+      }
+
+      if (length >= 2 && slug.length <= 3) {
+        const parsedSlug = slug.map((e) => {
+          return parseInt(e);
         });
+
+        const newDate = validateDateInput(parsedSlug);
+
+        if (newDate.year === 0 || newDate.month === 0 || newDate.day === 0) {
+          setError(true);
+        } else {
+          // const slugDate = new Date(
+          //   newDate.year,
+          //   newDate.month - 1,
+          //   newDate.day
+          // );
+          // console.info("Slug date:", slugDate);
+          // validateDateRange(slugDate);
+
+          setDate({
+            ...validateDateInput(parsedSlug)
+          });
+          2;
+        }
       }
     }
   }, [slug]);
