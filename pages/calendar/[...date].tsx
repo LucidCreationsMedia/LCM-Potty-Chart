@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
@@ -87,38 +87,65 @@ const DateRoute: React.FC<unknown> = () => {
   //   }
   // };
 
+  // Keeping track of the slug, if it is valid.
+  const parsedSlug = useRef<number[] | null>(null);
+
+  const checkNewSlug = (
+    currSlug: number[],
+    prevSlug: number[]
+  ): boolean | null => {
+    if (currSlug[0] === prevSlug[0] && currSlug[1] === prevSlug[1]) {
+      return false;
+    } else if (currSlug[0] !== prevSlug[0] || currSlug[1] !== prevSlug[1]) {
+      return true;
+    } else {
+      return null;
+    }
+  };
+
   useEffect(() => {
-    console.log("Use Effect");
-
+    // Checking if the slug exists and is an array.
     if (slug && Array.isArray(slug)) {
+      // Grabbing the slug length
       const length = slug.length;
-      if (length === 1 && slug[0] !== "now") {
-        setError(true);
-        return console.warn("improper date input:", slug);
-      }
 
-      if (length >= 2 && slug.length <= 3) {
-        const parsedSlug = slug.map((e) => {
-          return parseInt(e);
-        });
+      // Parsing the slug to convert it from strings to numbers.
+      const newParsedSlug = slug.map((e) => {
+        return parseInt(e);
+      });
 
-        const newDate = validateDateInput(parsedSlug);
-
-        if (newDate.year === 0 || newDate.month === 0 || newDate.day === 0) {
+      // Checking if the new slug is different from the previous slug.
+      if (checkNewSlug(newParsedSlug, parsedSlug.current)) {
+        // Checking if the slug is not "now" when the length is 1.
+        // ! Update this to include a check for "today".
+        if (length === 1 && slug[0] !== "now") {
           setError(true);
-        } else {
-          // const slugDate = new Date(
-          //   newDate.year,
-          //   newDate.month - 1,
-          //   newDate.day
-          // );
-          // console.info("Slug date:", slugDate);
-          // validateDateRange(slugDate);
+          return console.warn("improper date input:", slug);
+        }
 
-          setDate({
-            ...validateDateInput(parsedSlug)
-          });
-          2;
+        // Checking if the slug has 2 to 3 numbers within the array. year/month/day.
+        if (length >= 2 && slug.length <= 3) {
+          // Validate that the date is valid.
+          const newDate = validateDateInput(newParsedSlug);
+
+          // If anything is invalid the year/day/month would be set to 0. This checks for the invalid condition.
+          if (newDate.year === 0 || newDate.month === 0 || newDate.day === 0) {
+            setError(true);
+            // Set the date to the valid date.
+          } else {
+            // TODO: Make sure the date is within the valid range using the validateDateRange function.
+            // const slugDate = new Date(
+            //   newDate.year,
+            //   newDate.month - 1,
+            //   newDate.day
+            // );
+            // console.info("Slug date:", slugDate);
+            // validateDateRange(slugDate);
+
+            setDate({
+              ...validateDateInput(newParsedSlug)
+            });
+          }
         }
       }
     }
