@@ -206,8 +206,6 @@ const CalenderContextProvider = ({
     setSelectedMonthInfo(output);
   };
 
-  // TODO: Make a function that will give the valid date range for the front end. Either starting at the chart creation date or the oldest month with stickers (when enabled in filters).
-
   const setValidDateRange = (): ValidDateRange => {
     const currDate = new Date(); // Current date.
     const startDate = startOfMonth(currDate); // Will eventually be the creation date of the account or the creation date of the oldest chart within the account. Whichever is older.
