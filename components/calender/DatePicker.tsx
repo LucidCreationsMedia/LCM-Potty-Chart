@@ -24,6 +24,8 @@ import {
   Field,
   FieldProps
 } from "formik";
+import { format } from "date-fns"
+import findValidDateRange from "../../lib/findValidDateRange"
 import FormValidateEmoji from "./FormValidateEmoji";
 import { CalenderContext } from "../../contexts/CalenderContext";
 
@@ -33,6 +35,8 @@ const DatePicker = (): JSX.Element => {
   const router = useRouter();
 
   const [valid, setValid] = useState<boolean>(false);
+
+  const validDateRange = findValidDateRange();
 
   const validateDate = (
     dateString?: string | undefined
@@ -212,15 +216,17 @@ const DatePicker = (): JSX.Element => {
                               {...field}
                               id="date"
                               textAlign="center"
+                              min={format(validDateRange.start, "yyyy-MM-dd")}
+                              max={format(validDateRange.end, "yyyy-MM-dd")}
                               {...(!form.errors.date && form.touched.date
                                 ? {
+                                  borderColor: "brand.valid",
+                                  boxShadow: "0 0 0 1px #00c17c",
+                                  _hover: {
                                     borderColor: "brand.valid",
-                                    boxShadow: "0 0 0 1px #00c17c",
-                                    _hover: {
-                                      borderColor: "brand.valid",
-                                      boxShadow: "0 0 0 1px #00c17c"
-                                    }
+                                    boxShadow: "0 0 0 1px #00c17c"
                                   }
+                                }
                                 : "")}
                             />
                             {!form.touched.date && (
