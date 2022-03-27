@@ -59,6 +59,8 @@ const AddSticker = ({
     isSameDay(date, new Date()) ? "currDate" : "notCurrDate"
   );
 
+  // ! Step is not setting back to 0 when modal is closet. Try to move out of this component and take it in as an arg.
+
   const handleClose = () => {
     setSelectedSticker(null);
     setStep(null);
