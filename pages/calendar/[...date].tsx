@@ -99,6 +99,7 @@ const DateRoute: React.FC<unknown> = () => {
   useEffect(() => {
     // Checking if the slug exists and is an array.
     if (slug && Array.isArray(slug)) {
+      console.log(slug);
       // Grabbing the slug length
       const length = slug.length;
 
@@ -107,15 +108,8 @@ const DateRoute: React.FC<unknown> = () => {
         return parseInt(e);
       });
 
-      // Checking if the slug is not "now" when the length is 1.
-      // ! Update this to include a check for "today".
-      if (length === 1 && slug[0] !== "now") {
-        setError(true);
-        return console.warn("improper date input:", slug);
-      }
-
       // Checking if the slug has 2 to 3 numbers within the array. year/month/day.
-      if (length >= 2 && slug.length <= 3) {
+      if (length >= 2 && length <= 3) {
         // Validate that the date is valid.
         const newDate = validateDateInput(parsedSlug);
 
@@ -145,9 +139,21 @@ const DateRoute: React.FC<unknown> = () => {
             ...newDate
           });
         }
+      } else if (length === 1) {
+        // Checking if the slug is not "now".
+        // ! Update this to include a check for "today".
+        if (slug[0] !== "now") {
+          setError(true);
+          return console.warn("improper date input:", slug);
+        }
       }
     }
   }, [slug]);
+
+  /**
+   * ? Pushing into the router within the use effect does not create the infinite loop.
+   * ? The way the validate date range or the way it is being used within a useEffect is what is creating the infinite loop.
+   */
 
   // useEffect(() => {
   //   // Check is slug and date are valid.
