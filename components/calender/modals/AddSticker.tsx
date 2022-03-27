@@ -30,6 +30,7 @@ interface AddStickerProps {
  * @param {React.Dispatch<React.SetStateAction<boolean>>} props.updateIsOpen used to close the modal.
  * @param {date} props.date the date for which the sticker will be added or modified.
  * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker the react state function to update the sticker.
+ * @param {StickerVal}currSticker the current sticker for the date.
  */
 const AddSticker = ({
   isOpen,
