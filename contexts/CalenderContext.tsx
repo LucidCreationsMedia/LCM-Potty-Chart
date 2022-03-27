@@ -206,8 +206,6 @@ const CalenderContextProvider = ({
     setSelectedMonthInfo(output);
   };
 
-  // TODO: Make a function that will give the valid date range for the front end. Either starting at the chart creation date or the oldest month with stickers (when enabled in filters).
-
   // TODO: Add a function that validated if a date has at least one sticker in it. Use that within the nav function (when filter is enabled).
 
   // TODO: Add a function that will give the closest date, if available, when the nav func detects an empty month.
