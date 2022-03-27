@@ -11,7 +11,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   const { stickersMonth } = useContext(StickersContext);
 
   useEffect(() => {
-    if (newDate) {
+    if (newDate && newDate.year && newDate.month && newDate.day) {
       const { year, month, day } = newDate;
 
       if (year > 0 && month > 0 && day > 0) {
