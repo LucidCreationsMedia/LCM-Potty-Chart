@@ -156,6 +156,7 @@ const Day = ({
                 isOpen={isOpen}
                 updateIsOpen={setIsOpen}
                 updateSticker={setStickerState}
+                currSticker={stickerState}
               />
             )}
           </StickersContextProvider>

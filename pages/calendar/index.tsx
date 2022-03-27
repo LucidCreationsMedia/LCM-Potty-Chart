@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, Heading } from "@chakra-ui/react";
 
-const DateRoute = () => {
+const DateIndex = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -20,4 +20,4 @@ const DateRoute = () => {
   );
 };
 
-export default DateRoute;
+export default DateIndex;

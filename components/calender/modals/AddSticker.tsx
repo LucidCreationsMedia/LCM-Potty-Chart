@@ -4,15 +4,14 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   ModalFooter,
   Heading,
   HStack,
-  VStack
+  Text
 } from "@chakra-ui/react";
-import React, { Fragment, useState, useContext } from "react";
-import { format } from "date-fns";
+import React, { Fragment, useState, useContext, useEffect } from "react";
+import { format, isSameDay } from "date-fns";
 import DemoStickers from "../stickers/DemoStickers";
 import { StickersContext } from "../../../contexts/StickerContext";
 
@@ -21,6 +20,7 @@ interface AddStickerProps {
   updateIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   date: Date;
   updateSticker: React.Dispatch<React.SetStateAction<StickerVal>>;
+  currSticker: StickerVal;
 }
 
 /**
@@ -35,7 +35,8 @@ const AddSticker = ({
   isOpen,
   updateIsOpen,
   date,
-  updateSticker
+  updateSticker,
+  currSticker
 }: AddStickerProps): JSX.Element => {
   // TODO: Import the stickers array from the calender context.
 
@@ -49,95 +50,217 @@ const AddSticker = ({
 
   const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
 
+  const [step, setStep] = useState<number | null>(null);
+
   const { addEditSticker } = useContext(StickersContext);
+
+  const [modalVariant] = useState<"currDate" | "notCurrDate">(
+    isSameDay(date, new Date()) ? "currDate" : "notCurrDate"
+  );
 
   const handleClose = () => {
     setSelectedSticker(null);
+    setStep(null);
     updateIsOpen(false);
   };
 
+  useEffect(() => {
+    if (step === null) {
+      setStep(0);
+    }
+  }, [step]);
+
+  // TODO: Validate that the provided sticker is not the current sticker. Throw an error if the same sticker is attempted.
   const handleSubmit = (sticker) => {
     const newSticker: Sticker = addEditSticker(date, sticker);
     updateSticker(newSticker.sticker);
     handleClose();
   };
 
-  // TODO: Invalidate submit button if the selected sticker is the same as the current sticker.
+  // * Double check that the submit button is disabled if the selected sticker is the same as the current sticker.
 
   // TODO: Display the current sticker above the selection screen if a current sticker exists.
-
-  // TODO: Invalidate the button for the current sticker and gray it out.
 
   // TODO: Trigger a warning if the date is in the past showing the sticker change.
   // ! DO NOT update the sticker state or trigger the edd/edit function until that new warning is accepted.
 
+  const variants = {
+    currDate: [
+      {
+        header: `Which sticker did you earn for ${format(date, "LLL d, y")}?`,
+        body: (
+          <HStack
+            w="100%"
+            h="auto"
+            justifyContent={"center"}
+            alignContent={"center"}
+            spacing={14}
+          >
+            <Button
+              isDisabled={currSticker >= 1}
+              border={selectedSticker === 1 ? "1px solid #FFF" : "opx"}
+              bg={selectedSticker === 1 && "gray.800"}
+              onClick={() => setSelectedSticker(1)}
+              variant="stickerButton"
+            >
+              <DemoStickers stickerVal={1} />
+            </Button>
+            <Button
+              isDisabled={currSticker === 0}
+              border={selectedSticker === 0 ? "1px solid #FFF" : "opx"}
+              bg={selectedSticker === 0 && "gray.800"}
+              onClick={() => setSelectedSticker(0)}
+              variant="stickerButton"
+            >
+              <DemoStickers stickerVal={0} />
+            </Button>
+            <Button
+              isDisabled={currSticker <= -1}
+              border={selectedSticker === -1 ? "1px solid #FFF" : "opx"}
+              bg={selectedSticker === -1 && "gray.800"}
+              onClick={() => setSelectedSticker(-1)}
+              variant="stickerButton"
+            >
+              <DemoStickers stickerVal={-1} />
+            </Button>
+          </HStack>
+        ),
+        footer: (
+          <Button
+            variant="submit"
+            isDisabled={
+              selectedSticker === null || selectedSticker === currSticker
+            }
+            onClick={() => handleSubmit(selectedSticker)}
+          >
+            {"Submit"}
+          </Button>
+        )
+      }
+    ],
+    notCurrDate: [
+      {
+        header: `Which sticker did you want to update for ${format(
+          date,
+          "LLL d, y"
+        )}?`,
+        body: (
+          <Text
+            w="100%"
+            h="auto "
+            fontSize={"3xl"}
+            textAlign={"center"}
+            fontWeight={"bold"}
+          >
+            {"Filler"}
+          </Text>
+        ),
+        footer: (
+          <Button
+            variant="primary"
+            // isDisabled={
+            //   selectedSticker === null || selectedSticker === currSticker
+            // }
+            onClick={() => setStep(step + 1)}
+          >
+            {"Next"}
+          </Button>
+        )
+      },
+      {
+        header: `Are you sure you want to change the sticker for ${format(
+          date,
+          "M/d/y"
+        )}?`,
+        body: (
+          <Text
+            w="100%"
+            h="auto "
+            fontSize={"3xl"}
+            textAlign={"center"}
+            fontWeight={"bold"}
+          >
+            {"Filler"}
+          </Text>
+        ),
+        footer: (
+          <HStack
+            w="100%"
+            h="auto"
+            justifyContent={"space-between"}
+            alignContent={"center"}
+          >
+            <Button variant="primary" onClick={() => setStep(step - 1)}>
+              {"Previous"}
+            </Button>
+            <HStack w="auto" h="auto" alignContent={"center"} spacing={6}>
+              <Button
+                variant="submit"
+                // isDisabled={
+                //   selectedSticker === null || selectedSticker === currSticker
+                // }
+                // onClick={() => handleSubmit(selectedSticker)}
+              >
+                {"Confirm"}
+              </Button>
+              <Button
+                backgroundColor="transparent"
+                _hover={{ backgroundColor: "brand.danger" }}
+                onClick={() => updateIsOpen(!isOpen)}
+              >
+                {"Cancel"}
+              </Button>
+            </HStack>
+          </HStack>
+        )
+      }
+    ]
+  };
+
+  // const JSX = <></>;
+  // const example = {
+  //   currDate: [{ header: JSX, body: JSX, footer: JSX }],
+  //   notCurrDate: [
+  //     { header: JSX, body: JSX, footer: JSX },
+  //     { header: JSX, body: JSX, footer: JSX }
+  //   ]
+  // };
+
   return (
     <Fragment>
-      <Modal
-        isCentered
-        isOpen={isOpen}
-        onClose={() => handleClose()}
-        motionPreset="slideInBottom"
-        scrollBehavior="inside"
-        size="lg"
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Heading textAlign="center" as="h2" size="md" w="100%" h="auto">
-              {`Which sticker did you earn for ${format(date, "LLL d, y")}?`}
-            </Heading>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <VStack>
+      {step !== null && (
+        <Modal
+          isCentered
+          isOpen={isOpen}
+          onClose={() => handleClose()}
+          motionPreset="slideInBottom"
+          scrollBehavior="inside"
+          size={modalVariant === "currDate" ? "xl" : "2xl"}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>
               <HStack
                 w="100%"
                 h="auto"
-                justifyContent="center"
-                alignContent="center"
-                spacing={6}
+                justifyContent={"space-between"}
+                alignContent={"center"}
               >
-                <Button
-                  border={selectedSticker === 1 ? "1px solid #FFF" : "opx"}
-                  bg={selectedSticker === 1 && "gray.800"}
-                  onClick={() => setSelectedSticker(1)}
-                  variant="stickerButton"
-                >
-                  <DemoStickers stickerVal={1} />
-                </Button>
-                <Button
-                  border={selectedSticker === 0 ? "1px solid #FFF" : "opx"}
-                  bg={selectedSticker === 0 && "gray.800"}
-                  onClick={() => setSelectedSticker(0)}
-                  variant="stickerButton"
-                >
-                  <DemoStickers stickerVal={0} />
-                </Button>
-                <Button
-                  border={selectedSticker === -1 ? "1px solid #FFF" : "opx"}
-                  bg={selectedSticker === -1 && "gray.800"}
-                  onClick={() => setSelectedSticker(-1)}
-                  variant="stickerButton"
-                >
-                  <DemoStickers stickerVal={-1} />
-                </Button>
+                <Heading textAlign="center" as="h2" size="md" w="100%" h="auto">
+                  {modalVariant && variants[modalVariant][step].header}
+                </Heading>
+                <Button onClick={() => updateIsOpen(!isOpen)}>{"X"}</Button>
               </HStack>
-            </VStack>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              variant="primary"
-              isDisabled={selectedSticker === null}
-              // mr={3}
-              onClick={() => handleSubmit(selectedSticker)}
-            >
-              {"Submit"}
-            </Button>
-            {/* <Button variant="ghost">Secondary Action</Button> */}
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            </ModalHeader>
+            <ModalBody>
+              {modalVariant && variants[modalVariant][step].body}
+            </ModalBody>
+            <ModalFooter>
+              {modalVariant && variants[modalVariant][step].footer}
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </Fragment>
   );
 };
