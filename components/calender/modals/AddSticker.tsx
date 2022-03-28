@@ -10,7 +10,7 @@ import {
   HStack,
   Text
 } from "@chakra-ui/react";
-import React, { Fragment, useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { format, isSameDay } from "date-fns";
 import DemoStickers from "../stickers/DemoStickers";
 import { StickersContext } from "../../../contexts/StickerContext";
@@ -21,23 +21,28 @@ interface AddStickerProps {
   date: Date;
   updateSticker: React.Dispatch<React.SetStateAction<StickerVal>>;
   currSticker: StickerVal;
+  step: number;
+  updateStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 /**
  * Handles adding and modifying the stickers for the given month.
- * @param props the props for this component.
- * @param {boolean} props.isOpen tells the component when the modal should be open.
- * @param {React.Dispatch<React.SetStateAction<boolean>>} props.updateIsOpen used to close the modal.
- * @param {date} props.date the date for which the sticker will be added or modified.
+ * @param {boolean} isOpen tells the component when the modal should be open.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} updateIsOpen used to close the modal.
+ * @param {date} date the date for which the sticker will be added or modified.
  * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker the react state function to update the sticker.
- * @param {StickerVal}currSticker the current sticker for the date.
+ * @param {StickerVal} currSticker the current sticker for the date.
+ * @param {number} step a numerical variable that represents the page the modal should be at.
+ * @param {React.Dispatch<React.SetStateAction<number>>} updateStep used to navigate the pages of the modal by updating the step the modal is on.
  */
 const AddSticker = ({
   isOpen,
   updateIsOpen,
   date,
   updateSticker,
-  currSticker
+  currSticker,
+  step,
+  updateStep
 }: AddStickerProps): JSX.Element => {
   // TODO: Import the stickers array from the calender context.
 
@@ -51,8 +56,6 @@ const AddSticker = ({
 
   const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
 
-  const [step, setStep] = useState<number | null>(null);
-
   const { addEditSticker } = useContext(StickersContext);
 
   const [modalVariant] = useState<"currDate" | "notCurrDate">(
@@ -63,15 +66,8 @@ const AddSticker = ({
 
   const handleClose = () => {
     setSelectedSticker(null);
-    setStep(null);
     updateIsOpen(false);
   };
-
-  useEffect(() => {
-    if (step === null) {
-      setStep(0);
-    }
-  }, [step]);
 
   // TODO: Validate that the provided sticker is not the current sticker. Throw an error if the same sticker is attempted.
   const handleSubmit = (sticker) => {
@@ -164,7 +160,7 @@ const AddSticker = ({
             // isDisabled={
             //   selectedSticker === null || selectedSticker === currSticker
             // }
-            onClick={() => setStep(step + 1)}
+            onClick={() => updateStep(step + 1)}
           >
             {"Next"}
           </Button>
@@ -193,7 +189,7 @@ const AddSticker = ({
             justifyContent={"space-between"}
             alignContent={"center"}
           >
-            <Button variant="primary" onClick={() => setStep(step - 1)}>
+            <Button variant="primary" onClick={() => updateStep(step - 1)}>
               {"Previous"}
             </Button>
             <HStack w="auto" h="auto" alignContent={"center"} spacing={6}>
@@ -230,41 +226,37 @@ const AddSticker = ({
   // };
 
   return (
-    <Fragment>
-      {step !== null && (
-        <Modal
-          isCentered
-          isOpen={isOpen}
-          onClose={() => handleClose()}
-          motionPreset="slideInBottom"
-          scrollBehavior="inside"
-          size={modalVariant === "currDate" ? "xl" : "2xl"}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>
-              <HStack
-                w="100%"
-                h="auto"
-                justifyContent={"space-between"}
-                alignContent={"center"}
-              >
-                <Heading textAlign="center" as="h2" size="md" w="100%" h="auto">
-                  {modalVariant && variants[modalVariant][step].header}
-                </Heading>
-                <Button onClick={() => updateIsOpen(!isOpen)}>{"X"}</Button>
-              </HStack>
-            </ModalHeader>
-            <ModalBody>
-              {modalVariant && variants[modalVariant][step].body}
-            </ModalBody>
-            <ModalFooter>
-              {modalVariant && variants[modalVariant][step].footer}
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      )}
-    </Fragment>
+    <Modal
+      isCentered
+      isOpen={isOpen}
+      onClose={() => handleClose()}
+      motionPreset="slideInBottom"
+      scrollBehavior="inside"
+      size={modalVariant === "currDate" ? "xl" : "2xl"}
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>
+          <HStack
+            w="100%"
+            h="auto"
+            justifyContent={"space-between"}
+            alignContent={"center"}
+          >
+            <Heading textAlign="center" as="h2" size="md" w="100%" h="auto">
+              {modalVariant && variants[modalVariant][step].header}
+            </Heading>
+            <Button onClick={() => updateIsOpen(!isOpen)}>{"X"}</Button>
+          </HStack>
+        </ModalHeader>
+        <ModalBody>
+          {modalVariant && variants[modalVariant][step].body}
+        </ModalBody>
+        <ModalFooter>
+          {modalVariant && variants[modalVariant][step].footer}
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 

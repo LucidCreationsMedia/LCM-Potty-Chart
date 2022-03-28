@@ -58,10 +58,13 @@ const Day = ({
     }
   };
 
-  // This handles the modal for this date.
+  // This handles the modal for the day.
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [stickerState, setStickerState] = useState<StickerVal>(sticker);
+
+  // The step the modal is at.
+  const [step, setStep] = useState<number>(0);
 
   /**
    * TODO: Add logic to remove the onClick within overflow dates.
@@ -114,7 +117,10 @@ const Day = ({
           border="1px solid #0068ff"
           w="100%"
           h="100%"
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            setStep(0);
+            setIsOpen(true);
+          }}
           alignContent="center"
           justifyContent="flex-start"
           pt={2}
@@ -157,6 +163,8 @@ const Day = ({
                 updateIsOpen={setIsOpen}
                 updateSticker={setStickerState}
                 currSticker={stickerState}
+                step={step}
+                updateStep={setStep}
               />
             )}
           </StickersContextProvider>
