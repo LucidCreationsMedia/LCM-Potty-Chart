@@ -2,7 +2,11 @@
   "private": true,
   "name": "lucid-creations-media-potty-chart",
   "homepage": "https://lucidcreations.media/introducing-code-name-potty-chart/",
+<<<<<<< HEAD
   "version": "v0.0.9.0-alpha",
+=======
+  "version": "v0.0.8.1-alpha",
+>>>>>>> main
   "author": {
     "name": "Lucid Creations Media",
     "url": "https://lucidcreations.media",
@@ -16,28 +20,28 @@
     "pretty": "prettier --write ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.8.6",
+    "@chakra-ui/react": "^1.8.7",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@iconify/react": "^3.2.0",
+    "@iconify/react": "^3.2.1",
     "@types/react": "^17.0.43",
     "date-fns": "^2.28.0",
     "formik": "^2.2.9",
     "framer-motion": "^6.2.8",
-    "next": "12.1.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "next": "12.1.4",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
     "sharp": "^0.30.3"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
-    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
     "eslint": "^8.12.0",
-    "eslint-config-next": "<12.1.0",
+    "eslint-config-next": "^12.1.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "<7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "<=4.3.0",
     "prettier": "^2.6.1",
     "typescript": "<4.6.0"
   },
