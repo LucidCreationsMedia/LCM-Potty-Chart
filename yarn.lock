@@ -1135,10 +1135,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iconify/react@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@iconify/react@npm:3.2.0"
-  checksum: 3d3283180433907c65254a52edecc8a1978425651b3222504dc54359df23a86d1ed996ac36f1b2712234bdf8442eedfdf949c121481d8b14772bf7ecbee8dc53
+"@iconify/react@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "@iconify/react@npm:3.2.1"
+  checksum: 3c8f74506403b9a8166443c4ec04736aace0fd3ee27572501954c8a505e65893c0c06f5fdf55c5207c3564f3be5c870f71d87a474f5b93eb3d3c1347312b47aa
   languageName: node
   linkType: hard
 
@@ -3587,7 +3587,7 @@ __metadata:
     "@chakra-ui/react": ^1.8.7
     "@emotion/react": ^11.8.2
     "@emotion/styled": ^11.8.1
-    "@iconify/react": ^3.2.0
+    "@iconify/react": ^3.2.1
     "@types/node": ^17.0.23
     "@types/react": ^17.0.43
     "@typescript-eslint/eslint-plugin": ^5.16.0
