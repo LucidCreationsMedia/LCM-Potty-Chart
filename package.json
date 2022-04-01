@@ -2,11 +2,7 @@
   "private": true,
   "name": "lucid-creations-media-potty-chart",
   "homepage": "https://lucidcreations.media/introducing-code-name-potty-chart/",
-<<<<<<< HEAD
   "version": "v0.0.9.0-alpha",
-=======
-  "version": "v0.0.8.1-alpha",
->>>>>>> main
   "author": {
     "name": "Lucid Creations Media",
     "url": "https://lucidcreations.media",
