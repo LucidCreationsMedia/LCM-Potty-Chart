@@ -8,12 +8,17 @@ import {
   ModalFooter,
   Heading,
   HStack,
-  Text
+  Text,
+  VStack,
+  SimpleGrid,
+  Box
 } from "@chakra-ui/react";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import { format, isSameDay } from "date-fns";
+import { Icon } from "@iconify/react";
 import { StickersContext } from "../../../contexts/StickerContext";
 import StickerSelector from "./StickerSelector";
+import DemoStickers from "../stickers/DemoStickers";
 
 interface AddStickerProps {
   isOpen: boolean;
@@ -116,12 +121,28 @@ const AddSticker = ({
           "LLL d, y"
         )}?`,
         body: (
-          <StickerSelector
-            stickerSet="Demo"
-            currSticker={currSticker}
-            selectedSticker={selectedSticker}
-            updateSelectedSticker={updateSelectedSticker}
-          />
+          <VStack
+            w="100%"
+            h="auto"
+            justifyContent="space-between"
+            alignContent="center"
+          >
+            <Heading textAlign="center" as="h3" size="md" w="100%" h="auto">
+              {"Current Sticker"}
+            </Heading>
+            <Text fontSize="4rem">
+              <DemoStickers stickerVal={currSticker} />
+            </Text>
+            <Heading textAlign="center" as="h3" size="md" w="100%" h="auto">
+              {"Select your new sticker"}
+            </Heading>
+            <StickerSelector
+              stickerSet="Demo"
+              currSticker={currSticker}
+              selectedSticker={selectedSticker}
+              updateSelectedSticker={updateSelectedSticker}
+            />
+          </VStack>
         ),
         footer: (
           <Button
@@ -141,15 +162,24 @@ const AddSticker = ({
           "M/d/y"
         )}?`,
         body: (
-          <Text
-            w="100%"
-            h="auto "
-            fontSize={"3xl"}
-            textAlign={"center"}
-            fontWeight={"bold"}
-          >
-            {"Filler"}
-          </Text>
+          <SimpleGrid my="1.5rem" mx="5rem" w="auto" h="100%" columns={3}>
+            <Heading textAlign="center" as="h3" size="md" w="100%" h="auto">
+              {"Previous Sticker"}
+            </Heading>
+            <Box></Box>
+            <Heading textAlign="center" as="h3" size="md" w="100%" h="auto">
+              {"New Sticker"}
+            </Heading>
+            <Text textAlign="center" w="100%" fontSize="4rem">
+              <DemoStickers stickerVal={currSticker} />
+            </Text>
+            <Box fontSize="4rem" m="auto">
+              <Icon fontSize="4rem" icon="bi:arrow-right" />
+            </Box>
+            <Text textAlign="center" w="100%" fontSize="4rem">
+              <DemoStickers stickerVal={selectedSticker} />
+            </Text>
+          </SimpleGrid>
         ),
         footer: (
           <HStack
@@ -164,10 +194,10 @@ const AddSticker = ({
             <HStack w="auto" h="auto" alignContent={"center"} spacing={6}>
               <Button
                 variant="submit"
-                // isDisabled={
-                //   selectedSticker === null || selectedSticker === currSticker
-                // }
-                // onClick={() => handleSubmit(selectedSticker)}
+              isDisabled={
+                selectedSticker === null || selectedSticker === currSticker
+              }
+              onClick={() => handleSubmit(selectedSticker)}
               >
                 {"Confirm"}
               </Button>
