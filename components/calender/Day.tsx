@@ -12,7 +12,7 @@ import {
 import router from "next/router";
 import React, { Fragment, useState } from "react";
 import { StickersContextProvider } from "../../contexts/StickerContext";
-import AddSticker from "./modals/AddSticker";
+import AddUpdateSticker from "./modals/AddUpdateSticker";
 import DemoStickers from "./stickers/DemoStickers";
 
 interface DayProps {
@@ -58,10 +58,18 @@ const Day = ({
     }
   };
 
-  // This handles the modal for this date.
+  // This handles the modal for the day.
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // The current sticker to be displayed on the current date.
+  // * This is temporary. There should be no need for this once persistent storage is used. This is being used as a workaround to a bug.
   const [stickerState, setStickerState] = useState<StickerVal>(sticker);
+
+  // The step the modal is at.
+  const [step, setStep] = useState<number>(0);
+
+  // The current selected sticker. (To be added or updated)
+  const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
 
   /**
    * TODO: Add logic to remove the onClick within overflow dates.
@@ -114,7 +122,11 @@ const Day = ({
           border="1px solid #0068ff"
           w="100%"
           h="100%"
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            setStep(0);
+            setSelectedSticker(null);
+            setIsOpen(true);
+          }}
           alignContent="center"
           justifyContent="flex-start"
           pt={2}
@@ -151,11 +163,16 @@ const Day = ({
           </Box>
           <StickersContextProvider>
             {isBefore(date, endOfDay(new Date())) && (
-              <AddSticker
+              <AddUpdateSticker
                 date={date}
                 isOpen={isOpen}
                 updateIsOpen={setIsOpen}
                 updateSticker={setStickerState}
+                currSticker={stickerState}
+                step={step}
+                updateStep={setStep}
+                selectedSticker={selectedSticker}
+                updateSelectedSticker={setSelectedSticker}
               />
             )}
           </StickersContextProvider>
