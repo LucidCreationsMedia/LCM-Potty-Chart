@@ -58,6 +58,8 @@ const AddUpdateSticker = ({
 
   const { addEditSticker } = useContext(StickersContext);
 
+  // ! Update these states to sat "add" and "edit" for easier reading.
+
   const [modalVariant] = useState<"currDate" | "notCurrDate">(
     isSameDay(date, new Date()) ? "currDate" : "notCurrDate"
   );
@@ -80,12 +82,23 @@ const AddUpdateSticker = ({
       {
         header: `Which sticker did you earn for ${format(date, "LLL d, y")}?`,
         body: (
-          <StickerSelector
-            stickerSet="Demo"
-            currSticker={currSticker}
-            selectedSticker={selectedSticker}
-            updateSelectedSticker={updateSelectedSticker}
-          />
+          <VStack
+            w="100%"
+            h="auto"
+            justifyContent="space-between"
+            alignContent="center"
+            spacing="4"
+          >
+            <Heading textAlign="center" as="h3" size="md" w="100%" h="auto">
+              {"Select a sticker"}
+            </Heading>
+            <StickerSelector
+              stickerSet="Demo"
+              currSticker={currSticker}
+              selectedSticker={selectedSticker}
+              updateSelectedSticker={updateSelectedSticker}
+            />
+          </VStack>
         ),
         footer: (
           <Button
@@ -133,9 +146,9 @@ const AddUpdateSticker = ({
         footer: (
           <Button
             variant="primary"
-            // isDisabled={
-            //   selectedSticker === null || selectedSticker === currSticker
-            // }
+            isDisabled={
+              selectedSticker === null || selectedSticker === currSticker
+            }
             onClick={() => updateStep(step + 1)}
           >
             {"Next"}
