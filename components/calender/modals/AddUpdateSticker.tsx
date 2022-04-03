@@ -179,6 +179,13 @@ const AddUpdateSticker = ({
             </Button>
             <HStack w="auto" h="auto" alignContent="center" spacing={6}>
               <Button
+                backgroundColor="transparent"
+                _hover={{ backgroundColor: "brand.danger" }}
+                onClick={() => updateIsOpen(!isOpen)}
+              >
+                {"Cancel"}
+              </Button>
+              <Button
                 variant="submit"
                 isDisabled={
                   selectedSticker === null || selectedSticker === currSticker
@@ -186,13 +193,6 @@ const AddUpdateSticker = ({
                 onClick={() => handleSubmit(selectedSticker)}
               >
                 {"Confirm"}
-              </Button>
-              <Button
-                backgroundColor="transparent"
-                _hover={{ backgroundColor: "brand.danger" }}
-                onClick={() => updateIsOpen(!isOpen)}
-              >
-                {"Cancel"}
               </Button>
             </HStack>
           </HStack>
