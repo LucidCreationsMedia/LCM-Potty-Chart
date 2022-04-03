@@ -12,7 +12,7 @@ import {
 import router from "next/router";
 import React, { Fragment, useState } from "react";
 import { StickersContextProvider } from "../../contexts/StickerContext";
-import AddSticker from "./modals/AddSticker";
+import AddUpdateSticker from "./modals/AddUpdateSticker";
 import DemoStickers from "./stickers/DemoStickers";
 
 interface DayProps {
@@ -163,7 +163,7 @@ const Day = ({
           </Box>
           <StickersContextProvider>
             {isBefore(date, endOfDay(new Date())) && (
-              <AddSticker
+              <AddUpdateSticker
                 date={date}
                 isOpen={isOpen}
                 updateIsOpen={setIsOpen}

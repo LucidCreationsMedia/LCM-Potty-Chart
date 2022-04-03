@@ -43,7 +43,7 @@ interface AddStickerProps {
  * @param {React.Dispatch<React.SetStateAction<number>>} updateStep Used to navigate the pages of the modal by updating the step the modal is on.
  * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker The react state function to update the selected sticker that will be added or updated.
  */
-const AddSticker = ({
+const AddUpdateSticker = ({
   isOpen,
   updateIsOpen,
   date,
@@ -171,19 +171,19 @@ const AddSticker = ({
           <HStack
             w="100%"
             h="auto"
-            justifyContent={"space-between"}
-            alignContent={"center"}
+            justifyContent="space-between"
+            alignContent="center"
           >
             <Button variant="primary" onClick={() => updateStep(step - 1)}>
               {"Previous"}
             </Button>
-            <HStack w="auto" h="auto" alignContent={"center"} spacing={6}>
+            <HStack w="auto" h="auto" alignContent="center" spacing={6}>
               <Button
                 variant="submit"
-              isDisabled={
-                selectedSticker === null || selectedSticker === currSticker
-              }
-              onClick={() => handleSubmit(selectedSticker)}
+                isDisabled={
+                  selectedSticker === null || selectedSticker === currSticker
+                }
+                onClick={() => handleSubmit(selectedSticker)}
               >
                 {"Confirm"}
               </Button>
@@ -216,13 +216,19 @@ const AddSticker = ({
           <HStack
             w="100%"
             h="auto"
-            justifyContent={"space-between"}
-            alignContent={"center"}
+            justifyContent="space-between"
+            alignContent="center"
           >
             <Heading textAlign="center" as="h2" size="md" w="100%" h="auto">
               {modalVariant && variants[modalVariant][step].header}
             </Heading>
-            <Button onClick={() => updateIsOpen(!isOpen)}>{"X"}</Button>
+            <Button
+              fontSize="2rem"
+              px="1"
+              onClick={() => updateIsOpen(!isOpen)}
+            >
+              <Icon icon="bi:x" />
+            </Button>
           </HStack>
         </ModalHeader>
         <ModalBody>
@@ -236,4 +242,4 @@ const AddSticker = ({
   );
 };
 
-export default AddSticker;
+export default AddUpdateSticker;
