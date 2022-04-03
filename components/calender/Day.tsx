@@ -66,6 +66,9 @@ const Day = ({
   // The step the modal is at.
   const [step, setStep] = useState<number>(0);
 
+  // The current selected sticker.
+  const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
+
   /**
    * TODO: Add logic to remove the onClick within overflow dates.
    * Do not give dates for the next month an onClick.
@@ -119,6 +122,7 @@ const Day = ({
           h="100%"
           onClick={() => {
             setStep(0);
+            setSelectedSticker(null);
             setIsOpen(true);
           }}
           alignContent="center"
@@ -165,6 +169,8 @@ const Day = ({
                 currSticker={stickerState}
                 step={step}
                 updateStep={setStep}
+                selectedSticker={selectedSticker}
+                updateSelectedSticker={setSelectedSticker}
               />
             )}
           </StickersContextProvider>

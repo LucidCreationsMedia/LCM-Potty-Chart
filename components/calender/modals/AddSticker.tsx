@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, useContext } from "react";
 import { format, isSameDay } from "date-fns";
-import DemoStickers from "../stickers/DemoStickers";
 import { StickersContext } from "../../../contexts/StickerContext";
+import StickerSelector from "./StickerSelector";
 
 interface AddStickerProps {
   isOpen: boolean;
@@ -23,6 +23,8 @@ interface AddStickerProps {
   currSticker: StickerVal;
   step: number;
   updateStep: React.Dispatch<React.SetStateAction<number>>;
+  selectedSticker: StickerVal;
+  updateSelectedSticker: React.Dispatch<React.SetStateAction<StickerVal>>;
 }
 
 /**
@@ -42,7 +44,9 @@ const AddSticker = ({
   updateSticker,
   currSticker,
   step,
-  updateStep
+  updateStep,
+  selectedSticker,
+  updateSelectedSticker
 }: AddStickerProps): JSX.Element => {
   // TODO: Import the stickers array from the calender context.
 
@@ -54,8 +58,6 @@ const AddSticker = ({
    * Show a message when a date before the current date is selected.
    */
 
-  const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
-
   const { addEditSticker } = useContext(StickersContext);
 
   const [modalVariant] = useState<"currDate" | "notCurrDate">(
@@ -65,7 +67,6 @@ const AddSticker = ({
   // ! Step is not setting back to 0 when modal is closet. Try to move out of this component and take it in as an arg.
 
   const handleClose = () => {
-    setSelectedSticker(null);
     updateIsOpen(false);
   };
 
@@ -88,41 +89,12 @@ const AddSticker = ({
       {
         header: `Which sticker did you earn for ${format(date, "LLL d, y")}?`,
         body: (
-          <HStack
-            w="100%"
-            h="auto"
-            justifyContent={"center"}
-            alignContent={"center"}
-            spacing={14}
-          >
-            <Button
-              isDisabled={currSticker >= 1}
-              border={selectedSticker === 1 ? "1px solid #FFF" : "opx"}
-              bg={selectedSticker === 1 && "gray.800"}
-              onClick={() => setSelectedSticker(1)}
-              variant="stickerButton"
-            >
-              <DemoStickers stickerVal={1} />
-            </Button>
-            <Button
-              isDisabled={currSticker === 0}
-              border={selectedSticker === 0 ? "1px solid #FFF" : "opx"}
-              bg={selectedSticker === 0 && "gray.800"}
-              onClick={() => setSelectedSticker(0)}
-              variant="stickerButton"
-            >
-              <DemoStickers stickerVal={0} />
-            </Button>
-            <Button
-              isDisabled={currSticker <= -1}
-              border={selectedSticker === -1 ? "1px solid #FFF" : "opx"}
-              bg={selectedSticker === -1 && "gray.800"}
-              onClick={() => setSelectedSticker(-1)}
-              variant="stickerButton"
-            >
-              <DemoStickers stickerVal={-1} />
-            </Button>
-          </HStack>
+          <StickerSelector
+            stickerSet="Demo"
+            currSticker={currSticker}
+            selectedSticker={selectedSticker}
+            updateSelectedSticker={updateSelectedSticker}
+          />
         ),
         footer: (
           <Button
@@ -144,15 +116,12 @@ const AddSticker = ({
           "LLL d, y"
         )}?`,
         body: (
-          <Text
-            w="100%"
-            h="auto "
-            fontSize={"3xl"}
-            textAlign={"center"}
-            fontWeight={"bold"}
-          >
-            {"Filler"}
-          </Text>
+          <StickerSelector
+            stickerSet="Demo"
+            currSticker={currSticker}
+            selectedSticker={selectedSticker}
+            updateSelectedSticker={updateSelectedSticker}
+          />
         ),
         footer: (
           <Button
@@ -215,15 +184,6 @@ const AddSticker = ({
       }
     ]
   };
-
-  // const JSX = <></>;
-  // const example = {
-  //   currDate: [{ header: JSX, body: JSX, footer: JSX }],
-  //   notCurrDate: [
-  //     { header: JSX, body: JSX, footer: JSX },
-  //     { header: JSX, body: JSX, footer: JSX }
-  //   ]
-  // };
 
   return (
     <Modal
