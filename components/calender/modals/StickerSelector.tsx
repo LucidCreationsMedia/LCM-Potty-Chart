@@ -9,6 +9,14 @@ interface StickerSelectorProps {
   updateSelectedSticker: React.Dispatch<React.SetStateAction<StickerVal>>;
 }
 
+/**
+ * Handles displaying a list of dynamic stickers to be selected.
+ * @param {string} stickerSet The name of the stickers that should be displayed.
+ * @param {StickerVal} currSticker The current sticker for the date.
+ * @param {StickerVal} selectedSticker The selected sticker for the current. date
+ * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSelectedSticker TThe react state function to update the selected sticker that will be added or updated.
+ */
+
 const StickerSelector = ({
   stickerSet,
   currSticker,

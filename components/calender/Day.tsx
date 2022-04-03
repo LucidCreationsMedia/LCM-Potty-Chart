@@ -61,12 +61,14 @@ const Day = ({
   // This handles the modal for the day.
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // The current sticker to be displayed on the current date.
+  // * This is temporary. There should be no need for this once persistent storage is used. This is being used as a workaround to a bug.
   const [stickerState, setStickerState] = useState<StickerVal>(sticker);
 
   // The step the modal is at.
   const [step, setStep] = useState<number>(0);
 
-  // The current selected sticker.
+  // The current selected sticker. (To be added or updated)
   const [selectedSticker, setSelectedSticker] = useState<StickerVal>(null);
 
   /**

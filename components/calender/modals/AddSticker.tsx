@@ -13,7 +13,7 @@ import {
   SimpleGrid,
   Box
 } from "@chakra-ui/react";
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext } from "react";
 import { format, isSameDay } from "date-fns";
 import { Icon } from "@iconify/react";
 import { StickersContext } from "../../../contexts/StickerContext";
@@ -34,13 +34,14 @@ interface AddStickerProps {
 
 /**
  * Handles adding and modifying the stickers for the given month.
- * @param {boolean} isOpen tells the component when the modal should be open.
- * @param {React.Dispatch<React.SetStateAction<boolean>>} updateIsOpen used to close the modal.
- * @param {date} date the date for which the sticker will be added or modified.
- * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker the react state function to update the sticker.
- * @param {StickerVal} currSticker the current sticker for the date.
- * @param {number} step a numerical variable that represents the page the modal should be at.
- * @param {React.Dispatch<React.SetStateAction<number>>} updateStep used to navigate the pages of the modal by updating the step the modal is on.
+ * @param {boolean} isOpen Tells the component when the modal should be open.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} updateIsOpen Used to close the modal.
+ * @param {date} date The date for which the sticker will be added or modified.
+ * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker The react state function to update the sticker.
+ * @param {StickerVal} currSticker The current sticker for the date.
+ * @param {number} step A numerical variable that represents the page the modal should be at.
+ * @param {React.Dispatch<React.SetStateAction<number>>} updateStep Used to navigate the pages of the modal by updating the step the modal is on.
+ * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker The react state function to update the selected sticker that will be added or updated.
  */
 const AddSticker = ({
   isOpen,
@@ -55,21 +56,11 @@ const AddSticker = ({
 }: AddStickerProps): JSX.Element => {
   // TODO: Import the stickers array from the calender context.
 
-  // TODO: Add a function that will add or update the sticker for the current date.
-
-  /**
-   * TODO: Add logic into the contents of the modal to show messages if the selected date is out of range.
-   * Show a message when a date in the future is selected.
-   * Show a message when a date before the current date is selected.
-   */
-
   const { addEditSticker } = useContext(StickersContext);
 
   const [modalVariant] = useState<"currDate" | "notCurrDate">(
     isSameDay(date, new Date()) ? "currDate" : "notCurrDate"
   );
-
-  // ! Step is not setting back to 0 when modal is closet. Try to move out of this component and take it in as an arg.
 
   const handleClose = () => {
     updateIsOpen(false);
@@ -83,11 +74,6 @@ const AddSticker = ({
   };
 
   // * Double check that the submit button is disabled if the selected sticker is the same as the current sticker.
-
-  // TODO: Display the current sticker above the selection screen if a current sticker exists.
-
-  // TODO: Trigger a warning if the date is in the past showing the sticker change.
-  // ! DO NOT update the sticker state or trigger the edd/edit function until that new warning is accepted.
 
   const variants = {
     currDate: [
