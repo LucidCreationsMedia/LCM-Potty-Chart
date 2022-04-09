@@ -13,7 +13,7 @@ import {
   SimpleGrid,
   Box
 } from "@chakra-ui/react";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { format, isSameDay } from "date-fns";
 import { Icon } from "@iconify/react";
 import { StickersContext } from "../../../contexts/StickerContext";
@@ -58,7 +58,7 @@ const AddUpdateSticker = ({
 
   const { addEditSticker } = useContext(StickersContext);
 
-  // ! Update these states to sat "add" and "edit" for easier reading.
+  // ! Update these states to say "add" and "edit" for easier reading.
 
   const [modalVariant] = useState<"currDate" | "notCurrDate">(
     isSameDay(date, new Date()) ? "currDate" : "notCurrDate"
@@ -74,6 +74,9 @@ const AddUpdateSticker = ({
     updateSticker(newSticker.sticker);
     handleClose();
   };
+
+  // The first sticker to have focus when the modal opens.
+  const initialRef = useRef();
 
   // * Double check that the submit button is disabled if the selected sticker is the same as the current sticker.
 
@@ -97,6 +100,7 @@ const AddUpdateSticker = ({
               currSticker={currSticker}
               selectedSticker={selectedSticker}
               updateSelectedSticker={updateSelectedSticker}
+              initialSticker={initialRef}
             />
           </VStack>
         ),
@@ -140,6 +144,7 @@ const AddUpdateSticker = ({
               currSticker={currSticker}
               selectedSticker={selectedSticker}
               updateSelectedSticker={updateSelectedSticker}
+              initialSticker={initialRef}
             />
           </VStack>
         ),
@@ -223,6 +228,7 @@ const AddUpdateSticker = ({
   return (
     <Modal
       isCentered
+      initialFocusRef={initialRef}
       isOpen={isOpen}
       onClose={() => handleClose()}
       motionPreset="slideInBottom"
