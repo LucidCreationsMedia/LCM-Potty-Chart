@@ -142,8 +142,8 @@ const Day = ({
             p={
               isSameDay(new Date(), date)
                 ? getDate(date) > 10
-                  ? "4px 8px"
-                  : "2px 10px"
+                  ? "0px 6px 3px 6px"
+                  : "0px 9px 3px 9px"
                 : "auto"
             }
             h="auto"
