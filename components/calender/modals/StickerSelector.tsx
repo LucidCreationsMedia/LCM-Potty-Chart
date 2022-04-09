@@ -28,8 +28,8 @@ const StickerSelector = ({
       <HStack
         w="100%"
         h="auto"
-        justifyContent={"center"}
-        alignContent={"center"}
+        justifyContent="center"
+        alignContent="center"
         spacing={14}
       >
         <Button

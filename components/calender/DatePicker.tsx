@@ -180,7 +180,7 @@ const DatePicker = (): JSX.Element => {
                   py={4}
                 >
                   <Heading as="h4" size="sm" fontWeight="semibold">
-                    Required fields indicated with{" "}
+                    {"Required fields indicated with"}
                     <FormValidateEmoji type="Required" />
                   </Heading>
                   <Field name="date" validate={validateDate}>
