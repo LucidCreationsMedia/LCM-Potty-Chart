@@ -30,6 +30,11 @@ const AppTheme = extendTheme({
       footerText: "black",
       content: "#2d3748",
       patreon: "#FF424D"
+    },
+    loading: {
+      overlayBg: "#171923cb",
+      spinnerColor: "#0088ff",
+      spinnerEmptySpace: "#2D374860"
     }
   },
   styles: {
