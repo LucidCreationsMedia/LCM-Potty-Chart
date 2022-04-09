@@ -161,7 +161,13 @@ const AddUpdateSticker = ({
           "M/d/y"
         )}?`,
         body: (
-          <SimpleGrid my={{ base: "0px", sm: "6" }} mx={{ base: "0px", sm: "10", md: "16" }} w="auto" h="100%" columns={3}>
+          <SimpleGrid
+            my={{ base: "0px", sm: "6" }}
+            mx={{ base: "0px", sm: "10", md: "16" }}
+            w="auto"
+            h="100%"
+            columns={3}
+          >
             <Heading textAlign="center" as="h3" size="md" w="100%" h="auto">
               {"Previous Sticker"}
             </Heading>
