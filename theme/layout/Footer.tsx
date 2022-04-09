@@ -96,8 +96,7 @@ const Footer = (): JSX.Element => {
           </MotionBox>
           <Text color="brand.footerText" fontSize="xs">
             &copy;
-            {" 2021 - "}
-            {new Date().getFullYear()}{" "}
+            {` 2021 - ${new Date().getFullYear()} `}
             <Link
               href="https://lucidcreations.media"
               rel="noopener"

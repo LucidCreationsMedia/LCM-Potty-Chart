@@ -7,6 +7,7 @@ interface StickerSelectorProps {
   currSticker: StickerVal;
   selectedSticker: StickerVal;
   updateSelectedSticker: React.Dispatch<React.SetStateAction<StickerVal>>;
+  initialSticker: React.MutableRefObject<undefined>;
 }
 
 /**
@@ -21,19 +22,21 @@ const StickerSelector = ({
   stickerSet,
   currSticker,
   selectedSticker,
-  updateSelectedSticker
+  updateSelectedSticker,
+  initialSticker
 }: StickerSelectorProps): JSX.Element => {
   const stickers = {
     Demo: (
       <HStack
         w="100%"
         h="auto"
-        justifyContent={"center"}
-        alignContent={"center"}
+        justifyContent="center"
+        alignContent="center"
         spacing={14}
       >
         <Button
           isDisabled={currSticker >= 1}
+          ref={currSticker <= 1 ? initialSticker : null}
           border={selectedSticker === 1 ? "1px solid #FFF" : "opx"}
           bg={selectedSticker === 1 && "gray.800"}
           onClick={() => updateSelectedSticker(1)}
@@ -43,6 +46,7 @@ const StickerSelector = ({
         </Button>
         <Button
           isDisabled={currSticker === 0}
+          ref={currSticker >= 1 ? initialSticker : null}
           border={selectedSticker === 0 ? "1px solid #FFF" : "opx"}
           bg={selectedSticker === 0 && "gray.800"}
           onClick={() => updateSelectedSticker(0)}

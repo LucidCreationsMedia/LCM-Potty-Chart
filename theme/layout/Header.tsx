@@ -15,7 +15,7 @@ import appLogo from "../../public/images/logo.svg";
 
 const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart";
-  const appVersion = "v0.0.9.4-alpha";
+  const appVersion = "v0.0.9.5-alpha";
 
   // Add transparency while not at the top of the page.
   const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
@@ -70,11 +70,11 @@ const Header = (): JSX.Element => {
 
   return (
     <Box
-      zIndex={1000000}
+      zIndex={1}
       w="100%"
       pos="fixed"
-      top="0"
-      alignItems={"center"}
+      top={0}
+      alignItems="center"
       boxShadow={
         open
           ? "none"
