@@ -7,7 +7,7 @@ import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { selectedDate, layout, updateDate } = useContext(CalenderContext);
+  const { selectedDate, layout, updateDate, currDate } = useContext(CalenderContext);
   const { stickersMonth } = useContext(StickersContext);
 
   useEffect(() => {
@@ -91,6 +91,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                   sticker={sticker}
                   date={date}
                   selectedDate={selectedDate}
+                  currDate={currDate}
                   key={
                     id.length
                       ? id

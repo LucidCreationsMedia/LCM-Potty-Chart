@@ -55,6 +55,7 @@ interface UpdateCalendarProps {
 }
 
 interface CalenderContextState {
+  currDate: Date;
   selectedDate: Date;
   title: string;
   layout: MonthLayout;

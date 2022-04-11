@@ -21,6 +21,7 @@ interface DayProps {
   sticker: StickerVal;
   date: Date;
   selectedDate: Date;
+  currDate: Date;
 }
 
 /**
@@ -37,7 +38,8 @@ const Day = ({
   overflowDirection,
   sticker,
   date,
-  selectedDate
+  selectedDate,
+  currDate
 }: DayProps): JSX.Element => {
   const handleNav = (direction: "next" | "prev") => {
     if (direction === "next") {
@@ -90,7 +92,7 @@ const Day = ({
           w="100%"
           h="100%"
           _hover={{
-            cursor: isBefore(date, endOfDay(new Date()))
+            cursor: isBefore(date, endOfDay(currDate))
               ? "pointer"
               : "default",
             background: "gray.700",
@@ -131,7 +133,7 @@ const Day = ({
           justifyContent="flex-start"
           pt={2}
           _hover={{
-            cursor: isBefore(date, endOfDay(new Date()))
+            cursor: isBefore(date, endOfDay(currDate))
               ? "pointer"
               : "default",
             background: "gray.700",
@@ -140,7 +142,7 @@ const Day = ({
         >
           <Text
             p={
-              isSameDay(new Date(), date)
+              isSameDay(currDate, date)
                 ? getDate(date) > 10
                   ? "0px 6px 3px 6px"
                   : "0px 9px 3px 9px"
@@ -148,8 +150,8 @@ const Day = ({
             }
             h="auto"
             w="auto"
-            border={isSameDay(new Date(), date) ? "1px solid #0068ff" : "0px"}
-            borderRadius={isSameDay(new Date(), date) ? "100px" : "0px"}
+            border={isSameDay(currDate, date) ? "1px solid #0068ff" : "0px"}
+            borderRadius={isSameDay(currDate, date) ? "100px" : "0px"}
           >
             {`${getDate(date)}`}
           </Text>
@@ -162,7 +164,7 @@ const Day = ({
             />
           </Box>
           <StickersContextProvider>
-            {isBefore(date, endOfDay(new Date())) && (
+            {isBefore(date, endOfDay(currDate)) && (
               <AddUpdateSticker
                 date={date}
                 isOpen={isOpen}
@@ -173,6 +175,7 @@ const Day = ({
                 updateStep={setStep}
                 selectedSticker={selectedSticker}
                 updateSelectedSticker={setSelectedSticker}
+                currDate={currDate}
               />
             )}
           </StickersContextProvider>
