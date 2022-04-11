@@ -22,6 +22,7 @@ interface DayProps {
   date: Date;
   selectedDate: Date;
   currDate: Date;
+  isToday: boolean;
 }
 
 /**
@@ -39,7 +40,8 @@ const Day = ({
   sticker,
   date,
   selectedDate,
-  currDate
+  currDate,
+  isToday
 }: DayProps): JSX.Element => {
   const handleNav = (direction: "next" | "prev") => {
     if (direction === "next") {
@@ -142,7 +144,7 @@ const Day = ({
         >
           <Text
             p={
-              isSameDay(currDate, date)
+              isToday
                 ? getDate(date) > 10
                   ? "0px 6px 3px 6px"
                   : "0px 9px 3px 9px"
@@ -150,8 +152,8 @@ const Day = ({
             }
             h="auto"
             w="auto"
-            border={isSameDay(currDate, date) ? "1px solid #0068ff" : "0px"}
-            borderRadius={isSameDay(currDate, date) ? "100px" : "0px"}
+            border={isToday ? "1px solid #0068ff" : "0px"}
+            borderRadius={isToday ? "100px" : "0px"}
           >
             {`${getDate(date)}`}
           </Text>

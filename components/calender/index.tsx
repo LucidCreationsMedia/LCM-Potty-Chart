@@ -100,6 +100,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                   date={date}
                   selectedDate={selectedDate}
                   currDate={currDate}
+                  isToday={isSameDay(currDate, date)}
                   key={
                     id.length
                       ? id
