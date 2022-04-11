@@ -7,18 +7,20 @@ import Head from "next/head";
 
 function LCMPottyChart({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <ChakraProvider theme={AppTheme}>
-      <Layout {...pageProps}>
-        <Head>
-          <title>{"LCM Potty Chart"}</title>
-          <meta
-            name="viewport"
-            content="width=device-width, user-scalable=yes, initial-scale=1.0"
-          />
-        </Head>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
+    <React.StrictMode>
+      <ChakraProvider theme={AppTheme}>
+        <Layout {...pageProps}>
+          <Head>
+            <title>{"LCM Potty Chart"}</title>
+            <meta
+              name="viewport"
+              content="width=device-width, user-scalable=yes, initial-scale=1.0"
+            />
+          </Head>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </React.StrictMode>
   );
 }
 

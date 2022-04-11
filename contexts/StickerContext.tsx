@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode } from "react";
-import { format, getDate, isBefore, startOfDay } from "date-fns";
+import { format, getDate, isSameDay } from "date-fns";
 import stickersSeeder from "../data/stickerSeeder";
 
 const StickersContext = createContext({} as StickersContextState);
@@ -21,9 +21,9 @@ const StickersContextProvider = ({
 
     const edited = currDate.edited
       ? true
-      : isBefore(currDate.date, startOfDay(new Date()))
-      ? true
-      : false;
+      : isSameDay(currDate.date, new Date())
+      ? false
+      : true;
     currDate.edited = edited;
     // Add manual here when necessary.
 
