@@ -7,7 +7,8 @@ import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { selectedDate, layout, updateDate, currDate, setCurrDate } = useContext(CalenderContext);
+  const { selectedDate, layout, updateDate, currDate, setCurrDate } =
+    useContext(CalenderContext);
   const { stickersMonth } = useContext(StickersContext);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
   useEffect(() => {
     console.info("Check to update date.");
     if (!isSameDay(currDate, new Date())) {
-      console.info("Updated date.")
+      console.info("Updated date.");
       setCurrDate(new Date());
     }
   }, [currDate, setCurrDate]);

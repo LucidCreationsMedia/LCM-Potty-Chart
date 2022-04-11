@@ -5,7 +5,6 @@ import {
   getMonth,
   sub,
   getDate,
-  isSameDay,
   isBefore,
   endOfDay
 } from "date-fns";
@@ -94,9 +93,7 @@ const Day = ({
           w="100%"
           h="100%"
           _hover={{
-            cursor: isBefore(date, endOfDay(currDate))
-              ? "pointer"
-              : "default",
+            cursor: isBefore(date, endOfDay(currDate)) ? "pointer" : "default",
             background: "gray.700",
             border: "1px solid #FFF",
             color: "whiteAlpha.900"
@@ -135,9 +132,7 @@ const Day = ({
           justifyContent="flex-start"
           pt={2}
           _hover={{
-            cursor: isBefore(date, endOfDay(currDate))
-              ? "pointer"
-              : "default",
+            cursor: isBefore(date, endOfDay(currDate)) ? "pointer" : "default",
             background: "gray.700",
             border: "1px solid #FFF"
           }}
