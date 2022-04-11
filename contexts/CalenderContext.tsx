@@ -241,10 +241,11 @@ const CalenderContextProvider = ({
   };
 
     // * Attempting to fix an issue with static generation where the date does not appear to be updating after initial generation.
-    const [currDate] = useState<Date>(new Date);
+    const [currDate, setCurrDate] = useState<Date>(new Date);
 
   const calenderContextValues: CalenderContextState = {
     currDate,
+    setCurrDate,
     selectedDate,
     title: selectedDateInfo.title,
     layout: selectedDateInfo.layout,

@@ -56,6 +56,7 @@ interface UpdateCalendarProps {
 
 interface CalenderContextState {
   currDate: Date;
+  setCurrDate: React.Dispatch<React.SetStateAction<Date>>;
   selectedDate: Date;
   title: string;
   layout: MonthLayout;
