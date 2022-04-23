@@ -16,7 +16,7 @@ import {
 import React, { useState, useContext, useRef } from "react";
 import { format, isSameDay } from "date-fns";
 import { Icon } from "@iconify/react";
-import { StickersContext } from "../../../contexts/StickerContext";
+import { StickersContext } from "../../../../contexts/StickerContext";
 import StickerSelector from "./StickerSelector";
 import DemoStickers from "../stickers/DemoStickers";
 
