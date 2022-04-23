@@ -11,7 +11,7 @@ import {
 import { Icon } from "@iconify/react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
-import appLogo from "../../public/images/logo.svg";
+import appLogo from "../../../public/images/logo.svg";
 
 const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart";

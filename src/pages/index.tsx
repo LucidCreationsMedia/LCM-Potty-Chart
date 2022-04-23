@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { Box } from "@chakra-ui/react";
 import Calender from "../components/calender";
-import { StickersContextProvider } from "../contexts/StickerContext";
-import { CalenderContextProvider } from "../contexts/CalenderContext";
+import { StickersContextProvider } from "../../contexts/StickerContext";
+import { CalenderContextProvider } from "../../contexts/CalenderContext";
 import { format } from "date-fns";
 
 const IndexPage = (): JSX.Element => {
