@@ -13,8 +13,8 @@ import {
 // import findValidDateRange from "../../lib/findValidDateRange";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
-import { CalenderContextProvider } from "../../contexts/CalenderContext";
-import { StickersContextProvider } from "../../contexts/StickerContext";
+import { CalenderContextProvider } from "../../../contexts/CalenderContext";
+import { StickersContextProvider } from "../../../contexts/StickerContext";
 
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();

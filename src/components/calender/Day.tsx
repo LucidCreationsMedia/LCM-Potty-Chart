@@ -11,7 +11,7 @@ import {
 } from "date-fns";
 import router from "next/router";
 import React, { Fragment, useState } from "react";
-import { StickersContextProvider } from "../../contexts/StickerContext";
+import { StickersContextProvider } from "../../../contexts/StickerContext";
 import AddUpdateSticker from "./modals/AddUpdateSticker";
 import DemoStickers from "./stickers/DemoStickers";
 

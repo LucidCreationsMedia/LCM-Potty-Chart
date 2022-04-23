@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { isSameDay, format } from "date-fns";
-import { CalenderContext } from "../../contexts/CalenderContext";
-import { StickersContext } from "../../contexts/StickerContext";
+import { CalenderContext } from "../../../contexts/CalenderContext";
+import { StickersContext } from "../../../contexts/StickerContext";
 import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
