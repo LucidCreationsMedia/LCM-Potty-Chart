@@ -30,6 +30,7 @@ interface AddStickerProps {
   updateStep: React.Dispatch<React.SetStateAction<number>>;
   selectedSticker: StickerVal;
   updateSelectedSticker: React.Dispatch<React.SetStateAction<StickerVal>>;
+  currDate: Date;
 }
 
 /**
@@ -52,7 +53,8 @@ const AddUpdateSticker = ({
   step,
   updateStep,
   selectedSticker,
-  updateSelectedSticker
+  updateSelectedSticker,
+  currDate
 }: AddStickerProps): JSX.Element => {
   // TODO: Import the stickers array from the calender context.
 
@@ -61,7 +63,7 @@ const AddUpdateSticker = ({
   // ! Update these states to say "add" and "edit" for easier reading.
 
   const [modalVariant] = useState<"currDate" | "notCurrDate">(
-    isSameDay(date, new Date()) ? "currDate" : "notCurrDate"
+    isSameDay(date, currDate) ? "currDate" : "notCurrDate"
   );
 
   const handleClose = () => {
