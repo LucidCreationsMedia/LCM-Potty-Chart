@@ -1,6 +1,7 @@
 <p align="center">
   <a href="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/main.yml"><img alt="CI Status Badge" src="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/main.yml/badge.svg?branch=main" /></a>
   <a href="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/codeql-analysis.yml"><img alt="CodeQL Analysis" src="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/codeql-analysis.yml/badge.svg?branch=main" /></a>
+    <a href="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/njsscan-analysis.yml"><img alt="CodeQL Analysis" src="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/njsscan-analysis.yml/badge.svg?branch=main" /></a>
 </p>
 
 # [LCM Potty Chart](https://lucidcreations.media/)
