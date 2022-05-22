@@ -58,7 +58,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
           {weekdays.map((weekDay) => {
             return (
               <Box
-                d="flex"
+                display="flex"
                 alignContent="center"
                 alignItems="center"
                 bg="transparent"
