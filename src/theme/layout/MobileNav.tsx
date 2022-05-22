@@ -16,7 +16,7 @@ const MobileNav: FC<MobileNavProps> = ({ updateOpen }: MobileNavProps) => {
   return (
     <MenuList
       as="nav"
-      d={{ base: "block", lg: "none" }}
+      display={{ base: "block", lg: "none" }}
       bg="brand.main"
       h="auto"
       w="100%"

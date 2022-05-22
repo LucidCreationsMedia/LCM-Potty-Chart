@@ -109,7 +109,7 @@ const Header = (): JSX.Element => {
         top={0}
         position="absolute"
         ml={4}
-        d={{ base: "flex", lg: "none" }}
+        display={{ base: "flex", lg: "none" }}
         spacing="5px"
         _hover={{
           cursor: "default"
@@ -139,8 +139,8 @@ const Header = (): JSX.Element => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Box w="auto" d={{ base: "flex", lg: "none " }}></Box>
-          <Box w="100%" d={{ base: "none", lg: "flex" }} m="auto">
+          <Box w="auto" display={{ base: "flex", lg: "none " }}></Box>
+          <Box w="100%" display={{ base: "none", lg: "flex" }} m="auto">
             <HStack
               width="100%"
               alignItems="center"
@@ -169,7 +169,7 @@ const Header = (): JSX.Element => {
             onClick={() => setOpen(!open)}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            d={{
+            display={{
               base: "inline-flex",
               lg: "none"
             }}
