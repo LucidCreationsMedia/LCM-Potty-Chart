@@ -1,13 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { isSameDay, format } from "date-fns";
+import { useAppDiscpatch, useAppSelector } from "../../app/hooks";
+import { updateCurrDate, updateMonth } from '../../features/calender/calender';
 import { CalenderContext } from "../../../contexts/CalenderContext";
 import { StickersContext } from "../../../contexts/StickerContext";
 import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { selectedDate, layout, updateDate, currDate, setCurrDate } =
+  const currDate: Date = useAppSelector(state => state.calender.currDate);
+  const seletedMonth = useAppSelector(state => state.calender.selectedDateInfo);
+
+
+  const { selectedDate, layout, updateDate,/* currDate, */setCurrDate } =
     useContext(CalenderContext);
   const { stickersMonth } = useContext(StickersContext);
 
@@ -106,7 +112,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                     id.length
                       ? id
                       : format(date, "yyyyddLL") +
-                        `/${sticker === null ? 0 : sticker}`
+                      `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );
