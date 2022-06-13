@@ -7,11 +7,9 @@ import {
 } from "date-fns";
 
 /**
- * This seeder is to simulate the date and sticker info from the database.
- * Filling up an array for the current month with sticker from ths first to
- * the day before the current date, leaving the rest of the month empty.
+ * Generated a valid sticker value for use when generating a sticker obj.
+ * @returns {ValidStickerVal} a number that will represent a valid sticker value.
  */
-
 const generateSticker = (): -2 | -1 | 0 | 1 | 2 => {
   const sticker = Math.floor(Math.random() * (2 - -2 + 1)) + -2;
 
@@ -26,6 +24,12 @@ const generateSticker = (): -2 | -1 | 0 | 1 | 2 => {
   }
 };
 
+/**
+ * This seeder is to simulate the date and sticker info from the database.
+ * Filling up an array for the current month with sticker from ths first to
+ * the day before the current date, leaving the rest of the month empty.
+ * @returns {StickerDays} an array with populated sticker objects that correspond to the current month's info.
+ */
 const stickersSeeder = (): StickerDays => {
   const stickers = [] as Sticker[];
 

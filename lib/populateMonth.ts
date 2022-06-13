@@ -7,7 +7,9 @@ import {
   set,
   add,
   isAfter,
-  isBefore
+  isBefore,
+  subMonths,
+  addDays
 } from "date-fns";
 
 const weekDays: WeekDays = {
@@ -104,10 +106,11 @@ const populateMonth = (selectedDate: Date): MonthLayout => {
     week6: new Array(7).fill(null)
   };
 
+  // The date of the first day in the overflow
   const sunStartDay =
     endLastMonth - (ISOToIndex.sunday[startOfSelectedMonth] - 1);
 
-  let sunCurrDate = set(sub(selectedDate, { months: 1 }), {
+  let sunCurrDate = set(subMonths(selectedDate, 1), {
     date: sunStartDay
   });
 
@@ -122,9 +125,7 @@ const populateMonth = (selectedDate: Date): MonthLayout => {
         date: sunCurrDate.toJSON()
       };
 
-      sunCurrDate = add(sunCurrDate, {
-        days: 1
-      });
+      sunCurrDate = addDays(sunCurrDate, 1);
 
       sundays[week][i] = day;
     });
@@ -139,9 +140,10 @@ const populateMonth = (selectedDate: Date): MonthLayout => {
     week6: new Array(7).fill(null)
   };
 
+  // The date of the first day in the overflow
   const monStartDay = endLastMonth - ISOToIndex.monday[startOfSelectedMonth];
 
-  let monCurrDate = set(sub(selectedDate, { months: 1 }), {
+  let monCurrDate = set(subMonths(selectedDate, 1), {
     date: monStartDay
   });
 
@@ -156,9 +158,7 @@ const populateMonth = (selectedDate: Date): MonthLayout => {
         date: monCurrDate.toJSON()
       };
 
-      monCurrDate = add(monCurrDate, {
-        days: 1
-      });
+      monCurrDate = addDays(monCurrDate, 1);
 
       mondays[week][i] = day;
     });

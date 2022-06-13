@@ -57,10 +57,8 @@ const AddUpdateSticker = ({
   const dispatch = useAppDispatch();
   const currDateObj = new Date(date);
 
-  // ! Update these states to say "add" and "edit" for easier reading.
-
-  const [modalVariant] = useState<"currDate" | "notCurrDate">(
-    isSameDay(currDateObj, currDate) ? "currDate" : "notCurrDate"
+  const [modalVariant] = useState<"add" | "edit">(
+    isSameDay(currDateObj, currDate) ? "add" : "edit"
   );
 
   const handleClose = () => {
@@ -79,7 +77,7 @@ const AddUpdateSticker = ({
   // * Double check that the submit button is disabled if the selected sticker is the same as the current sticker.
 
   const variants = {
-    currDate: [
+    add: [
       {
         header: `Which sticker did you earn for ${format(
           currDateObj,
@@ -118,7 +116,7 @@ const AddUpdateSticker = ({
         )
       }
     ],
-    notCurrDate: [
+    edit: [
       {
         header: `Which sticker did you want to update for ${format(
           currDateObj,
@@ -234,7 +232,7 @@ const AddUpdateSticker = ({
       onClose={() => handleClose()}
       motionPreset="slideInBottom"
       scrollBehavior="inside"
-      size={modalVariant === "currDate" ? "xl" : "2xl"}
+      size={modalVariant === "add" ? "xl" : "2xl"}
     >
       <ModalOverlay />
       <ModalContent>
