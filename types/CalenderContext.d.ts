@@ -44,3 +44,9 @@ interface UpdateCalendarProps {
   month: number;
   day: number;
 }
+
+interface SelectedDateInfo {
+  date: string;
+  title: string;
+  layout: MonthLayout;
+}

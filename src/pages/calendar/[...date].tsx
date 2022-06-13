@@ -15,7 +15,6 @@ import ErrorPage from "next/error";
 import Calender from "../../components/calender";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
-import { StickersContextProvider } from "../../../contexts/StickerContext";
 
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
@@ -198,11 +197,9 @@ const DateRoute: React.FC<unknown> = () => {
     <ErrorPage statusCode={404} />
   ) : (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
-      <StickersContextProvider>
-        <Provider store={store}>
-          <Calender {...date} />
-        </Provider>
-      </StickersContextProvider>
+      <Provider store={store}>
+        <Calender {...date} />
+      </Provider>
     </Box>
   );
 };

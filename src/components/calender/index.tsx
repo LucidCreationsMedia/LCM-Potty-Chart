@@ -1,24 +1,28 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { isSameDay, format } from "date-fns";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { updateCurrDate, updateMonth } from "../../features/calender/calender";
-import { StickersContext } from "../../../contexts/StickerContext";
 import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
+  // * Month * //
   const currDate: string = useAppSelector((state) => state.calender.currDate);
-  const selectedDate = useAppSelector(
+  const selectedDate: SelectedDateInfo = useAppSelector(
     (state) => state.calender.selectedDateInfo
   );
   const { layout } = selectedDate;
 
-  const dispatch = useAppDispatch();
-
-  const { stickersMonth } = useContext(StickersContext);
-
   const currDateObj = new Date(currDate);
+
+  // * Stickers * //
+
+  const stickersMonth: StickerDays = useAppSelector(
+    (state) => state.stickers.stickersMonth
+  );
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (newDate && newDate.year && newDate.month && newDate.day) {
@@ -46,7 +50,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
     }
   }, [currDate, dispatch]);
 
-  // Simulated user settings context
+  // Simulated user settings.
   const userSettings = {
     theme: "default",
     startOfWeek: "Sunday"
@@ -103,7 +107,9 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
               let id = "";
 
               stickersMonth.map((stickerDay) => {
-                if (isSameDay(stickerDay.date, toDateObj)) {
+                const { date: stickerDate } = stickerDay;
+
+                if (isSameDay(new Date(stickerDate), toDateObj)) {
                   sticker = stickerDay.sticker;
 
                   id = stickerDay.id;
@@ -115,7 +121,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                   isOverflow={isOverflow}
                   overflowDirection={overflowDirection}
                   sticker={sticker}
-                  date={toDateObj}
+                  date={date}
                   selectedDate={selectedDate.date}
                   currDate={currDateObj}
                   isToday={isSameDay(currDateObj, toDateObj)}

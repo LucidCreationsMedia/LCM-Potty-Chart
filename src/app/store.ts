@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import calenderReducer from "../features/calender/calender";
+import stickersReducer from "../features/calender/stickers";
 
 export const store = configureStore({
   reducer: {
-    calender: calenderReducer
+    calender: calenderReducer,
+    stickers: stickersReducer
   }
 });
 

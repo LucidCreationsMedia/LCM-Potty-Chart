@@ -1,4 +1,10 @@
-import { format, getDaysInMonth, isBefore, setDate } from "date-fns";
+import {
+  format,
+  getDaysInMonth,
+  isBefore,
+  setDate,
+  startOfDay
+} from "date-fns";
 
 /**
  * This seeder is to simulate the date and sticker info from the database.
@@ -23,7 +29,7 @@ const generateSticker = (): -2 | -1 | 0 | 1 | 2 => {
 const stickersSeeder = (): StickerDays => {
   const stickers = [] as Sticker[];
 
-  const now = new Date();
+  const now = startOfDay(new Date());
   const daysOfThisMonth = getDaysInMonth(now);
 
   for (let i = 1; i <= daysOfThisMonth; i++) {
@@ -36,7 +42,7 @@ const stickersSeeder = (): StickerDays => {
 
     const newSticker: Sticker = {
       id: id,
-      date: currDate,
+      date: currDate.toJSON(),
       sticker: sticker,
       edited: false,
       manual: false

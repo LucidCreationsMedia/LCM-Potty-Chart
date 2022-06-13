@@ -4,11 +4,7 @@ import populate from "../../../lib/populateMonth";
 
 interface CalenderSlice {
   currDate: string;
-  selectedDateInfo: {
-    date: string;
-    title: string;
-    layout: MonthLayout;
-  };
+  selectedDateInfo: SelectedDateInfo;
 }
 
 const getCurrDate = (): Date => new Date();
