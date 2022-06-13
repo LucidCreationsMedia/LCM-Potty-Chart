@@ -19,7 +19,7 @@ interface DayProps {
   overflowDirection?: "next" | "prev" | null;
   sticker: StickerVal;
   date: Date;
-  selectedDate: Date;
+  selectedDate: string;
   currDate: Date;
   isToday: boolean;
 }
@@ -42,17 +42,19 @@ const Day = ({
   currDate,
   isToday
 }: DayProps): JSX.Element => {
+  const selectedDateObj = new Date(selectedDate);
+
   const handleNav = (direction: "next" | "prev") => {
     if (direction === "next") {
       console.log(overflowDirection);
-      const newMonth = add(selectedDate, { months: 1 });
+      const newMonth = add(selectedDateObj, { months: 1 });
 
       const year = getYear(newMonth);
       const month = getMonth(newMonth) + 1;
 
       router.push(`/calendar/${year}/${month}`);
     } else if (direction === "prev") {
-      const newMonth = sub(selectedDate, { months: 1 });
+      const newMonth = sub(selectedDateObj, { months: 1 });
 
       const year = getYear(newMonth);
       const month = getMonth(newMonth) + 1;

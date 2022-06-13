@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import {
   Button,
@@ -27,10 +27,12 @@ import {
 import { format } from "date-fns";
 import findValidDateRange from "../../../lib/findValidDateRange";
 import FormValidateEmoji from "./FormValidateEmoji";
-import { CalenderContext } from "../../../contexts/CalenderContext";
+import { useAppSelector } from "../../app/hooks";
 
 const DatePicker = (): JSX.Element => {
-  const { title } = useContext(CalenderContext);
+  const selectedDate = useAppSelector(
+    (state) => state.calender.selectedDateInfo
+  );
 
   const router = useRouter();
 
@@ -129,7 +131,7 @@ const DatePicker = (): JSX.Element => {
       <PopoverTrigger>
         <Button border="none" variant="outline">
           <Heading w="100%" h="auto">
-            {title}
+            {selectedDate.title}
           </Heading>
         </Button>
       </PopoverTrigger>

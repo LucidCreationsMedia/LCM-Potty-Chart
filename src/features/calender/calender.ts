@@ -1,43 +1,59 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { format } from "date-fns";
+import populate from "../../../lib/populateMonth";
 
 interface CalenderSlice {
-  currDate: Date;
+  currDate: string;
   selectedDateInfo: {
-    selectedDate: Date;
+    date: string;
     title: string;
     layout: MonthLayout;
   };
 }
 
 const getCurrDate = (): Date => new Date();
+const dateParse = (date: Date) => date.toJSON();
 const dateFormatter = (date: Date): string => format(date, "LLLL uuuu");
 
 const initialState: CalenderSlice = {
-  currDate: getCurrDate(),
+  currDate: dateParse(getCurrDate()),
   selectedDateInfo: {
-    selectedDate: getCurrDate(),
-    title: dateFormatter(new Date()),
-    layout: {} as MonthLayout
+    date: dateParse(getCurrDate()),
+    title: dateFormatter(getCurrDate()),
+    layout: populate(getCurrDate())
   }
 };
+
+// TODO: Add a function that validated if a month has at least one sticker in it. Use that within the nav function (when filter is enabled).
+
+// TODO: Add a function that will give the closest date, if available, when the nav func detects an empty month.
+// Use the chart creation date to aid with this. (When filter is enabled)
+
+/**
+ * TODO: Add logic that prevents navigation to the future and too far in the past. (Use chart creation date)
+ * Update to use a promise and return appropriate errors. Display those errors on the front end.
+ * Update the use of this function on the front to handle the fails of the promise.
+ */
+
+// TODO: (When filter is enabled) Update the calender update function that will take in a direction so that the the navigation buttons will take the user to the next month with stickers. Assuming there was a gap with empty months.
 
 const calenderSlice = createSlice({
   name: "Calender",
   initialState,
   reducers: {
-    // Populate month
     // Update month info
-    updateMonth(state: CalenderSlice, action: PayloadAction<Date>) {
-      const { payload: newDate } = action;
+    updateMonth(state: CalenderSlice, action: PayloadAction<string>) {
+      const { payload } = action;
 
-      state.selectedDateInfo.selectedDate = newDate;
-      state.selectedDateInfo.title = dateFormatter(newDate);
-      // ! Add the layout formatter function
+      const toDateObj: Date = new Date(payload);
+
+      state.selectedDateInfo.date = payload;
+      state.selectedDateInfo.title = dateFormatter(toDateObj);
+      state.selectedDateInfo.layout = populate(toDateObj);
     },
     // Update current date
     updateCurrDate(state: CalenderSlice) {
-      state.currDate = new Date();
+      state.currDate = dateParse(new Date());
     }
   }
 });

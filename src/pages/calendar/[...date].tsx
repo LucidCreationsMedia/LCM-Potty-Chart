@@ -13,7 +13,8 @@ import {
 // import findValidDateRange from "../../lib/findValidDateRange";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
-import { CalenderContextProvider } from "../../../contexts/CalenderContext";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
 import { StickersContextProvider } from "../../../contexts/StickerContext";
 
 const DateRoute: React.FC<unknown> = () => {
@@ -59,8 +60,6 @@ const DateRoute: React.FC<unknown> = () => {
       } else if (!dateArr[2]) {
         date.day = 1;
       }
-    } else {
-      return date;
     }
 
     return date;
@@ -199,11 +198,11 @@ const DateRoute: React.FC<unknown> = () => {
     <ErrorPage statusCode={404} />
   ) : (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
-      <CalenderContextProvider>
-        <StickersContextProvider>
+      <StickersContextProvider>
+        <Provider store={store}>
           <Calender {...date} />
-        </StickersContextProvider>
-      </CalenderContextProvider>
+        </Provider>
+      </StickersContextProvider>
     </Box>
   );
 };

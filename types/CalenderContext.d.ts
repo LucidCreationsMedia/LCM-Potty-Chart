@@ -15,7 +15,7 @@ interface WeekDays {
 }
 
 interface MonthDay {
-  date: Date;
+  date: string;
   isOverflow: boolean;
   overflowDirection: "prev" | "next" | null;
 }

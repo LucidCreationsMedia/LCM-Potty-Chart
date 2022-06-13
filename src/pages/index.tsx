@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 import { StickersContextProvider } from "../../contexts/StickerContext";
-import { CalenderContextProvider } from "../../contexts/CalenderContext";
 import Calender from "../components/calender";
 
 const IndexPage = (): JSX.Element => {
@@ -17,11 +16,9 @@ const IndexPage = (): JSX.Element => {
   return (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <StickersContextProvider>
-        <CalenderContextProvider>
-          <Provider store={store}>
-            <Calender {...date.current} />
-          </Provider>
-        </CalenderContextProvider>
+        <Provider store={store}>
+          <Calender {...date.current} />
+        </Provider>
       </StickersContextProvider>
     </Box>
   );
