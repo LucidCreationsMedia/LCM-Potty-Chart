@@ -15,7 +15,7 @@ interface WeekDays {
 }
 
 interface MonthDay {
-  date: Date;
+  date: string;
   isOverflow: boolean;
   overflowDirection: "prev" | "next" | null;
 }
@@ -29,11 +29,6 @@ interface Month {
   week6: MonthDay[];
 }
 
-interface MonthInfo {
-  date: Date;
-  title: string;
-}
-
 interface WeekLayout {
   weekdays: DaysOfWeek;
   month: Month;
@@ -44,21 +39,14 @@ interface MonthLayout {
   monday: WeekLayout;
 }
 
-interface MonthContext extends MonthInfo {
-  layout: MonthLayout;
-}
-
 interface UpdateCalendarProps {
   year: number;
   month: number;
   day: number;
 }
 
-interface CalenderContextState {
-  currDate: Date;
-  setCurrDate: React.Dispatch<React.SetStateAction<Date>>;
-  selectedDate: Date;
+interface SelectedDateInfo {
+  date: string;
   title: string;
   layout: MonthLayout;
-  updateDate: (input: UpdateCalendarProps) => void;
 }

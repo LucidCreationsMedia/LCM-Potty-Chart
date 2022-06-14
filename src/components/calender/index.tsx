@@ -1,37 +1,56 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { isSameDay, format } from "date-fns";
-import { CalenderContext } from "../../../contexts/CalenderContext";
-import { StickersContext } from "../../../contexts/StickerContext";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { updateCurrDate, updateMonth } from "../../features/calender/calender";
 import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
 const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
-  const { selectedDate, layout, updateDate, currDate, setCurrDate } =
-    useContext(CalenderContext);
-  const { stickersMonth } = useContext(StickersContext);
+  // * Month * //
+  const currDate: string = useAppSelector((state) => state.calender.currDate);
+  const selectedDate: SelectedDateInfo = useAppSelector(
+    (state) => state.calender.selectedDateInfo
+  );
+  const { layout } = selectedDate;
+
+  const currDateObj = new Date(currDate);
+
+  // * Stickers * //
+
+  const stickersMonth: StickerDays = useAppSelector(
+    (state) => state.stickers.stickersMonth
+  );
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (newDate && newDate.year && newDate.month && newDate.day) {
       const { year, month, day } = newDate;
 
       if (year > 0 && month > 0 && day > 0) {
-        updateDate(newDate);
+        const generatedDate: Date = new Date(year, month - 1, day);
+        const dateString: string = generatedDate.toJSON();
+
+        dispatch(updateMonth(dateString));
       } else {
         console.warn("Invalid date format: ", newDate);
       }
     }
-  }, [newDate, updateDate]);
+  }, [dispatch, newDate]);
 
   useEffect(() => {
     console.info("Check to update date.");
-    if (!isSameDay(currDate, new Date())) {
-      console.info("Updated date.");
-      setCurrDate(new Date());
-    }
-  }, [currDate, setCurrDate]);
 
-  // Simulated user settings context
+    const currDateObj = new Date(currDate);
+
+    if (!isSameDay(currDateObj, new Date())) {
+      console.info("Updated date.");
+      dispatch(updateCurrDate());
+    }
+  }, [currDate, dispatch]);
+
+  // Simulated user settings.
   const userSettings = {
     theme: "default",
     startOfWeek: "Sunday"
@@ -81,12 +100,16 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
             return thisWeek.map((day: MonthDay) => {
               const { date, isOverflow, overflowDirection } = day;
 
+              const toDateObj: Date = new Date(date);
+
               let sticker = null;
 
               let id = "";
 
               stickersMonth.map((stickerDay) => {
-                if (isSameDay(stickerDay.date, date)) {
+                const { date: stickerDate } = stickerDay;
+
+                if (isSameDay(new Date(stickerDate), toDateObj)) {
                   sticker = stickerDay.sticker;
 
                   id = stickerDay.id;
@@ -97,15 +120,15 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 <Day
                   isOverflow={isOverflow}
                   overflowDirection={overflowDirection}
-                  sticker={sticker}
+                  currSticker={sticker}
                   date={date}
-                  selectedDate={selectedDate}
-                  currDate={currDate}
-                  isToday={isSameDay(currDate, date)}
+                  selectedDate={selectedDate.date}
+                  currDate={currDateObj}
+                  isToday={isSameDay(currDateObj, toDateObj)}
                   key={
                     id.length
                       ? id
-                      : format(date, "yyyyddLL") +
+                      : format(toDateObj, "yyyyddLL") +
                         `/${sticker === null ? 0 : sticker}`
                   }
                 />

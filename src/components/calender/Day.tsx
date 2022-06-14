@@ -10,49 +10,54 @@ import {
 } from "date-fns";
 import router from "next/router";
 import React, { Fragment, useState } from "react";
-import { StickersContextProvider } from "../../../contexts/StickerContext";
 import AddUpdateSticker from "./modals/AddUpdateSticker";
 import DemoStickers from "./stickers/DemoStickers";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
 
 interface DayProps {
   isOverflow?: boolean;
   overflowDirection?: "next" | "prev" | null;
-  sticker: StickerVal;
-  date: Date;
-  selectedDate: Date;
+  currSticker: StickerVal;
+  date: string;
+  selectedDate: string;
   currDate: Date;
   isToday: boolean;
 }
 
 /**
  * The individual days in the calender component.
- * @param props the props for this component.
- * @param {boolean} props.isOverflow is the current date being given before or after the current month.
- * @param {"next" | "prev" | null} props.overflowDirection the direction the overflow is. This will navigate the calender forward or backwards 1 month.
- * @param {StickerVal} props.sticker the sticker for this date.
- * @param {date} props.date the date for this day.
- * @param {date} props.selectedDate the date for the selected month.
+ * @param {boolean} isOverflow is the current date being given before or after the current month.
+ * @param {"next" | "prev" | null} overflowDirection the direction the overflow is. This will navigate the calender forward or backwards 1 month.
+ * @param {StickerVal} currSticker the sticker for this date.
+ * @param {date} date the date for this day.
+ * @param {date} selectedDate the date for the selected month.
+ * @param {Date} currDate today's date.
+ * @param {boolean} isToday is the current iteration of this component in today's date.
  */
 const Day = ({
   isOverflow,
   overflowDirection,
-  sticker,
+  currSticker,
   date,
   selectedDate,
   currDate,
   isToday
 }: DayProps): JSX.Element => {
+  const selectedDateObj = new Date(selectedDate);
+  const currDateObj = new Date(date);
+
   const handleNav = (direction: "next" | "prev") => {
     if (direction === "next") {
       console.log(overflowDirection);
-      const newMonth = add(selectedDate, { months: 1 });
+      const newMonth = add(selectedDateObj, { months: 1 });
 
       const year = getYear(newMonth);
       const month = getMonth(newMonth) + 1;
 
       router.push(`/calendar/${year}/${month}`);
     } else if (direction === "prev") {
-      const newMonth = sub(selectedDate, { months: 1 });
+      const newMonth = sub(selectedDateObj, { months: 1 });
 
       const year = getYear(newMonth);
       const month = getMonth(newMonth) + 1;
@@ -63,10 +68,6 @@ const Day = ({
 
   // This handles the modal for the day.
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  // The current sticker to be displayed on the current date.
-  // * This is temporary. There should be no need for this once persistent storage is used. This is being used as a workaround to a bug.
-  const [stickerState, setStickerState] = useState<StickerVal>(sticker);
 
   // The step the modal is at.
   const [step, setStep] = useState<number>(0);
@@ -93,7 +94,9 @@ const Day = ({
           w="100%"
           h="100%"
           _hover={{
-            cursor: isBefore(date, endOfDay(currDate)) ? "pointer" : "default",
+            cursor: isBefore(currDateObj, endOfDay(currDate))
+              ? "pointer"
+              : "default",
             background: "gray.700",
             border: "1px solid #FFF",
             color: "whiteAlpha.900"
@@ -105,15 +108,10 @@ const Day = ({
           pt={2}
         >
           <Text w="auto" h="auto">
-            {`${getDate(date)}`}
+            {`${getDate(currDateObj)}`}
           </Text>
-          <Box
-            key={stickerState === null ? Math.random() : stickerState}
-            fontSize="1.5rem"
-          >
-            <DemoStickers
-              stickerVal={stickerState === null ? null : stickerState}
-            />
+          <Box key={currSticker} fontSize="1.5rem">
+            <DemoStickers stickerVal={currSticker} />
           </Box>
         </VStack>
       )}
@@ -132,7 +130,9 @@ const Day = ({
           justifyContent="flex-start"
           pt={2}
           _hover={{
-            cursor: isBefore(date, endOfDay(currDate)) ? "pointer" : "default",
+            cursor: isBefore(currDateObj, endOfDay(currDate))
+              ? "pointer"
+              : "default",
             background: "gray.700",
             border: "1px solid #FFF"
           }}
@@ -140,7 +140,7 @@ const Day = ({
           <Text
             p={
               isToday
-                ? getDate(date) > 10
+                ? getDate(currDateObj) > 10
                   ? "0px 6px 3px 6px"
                   : "0px 9px 3px 9px"
                 : "auto"
@@ -150,24 +150,18 @@ const Day = ({
             border={isToday ? "1px solid #0068ff" : "0px"}
             borderRadius={isToday ? "100px" : "0px"}
           >
-            {`${getDate(date)}`}
+            {`${getDate(currDateObj)}`}
           </Text>
-          <Box
-            key={stickerState === null ? Math.random() : stickerState}
-            fontSize="1.5rem"
-          >
-            <DemoStickers
-              stickerVal={stickerState === null ? null : stickerState}
-            />
+          <Box key={currSticker} fontSize="1.5rem">
+            <DemoStickers stickerVal={currSticker} />
           </Box>
-          <StickersContextProvider>
-            {isBefore(date, endOfDay(currDate)) && (
+          <Provider store={store}>
+            {isBefore(currDateObj, endOfDay(currDate)) && (
               <AddUpdateSticker
-                date={date}
+                stickerDate={date}
                 isOpen={isOpen}
                 updateIsOpen={setIsOpen}
-                updateSticker={setStickerState}
-                currSticker={stickerState}
+                currSticker={currSticker}
                 step={step}
                 updateStep={setStep}
                 selectedSticker={selectedSticker}
@@ -175,7 +169,7 @@ const Day = ({
                 currDate={currDate}
               />
             )}
-          </StickersContextProvider>
+          </Provider>
         </VStack>
       )}
     </Fragment>

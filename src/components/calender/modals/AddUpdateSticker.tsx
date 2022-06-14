@@ -13,18 +13,18 @@ import {
   SimpleGrid,
   Box
 } from "@chakra-ui/react";
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { format, isSameDay } from "date-fns";
 import { Icon } from "@iconify/react";
-import { StickersContext } from "../../../../contexts/StickerContext";
 import StickerSelector from "./StickerSelector";
 import DemoStickers from "../stickers/DemoStickers";
+import { useAppDispatch } from "../../../app/hooks";
+import { addEditSticker } from "../../../features/calender/stickers";
 
 interface AddStickerProps {
   isOpen: boolean;
   updateIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  date: Date;
-  updateSticker: React.Dispatch<React.SetStateAction<StickerVal>>;
+  stickerDate: string;
   currSticker: StickerVal;
   step: number;
   updateStep: React.Dispatch<React.SetStateAction<number>>;
@@ -37,18 +37,18 @@ interface AddStickerProps {
  * Handles adding and modifying the stickers for the given month.
  * @param {boolean} isOpen Tells the component when the modal should be open.
  * @param {React.Dispatch<React.SetStateAction<boolean>>} updateIsOpen Used to close the modal.
- * @param {date} date The date for which the sticker will be added or modified.
- * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker The react state function to update the sticker.
+ * @param {date} stickerDate The date for which the sticker will be added or modified.
  * @param {StickerVal} currSticker The current sticker for the date.
  * @param {number} step A numerical variable that represents the page the modal should be at.
  * @param {React.Dispatch<React.SetStateAction<number>>} updateStep Used to navigate the pages of the modal by updating the step the modal is on.
- * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker The react state function to update the selected sticker that will be added or updated.
+ * @param {StickerVal} selectedSticker the value of the selected sticker.
+ * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSelectedSticker The react state function to update the selected sticker that will be added or updated.
+ * @param {Date} currDate the current date.
  */
 const AddUpdateSticker = ({
   isOpen,
   updateIsOpen,
-  date,
-  updateSticker,
+  stickerDate,
   currSticker,
   step,
   updateStep,
@@ -56,14 +56,11 @@ const AddUpdateSticker = ({
   updateSelectedSticker,
   currDate
 }: AddStickerProps): JSX.Element => {
-  // TODO: Import the stickers array from the calender context.
+  const dispatch = useAppDispatch();
+  const stickerDateObj = new Date(stickerDate);
 
-  const { addEditSticker } = useContext(StickersContext);
-
-  // ! Update these states to say "add" and "edit" for easier reading.
-
-  const [modalVariant] = useState<"currDate" | "notCurrDate">(
-    isSameDay(date, currDate) ? "currDate" : "notCurrDate"
+  const [modalVariant] = useState<"add" | "edit">(
+    isSameDay(stickerDateObj, currDate) ? "add" : "edit"
   );
 
   const handleClose = () => {
@@ -71,9 +68,8 @@ const AddUpdateSticker = ({
   };
 
   // TODO: Validate that the provided sticker is not the current sticker. Throw an error if the same sticker is attempted.
-  const handleSubmit = (sticker) => {
-    const newSticker: Sticker = addEditSticker(date, sticker);
-    updateSticker(newSticker.sticker);
+  const handleSubmit = (sticker: StickerVal) => {
+    dispatch(addEditSticker({ stickerDate, sticker }));
     handleClose();
   };
 
@@ -83,9 +79,12 @@ const AddUpdateSticker = ({
   // * Double check that the submit button is disabled if the selected sticker is the same as the current sticker.
 
   const variants = {
-    currDate: [
+    add: [
       {
-        header: `Which sticker did you earn for ${format(date, "LLL d, y")}?`,
+        header: `Which sticker did you earn for ${format(
+          stickerDateObj,
+          "LLL d, y"
+        )}?`,
         body: (
           <VStack
             w="100%"
@@ -119,10 +118,10 @@ const AddUpdateSticker = ({
         )
       }
     ],
-    notCurrDate: [
+    edit: [
       {
         header: `Which sticker did you want to update for ${format(
-          date,
+          stickerDateObj,
           "LLL d, y"
         )}?`,
         body: (
@@ -164,7 +163,7 @@ const AddUpdateSticker = ({
       },
       {
         header: `Are you sure you want to change the sticker for ${format(
-          date,
+          stickerDateObj,
           "M/d/y"
         )}?`,
         body: (
@@ -235,7 +234,7 @@ const AddUpdateSticker = ({
       onClose={() => handleClose()}
       motionPreset="slideInBottom"
       scrollBehavior="inside"
-      size={modalVariant === "currDate" ? "xl" : "2xl"}
+      size={modalVariant === "add" ? "xl" : "2xl"}
     >
       <ModalOverlay />
       <ModalContent>

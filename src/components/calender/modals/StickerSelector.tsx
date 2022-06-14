@@ -16,6 +16,7 @@ interface StickerSelectorProps {
  * @param {StickerVal} currSticker The current sticker for the date.
  * @param {StickerVal} selectedSticker The selected sticker for the current. date
  * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSelectedSticker TThe react state function to update the selected sticker that will be added or updated.
+ * @param {React.MutableRefObject<undefined>} initialSticker the sticker that should have be in focus when the modal opens.
  */
 
 const StickerSelector = ({
