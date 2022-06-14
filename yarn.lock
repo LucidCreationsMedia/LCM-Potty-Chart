@@ -1388,10 +1388,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^17.0.40":
-  version: 17.0.40
-  resolution: "@types/node@npm:17.0.40"
-  checksum: e3b2fe876672fbe4be84ce17773944eb2f5eaba50e2c6c0536bdf6d4972ed6488581580581f154183fdc8f2d56fa42a42e3d6e83b9b71ee25adea16a84765e92
+"@types/node@npm:^17.0.42":
+  version: 17.0.42
+  resolution: "@types/node@npm:17.0.42"
+  checksum: a200cd87e4f12d4d5682a893ad6e1140720c6c074a2cd075f254b3b8306d6174f5a3630e5d2347efb5e9b80d420404b5fafc8fe3c7d4c81998cd914c50b19f75
   languageName: node
   linkType: hard
 
@@ -3728,7 +3728,7 @@ __metadata:
     "@emotion/styled": ^11.9.3
     "@iconify/react": ^3.2.2
     "@reduxjs/toolkit": ^1.8.2
-    "@types/node": ^17.0.40
+    "@types/node": ^17.0.42
     "@types/react": ^18.0.12
     "@types/react-redux": ^7.1.24
     "@typescript-eslint/eslint-plugin": ^5.27.0
