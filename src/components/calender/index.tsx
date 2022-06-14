@@ -120,7 +120,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 <Day
                   isOverflow={isOverflow}
                   overflowDirection={overflowDirection}
-                  sticker={sticker}
+                  currSticker={sticker}
                   date={date}
                   selectedDate={selectedDate.date}
                   currDate={currDateObj}

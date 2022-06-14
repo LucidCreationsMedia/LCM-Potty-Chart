@@ -24,7 +24,7 @@ import { addEditSticker } from "../../../features/calender/stickers";
 interface AddStickerProps {
   isOpen: boolean;
   updateIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  date: string;
+  stickerDate: string;
   currSticker: StickerVal;
   step: number;
   updateStep: React.Dispatch<React.SetStateAction<number>>;
@@ -37,16 +37,18 @@ interface AddStickerProps {
  * Handles adding and modifying the stickers for the given month.
  * @param {boolean} isOpen Tells the component when the modal should be open.
  * @param {React.Dispatch<React.SetStateAction<boolean>>} updateIsOpen Used to close the modal.
- * @param {date} string The date for which the sticker will be added or modified.
+ * @param {date} stickerDate The date for which the sticker will be added or modified.
  * @param {StickerVal} currSticker The current sticker for the date.
  * @param {number} step A numerical variable that represents the page the modal should be at.
  * @param {React.Dispatch<React.SetStateAction<number>>} updateStep Used to navigate the pages of the modal by updating the step the modal is on.
- * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSticker The react state function to update the selected sticker that will be added or updated.
+ * @param {StickerVal} selectedSticker the value of the selected sticker.
+ * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSelectedSticker The react state function to update the selected sticker that will be added or updated.
+ * @param {Date} currDate the current date.
  */
 const AddUpdateSticker = ({
   isOpen,
   updateIsOpen,
-  date,
+  stickerDate,
   currSticker,
   step,
   updateStep,
@@ -55,10 +57,10 @@ const AddUpdateSticker = ({
   currDate
 }: AddStickerProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const currDateObj = new Date(date);
+  const stickerDateObj = new Date(stickerDate);
 
   const [modalVariant] = useState<"add" | "edit">(
-    isSameDay(currDateObj, currDate) ? "add" : "edit"
+    isSameDay(stickerDateObj, currDate) ? "add" : "edit"
   );
 
   const handleClose = () => {
@@ -67,7 +69,7 @@ const AddUpdateSticker = ({
 
   // TODO: Validate that the provided sticker is not the current sticker. Throw an error if the same sticker is attempted.
   const handleSubmit = (sticker: StickerVal) => {
-    dispatch(addEditSticker({ date, sticker }));
+    dispatch(addEditSticker({ stickerDate, sticker }));
     handleClose();
   };
 
@@ -80,7 +82,7 @@ const AddUpdateSticker = ({
     add: [
       {
         header: `Which sticker did you earn for ${format(
-          currDateObj,
+          stickerDateObj,
           "LLL d, y"
         )}?`,
         body: (
@@ -119,7 +121,7 @@ const AddUpdateSticker = ({
     edit: [
       {
         header: `Which sticker did you want to update for ${format(
-          currDateObj,
+          stickerDateObj,
           "LLL d, y"
         )}?`,
         body: (
@@ -161,7 +163,7 @@ const AddUpdateSticker = ({
       },
       {
         header: `Are you sure you want to change the sticker for ${format(
-          currDateObj,
+          stickerDateObj,
           "M/d/y"
         )}?`,
         body: (

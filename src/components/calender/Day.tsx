@@ -18,7 +18,7 @@ import { store } from "../../app/store";
 interface DayProps {
   isOverflow?: boolean;
   overflowDirection?: "next" | "prev" | null;
-  sticker: StickerVal;
+  currSticker: StickerVal;
   date: string;
   selectedDate: string;
   currDate: Date;
@@ -29,14 +29,16 @@ interface DayProps {
  * The individual days in the calender component.
  * @param {boolean} isOverflow is the current date being given before or after the current month.
  * @param {"next" | "prev" | null} overflowDirection the direction the overflow is. This will navigate the calender forward or backwards 1 month.
- * @param {StickerVal} sticker the sticker for this date.
- * @param {date} string the date for this day.
+ * @param {StickerVal} currSticker the sticker for this date.
+ * @param {date} date the date for this day.
  * @param {date} selectedDate the date for the selected month.
+ * @param {Date} currDate today's date.
+ * @param {boolean} isToday is the current iteration of this component in today's date.
  */
 const Day = ({
   isOverflow,
   overflowDirection,
-  sticker,
+  currSticker,
   date,
   selectedDate,
   currDate,
@@ -108,8 +110,8 @@ const Day = ({
           <Text w="auto" h="auto">
             {`${getDate(currDateObj)}`}
           </Text>
-          <Box key={sticker} fontSize="1.5rem">
-            <DemoStickers stickerVal={sticker} />
+          <Box key={currSticker} fontSize="1.5rem">
+            <DemoStickers stickerVal={currSticker} />
           </Box>
         </VStack>
       )}
@@ -150,16 +152,16 @@ const Day = ({
           >
             {`${getDate(currDateObj)}`}
           </Text>
-          <Box key={sticker} fontSize="1.5rem">
-            <DemoStickers stickerVal={sticker} />
+          <Box key={currSticker} fontSize="1.5rem">
+            <DemoStickers stickerVal={currSticker} />
           </Box>
           <Provider store={store}>
             {isBefore(currDateObj, endOfDay(currDate)) && (
               <AddUpdateSticker
-                date={date}
+                stickerDate={date}
                 isOpen={isOpen}
                 updateIsOpen={setIsOpen}
-                currSticker={sticker}
+                currSticker={currSticker}
                 step={step}
                 updateStep={setStep}
                 selectedSticker={selectedSticker}

@@ -1,11 +1,9 @@
 import {
   getDate,
   endOfMonth,
-  sub,
   format,
   startOfMonth,
   set,
-  add,
   isAfter,
   isBefore,
   subMonths,
@@ -73,7 +71,7 @@ const isOverflow = (
  * @returns The month layout object for the provided month.
  */
 const populateMonth = (selectedDate: Date): MonthLayout => {
-  const endLastMonth = getDate(endOfMonth(sub(selectedDate, { months: 1 })));
+  const endLastMonth = getDate(endOfMonth(subMonths(selectedDate, 1)));
   const startOfSelectedMonth = format(startOfMonth(selectedDate), "iii");
 
   const ISOToIndex = {

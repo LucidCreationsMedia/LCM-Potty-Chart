@@ -7,7 +7,7 @@ interface StickersSlice {
 }
 
 interface UpdateStickerSlicePayload {
-  date: string;
+  stickerDate: string;
   sticker: StickerVal;
 }
 
@@ -23,14 +23,13 @@ const stickersSlice = createSlice({
       state: StickersSlice,
       actions: PayloadAction<UpdateStickerSlicePayload>
     ) {
-      const { date, sticker } = actions.payload;
+      const { stickerDate, sticker } = actions.payload;
 
-      const dateObj = new Date(date);
+      const dateObj = new Date(stickerDate);
 
       // Getting index for the stickers array, sticker from the stickers array, and the date from the sticker.
       const index: number = getDate(dateObj) - 1;
       const currSticker: Sticker = state.stickersMonth[index];
-      const { date: stickerDate } = currSticker;
 
       // Updating the edited status by checking if the sticker date is today's date.
       const edited = currSticker.edited
@@ -48,7 +47,7 @@ const stickersSlice = createSlice({
       // Updating the information of the sticker.
       const newSticker: Sticker = {
         id: id,
-        date: date,
+        date: stickerDate,
         sticker: sticker,
         edited: edited,
         manual: false

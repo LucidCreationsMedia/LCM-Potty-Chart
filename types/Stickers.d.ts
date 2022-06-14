@@ -16,3 +16,9 @@ interface Sticker {
 }
 
 type StickerDays = Sticker[];
+
+interface StickerModal {
+  isOpen: boolean;
+  selectedSticker: StickerVal;
+  step: number;
+}
