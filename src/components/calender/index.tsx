@@ -86,11 +86,11 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 h={10}
                 key={weekDay}
               >
-                <Text display={{ base: "none", lg: "block" }} w="100%" h="auto">
+                <Text display={{ base: "none", md: "block" }} w="100%" h="auto">
                   {weekDay}
                 </Text>
                 <Text
-                  display={{ base: "none", sm: "block", lg: "none" }}
+                  display={{ base: "none", sm: "block", md: "none" }}
                   w="100%"
                   h="auto"
                 >
