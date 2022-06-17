@@ -86,13 +86,17 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
                 h={10}
                 key={weekDay}
               >
-                <Text display={{base:"none", lg:"block"}} w="100%" h="auto">
+                <Text display={{ base: "none", lg: "block" }} w="100%" h="auto">
                   {weekDay}
                 </Text>
-                <Text display={{base:"none", sm: "block", lg:"none"}} w="100%" h="auto">
+                <Text
+                  display={{ base: "none", sm: "block", lg: "none" }}
+                  w="100%"
+                  h="auto"
+                >
                   {weekDay.substring(0, 3)}
                 </Text>
-                <Text display={{base:"block", sm: "none",}} w="100%" h="auto">
+                <Text display={{ base: "block", sm: "none" }} w="100%" h="auto">
                   {weekDay.substring(0, 2)}
                 </Text>
               </Box>
