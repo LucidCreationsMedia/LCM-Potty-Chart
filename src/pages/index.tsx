@@ -13,7 +13,7 @@ const IndexPage = (): JSX.Element => {
   });
 
   return (
-    <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
+    <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh" minWidth="min-content">
       <Provider store={store}>
         <Calender {...date.current} />
       </Provider>
