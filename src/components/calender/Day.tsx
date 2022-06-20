@@ -1,4 +1,4 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Box, Skeleton, Text, VStack } from "@chakra-ui/react";
 import {
   add,
   getYear,
@@ -16,6 +16,7 @@ import { Provider } from "react-redux";
 import { store } from "../../app/store";
 
 interface DayProps {
+  isLoading: boolean;
   isOverflow?: boolean;
   overflowDirection?: "next" | "prev" | null;
   currSticker: StickerVal;
@@ -27,6 +28,7 @@ interface DayProps {
 
 /**
  * The individual days in the calender component.
+ * @param {boolean} isLoading is the component loading?
  * @param {boolean} isOverflow is the current date being given before or after the current month.
  * @param {"next" | "prev" | null} overflowDirection the direction the overflow is. This will navigate the calender forward or backwards 1 month.
  * @param {StickerVal} currSticker the sticker for this date.
@@ -36,6 +38,7 @@ interface DayProps {
  * @param {boolean} isToday is the current iteration of this component in today's date.
  */
 const Day = ({
+  isLoading,
   isOverflow,
   overflowDirection,
   currSticker,
@@ -110,9 +113,17 @@ const Day = ({
           <Text w="auto" h="auto">
             {`${getDate(currDateObj)}`}
           </Text>
-          <Box key={currSticker} fontSize="1.5rem">
-            <DemoStickers stickerVal={currSticker} />
-          </Box>
+          {isLoading ? (
+            <Skeleton key={currSticker}>
+              <Box fontSize="1.5rem">
+                <DemoStickers stickerVal={0} />
+              </Box>
+            </Skeleton>
+          ) : (
+            <Box key={currSticker} fontSize="1.5rem">
+              <DemoStickers stickerVal={currSticker} />
+            </Box>
+          )}
         </VStack>
       )}
       {!isOverflow && (
@@ -152,11 +163,19 @@ const Day = ({
           >
             {`${getDate(currDateObj)}`}
           </Text>
-          <Box key={currSticker} fontSize="1.5rem">
-            <DemoStickers stickerVal={currSticker} />
-          </Box>
+          {isLoading ? (
+            <Skeleton key={currSticker}>
+              <Box fontSize="1.5rem">
+                <DemoStickers stickerVal={0} />
+              </Box>
+            </Skeleton>
+          ) : (
+            <Box key={currSticker} fontSize="1.5rem">
+              <DemoStickers stickerVal={currSticker} />
+            </Box>
+          )}
           <Provider store={store}>
-            {isBefore(currDateObj, endOfDay(currDate)) && (
+            {isBefore(currDateObj, endOfDay(currDate)) && !isLoading && (
               <AddUpdateSticker
                 stickerDate={date}
                 isOpen={isOpen}

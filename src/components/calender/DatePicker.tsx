@@ -14,6 +14,7 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
+  Skeleton,
   VStack
 } from "@chakra-ui/react";
 import {
@@ -29,11 +30,17 @@ import findValidDateRange from "../../../lib/findValidDateRange";
 import FormValidateEmoji from "./FormValidateEmoji";
 import { useAppSelector } from "../../app/hooks";
 
-const DatePicker = (): JSX.Element => {
-  const selectedDate = useAppSelector(
-    (state) => state.calender.selectedDateInfo
-  );
+interface DatePickerProps {
+  isLoading: boolean;
+  title: string;
+}
 
+/**
+ * @param {boolean} isLoading is the component loading?
+ * @param {string} title the title for the current date.
+ */
+
+const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
   const router = useRouter();
 
   const [valid, setValid] = useState<boolean>(false);
@@ -130,9 +137,17 @@ const DatePicker = (): JSX.Element => {
     <Popover placement="bottom" initialFocusRef={initRef}>
       <PopoverTrigger>
         <Button border="none" variant="outline">
-          <Heading w="100%" h="auto">
-            {selectedDate.title}
-          </Heading>
+          {isLoading ? (
+            <Skeleton>
+              <Heading w="100%" h="auto">
+                {title}
+              </Heading>
+            </Skeleton>
+          ) : (
+            <Heading w="100%" h="auto">
+              {title}
+            </Heading>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent>
