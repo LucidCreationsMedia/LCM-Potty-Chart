@@ -6,7 +6,10 @@ import { updateCurrDate, updateMonth } from "../../features/calender/calender";
 import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
-const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
+const Calender = ({
+  date: newDate,
+  isLoading
+}: UpdateCalendarProps): JSX.Element => {
   // * Month * //
   const currDate: string = useAppSelector((state) => state.calender.currDate);
   const selectedDate: SelectedDateInfo = useAppSelector(
@@ -64,7 +67,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
 
   return (
     <VStack h="91vh" w="100%">
-      <CalenderNav title={title} isLoading={false} />
+      <CalenderNav title={title} isLoading={isLoading} />
       <VStack h="100%" w="100%" spacing={0}>
         <HStack
           px={6}
@@ -128,7 +131,7 @@ const Calender = (newDate?: UpdateCalendarProps): JSX.Element => {
 
               return (
                 <Day
-                  isLoading={false}
+                  isLoading={isLoading}
                   isOverflow={isOverflow}
                   overflowDirection={overflowDirection}
                   currSticker={sticker}

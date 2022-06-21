@@ -4,6 +4,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import AppTheme from "../theme/AppTheme";
 import Layout from "../theme/layout/Layout";
 import Head from "next/head";
+import { Provider } from "react-redux";
+import { store } from "../app/store";
 
 function LCMPottyChart({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -17,7 +19,9 @@ function LCMPottyChart({ Component, pageProps }: AppProps): JSX.Element {
               content="width=device-width, user-scalable=yes, initial-scale=1.0"
             />
           </Head>
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
         </Layout>
       </ChakraProvider>
     </React.StrictMode>

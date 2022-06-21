@@ -28,7 +28,6 @@ import {
 import { format } from "date-fns";
 import findValidDateRange from "../../../lib/findValidDateRange";
 import FormValidateEmoji from "./FormValidateEmoji";
-import { useAppSelector } from "../../app/hooks";
 
 interface DatePickerProps {
   isLoading: boolean;
@@ -58,7 +57,7 @@ const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
         dateError = "Please select a date.";
         setValid(false);
       } else if (dateArr.length === 3) {
-        const date: UpdateCalendarProps = {
+        const date: UpdateCalenderPropsDateLayout = {
           year: parseInt(dateArr[0]),
           month: parseInt(dateArr[1]),
           day: parseInt(dateArr[2])
@@ -98,7 +97,7 @@ const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
       if (formInput.date) {
         if (!validateDate(formInput.date)) {
           const dateArr = formInput.date.split("-");
-          const date: UpdateCalendarProps = {
+          const date: UpdateCalenderPropsDateLayout = {
             year: parseInt(dateArr[0]),
             month: parseInt(dateArr[1]),
             day: parseInt(dateArr[2])

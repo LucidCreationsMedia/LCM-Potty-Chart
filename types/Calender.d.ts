@@ -39,10 +39,14 @@ interface MonthLayout {
   monday: WeekLayout;
 }
 
-interface UpdateCalendarProps {
+interface UpdateCalenderPropsDateLayout {
   year: number;
   month: number;
   day: number;
+}
+interface UpdateCalendarProps {
+  date: UpdateCalenderPropsDateLayout;
+  isLoading: boolean;
 }
 
 interface SelectedDateInfo {
