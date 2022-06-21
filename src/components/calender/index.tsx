@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { isSameDay, format } from "date-fns";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { updateCurrDate, updateMonth } from "../../features/calender/calender";
+import { updateCurrDate, updateMonth } from "../../features/calender";
 import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
@@ -43,12 +43,12 @@ const Calender = ({
   }, [dispatch, newDate]);
 
   useEffect(() => {
-    console.info("Check to update date.");
+    // console.info("Check to update date.");
 
     const currDateObj = new Date(currDate);
 
     if (!isSameDay(currDateObj, new Date())) {
-      console.info("Updated date.");
+      // console.info("Updated date.");
       dispatch(updateCurrDate());
     }
   }, [currDate, dispatch]);

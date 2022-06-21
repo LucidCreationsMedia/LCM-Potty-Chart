@@ -20,14 +20,16 @@ const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();
   const { date: slug } = router.query;
 
-  const [date, setDate] = useState<UpdateCalendarProps | null>(null);
+  const [date, setDate] = useState<UpdateCalenderPropsDateLayout | null>(null);
 
   const [error, setError] = useState<boolean>(false);
 
   // const dateRange = useRef(findValidDateRange());
   // const validDateRange = Object.assign({}, dateRange.current);
 
-  const validateDateInput = (dateArr: number[]): UpdateCalendarProps => {
+  const validateDateInput = (
+    dateArr: number[]
+  ): UpdateCalenderPropsDateLayout => {
     if (!(dateArr.length >= 2) && !(dateArr.length <= 3)) {
       return {
         year: 0,
@@ -198,7 +200,7 @@ const DateRoute: React.FC<unknown> = () => {
   ) : (
     <Box textAlign="center" w="100%" h="auto" pt="50px" pb="10vh">
       <Provider store={store}>
-        <Calender {...date} />
+        <Calender date={date} isLoading={false} />
       </Provider>
     </Box>
   );
