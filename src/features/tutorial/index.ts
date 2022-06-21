@@ -90,7 +90,8 @@ const tutorialSlice = createSlice({
 
       if (temp !== null || local !== null) {
         state.storageState = temp !== null ? temp : local;
-        state.completedTutorial = temp !== null ? temp.completed : local.completed;
+        state.completedTutorial =
+          temp !== null ? temp.completed : local.completed;
       }
 
       if (temp === null && local === null) {
