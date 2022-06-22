@@ -40,6 +40,14 @@ const Tutorial = ({
     setRememberComplete(!rememberComplete);
   };
 
+  // TODO: Add an expiration validator.
+  // TODO: Add a version validator that removed the completed tutorial storages when there were major changes to the tutorial.
+  // * The changes are tracked via env variables. The last version that user saw the tutorial is saved in storage.
+
+  // TODO: Break up this component into reusable components that will generate headers and the content section.
+  // * Pass in if the component to be generated is the last component so the dividers can be conditionally rendered.
+  // * Pass in the type of component: text, calender, type of calender.
+
   return (
     <Box>
       <VStack
