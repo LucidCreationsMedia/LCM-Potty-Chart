@@ -47,8 +47,6 @@ const IndexPage = (): JSX.Element => {
     if (completedTutorial !== null) {
       dispatch(updateLoading(false));
     }
-
-    console.info("use effect", completedTutorial, tutorialCompletionInfo);
   }, [completedTutorial, dispatch, tutorialCompletionInfo]);
 
   return (
