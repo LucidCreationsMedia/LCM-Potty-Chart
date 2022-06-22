@@ -10,7 +10,6 @@ const Calender = ({
   date: newDate,
   isLoading
 }: UpdateCalendarProps): JSX.Element => {
-
   const dispatch = useAppDispatch();
 
   // * Month * //
@@ -67,7 +66,7 @@ const Calender = ({
   // TODO: Move the weekdays into it's own component for responsiveness.
 
   return (
-    <VStack h="91vh" w="100%">
+    <VStack h="92vh" w="100%" mb="5vh">
       <CalenderNav title={title} isLoading={isLoading} />
       <VStack h="100%" w="100%" spacing={0}>
         <HStack
@@ -139,12 +138,11 @@ const Calender = ({
                   date={date}
                   selectedDate={selectedDate.date}
                   currDate={currDateObj}
-                  isToday={isSameDay(currDateObj, toDateObj)}
                   key={
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                      `/${sticker === null ? 0 : sticker}`
+                        `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );

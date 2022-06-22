@@ -6,12 +6,10 @@ import { updateMonth } from "../../features/calender";
 import Day from "../calender/Day";
 
 interface CalenderExampleProps {
-  type: "add" | "edit"
+  type: "add" | "edit";
 }
 
-const CalenderExample = ({
-  type
-}: CalenderExampleProps): JSX.Element => {
+const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
   // TODO: Check if the current date is the start of the user's preferred start of the week and use the previous week for the edit example.
 
   // TODO: Add highlight to the current date for the add example and highlight other dates when the edit example is used.
@@ -27,7 +25,7 @@ const CalenderExample = ({
   const selectedDate: SelectedDateInfo = useAppSelector(
     (state) => state.calender.selectedDateInfo
   );
-  const { layout } = selectedDate
+  const { layout } = selectedDate;
 
   // * Stickers * //
 
@@ -66,15 +64,15 @@ const CalenderExample = ({
       });
     }
 
-    return foundWeek || [] as MonthDay[];
-  }
+    return foundWeek || ([] as MonthDay[]);
+  };
 
-  const [currWeek, setCurrWeek] = useState<MonthDay[]>(getCurrentWeek());
+  const [currWeek /*, setCurrWeek*/] = useState<MonthDay[]>(getCurrentWeek());
 
   console.info(currWeek);
 
   return (
-    <VStack h="100%" w="100%" spacing={0}>
+    <VStack h="8.5rem" w="100%" spacing={0}>
       <HStack
         px={6}
         spacing={0}
@@ -141,17 +139,16 @@ const CalenderExample = ({
               date={date}
               selectedDate={selectedDate.date}
               currDate={currDateObj}
-              isToday={isSameDay(currDateObj, toDateObj)}
+              tutorial={type}
               key={
                 id.length
                   ? id
                   : format(toDateObj, "yyyyddLL") +
-                  `/${sticker === null ? 0 : sticker}`
+                    `/${sticker === null ? 0 : sticker}`
               }
             />
           );
-        })
-        }
+        })}
       </SimpleGrid>
     </VStack>
   );

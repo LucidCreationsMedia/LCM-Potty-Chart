@@ -36,6 +36,14 @@ const buttonStyles = {
         )(props)
       }
     }),
+    skip: (props: Dict<never> | StyleFunctionProps) => ({
+      bg: "transparent",
+      fontSize: "xl",
+      p: "2",
+      _hover: {
+        bg: mode(whiten("brand.danger", 20), darken("brand.danger", 20))(props)
+      }
+    }),
     stickerButton: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "transparent",
       fontSize: "4rem",

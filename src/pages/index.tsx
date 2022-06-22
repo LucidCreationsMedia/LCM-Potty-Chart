@@ -52,14 +52,7 @@ const IndexPage = (): JSX.Element => {
   }, [completedTutorial, dispatch, tutorialCompletionInfo]);
 
   return (
-    <Box
-      textAlign="center"
-      w="100%"
-      h="auto"
-      pt="50px"
-      // pb="10vh"
-      minWidth="min-content"
-    >
+    <Box textAlign="center" w="100%" h="auto" pt="50px" minWidth="min-content">
       <Provider store={store}>
         {isLoading === true ? (
           <Fragment>

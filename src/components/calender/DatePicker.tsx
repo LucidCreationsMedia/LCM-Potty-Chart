@@ -189,7 +189,7 @@ const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
               >
                 <VStack
                   alignItems="center"
-                  alignContent="flex=start"
+                  alignContent="flex-start"
                   w="100%"
                   h="auto"
                   spacing={6}
