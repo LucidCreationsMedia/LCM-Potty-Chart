@@ -15,7 +15,7 @@ import appLogo from "../../../public/images/logo.svg";
 
 const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart";
-  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || "";
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION_HEADER || "";
 
   // Add transparency while not at the top of the page.
   const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
