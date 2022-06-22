@@ -84,7 +84,6 @@ const tutorialSlice = createSlice({
     },
     // Get and set states
     getAndSetTutorial(state: TutorialSlice) {
-      console.log("get and set tutorial states");
       const temp = getTempStorage();
       const local = getStorage();
 

@@ -69,8 +69,6 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
 
   const [currWeek /*, setCurrWeek*/] = useState<MonthDay[]>(getCurrentWeek());
 
-  console.info(currWeek);
-
   return (
     <VStack h="8.5rem" w="100%" spacing={0}>
       <HStack
