@@ -57,7 +57,7 @@ const IndexPage = (): JSX.Element => {
       w="100%"
       h="auto"
       pt="50px"
-      pb="10vh"
+      // pb="10vh"
       minWidth="min-content"
     >
       <Provider store={store}>

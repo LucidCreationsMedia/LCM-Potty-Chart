@@ -15,7 +15,7 @@ const buttonStyles = {
   // styles for different visual variants ("outline", "solid")
   variants: {
     primary: (props: Dict<never> | StyleFunctionProps) => ({
-      bg: "rgba(255, 255, 255, .15)",
+      bg: "brand.primary",
       fontSize: "xl",
       p: "2",
       _hover: {
@@ -26,13 +26,13 @@ const buttonStyles = {
       }
     }),
     secondary: (props: Dict<never> | StyleFunctionProps) => ({
-      bg: "brand.primary",
+      bg: "transparent",
       fontSize: "xl",
       p: "2",
       _hover: {
         bg: mode(
-          whiten("brand.primary", 20),
-          darken("brand.primary", 20)
+          whiten("brand.secondary", 20),
+          darken("brand.secondary", 20)
         )(props)
       }
     }),

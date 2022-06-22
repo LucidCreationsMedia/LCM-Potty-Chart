@@ -10,6 +10,9 @@ const Calender = ({
   date: newDate,
   isLoading
 }: UpdateCalendarProps): JSX.Element => {
+
+  const dispatch = useAppDispatch();
+
   // * Month * //
   const currDate: string = useAppSelector((state) => state.calender.currDate);
   const selectedDate: SelectedDateInfo = useAppSelector(
@@ -24,8 +27,6 @@ const Calender = ({
   const stickersMonth: StickerDays = useAppSelector(
     (state) => state.stickers.stickersMonth
   );
-
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (newDate && newDate.year && newDate.month && newDate.day) {
@@ -143,7 +144,7 @@ const Calender = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                        `/${sticker === null ? 0 : sticker}`
+                      `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );
