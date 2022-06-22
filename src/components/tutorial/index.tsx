@@ -56,8 +56,9 @@ const Tutorial = ({
         justifyContent="center"
         alignContent="center"
         my={8}
-        mx={4}
-        p={4}
+        mx={{ base: 0, sm: 2, md: 4 }}
+        py={4}
+        px={{ base: 0, sm: 2, md: 4 }}
         bg="gray.700"
       >
         <VStack
@@ -97,7 +98,7 @@ const Tutorial = ({
               w="100%"
               justifyContent="start"
               alignContent="center"
-              spacing={0}
+              spacing={1}
             >
               <Text>
                 {
@@ -139,7 +140,7 @@ const Tutorial = ({
             w="100%"
             justifyContent="start"
             alignContent="center"
-            spacing={2}
+            spacing={1}
           >
             <Text>
               {

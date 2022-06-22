@@ -72,7 +72,7 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
   return (
     <VStack h="8.5rem" w="100%" spacing={0}>
       <HStack
-        px={6}
+        px={{ base: 1, sm: 2, md: 6 }}
         spacing={0}
         w="100%"
         h="auto"
@@ -108,7 +108,7 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
           );
         })}
       </HStack>
-      <SimpleGrid px={6} w="100%" h="100%" columns={7} alignItems="center">
+      <SimpleGrid px={{ base: 1, sm: 2, md: 6 }} w="100%" h="100%" columns={7} alignItems="center">
         {currWeek.map((day: MonthDay) => {
           const { date, isOverflow, overflowDirection } = day;
 
@@ -142,7 +142,7 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
                 id.length
                   ? id
                   : format(toDateObj, "yyyyddLL") +
-                    `/${sticker === null ? 0 : sticker}`
+                  `/${sticker === null ? 0 : sticker}`
               }
             />
           );
