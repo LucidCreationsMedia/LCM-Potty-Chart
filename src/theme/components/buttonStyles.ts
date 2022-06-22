@@ -17,7 +17,9 @@ const buttonStyles = {
     primary: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "brand.primary",
       fontSize: "xl",
-      p: "2",
+      py: 3,
+      px: 4,
+      color: "whiteAlpha",
       _hover: {
         bg: mode(
           whiten("brand.primary", 20),
@@ -26,9 +28,11 @@ const buttonStyles = {
       }
     }),
     secondary: (props: Dict<never> | StyleFunctionProps) => ({
-      bg: "transparent",
+      bg: "brand.secondary",
       fontSize: "xl",
-      p: "2",
+      py: 3,
+      px: 4,
+      color: "whiteAlpha",
       _hover: {
         bg: mode(
           whiten("brand.secondary", 20),
@@ -39,9 +43,12 @@ const buttonStyles = {
     skip: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "transparent",
       fontSize: "xl",
-      p: "2",
+      py: 3,
+      px: 4,
+      color: "gray.400",
       _hover: {
-        bg: mode(whiten("brand.danger", 20), darken("brand.danger", 20))(props)
+        bg: mode(whiten("brand.danger", 20), darken("brand.danger", 20))(props),
+        color: "whiteAlpha.900"
       }
     }),
     stickerButton: (props: Dict<never> | StyleFunctionProps) => ({
@@ -56,27 +63,10 @@ const buttonStyles = {
         )(props)
       }
     }),
-    project: (props: Dict<never> | StyleFunctionProps) => ({
-      bg: "transparent",
-      fontSize: "md",
-      py: 2,
-      px: 4,
-      boxShadow:
-        "rgba(0, 134, 255, 0.2) 0px 0px 15px, rgba(0, 134, 255, 0.15) 0px 0px 3px 1px",
-      border: "1px solid rgba(0, 134, 255, 0.4)",
-      _hover: {
-        bg: mode(
-          whiten("brand.secondary", 20),
-          darken("brand.secondary", 20)
-        )(props),
-        boxShadow:
-          "rgba(0, 104, 255, 0.5) 0px 0px 15px, rgba(0, 104, 255, 0.3) 0px 0px 3px 1px"
-      }
-    }),
     nav: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "transparent",
       fontSize: "md",
-      px: "2",
+      px: 2,
       _hover: {
         bg: mode(
           whiten("brand.secondary", 20),
@@ -87,15 +77,16 @@ const buttonStyles = {
     stickyNav: (/* props: Dict<never> | StyleFunctionProps */) => ({
       bg: "transparent",
       fontSize: "md",
-      px: "2",
+      px: 2,
       _hover: {
         textDecoration: "underline"
       }
     }),
-    credits: (props: Dict<never> | StyleFunctionProps) => ({
+    footer: (props: Dict<never> | StyleFunctionProps) => ({
       bg: "brand.main",
       fontSize: "lg",
-      p: 3,
+      py: 3,
+      px: 4,
       color: "whiteAlpha",
       _hover: {
         bg: mode(whiten("brand.main", 20), darken("brand.main", 20))(props)
@@ -121,22 +112,6 @@ const buttonStyles = {
         border: "1px solid rgba(0, 134, 255, 1)"
       }
     }),
-    collapse: (props: Dict<never> | StyleFunctionProps) => ({
-      bg: "transparent",
-      fontSize: "md",
-      p: 2,
-      h: 8,
-      color: "brand.hover",
-      textDecoration: "underline",
-      _hover: {
-        bg: mode(
-          whiten("brand.secondary", 20),
-          darken("brand.secondary", 20)
-        )(props),
-        color: "whiteAlpha.900",
-        textDecoration: "none"
-      }
-    }),
     submit: (props: Dict<never> | StyleFunctionProps) => ({
       fontSize: "lg",
       py: 2,
@@ -159,7 +134,7 @@ const buttonStyles = {
     mobileNav: (props: Dict<never> | StyleFunctionProps) => ({
       // bg: "transparent",
       fontSize: "md",
-      px: "2",
+      px: 2,
       boxShadow:
         "rgba(0, 134, 255, 0.30) 0px 0px 15px, rgba(0, 134, 255, 0.15) 0px 0px 3px 1px",
       _hover: {
@@ -186,6 +161,19 @@ const buttonStyles = {
         bg: mode(
           whiten("brand.patreon", 20),
           darken("brand.patreon", 20)
+        )(props)
+      }
+    }),
+    twitter: (props: Dict<never> | StyleFunctionProps) => ({
+      bg: "brand.twitter",
+      fontSize: "lg",
+      py: 3,
+      px: 4,
+      color: "whiteAlpha",
+      _hover: {
+        bg: mode(
+          whiten("brand.twitter", 20),
+          darken("brand.twitter", 20)
         )(props)
       }
     })

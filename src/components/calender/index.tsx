@@ -106,7 +106,13 @@ const Calender = ({
             );
           })}
         </HStack>
-        <SimpleGrid px={{ base: 1, sm: 2, md: 6 }} w="100%" h="100%" columns={7} alignItems="center">
+        <SimpleGrid
+          px={{ base: 1, sm: 2, md: 6 }}
+          w="100%"
+          h="100%"
+          columns={7}
+          alignItems="center"
+        >
           {Object.keys(month).map((week) => {
             const thisWeek = month[week];
 
@@ -142,7 +148,7 @@ const Calender = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                      `/${sticker === null ? 0 : sticker}`
+                        `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );

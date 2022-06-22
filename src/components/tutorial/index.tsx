@@ -5,10 +5,14 @@ import {
   Divider,
   Heading,
   HStack,
+  Link,
   Text,
   VStack
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import CustomButton from "../buttons/Custom";
+import Patreon from "../buttons/Patreon";
+import Twitter from "../buttons/Twitter";
 import CalenderExample from "./CalenderExample";
 
 interface TutorialProps {
@@ -138,7 +142,8 @@ const Tutorial = ({
           <VStack
             h="auto"
             w="100%"
-            justifyContent="start"
+            justifyContent="center"
+            alignItems="center"
             alignContent="center"
             spacing={1}
           >
@@ -170,7 +175,8 @@ const Tutorial = ({
           <VStack
             h="auto"
             w="100%"
-            justifyContent="start"
+            justifyContent="center"
+            alignItems="center"
             alignContent="center"
             spacing={4}
           >
@@ -193,7 +199,8 @@ const Tutorial = ({
           <VStack
             h="auto"
             w="100%"
-            justifyContent="start"
+            justifyContent="center"
+            alignItems="center"
             alignContent="center"
             spacing={4}
           >
@@ -213,6 +220,43 @@ const Tutorial = ({
             </HStack>
             <CalenderExample type={"edit"} />
           </VStack>
+          <Divider orientation="horizontal" />
+        </VStack>
+        {/* Links */}
+        <VStack
+          h="auto"
+          w="100%"
+          justifyContent="center"
+          alignContent="center"
+          spacing={4}
+        >
+          <Heading as="h3" size="lg">
+            {"More Info"}
+          </Heading>
+          <HStack
+            h="auto"
+            w="100%"
+            justifyContent="center"
+            alignContent="center"
+            spacing={4}
+          >
+            <CustomButton
+              link={
+                "https://docs.google.com/document/d/1hrerGKHTO3iach8A-CabtfIB4lyZWlgO8EGTyOCrI2Y"
+              }
+              text="Roadmap and Progress"
+              type="secondary"
+            />
+            <CustomButton
+              link={
+                "https://lucidcreations.media/introducing-code-name-potty-chart/"
+              }
+              text="Original Announcement"
+              type="secondary"
+            />
+            <Patreon />
+            <Twitter />
+          </HStack>
           <Divider orientation="horizontal" />
         </VStack>
         {/* Complete tutorial */}

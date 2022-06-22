@@ -4,16 +4,17 @@ import {
   Text,
   VStack,
   Link,
-  HStack,
   // Image,
   Button,
   BoxProps
 } from "@chakra-ui/react";
-import { Icon } from "@iconify/react";
 // import BackToTopButton from "./BackToTopButton";
 import { motion } from "framer-motion";
+import Patreon from "../../components/buttons/Patreon";
+import CustomButton from "../../components/buttons/Custom";
+import Twitter from "../../components/buttons/Twitter";
 
-export const MotionBox = motion<BoxProps>(Box);
+const MotionBox = motion<BoxProps>(Box);
 
 const Footer = (): JSX.Element => {
   // const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
@@ -68,32 +69,15 @@ const Footer = (): JSX.Element => {
               </Button>
             </Link>
           </MotionBox> */}
-          <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-            <Link
-              href="https://lucidcreations.media/introducing-code-name-potty-chart/"
-              target="_blank"
-              rel="noopener"
-            >
-              <Button color="whiteAlpha" variant="credits">
-                More About This App
-              </Button>
-            </Link>
-          </MotionBox>
-          <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-            <Link
-              href="https://www.patreon.com/bePatron?u=15380906"
-              target="_blank"
-              rel="noopener"
-            >
-              <Button
-                color="whiteAlpha"
-                variant="patreon"
-                leftIcon={<Icon icon="ri:patreon-fill" />}
-              >
-                Fund This App
-              </Button>
-            </Link>
-          </MotionBox>
+          <CustomButton
+            link={
+              "https://lucidcreations.media/introducing-code-name-potty-chart/"
+            }
+            text="More About This App"
+            type="footer"
+          />
+          <Patreon />
+          <Twitter />
           <Text color="brand.footerText" fontSize="xs">
             &copy;
             {` 2021 - ${new Date().getFullYear()} `}
