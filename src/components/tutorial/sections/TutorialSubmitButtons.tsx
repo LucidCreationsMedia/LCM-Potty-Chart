@@ -40,7 +40,7 @@ const TutorialSubmitButtons = ({
   return (
     <HStack
       h="auto"
-      w="80%"
+      w="90%"
       justifyContent="space-between"
       alignItems="flex-start"
       pt={8}
