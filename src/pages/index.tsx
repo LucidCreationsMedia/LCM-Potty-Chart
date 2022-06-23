@@ -3,11 +3,7 @@ import { Provider } from "react-redux";
 import { store } from "../app/store";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { updateLoading } from "../features/calender";
-import {
-  getAndSetTutorial,
-  setTempTutorialComplete,
-  setTutorialCompleted
-} from "../features/tutorial";
+import { getAndSetTutorial } from "../features/tutorial";
 import { Box } from "@chakra-ui/react";
 import { format } from "date-fns";
 import Calender from "../components/calender";
@@ -30,14 +26,6 @@ const IndexPage = (): JSX.Element => {
     day: parseInt(format(new Date(), "d"))
   });
 
-  const handleTempTutorialCompleted = (): void => {
-    dispatch(setTempTutorialComplete());
-  };
-
-  const handleTutorialCompleted = (): void => {
-    dispatch(setTutorialCompleted());
-  };
-
   useEffect(() => {
     if (completedTutorial === null && tutorialCompletionInfo === null) {
       dispatch(getAndSetTutorial());
@@ -59,11 +47,7 @@ const IndexPage = (): JSX.Element => {
         ) : completedTutorial ? (
           <Calender date={currDate.current} isLoading={isLoading} />
         ) : (
-          <Tutorial
-            setTutorialComplete={handleTutorialCompleted}
-            setTempTutorialComplete={handleTempTutorialCompleted}
-            isLoading={isLoading}
-          />
+          <Tutorial isLoading={isLoading} />
         )}
       </Provider>
     </Box>
