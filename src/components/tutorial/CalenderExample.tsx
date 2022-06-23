@@ -7,18 +7,23 @@ import Day from "../calender/Day";
 
 interface CalenderExampleProps {
   type: "add" | "edit";
+  isLoading: boolean;
 }
 
-const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
+const CalenderExample = ({
+  type,
+  isLoading
+}: CalenderExampleProps): JSX.Element => {
   // TODO: Check if the current date is the start of the user's preferred start of the week and use the previous week for the edit example.
 
   // TODO: Add highlight to the current date for the add example and highlight other dates when the edit example is used.
 
   // TODO: Disable the days that shouldn't have a function to prevent edits on add example and add to current date on the edit example.
 
-  const currDateStr: string = useAppSelector(state => state.calender.currDate);
+  const currDateStr: string = useAppSelector(
+    (state) => state.calender.currDate
+  );
   const currDateObj: Date = new Date(currDateStr);
-  const isLoading = false;
 
   const dispatch = useAppDispatch();
 

@@ -43,7 +43,7 @@ const Calender = ({
         console.warn("Invalid date format: ", newDate);
       }
     }
-  }, [dispatch, newDate]);
+  }, [currentSelectedDateStr, dispatch, newDate]);
 
   useEffect(() => {
     // console.info("Check to update date.");
@@ -151,7 +151,7 @@ const Calender = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                      `/${sticker === null ? 0 : sticker}`
+                        `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );

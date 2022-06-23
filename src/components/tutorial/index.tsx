@@ -1,3 +1,6 @@
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { toggleRememberCompleted } from "../../features/tutorial";
 import {
   Box,
   Button,
@@ -8,9 +11,6 @@ import {
   Text,
   VStack
 } from "@chakra-ui/react";
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { toggleRememberCompleted } from "../../features/tutorial";
 import CustomButton from "../buttons/Custom";
 import Patreon from "../buttons/Patreon";
 import Twitter from "../buttons/Twitter";
@@ -19,11 +19,13 @@ import CalenderExample from "./CalenderExample";
 interface TutorialProps {
   setTutorialComplete: () => void;
   setTempTutorialComplete: () => void;
+  isLoading: boolean;
 }
 
 const Tutorial = ({
   setTutorialComplete,
-  setTempTutorialComplete
+  setTempTutorialComplete,
+  isLoading
 }: TutorialProps): JSX.Element => {
   const rememberComplete = useAppSelector(
     (state) => state.tutorial.rememberCompleted
@@ -271,7 +273,12 @@ const Tutorial = ({
           alignItems="flex-start"
           pt={8}
         >
-          <Button type="button" onClick={() => handleSkip()} variant="skip">
+          <Button
+            type="button"
+            isDisabled={isLoading}
+            onClick={() => handleSkip()}
+            variant="skip"
+          >
             {"Skip"}
           </Button>
           <VStack
@@ -283,6 +290,7 @@ const Tutorial = ({
           >
             <Button
               type="button"
+              isDisabled={isLoading}
               onClick={() => handleComplete()}
               variant="primary"
             >
@@ -290,6 +298,7 @@ const Tutorial = ({
             </Button>
             <Checkbox
               isChecked={rememberComplete}
+              isDisabled={isLoading}
               onChange={() => handleUpdateCheck()}
             >
               {"Remember completed?"}

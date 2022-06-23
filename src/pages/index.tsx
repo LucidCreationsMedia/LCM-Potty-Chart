@@ -39,9 +39,8 @@ const IndexPage = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if (completedTutorial === null || tutorialCompletionInfo === null) {
+    if (completedTutorial === null && tutorialCompletionInfo === null) {
       dispatch(getAndSetTutorial());
-      dispatch(updateLoading(false));
     }
 
     if (completedTutorial !== null) {
@@ -63,6 +62,7 @@ const IndexPage = (): JSX.Element => {
           <Tutorial
             setTutorialComplete={handleTutorialCompleted}
             setTempTutorialComplete={handleTempTutorialCompleted}
+            isLoading={isLoading}
           />
         )}
       </Provider>
