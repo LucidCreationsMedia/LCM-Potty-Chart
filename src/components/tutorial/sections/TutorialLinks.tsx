@@ -29,15 +29,22 @@ const TutorialLinks = (): JSX.Element => {
           const { href, name, type } = link;
 
           if (type === "primary" || type === "secondary") {
-            return <CustomButton link={href} text={name} type={type} />;
+            return (
+              <CustomButton
+                key={name.replaceAll(" ", "-")}
+                link={href}
+                text={name}
+                type={type}
+              />
+            );
           }
 
           if (type === "patreon") {
-            return <Patreon />;
+            return <Patreon key={type} />;
           }
 
           if (type === "twitter") {
-            return <Twitter />;
+            return <Twitter key={type} />;
           }
         })}
       </HStack>
@@ -53,15 +60,22 @@ const TutorialLinks = (): JSX.Element => {
           const { href, name, type } = link;
 
           if (type === "primary" || type === "secondary") {
-            return <CustomButton link={href} text={name} type={type} />;
+            return (
+              <CustomButton
+                key={name.replaceAll(" ", "-")}
+                link={href}
+                text={name}
+                type={type}
+              />
+            );
           }
 
           if (type === "patreon") {
-            return <Patreon />;
+            return <Patreon key={type} />;
           }
 
           if (type === "twitter") {
-            return <Twitter />;
+            return <Twitter key={type} />;
           }
         })}
       </VStack>

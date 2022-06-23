@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { updateMonth } from "../../features/calender";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { format, isSameDay, isToday } from "date-fns";
 import Day from "../calender/Day";
+import { setCurrentWeek } from "../../features/tutorial";
 
 interface CalenderExampleProps {
   type: "add" | "edit";
@@ -30,7 +31,6 @@ const CalenderExample = ({
   const { layout, date: currSelectedDateStr } = selectedDate;
 
   // * Stickers * //
-
   const stickersMonth: StickerDays = useAppSelector(
     (state) => state.stickers.stickersMonth
   );
@@ -56,25 +56,30 @@ const CalenderExample = ({
   }, [currDateStr, currSelectedDateStr, dispatch]);
 
   // * The current week * //
+  const currWeek = useAppSelector((state) => state.tutorial.currWeek);
 
-  const getCurrentWeek = (): MonthDay[] => {
-    let foundWeek: MonthDay[] | null;
-    for (const week in month) {
-      const currWeek = month[week];
+  useEffect(() => {
+    const getCurrentWeek = (): MonthDay[] => {
+      let foundWeek: MonthDay[] | null;
+      for (const week in month) {
+        const currWeek = month[week];
 
-      currWeek.forEach((day: MonthDay) => {
-        const { date } = day;
+        currWeek.forEach((day: MonthDay) => {
+          const { date } = day;
 
-        if (isToday(new Date(date))) {
-          foundWeek = currWeek;
-        }
-      });
+          if (isToday(new Date(date))) {
+            foundWeek = currWeek;
+          }
+        });
+      }
+
+      return foundWeek || ([] as MonthDay[]);
+    };
+
+    if (currWeek === null) {
+      dispatch(setCurrentWeek(getCurrentWeek()));
     }
-
-    return foundWeek || ([] as MonthDay[]);
-  };
-
-  const [currWeek /*, setCurrWeek*/] = useState<MonthDay[]>(getCurrentWeek());
+  }, [currWeek, dispatch, month]);
 
   return (
     <VStack h="8.5rem" w="100%" spacing={0}>
@@ -122,44 +127,45 @@ const CalenderExample = ({
         columns={7}
         alignItems="center"
       >
-        {currWeek.map((day: MonthDay) => {
-          const { date, isOverflow, overflowDirection } = day;
+        {currWeek &&
+          currWeek.map((day: MonthDay) => {
+            const { date, isOverflow, overflowDirection } = day;
 
-          const toDateObj: Date = new Date(date);
+            const toDateObj: Date = new Date(date);
 
-          let sticker = null;
+            let sticker = null;
 
-          let id = "";
+            let id = "";
 
-          stickersMonth.map((stickerDay) => {
-            const { date: stickerDate } = stickerDay;
+            stickersMonth.map((stickerDay) => {
+              const { date: stickerDate } = stickerDay;
 
-            if (isSameDay(new Date(stickerDate), toDateObj)) {
-              sticker = stickerDay.sticker;
+              if (isSameDay(new Date(stickerDate), toDateObj)) {
+                sticker = stickerDay.sticker;
 
-              id = stickerDay.id;
-            }
-          });
-
-          return (
-            <Day
-              isLoading={isLoading}
-              isOverflow={isOverflow}
-              overflowDirection={overflowDirection}
-              currSticker={sticker}
-              date={date}
-              selectedDate={selectedDate.date}
-              currDate={currDateObj}
-              tutorial={type}
-              key={
-                id.length
-                  ? id
-                  : format(toDateObj, "yyyyddLL") +
-                    `/${sticker === null ? 0 : sticker}`
+                id = stickerDay.id;
               }
-            />
-          );
-        })}
+            });
+
+            return (
+              <Day
+                isLoading={isLoading}
+                isOverflow={isOverflow}
+                overflowDirection={overflowDirection}
+                currSticker={sticker}
+                date={date}
+                selectedDate={selectedDate.date}
+                currDate={currDateObj}
+                tutorial={type}
+                key={
+                  id.length
+                    ? id
+                    : format(toDateObj, "yyyyddLL") +
+                      `/${sticker === null ? 0 : sticker}`
+                }
+              />
+            );
+          })}
       </SimpleGrid>
     </VStack>
   );

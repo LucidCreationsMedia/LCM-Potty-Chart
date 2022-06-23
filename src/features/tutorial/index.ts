@@ -1,4 +1,4 @@
-import { createSlice /*, PayloadAction*/ } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addMonths } from "date-fns";
 
 interface StorageState {
@@ -37,12 +37,14 @@ interface TutorialSlice {
   completedTutorial: boolean | null;
   storageState: StorageState | null;
   rememberCompleted: boolean;
+  currWeek: MonthDay[] | null;
 }
 
 const initialState: TutorialSlice = {
   completedTutorial: null,
   storageState: null,
-  rememberCompleted: false
+  rememberCompleted: false,
+  currWeek: null
 };
 
 const tutorialSlice = createSlice({
@@ -104,6 +106,12 @@ const tutorialSlice = createSlice({
       const { rememberCompleted } = state;
 
       state.rememberCompleted = !rememberCompleted;
+    },
+    // Set current week
+    setCurrentWeek(state: TutorialSlice, action: PayloadAction<MonthDay[]>) {
+      const { payload } = action;
+
+      state.currWeek = payload;
     }
   }
 });
@@ -113,6 +121,7 @@ export const {
   setTutorialCompleted,
   clearTutorialCompleted,
   getAndSetTutorial,
-  toggleRememberCompleted
+  toggleRememberCompleted,
+  setCurrentWeek
 } = tutorialSlice.actions;
 export default tutorialSlice.reducer;
