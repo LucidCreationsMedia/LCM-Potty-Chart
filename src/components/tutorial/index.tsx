@@ -5,11 +5,12 @@ import {
   Divider,
   Heading,
   HStack,
-  Link,
   Text,
   VStack
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { toggleRememberCompleted } from "../../features/tutorial";
 import CustomButton from "../buttons/Custom";
 import Patreon from "../buttons/Patreon";
 import Twitter from "../buttons/Twitter";
@@ -24,7 +25,8 @@ const Tutorial = ({
   setTutorialComplete,
   setTempTutorialComplete
 }: TutorialProps): JSX.Element => {
-  const [rememberComplete, setRememberComplete] = useState<boolean>(false);
+  const rememberComplete = useAppSelector(state => state.tutorial.rememberCompleted);
+  const dispatch = useAppDispatch();
 
   const handleComplete = (): void => {
     if (rememberComplete) {
@@ -41,7 +43,7 @@ const Tutorial = ({
   };
 
   const handleUpdateCheck = (): void => {
-    setRememberComplete(!rememberComplete);
+    dispatch(toggleRememberCompleted());
   };
 
   // TODO: Add an expiration validator.
