@@ -36,11 +36,13 @@ const clearStorage = (): void => {
 interface TutorialSlice {
   completedTutorial: boolean | null;
   storageState: StorageState | null;
+  rememberCompleted: boolean;
 }
 
 const initialState: TutorialSlice = {
   completedTutorial: null,
-  storageState: null
+  storageState: null,
+  rememberCompleted: false
 };
 
 const tutorialSlice = createSlice({
@@ -96,6 +98,12 @@ const tutorialSlice = createSlice({
       if (temp === null && local === null) {
         state.completedTutorial = false;
       }
+    },
+    // Toggle remember completed
+    toggleRememberCompleted(state: TutorialSlice) {
+      const { rememberCompleted } = state;
+
+      state.rememberCompleted = !rememberCompleted;
     }
   }
 });
@@ -104,6 +112,7 @@ export const {
   setTempTutorialComplete,
   setTutorialCompleted,
   clearTutorialCompleted,
-  getAndSetTutorial
+  getAndSetTutorial,
+  toggleRememberCompleted
 } = tutorialSlice.actions;
 export default tutorialSlice.reducer;

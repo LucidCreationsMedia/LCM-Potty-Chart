@@ -1,9 +1,4 @@
 import React, { Fragment, useEffect, useRef } from "react";
-import { Box } from "@chakra-ui/react";
-import { format } from "date-fns";
-import Calender from "../components/calender";
-import Tutorial from "../components/tutorial";
-import LoadingOverlay from "../components/loading/LoadingOverlay";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -13,6 +8,11 @@ import {
   setTempTutorialComplete,
   setTutorialCompleted
 } from "../features/tutorial";
+import { Box } from "@chakra-ui/react";
+import { format } from "date-fns";
+import Calender from "../components/calender";
+import Tutorial from "../components/tutorial";
+import LoadingOverlay from "../components/loading/LoadingOverlay";
 
 const IndexPage = (): JSX.Element => {
   const isLoading = useAppSelector((state) => state.calender.isLoading);

@@ -1,8 +1,8 @@
-import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import { format, isSameDay, isToday } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { updateMonth } from "../../features/calender";
+import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { format, isSameDay, isToday } from "date-fns";
 import Day from "../calender/Day";
 
 interface CalenderExampleProps {
@@ -148,7 +148,7 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
                 id.length
                   ? id
                   : format(toDateObj, "yyyyddLL") +
-                    `/${sticker === null ? 0 : sticker}`
+                  `/${sticker === null ? 0 : sticker}`
               }
             />
           );

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
@@ -13,8 +15,6 @@ import {
 // import findValidDateRange from "../../lib/findValidDateRange";
 import ErrorPage from "next/error";
 import Calender from "../../components/calender";
-import { Provider } from "react-redux";
-import { store } from "../../app/store";
 
 const DateRoute: React.FC<unknown> = () => {
   const router = useRouter();

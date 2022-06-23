@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
 import { Box, Skeleton, Text, VStack } from "@chakra-ui/react";
 import {
   add,
@@ -10,11 +13,8 @@ import {
   isToday as isTodayFun
 } from "date-fns";
 import router from "next/router";
-import React, { useState } from "react";
 import AddUpdateSticker from "./modals/AddUpdateSticker";
 import DemoStickers from "./stickers/DemoStickers";
-import { Provider } from "react-redux";
-import { store } from "../../app/store";
 
 interface DayProps {
   isLoading: boolean;
