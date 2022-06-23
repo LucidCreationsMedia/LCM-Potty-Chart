@@ -12,10 +12,6 @@ interface TutorialProps {
 }
 
 const Tutorial = ({ isLoading }: TutorialProps): JSX.Element => {
-  // TODO: Add an expiration validator.
-  // TODO: Add a version validator that removed the completed tutorial storages when there were major changes to the tutorial.
-  // * The changes are tracked via env variables. The last version that user saw the tutorial is saved in storage.
-
   return (
     <VStack
       h="auto"
@@ -27,6 +23,7 @@ const Tutorial = ({ isLoading }: TutorialProps): JSX.Element => {
       py={4}
       px={{ base: 0, sm: 2, md: 4 }}
       bg="gray.700"
+      borderRadius={{ base: "", sm: "2xl" }}
     >
       <TutorialHeading />
       <TutorialAboutApp />

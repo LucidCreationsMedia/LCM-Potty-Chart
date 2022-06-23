@@ -1,11 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addMonths } from "date-fns";
+import { addMonths, endOfDay } from "date-fns";
+import versionStringToNumber from "../../../lib/versionStringToNumber";
 
-interface StorageState {
+export interface StorageState {
   exp: string;
-  version: string;
+  version: number;
   completed: boolean;
 }
+
+const endOfToday: Date = endOfDay(new Date());
+
+const generateExpDate = (): string => {
+  return endOfDay(addMonths(endOfToday, 1)).toJSON();
+};
+
+const generateVersion = (): number => {
+  const versionStr: string = process.env.NEXT_PUBLIC_APP_VERSION;
+
+  return versionStringToNumber(versionStr);
+};
 
 // * Storage Helpers * //
 
@@ -53,8 +66,8 @@ const tutorialSlice = createSlice({
   reducers: {
     // Set temp complete
     setTempTutorialComplete(state: TutorialSlice) {
-      const exp: string = addMonths(new Date(), 1).toJSON();
-      const version: string = process.env.NEXT_PUBLIC_APP_VERSION.split("-")[0];
+      const exp: string = generateExpDate();
+      const version: number = generateVersion();
       const storageState: StorageState = {
         exp,
         version,
@@ -67,8 +80,8 @@ const tutorialSlice = createSlice({
     },
     // Set completed (remember)
     setTutorialCompleted(state: TutorialSlice) {
-      const exp: string = addMonths(new Date(), 1).toJSON();
-      const version: string = process.env.NEXT_PUBLIC_APP_VERSION.split("-")[0];
+      const exp: string = generateExpDate();
+      const version: number = generateVersion();
       const storageState: StorageState = {
         exp,
         version,
