@@ -13,10 +13,7 @@ const Patreon = (): JSX.Element => {
         target="_blank"
         rel="noopener"
       >
-        <Button
-          variant="patreon"
-          leftIcon={<Icon icon="ri:patreon-fill" />}
-        >
+        <Button variant="patreon" leftIcon={<Icon icon="ri:patreon-fill" />}>
           {"Fund The App"}
         </Button>
       </Link>

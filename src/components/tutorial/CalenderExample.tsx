@@ -16,7 +16,8 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
 
   // TODO: Disable the days that shouldn't have a function to prevent edits on add example and add to current date on the edit example.
 
-  const currDateObj: Date = new Date();
+  const currDateStr: string = useAppSelector(state => state.calender.currDate);
+  const currDateObj: Date = new Date(currDateStr);
   const isLoading = false;
 
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
   const selectedDate: SelectedDateInfo = useAppSelector(
     (state) => state.calender.selectedDateInfo
   );
-  const { layout } = selectedDate;
+  const { layout, date: currSelectedDateStr } = selectedDate;
 
   // * Stickers * //
 
@@ -45,8 +46,13 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
   const { month, weekdays } = currMonth;
 
   useEffect(() => {
-    dispatch(updateMonth(new Date().toJSON()));
-  }, [dispatch]);
+    const currDateObj: Date = new Date(currDateStr);
+    const currSelectedDateOj: Date = new Date(currSelectedDateStr);
+
+    if (!isSameDay(currDateObj, currSelectedDateOj)) {
+      dispatch(updateMonth(currDateObj.toJSON()));
+    }
+  }, [currDateStr, currSelectedDateStr, dispatch]);
 
   // * The current week * //
 
@@ -148,7 +154,7 @@ const CalenderExample = ({ type }: CalenderExampleProps): JSX.Element => {
                 id.length
                   ? id
                   : format(toDateObj, "yyyyddLL") +
-                  `/${sticker === null ? 0 : sticker}`
+                    `/${sticker === null ? 0 : sticker}`
               }
             />
           );

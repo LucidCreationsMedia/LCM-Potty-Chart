@@ -14,9 +14,7 @@ const CustomButton = ({ text, link, type }: CustomButtonProps): JSX.Element => {
   return (
     <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <Link href={link} target="_blank" rel="noopener">
-        <Button variant={type}>
-          {text}
-        </Button>
+        <Button variant={type}>{text}</Button>
       </Link>
     </MotionBox>
   );

@@ -17,7 +17,7 @@ const Calender = ({
   const selectedDate: SelectedDateInfo = useAppSelector(
     (state) => state.calender.selectedDateInfo
   );
-  const { layout, title } = selectedDate;
+  const { layout, title, date: currentSelectedDateStr } = selectedDate;
 
   const currDateObj = new Date(currDate);
 
@@ -33,9 +33,12 @@ const Calender = ({
 
       if (year > 0 && month > 0 && day > 0) {
         const generatedDate: Date = new Date(year, month - 1, day);
+        const currSelectedDateObj = new Date(currentSelectedDateStr);
         const dateString: string = generatedDate.toJSON();
 
-        dispatch(updateMonth(dateString));
+        if (!isSameDay(currSelectedDateObj, generatedDate)) {
+          dispatch(updateMonth(dateString));
+        }
       } else {
         console.warn("Invalid date format: ", newDate);
       }
@@ -148,7 +151,7 @@ const Calender = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                        `/${sticker === null ? 0 : sticker}`
+                      `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );

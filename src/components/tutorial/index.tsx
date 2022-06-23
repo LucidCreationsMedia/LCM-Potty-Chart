@@ -25,7 +25,9 @@ const Tutorial = ({
   setTutorialComplete,
   setTempTutorialComplete
 }: TutorialProps): JSX.Element => {
-  const rememberComplete = useAppSelector(state => state.tutorial.rememberCompleted);
+  const rememberComplete = useAppSelector(
+    (state) => state.tutorial.rememberCompleted
+  );
   const dispatch = useAppDispatch();
 
   const handleComplete = (): void => {
