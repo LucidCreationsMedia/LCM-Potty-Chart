@@ -12,7 +12,7 @@ const TutorialAppFunctionality = (): JSX.Element => {
       spacing={4}
     >
       <Heading as="h3" size="lg">
-        {"About the App"}
+        {"App Functionality"}
       </Heading>
       <VStack
         h="auto"
