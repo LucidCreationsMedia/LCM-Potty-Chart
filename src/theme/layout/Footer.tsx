@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import Patreon from "../../components/buttons/Patreon";
 import CustomButton from "../../components/buttons/Custom";
 import Twitter from "../../components/buttons/Twitter";
+import Buttons from "../../components/buttons";
 
 const MotionBox = motion<BoxProps>(Box);
 
@@ -69,15 +70,7 @@ const Footer = (): JSX.Element => {
               </Button>
             </Link>
           </MotionBox> */}
-          <CustomButton
-            link={
-              "https://lucidcreations.media/introducing-code-name-potty-chart/"
-            }
-            text="More About This App"
-            type="footer"
-          />
-          <Patreon />
-          <Twitter />
+          <Buttons />
           <Text color="brand.footerText" fontSize="xs">
             &copy;
             {` 2021 - ${new Date().getFullYear()} `}

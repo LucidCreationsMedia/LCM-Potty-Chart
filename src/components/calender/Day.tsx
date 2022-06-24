@@ -98,13 +98,17 @@ const Day = ({
       border="1px solid #181d8f"
       _hover={{
         cursor: isBefore(currDateObj, endOfDay(currDate))
-          ? "pointer"
+          ? selectedSticker !== null
+            ? "pointer"
+            : "default"
           : "default",
         background: "gray.700",
         border: "1px solid #FFF",
         color: "whiteAlpha.900"
       }}
-      onClick={() => handleNav(overflowDirection)}
+      onClick={() =>
+        selectedSticker !== null ? handleNav(overflowDirection) : ""
+      }
       spacing="0.5rem"
       alignContent="center"
       justifyContent="flex-start"
