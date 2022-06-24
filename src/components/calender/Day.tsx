@@ -1,4 +1,7 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
+import { Box, Skeleton, Text, VStack } from "@chakra-ui/react";
 import {
   add,
   getYear,
@@ -6,46 +9,47 @@ import {
   sub,
   getDate,
   isBefore,
-  endOfDay
+  endOfDay,
+  isToday as isTodayFun
 } from "date-fns";
 import router from "next/router";
-import React, { Fragment, useState } from "react";
 import AddUpdateSticker from "./modals/AddUpdateSticker";
 import DemoStickers from "./stickers/DemoStickers";
-import { Provider } from "react-redux";
-import { store } from "../../app/store";
 
 interface DayProps {
+  isLoading: boolean;
   isOverflow?: boolean;
   overflowDirection?: "next" | "prev" | null;
   currSticker: StickerVal;
   date: string;
   selectedDate: string;
   currDate: Date;
-  isToday: boolean;
+  tutorial?: "add" | "edit";
 }
 
 /**
  * The individual days in the calender component.
+ * @param {boolean} isLoading is the component loading?
  * @param {boolean} isOverflow is the current date being given before or after the current month.
  * @param {"next" | "prev" | null} overflowDirection the direction the overflow is. This will navigate the calender forward or backwards 1 month.
  * @param {StickerVal} currSticker the sticker for this date.
  * @param {date} date the date for this day.
  * @param {date} selectedDate the date for the selected month.
  * @param {Date} currDate today's date.
- * @param {boolean} isToday is the current iteration of this component in today's date.
  */
 const Day = ({
+  isLoading,
   isOverflow,
   overflowDirection,
   currSticker,
   date,
   selectedDate,
   currDate,
-  isToday
+  tutorial
 }: DayProps): JSX.Element => {
   const selectedDateObj = new Date(selectedDate);
   const currDateObj = new Date(date);
+  const isToday = isTodayFun(currDateObj);
 
   const handleNav = (direction: "next" | "prev") => {
     if (direction === "next") {
@@ -84,79 +88,141 @@ const Day = ({
 
   // TODO: When the valid date range is created, disallow pointer cursor outside of the date range.
 
-  return (
-    <Fragment>
-      {isOverflow && (
-        <VStack
-          bg="transparent"
-          color="gray.600"
-          border="1px solid #181d8f"
-          w="100%"
-          h="100%"
-          _hover={{
-            cursor: isBefore(currDateObj, endOfDay(currDate))
-              ? "pointer"
-              : "default",
-            background: "gray.700",
-            border: "1px solid #FFF",
-            color: "whiteAlpha.900"
-          }}
-          onClick={() => handleNav(overflowDirection)}
-          spacing="0.5rem"
-          alignContent="center"
-          justifyContent="flex-start"
-          pt={2}
-        >
-          <Text w="auto" h="auto">
-            {`${getDate(currDateObj)}`}
-          </Text>
-          <Box key={currSticker} fontSize="1.5rem">
-            <DemoStickers stickerVal={currSticker} />
+  return isOverflow ? (
+    <VStack
+      w="100%"
+      h="100%"
+      bg="transparent"
+      pt={2}
+      color="gray.600"
+      border="1px solid #181d8f"
+      _hover={{
+        cursor: isBefore(currDateObj, endOfDay(currDate))
+          ? selectedSticker !== null
+            ? "pointer"
+            : "default"
+          : "default",
+        background: "gray.700",
+        border: "1px solid #FFF",
+        color: "whiteAlpha.900"
+      }}
+      onClick={() =>
+        selectedSticker !== null ? handleNav(overflowDirection) : ""
+      }
+      spacing="0.5rem"
+      alignContent="center"
+      justifyContent="flex-start"
+    >
+      <Text w="auto" h="auto">
+        {`${getDate(currDateObj)}`}
+      </Text>
+      {isLoading ? (
+        <Skeleton key={currSticker}>
+          <Box fontSize="1.5rem">
+            <DemoStickers stickerVal={0} />
           </Box>
-        </VStack>
+        </Skeleton>
+      ) : (
+        <Box key={currSticker} fontSize="1.5rem">
+          <DemoStickers stickerVal={currSticker} />
+        </Box>
       )}
-      {!isOverflow && (
-        <VStack
-          bg="transparent"
-          border="1px solid #0068ff"
-          w="100%"
-          h="100%"
-          onClick={() => {
-            setStep(0);
-            setSelectedSticker(null);
-            setIsOpen(true);
-          }}
-          alignContent="center"
-          justifyContent="flex-start"
-          pt={2}
-          _hover={{
-            cursor: isBefore(currDateObj, endOfDay(currDate))
-              ? "pointer"
-              : "default",
-            background: "gray.700",
-            border: "1px solid #FFF"
-          }}
-        >
-          <Text
-            p={
-              isToday
-                ? getDate(currDateObj) > 10
-                  ? "0px 6px 3px 6px"
-                  : "0px 9px 3px 9px"
-                : "auto"
-            }
-            h="auto"
-            w="auto"
-            border={isToday ? "1px solid #0068ff" : "0px"}
-            borderRadius={isToday ? "100px" : "0px"}
-          >
-            {`${getDate(currDateObj)}`}
-          </Text>
-          <Box key={currSticker} fontSize="1.5rem">
-            <DemoStickers stickerVal={currSticker} />
+    </VStack>
+  ) : (
+    <VStack
+      w="100%"
+      h="100%"
+      bg={
+        tutorial
+          ? tutorial === "add" && isToday
+            ? "gray.600"
+            : tutorial === "edit" &&
+              !isToday &&
+              isBefore(currDateObj, endOfDay(currDate))
+            ? "gray.600"
+            : "transparent"
+          : "transparent"
+      }
+      border={
+        tutorial
+          ? tutorial === "add" && isToday
+            ? "1px solid #00ff3c"
+            : tutorial === "edit" &&
+              !isToday &&
+              isBefore(currDateObj, endOfDay(currDate))
+            ? "1px solid #00ff3c"
+            : "1px solid #0068ff"
+          : "1px solid #0068ff"
+      }
+      onClick={() => {
+        setStep(0);
+        setSelectedSticker(null);
+        setIsOpen(true);
+      }}
+      alignContent="center"
+      justifyContent="flex-start"
+      pt={2}
+      _hover={{
+        cursor: isBefore(currDateObj, endOfDay(currDate))
+          ? "pointer"
+          : "default",
+        bg: tutorial
+          ? tutorial === "add" && isToday
+            ? "gray.600"
+            : tutorial === "edit" &&
+              !isToday &&
+              isBefore(currDateObj, endOfDay(currDate))
+            ? "gray.600"
+            : "transparent"
+          : "transparent",
+        border: "1px solid #FFF"
+      }}
+    >
+      <Text
+        h="auto"
+        w="auto"
+        p={
+          isToday
+            ? getDate(currDateObj) > 10
+              ? "0px 6px 3px 6px"
+              : "0px 9px 3px 9px"
+            : "auto"
+        }
+        border={isToday ? "1px solid #0068ff" : "0px"}
+        borderRadius={isToday ? "100px" : "0px"}
+      >
+        {`${getDate(currDateObj)}`}
+      </Text>
+      {isLoading ? (
+        <Skeleton key={currSticker}>
+          <Box fontSize="1.5rem">
+            <DemoStickers stickerVal={0} />
           </Box>
-          <Provider store={store}>
-            {isBefore(currDateObj, endOfDay(currDate)) && (
+        </Skeleton>
+      ) : (
+        <Box key={currSticker} fontSize="1.5rem">
+          <DemoStickers stickerVal={currSticker} />
+        </Box>
+      )}
+      {tutorial ? (
+        <Provider store={store}>
+          {tutorial.toLowerCase() === "add" && isToday && !isLoading && (
+            <AddUpdateSticker
+              stickerDate={date}
+              isOpen={isOpen}
+              updateIsOpen={setIsOpen}
+              currSticker={currSticker}
+              step={step}
+              updateStep={setStep}
+              selectedSticker={selectedSticker}
+              updateSelectedSticker={setSelectedSticker}
+              currDate={currDate}
+            />
+          )}
+          {tutorial.toLowerCase() === "edit" &&
+            !isToday &&
+            isBefore(currDateObj, endOfDay(currDate)) &&
+            !isLoading && (
               <AddUpdateSticker
                 stickerDate={date}
                 isOpen={isOpen}
@@ -169,10 +235,25 @@ const Day = ({
                 currDate={currDate}
               />
             )}
-          </Provider>
-        </VStack>
+        </Provider>
+      ) : (
+        <Provider store={store}>
+          {isBefore(currDateObj, endOfDay(currDate)) && !isLoading && (
+            <AddUpdateSticker
+              stickerDate={date}
+              isOpen={isOpen}
+              updateIsOpen={setIsOpen}
+              currSticker={currSticker}
+              step={step}
+              updateStep={setStep}
+              selectedSticker={selectedSticker}
+              updateSelectedSticker={setSelectedSticker}
+              currDate={currDate}
+            />
+          )}
+        </Provider>
       )}
-    </Fragment>
+    </VStack>
   );
 };
 

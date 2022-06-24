@@ -1,13 +1,23 @@
 import React from "react";
+import { useAppSelector } from "../../app/hooks";
 import { useRouter } from "next/router";
 import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { format, isSameMonth, addMonths, subMonths } from "date-fns";
 import findValidDateRange from "../../../lib/findValidDateRange";
 import DatePicker from "./DatePicker";
-import { useAppSelector } from "../../app/hooks";
 
-const CalenderNav = (): JSX.Element => {
+interface CalenderNavProps {
+  isLoading: boolean;
+  title: string;
+}
+
+/**
+ * @param {boolean} isLoading is the component loading?
+ * @param {string} title the title for the current date.
+ */
+
+const CalenderNav = ({ title, isLoading }: CalenderNavProps): JSX.Element => {
   const selectedDate = useAppSelector(
     (state) => state.calender.selectedDateInfo
   );
@@ -46,7 +56,7 @@ const CalenderNav = (): JSX.Element => {
         icon={<Icon icon="akar-icons:chevron-left" />}
         onClick={() => handleNavButtons("prev")}
       />
-      <DatePicker />
+      <DatePicker isLoading={isLoading} title={title} />
       <IconButton
         isDisabled={isSameMonth(selectedDateObj, validEnd)}
         aria-label="Next Month"

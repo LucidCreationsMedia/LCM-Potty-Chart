@@ -24,6 +24,7 @@ const generateSticker = (): -2 | -1 | 0 | 1 | 2 => {
   }
 };
 
+// TODO: Update so seeder takes in a month or date to then generate the stickers for it.
 /**
  * This seeder is to simulate the date and sticker info from the database.
  * Filling up an array for the current month with sticker from ths first to

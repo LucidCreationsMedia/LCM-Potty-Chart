@@ -1,60 +1,39 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { updateCurrDate, updateMonth } from "../../features/calender";
+import { updateMonth } from "../../features/calender";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import { isSameDay, format } from "date-fns";
-import CalenderNav from "./CalenderNav";
-import Day from "./Day";
+import { format, isSameDay, isToday } from "date-fns";
+import Day from "../calender/Day";
+import { setCurrentWeek } from "../../features/tutorial";
 
-const Calender = ({
-  date: newDate,
+interface CalenderExampleProps {
+  type: "add" | "edit";
+  isLoading: boolean;
+}
+
+const CalenderExample = ({
+  type,
   isLoading
-}: UpdateCalendarProps): JSX.Element => {
+}: CalenderExampleProps): JSX.Element => {
+  // TODO: Check if the current date is the start of the user's preferred start of the week and use the previous week for the edit example.
+
+  const currDateStr: string = useAppSelector(
+    (state) => state.calender.currDate
+  );
+  const currDateObj: Date = new Date(currDateStr);
+
   const dispatch = useAppDispatch();
 
-  // * Month * //
-  const currDate: string = useAppSelector((state) => state.calender.currDate);
+  // * Current Month * //
   const selectedDate: SelectedDateInfo = useAppSelector(
     (state) => state.calender.selectedDateInfo
   );
-  const { layout, title, date: currentSelectedDateStr } = selectedDate;
-
-  const currDateObj = new Date(currDate);
+  const { layout, date: currSelectedDateStr } = selectedDate;
 
   // * Stickers * //
-
   const stickersMonth: StickerDays = useAppSelector(
     (state) => state.stickers.stickersMonth
   );
-
-  useEffect(() => {
-    if (newDate && newDate.year && newDate.month && newDate.day) {
-      const { year, month, day } = newDate;
-
-      if (year > 0 && month > 0 && day > 0) {
-        const generatedDate: Date = new Date(year, month - 1, day);
-        const currSelectedDateObj = new Date(currentSelectedDateStr);
-        const dateString: string = generatedDate.toJSON();
-
-        if (!isSameDay(currSelectedDateObj, generatedDate)) {
-          dispatch(updateMonth(dateString));
-        }
-      } else {
-        console.warn("Invalid date format: ", newDate);
-      }
-    }
-  }, [currentSelectedDateStr, dispatch, newDate]);
-
-  useEffect(() => {
-    // console.info("Check to update date.");
-
-    const currDateObj = new Date(currDate);
-
-    if (!isSameDay(currDateObj, new Date())) {
-      // console.info("Updated date.");
-      dispatch(updateCurrDate());
-    }
-  }, [currDate, dispatch]);
 
   // Simulated user settings.
   const userSettings = {
@@ -62,23 +41,69 @@ const Calender = ({
     startOfWeek: "Sunday"
   };
 
+  // * Week Names * //
   const currMonth: WeekLayout =
     layout[`${userSettings.startOfWeek.toLowerCase()}`];
   const { month, weekdays } = currMonth;
 
-  // TODO: Move the weekdays into it's own component for responsiveness.
+  useEffect(() => {
+    const currDateObj: Date = new Date(currDateStr);
+    const currSelectedDateOj: Date = new Date(currSelectedDateStr);
+
+    if (!isSameDay(currDateObj, currSelectedDateOj)) {
+      dispatch(updateMonth(currDateObj.toJSON()));
+    }
+  }, [currDateStr, currSelectedDateStr, dispatch]);
+
+  // * The current week * //
+  const currWeek = useAppSelector((state) => state.tutorial.currWeek);
+
+  useEffect(() => {
+    const getCurrentWeek = (): MonthDay[] => {
+      let foundWeek: MonthDay[];
+
+      for (const week in month) {
+        const currWeek = month[week];
+
+        currWeek.forEach((day: MonthDay) => {
+          const { date } = day;
+
+          if (isToday(new Date(date))) {
+            foundWeek = currWeek;
+          }
+        });
+      }
+
+      return foundWeek || ([] as MonthDay[]);
+    };
+
+    if (currWeek === null) {
+      dispatch(setCurrentWeek(getCurrentWeek()));
+    }
+  }, [currWeek, dispatch, month]);
 
   return (
-    <VStack h="92vh" w="100%" mb="5vh">
-      <CalenderNav title={title} isLoading={isLoading} />
-      <VStack h="100%" w="100%" spacing={0}>
+    <VStack
+      h="auto"
+      w="100%"
+      alignContent="center"
+      alignItems="center"
+      spacing={2}
+    >
+      <VStack
+        h="8.5rem"
+        w="100%"
+        alignContent="center"
+        alignItems="center"
+        spacing={0}
+      >
         <HStack
           w="100%"
           h="auto"
-          px={{ base: 1, sm: 2, md: 6 }}
-          spacing={0}
           alignContent="center"
           alignItems="center"
+          spacing={0}
+          px={{ base: 1, sm: 2, md: 6 }}
         >
           {weekdays.map((weekDay) => {
             return (
@@ -112,14 +137,12 @@ const Calender = ({
         <SimpleGrid
           w="100%"
           h="100%"
-          px={{ base: 1, sm: 2, md: 6 }}
           columns={7}
+          px={{ base: 1, sm: 2, md: 6 }}
           alignItems="center"
         >
-          {Object.keys(month).map((week) => {
-            const thisWeek = month[week];
-
-            return thisWeek.map((day: MonthDay) => {
+          {currWeek &&
+            currWeek.map((day: MonthDay) => {
               const { date, isOverflow, overflowDirection } = day;
 
               const toDateObj: Date = new Date(date);
@@ -147,6 +170,7 @@ const Calender = ({
                   date={date}
                   selectedDate={selectedDate.date}
                   currDate={currDateObj}
+                  tutorial={type}
                   key={
                     id.length
                       ? id
@@ -155,12 +179,32 @@ const Calender = ({
                   }
                 />
               );
-            });
-          })}
+            })}
         </SimpleGrid>
       </VStack>
+      {type === "edit" && (
+        <VStack
+          w="100%"
+          h="auto"
+          alignContent="center"
+          alignItems="center"
+          spacing={2}
+        >
+          <Text fontSize="sm" color="whiteAlpha.800">
+            {
+              "Not being able to edit within this tutorial when the current date is the start of the week or month is a known bug."
+            }
+          </Text>
+          <Text fontSize="sm" color="whiteAlpha.800">
+            {"This bug will be fixed in beta v2."}
+          </Text>
+          <Text fontSize="sm" color="whiteAlpha.800">
+            {"You can skip the tutorial and try again tomorrow."}
+          </Text>
+        </VStack>
+      )}
     </VStack>
   );
 };
 
-export default Calender;
+export default CalenderExample;

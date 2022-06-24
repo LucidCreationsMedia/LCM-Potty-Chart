@@ -5,6 +5,7 @@ import populate from "../../../lib/populateMonth";
 interface CalenderSlice {
   currDate: string;
   selectedDateInfo: SelectedDateInfo;
+  isLoading: boolean;
 }
 
 const getCurrDate = (): Date => new Date();
@@ -17,7 +18,8 @@ const initialState: CalenderSlice = {
     date: dateParse(getCurrDate()),
     title: dateFormatter(getCurrDate()),
     layout: populate(getCurrDate())
-  }
+  },
+  isLoading: true
 };
 
 // TODO: Add a function that validated if a month has at least one sticker in it. Use that within the nav function (when filter is enabled).
@@ -50,9 +52,15 @@ const calenderSlice = createSlice({
     // Update current date
     updateCurrDate(state: CalenderSlice) {
       state.currDate = dateParse(new Date());
+    },
+    // Update isLoading
+    updateLoading(state: CalenderSlice, action: PayloadAction<boolean>) {
+      const { payload } = action;
+      state.isLoading = payload;
     }
   }
 });
 
-export const { updateMonth, updateCurrDate } = calenderSlice.actions;
+export const { updateMonth, updateCurrDate, updateLoading } =
+  calenderSlice.actions;
 export default calenderSlice.reducer;

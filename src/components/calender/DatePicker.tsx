@@ -14,6 +14,7 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
+  Skeleton,
   VStack
 } from "@chakra-ui/react";
 import {
@@ -27,13 +28,18 @@ import {
 import { format } from "date-fns";
 import findValidDateRange from "../../../lib/findValidDateRange";
 import FormValidateEmoji from "./FormValidateEmoji";
-import { useAppSelector } from "../../app/hooks";
 
-const DatePicker = (): JSX.Element => {
-  const selectedDate = useAppSelector(
-    (state) => state.calender.selectedDateInfo
-  );
+interface DatePickerProps {
+  isLoading: boolean;
+  title: string;
+}
 
+/**
+ * @param {boolean} isLoading is the component loading?
+ * @param {string} title the title for the current date.
+ */
+
+const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
   const router = useRouter();
 
   const [valid, setValid] = useState<boolean>(false);
@@ -51,7 +57,7 @@ const DatePicker = (): JSX.Element => {
         dateError = "Please select a date.";
         setValid(false);
       } else if (dateArr.length === 3) {
-        const date: UpdateCalendarProps = {
+        const date: UpdateCalenderPropsDateLayout = {
           year: parseInt(dateArr[0]),
           month: parseInt(dateArr[1]),
           day: parseInt(dateArr[2])
@@ -91,7 +97,7 @@ const DatePicker = (): JSX.Element => {
       if (formInput.date) {
         if (!validateDate(formInput.date)) {
           const dateArr = formInput.date.split("-");
-          const date: UpdateCalendarProps = {
+          const date: UpdateCalenderPropsDateLayout = {
             year: parseInt(dateArr[0]),
             month: parseInt(dateArr[1]),
             day: parseInt(dateArr[2])
@@ -130,9 +136,17 @@ const DatePicker = (): JSX.Element => {
     <Popover placement="bottom" initialFocusRef={initRef}>
       <PopoverTrigger>
         <Button border="none" variant="outline">
-          <Heading w="100%" h="auto">
-            {selectedDate.title}
-          </Heading>
+          {isLoading ? (
+            <Skeleton>
+              <Heading w="100%" h="auto">
+                {title}
+              </Heading>
+            </Skeleton>
+          ) : (
+            <Heading w="100%" h="auto">
+              {title}
+            </Heading>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent>
@@ -175,7 +189,7 @@ const DatePicker = (): JSX.Element => {
               >
                 <VStack
                   alignItems="center"
-                  alignContent="flex=start"
+                  alignContent="flex-start"
                   w="100%"
                   h="auto"
                   spacing={6}

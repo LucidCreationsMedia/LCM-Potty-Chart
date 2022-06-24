@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Modal,
@@ -5,7 +6,6 @@ import {
   ModalContent,
   ModalOverlay
 } from "@chakra-ui/react";
-import React from "react";
 import LoadingSpinner from "./LoadingSpinner";
 
 const LoadingOverlay = (): JSX.Element => {

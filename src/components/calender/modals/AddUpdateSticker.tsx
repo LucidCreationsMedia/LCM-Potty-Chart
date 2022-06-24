@@ -1,3 +1,6 @@
+import React, { useState, useRef } from "react";
+import { useAppDispatch } from "../../../app/hooks";
+import { addEditSticker } from "../../../features/calender/stickers";
 import {
   Button,
   Modal,
@@ -13,13 +16,10 @@ import {
   SimpleGrid,
   Box
 } from "@chakra-ui/react";
-import React, { useState, useRef } from "react";
 import { format, isSameDay } from "date-fns";
 import { Icon } from "@iconify/react";
 import StickerSelector from "./StickerSelector";
 import DemoStickers from "../stickers/DemoStickers";
-import { useAppDispatch } from "../../../app/hooks";
-import { addEditSticker } from "../../../features/calender/stickers";
 
 interface AddStickerProps {
   isOpen: boolean;

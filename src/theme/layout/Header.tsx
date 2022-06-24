@@ -15,7 +15,7 @@ import appLogo from "../../../public/images/logo.svg";
 
 const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart";
-  const appVersion = "v0.0.11-alpha";
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION_HEADER || "";
 
   // Add transparency while not at the top of the page.
   const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
@@ -99,18 +99,18 @@ const Header = (): JSX.Element => {
     >
       {/* Logo | Site Name */}
       <HStack
+        display={{ base: "flex", lg: "none" }}
+        position="absolute"
         width="100%"
+        height={12}
+        top={0}
+        ml={4}
+        spacing="5px"
         justifyContent={{
           base: "flex-start",
           sm: "center"
         }}
         alignItems="center"
-        height={12}
-        top={0}
-        position="absolute"
-        ml={4}
-        display={{ base: "flex", lg: "none" }}
-        spacing="5px"
         _hover={{
           cursor: "default"
         }}
@@ -163,21 +163,21 @@ const Header = (): JSX.Element => {
         </HStack>
         <Menu isLazy lazyBehavior="unmount" isOpen={open}>
           <MenuButton
+            id="mobile-menu-button"
             as={IconButton}
             aria-label="Mobile Menu"
             icon={menuIcon()}
-            onClick={() => setOpen(!open)}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
             display={{
               base: "inline-flex",
               lg: "none"
             }}
-            variant="mobileNav"
             bg={transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"}
-            type="button"
             border={transparentNavbar ? "1px solid #0068ff" : "none"}
-            id="mobile-menu-button"
+            variant="mobileNav"
+            type="button"
+            onClick={() => setOpen(!open)}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
           />
           <MobileNav updateOpen={setOpen} />
         </Menu>

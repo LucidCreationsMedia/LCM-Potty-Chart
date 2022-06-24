@@ -2,7 +2,7 @@
   "private": true,
   "name": "lucid-creations-media-potty-chart",
   "homepage": "https://lucidcreations.media/introducing-code-name-potty-chart/",
-  "version": "v0.0.11-alpha",
+  "version": "0.1.0",
   "author": {
     "name": "Lucid Creations Media",
     "url": "https://lucidcreations.media",
@@ -23,23 +23,23 @@
     "@reduxjs/toolkit": "^1.8.2",
     "date-fns": "^2.28.0",
     "formik": "^2.2.9",
-    "framer-motion": "^6.3.11",
+    "framer-motion": "^6.3.15",
     "next": "12.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
-    "sharp": "^0.30.6"
+    "sharp": "^0.30.7"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
     "@types/react-redux": "^7.1.24",
-    "@typescript-eslint/eslint-plugin": "<5.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
     "eslint": "^8.18.0",
     "eslint-config-next": "^12.1.6",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "<4.6.0",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
