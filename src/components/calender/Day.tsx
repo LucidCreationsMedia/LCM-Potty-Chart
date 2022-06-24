@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
-import { Box, Skeleton, Text, VStack } from "@chakra-ui/react";
+import { Box, Skeleton, VStack } from "@chakra-ui/react";
 import {
   add,
   getYear,
@@ -113,9 +113,9 @@ const Day = ({
       alignContent="center"
       justifyContent="flex-start"
     >
-      <Text w="auto" h="auto">
+      <Box w="1.8rem" h="1.8rem" textAlign="center" p={0} m={0}>
         {`${getDate(currDateObj)}`}
-      </Text>
+      </Box>
       {isLoading ? (
         <Skeleton key={currSticker}>
           <Box fontSize="1.5rem">
@@ -178,21 +178,23 @@ const Day = ({
         border: "1px solid #FFF"
       }}
     >
-      <Text
-        h="auto"
-        w="auto"
-        p={
-          isToday
-            ? getDate(currDateObj) > 10
-              ? "0px 6px 3px 6px"
-              : "0px 9px 3px 9px"
-            : "auto"
-        }
-        border={isToday ? "1px solid #0068ff" : "0px"}
-        borderRadius={isToday ? "100px" : "0px"}
-      >
-        {`${getDate(currDateObj)}`}
-      </Text>
+      {isToday ? (
+        <Box
+          border="1px solid #0068ff"
+          borderRadius="50%"
+          w="1.8rem"
+          h="1.8rem"
+          textAlign="center"
+          p={0}
+          m={0}
+        >
+          {`${getDate(currDateObj)}`}
+        </Box>
+      ) : (
+        <Box w="1.8rem" h="1.8rem" textAlign="center" p={0} m={0}>
+          {`${getDate(currDateObj)}`}
+        </Box>
+      )}
       {isLoading ? (
         <Skeleton key={currSticker}>
           <Box fontSize="1.5rem">
