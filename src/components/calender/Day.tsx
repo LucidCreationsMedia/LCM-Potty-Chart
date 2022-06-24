@@ -113,9 +113,15 @@ const Day = ({
       alignContent="center"
       justifyContent="flex-start"
     >
-      <Text w="auto" h="auto">
+      <Box
+        w="1.8rem"
+        h="1.8rem"
+        textAlign="center"
+        p={0}
+        m={0}
+      >
         {`${getDate(currDateObj)}`}
-      </Text>
+      </Box>
       {isLoading ? (
         <Skeleton key={currSticker}>
           <Box fontSize="1.5rem">
@@ -139,8 +145,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-            ? "gray.600"
-            : "transparent"
+              ? "gray.600"
+              : "transparent"
           : "transparent"
       }
       border={
@@ -150,8 +156,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-            ? "1px solid #00ff3c"
-            : "1px solid #0068ff"
+              ? "1px solid #00ff3c"
+              : "1px solid #0068ff"
           : "1px solid #0068ff"
       }
       onClick={() => {
@@ -172,27 +178,39 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-            ? "gray.600"
-            : "transparent"
+              ? "gray.600"
+              : "transparent"
           : "transparent",
         border: "1px solid #FFF"
       }}
     >
-      <Text
-        h="auto"
-        w="auto"
-        p={
-          isToday
-            ? getDate(currDateObj) > 10
-              ? "0px 6px 3px 6px"
-              : "0px 9px 3px 9px"
-            : "auto"
-        }
-        border={isToday ? "1px solid #0068ff" : "0px"}
-        borderRadius={isToday ? "100px" : "0px"}
-      >
-        {`${getDate(currDateObj)}`}
-      </Text>
+      {isToday ?
+        (
+          <Box
+            border="1px solid #0068ff"
+            borderRadius="50%"
+            w="1.8rem"
+            h="1.8rem"
+            textAlign="center"
+            p={0}
+            m={0}
+          >
+            {`${getDate(currDateObj)}`}
+          </Box>
+        )
+        :
+        (
+          <Box
+            w="1.8rem"
+            h="1.8rem"
+            textAlign="center"
+            p={0}
+            m={0}
+          >
+            {`${getDate(currDateObj)}`}
+          </Box>
+        )
+      }
       {isLoading ? (
         <Skeleton key={currSticker}>
           <Box fontSize="1.5rem">
