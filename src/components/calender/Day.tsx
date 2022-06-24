@@ -135,8 +135,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-              ? "gray.600"
-              : "transparent"
+            ? "gray.600"
+            : "transparent"
           : "transparent"
       }
       border={
@@ -146,8 +146,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-              ? "1px solid #00ff3c"
-              : "1px solid #0068ff"
+            ? "1px solid #00ff3c"
+            : "1px solid #0068ff"
           : "1px solid #0068ff"
       }
       onClick={() => {
@@ -168,8 +168,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-              ? "gray.600"
-              : "transparent"
+            ? "gray.600"
+            : "transparent"
           : "transparent",
         border: "1px solid #FFF"
       }}

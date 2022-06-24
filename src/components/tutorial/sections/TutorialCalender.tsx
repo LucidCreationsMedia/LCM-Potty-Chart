@@ -36,7 +36,7 @@ const TutorialCalender = ({ isLoading }: CalenderExampleProps): JSX.Element => {
           justifyContent="center"
           spacing={1}
         >
-          <Text>{"Select the date with a"}</Text>
+          <Text>{"Select the date with the"}</Text>
           <Text color="#00ff3c">{" green "}</Text>
           <Text>{"border."}</Text>
         </HStack>

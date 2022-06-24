@@ -175,7 +175,7 @@ const CalenderExample = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                      `/${sticker === null ? 0 : sticker}`
+                        `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );
@@ -190,12 +190,17 @@ const CalenderExample = ({
           alignItems="center"
           spacing={2}
         >
-          <Text>
+          <Text fontSize="sm" color="whiteAlpha.800">
             {
-              "Not being able to edit within this tutorial when the current date is the start of the month is a known bug."
+              "Not being able to edit within this tutorial when the current date is the start of the week or month is a known bug."
             }
           </Text>
-          <Text>{"This bug will be fixed in beta v2."}</Text>
+          <Text fontSize="sm" color="whiteAlpha.800">
+            {"This bug will be fixed in beta v2."}
+          </Text>
+          <Text fontSize="sm" color="whiteAlpha.800">
+            {"You can skip the tutorial and try again tomorrow."}
+          </Text>
         </VStack>
       )}
     </VStack>

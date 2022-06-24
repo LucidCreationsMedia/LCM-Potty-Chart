@@ -45,7 +45,7 @@ const buttonStyles = {
       fontSize: "xl",
       py: 3,
       px: 4,
-      color: "gray.400",
+      color: "whiteAlpha.800",
       _hover: {
         bg: mode(whiten("brand.danger", 20), darken("brand.danger", 20))(props),
         color: "whiteAlpha.900"
