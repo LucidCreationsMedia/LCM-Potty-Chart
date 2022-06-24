@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
-import { Box, Skeleton, Text, VStack } from "@chakra-ui/react";
+import { Box, Skeleton, VStack } from "@chakra-ui/react";
 import {
   add,
   getYear,
@@ -113,13 +113,7 @@ const Day = ({
       alignContent="center"
       justifyContent="flex-start"
     >
-      <Box
-        w="1.8rem"
-        h="1.8rem"
-        textAlign="center"
-        p={0}
-        m={0}
-      >
+      <Box w="1.8rem" h="1.8rem" textAlign="center" p={0} m={0}>
         {`${getDate(currDateObj)}`}
       </Box>
       {isLoading ? (
@@ -145,8 +139,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-              ? "gray.600"
-              : "transparent"
+            ? "gray.600"
+            : "transparent"
           : "transparent"
       }
       border={
@@ -156,8 +150,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-              ? "1px solid #00ff3c"
-              : "1px solid #0068ff"
+            ? "1px solid #00ff3c"
+            : "1px solid #0068ff"
           : "1px solid #0068ff"
       }
       onClick={() => {
@@ -178,39 +172,29 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-              ? "gray.600"
-              : "transparent"
+            ? "gray.600"
+            : "transparent"
           : "transparent",
         border: "1px solid #FFF"
       }}
     >
-      {isToday ?
-        (
-          <Box
-            border="1px solid #0068ff"
-            borderRadius="50%"
-            w="1.8rem"
-            h="1.8rem"
-            textAlign="center"
-            p={0}
-            m={0}
-          >
-            {`${getDate(currDateObj)}`}
-          </Box>
-        )
-        :
-        (
-          <Box
-            w="1.8rem"
-            h="1.8rem"
-            textAlign="center"
-            p={0}
-            m={0}
-          >
-            {`${getDate(currDateObj)}`}
-          </Box>
-        )
-      }
+      {isToday ? (
+        <Box
+          border="1px solid #0068ff"
+          borderRadius="50%"
+          w="1.8rem"
+          h="1.8rem"
+          textAlign="center"
+          p={0}
+          m={0}
+        >
+          {`${getDate(currDateObj)}`}
+        </Box>
+      ) : (
+        <Box w="1.8rem" h="1.8rem" textAlign="center" p={0} m={0}>
+          {`${getDate(currDateObj)}`}
+        </Box>
+      )}
       {isLoading ? (
         <Skeleton key={currSticker}>
           <Box fontSize="1.5rem">
