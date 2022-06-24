@@ -60,7 +60,8 @@ const CalenderExample = ({
 
   useEffect(() => {
     const getCurrentWeek = (): MonthDay[] => {
-      let foundWeek: MonthDay[] | null;
+      let foundWeek: MonthDay[];
+
       for (const week in month) {
         const currWeek = month[week];
 
@@ -82,91 +83,121 @@ const CalenderExample = ({
   }, [currWeek, dispatch, month]);
 
   return (
-    <VStack h="8.5rem" w="100%" spacing={0}>
-      <HStack
-        px={{ base: 1, sm: 2, md: 6 }}
-        spacing={0}
+    <VStack
+      h="auto"
+      w="100%"
+      alignContent="center"
+      alignItems="center"
+      spacing={2}
+    >
+      <VStack
+        h="8.5rem"
         w="100%"
-        h="auto"
         alignContent="center"
         alignItems="center"
+        spacing={0}
       >
-        {weekdays.map((weekDay) => {
-          return (
-            <Box
-              display="flex"
-              alignContent="center"
-              alignItems="center"
-              bg="transparent"
-              border="1px solid #0068ff"
-              w="100%"
-              h={10}
-              key={weekDay}
-            >
-              <Text display={{ base: "none", md: "block" }} w="100%" h="auto">
-                {weekDay}
-              </Text>
-              <Text
-                display={{ base: "none", sm: "block", md: "none" }}
-                w="100%"
-                h="auto"
-              >
-                {weekDay.substring(0, 3)}
-              </Text>
-              <Text display={{ base: "block", sm: "none" }} w="100%" h="auto">
-                {weekDay.substring(0, 2)}
-              </Text>
-            </Box>
-          );
-        })}
-      </HStack>
-      <SimpleGrid
-        px={{ base: 1, sm: 2, md: 6 }}
-        w="100%"
-        h="100%"
-        columns={7}
-        alignItems="center"
-      >
-        {currWeek &&
-          currWeek.map((day: MonthDay) => {
-            const { date, isOverflow, overflowDirection } = day;
-
-            const toDateObj: Date = new Date(date);
-
-            let sticker = null;
-
-            let id = "";
-
-            stickersMonth.map((stickerDay) => {
-              const { date: stickerDate } = stickerDay;
-
-              if (isSameDay(new Date(stickerDate), toDateObj)) {
-                sticker = stickerDay.sticker;
-
-                id = stickerDay.id;
-              }
-            });
-
+        <HStack
+          w="100%"
+          h="auto"
+          alignContent="center"
+          alignItems="center"
+          spacing={0}
+          px={{ base: 1, sm: 2, md: 6 }}
+        >
+          {weekdays.map((weekDay) => {
             return (
-              <Day
-                isLoading={isLoading}
-                isOverflow={isOverflow}
-                overflowDirection={overflowDirection}
-                currSticker={sticker}
-                date={date}
-                selectedDate={selectedDate.date}
-                currDate={currDateObj}
-                tutorial={type}
-                key={
-                  id.length
-                    ? id
-                    : format(toDateObj, "yyyyddLL") +
-                      `/${sticker === null ? 0 : sticker}`
-                }
-              />
+              <Box
+                key={weekDay}
+                display="flex"
+                w="100%"
+                h={10}
+                bg="transparent"
+                border="1px solid #0068ff"
+                alignContent="center"
+                alignItems="center"
+              >
+                <Text display={{ base: "none", md: "block" }} w="100%" h="auto">
+                  {weekDay}
+                </Text>
+                <Text
+                  display={{ base: "none", sm: "block", md: "none" }}
+                  w="100%"
+                  h="auto"
+                >
+                  {weekDay.substring(0, 3)}
+                </Text>
+                <Text display={{ base: "block", sm: "none" }} w="100%" h="auto">
+                  {weekDay.substring(0, 2)}
+                </Text>
+              </Box>
             );
           })}
-      </SimpleGrid>
+        </HStack>
+        <SimpleGrid
+          w="100%"
+          h="100%"
+          columns={7}
+          px={{ base: 1, sm: 2, md: 6 }}
+          alignItems="center"
+        >
+          {currWeek &&
+            currWeek.map((day: MonthDay) => {
+              const { date, isOverflow, overflowDirection } = day;
+
+              const toDateObj: Date = new Date(date);
+
+              let sticker = null;
+
+              let id = "";
+
+              stickersMonth.map((stickerDay) => {
+                const { date: stickerDate } = stickerDay;
+
+                if (isSameDay(new Date(stickerDate), toDateObj)) {
+                  sticker = stickerDay.sticker;
+
+                  id = stickerDay.id;
+                }
+              });
+
+              return (
+                <Day
+                  isLoading={isLoading}
+                  isOverflow={isOverflow}
+                  overflowDirection={overflowDirection}
+                  currSticker={sticker}
+                  date={date}
+                  selectedDate={selectedDate.date}
+                  currDate={currDateObj}
+                  tutorial={type}
+                  key={
+                    id.length
+                      ? id
+                      : format(toDateObj, "yyyyddLL") +
+                      `/${sticker === null ? 0 : sticker}`
+                  }
+                />
+              );
+            })}
+        </SimpleGrid>
+      </VStack>
+      {type === "edit" && (
+        <VStack
+          w="100%"
+          h="auto"
+          alignContent="center"
+          alignItems="center"
+          spacing={2}
+        >
+          <Text>
+            {
+              "Not being able to edit within this tutorial when the current date is the start of the month is a known bug."
+            }
+          </Text>
+          <Text>{"This bug will be fixed in beta v2."}</Text>
+        </VStack>
+      )}
     </VStack>
   );
 };

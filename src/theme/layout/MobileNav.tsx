@@ -17,12 +17,12 @@ const MobileNav: FC<MobileNavProps> = ({ updateOpen }: MobileNavProps) => {
     <MenuList
       as="nav"
       display={{ base: "block", lg: "none" }}
-      bg="brand.main"
       h="auto"
       w="100%"
       p={0}
       border="none"
       boxShadow="none"
+      bg="brand.main"
     >
       {navItems.map((navItem: NavItem, index: number) => {
         return (

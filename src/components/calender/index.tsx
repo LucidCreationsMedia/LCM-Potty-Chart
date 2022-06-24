@@ -73,24 +73,24 @@ const Calender = ({
       <CalenderNav title={title} isLoading={isLoading} />
       <VStack h="100%" w="100%" spacing={0}>
         <HStack
-          px={{ base: 1, sm: 2, md: 6 }}
-          spacing={0}
           w="100%"
           h="auto"
+          px={{ base: 1, sm: 2, md: 6 }}
+          spacing={0}
           alignContent="center"
           alignItems="center"
         >
           {weekdays.map((weekDay) => {
             return (
               <Box
+                key={weekDay}
                 display="flex"
-                alignContent="center"
-                alignItems="center"
-                bg="transparent"
-                border="1px solid #0068ff"
                 w="100%"
                 h={10}
-                key={weekDay}
+                bg="transparent"
+                border="1px solid #0068ff"
+                alignContent="center"
+                alignItems="center"
               >
                 <Text display={{ base: "none", md: "block" }} w="100%" h="auto">
                   {weekDay}
@@ -110,9 +110,9 @@ const Calender = ({
           })}
         </HStack>
         <SimpleGrid
-          px={{ base: 1, sm: 2, md: 6 }}
           w="100%"
           h="100%"
+          px={{ base: 1, sm: 2, md: 6 }}
           columns={7}
           alignItems="center"
         >
@@ -151,7 +151,7 @@ const Calender = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                        `/${sticker === null ? 0 : sticker}`
+                      `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );

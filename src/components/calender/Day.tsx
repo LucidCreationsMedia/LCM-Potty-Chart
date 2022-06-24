@@ -90,11 +90,12 @@ const Day = ({
 
   return isOverflow ? (
     <VStack
-      bg="transparent"
-      color="gray.600"
-      border="1px solid #181d8f"
       w="100%"
       h="100%"
+      bg="transparent"
+      pt={2}
+      color="gray.600"
+      border="1px solid #181d8f"
       _hover={{
         cursor: isBefore(currDateObj, endOfDay(currDate))
           ? "pointer"
@@ -107,7 +108,6 @@ const Day = ({
       spacing="0.5rem"
       alignContent="center"
       justifyContent="flex-start"
-      pt={2}
     >
       <Text w="auto" h="auto">
         {`${getDate(currDateObj)}`}
@@ -126,6 +126,8 @@ const Day = ({
     </VStack>
   ) : (
     <VStack
+      w="100%"
+      h="100%"
       bg={
         tutorial
           ? tutorial === "add" && isToday
@@ -133,8 +135,8 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-            ? "gray.600"
-            : "transparent"
+              ? "gray.600"
+              : "transparent"
           : "transparent"
       }
       border={
@@ -144,12 +146,10 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-            ? "1px solid #00ff3c"
-            : "1px solid #0068ff"
+              ? "1px solid #00ff3c"
+              : "1px solid #0068ff"
           : "1px solid #0068ff"
       }
-      w="100%"
-      h="100%"
       onClick={() => {
         setStep(0);
         setSelectedSticker(null);
@@ -168,13 +168,15 @@ const Day = ({
             : tutorial === "edit" &&
               !isToday &&
               isBefore(currDateObj, endOfDay(currDate))
-            ? "gray.600"
-            : "transparent"
+              ? "gray.600"
+              : "transparent"
           : "transparent",
         border: "1px solid #FFF"
       }}
     >
       <Text
+        h="auto"
+        w="auto"
         p={
           isToday
             ? getDate(currDateObj) > 10
@@ -182,8 +184,6 @@ const Day = ({
               : "0px 9px 3px 9px"
             : "auto"
         }
-        h="auto"
-        w="auto"
         border={isToday ? "1px solid #0068ff" : "0px"}
         borderRadius={isToday ? "100px" : "0px"}
       >

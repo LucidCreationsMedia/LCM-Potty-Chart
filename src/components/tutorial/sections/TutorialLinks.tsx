@@ -18,9 +18,9 @@ const TutorialLinks = (): JSX.Element => {
         {"More Info"}
       </Heading>
       <HStack
+        display={{ base: "none", lg: "flex" }}
         h="auto"
         w="100%"
-        display={{ base: "none", lg: "flex" }}
         justifyContent="center"
         alignContent="center"
         spacing={4}
@@ -49,9 +49,9 @@ const TutorialLinks = (): JSX.Element => {
         })}
       </HStack>
       <VStack
+        display={{ base: "flex", lg: "none" }}
         h="auto"
         w="100%"
-        display={{ base: "flex", lg: "none" }}
         justifyContent="center"
         alignContent="center"
         spacing={4}

@@ -84,8 +84,8 @@ const Header = (): JSX.Element => {
         open
           ? "brand.main"
           : transparentNavbar
-          ? "rgba(49, 56, 220, 0.9)"
-          : "brand.main"
+            ? "rgba(49, 56, 220, 0.9)"
+            : "brand.main"
       }
       transition=".5s ease"
       borderRadius="0px 0px 10px 10px"
@@ -99,18 +99,18 @@ const Header = (): JSX.Element => {
     >
       {/* Logo | Site Name */}
       <HStack
+        display={{ base: "flex", lg: "none" }}
+        position="absolute"
         width="100%"
+        height={12}
+        top={0}
+        ml={4}
+        spacing="5px"
         justifyContent={{
           base: "flex-start",
           sm: "center"
         }}
         alignItems="center"
-        height={12}
-        top={0}
-        position="absolute"
-        ml={4}
-        display={{ base: "flex", lg: "none" }}
-        spacing="5px"
         _hover={{
           cursor: "default"
         }}
@@ -163,21 +163,21 @@ const Header = (): JSX.Element => {
         </HStack>
         <Menu isLazy lazyBehavior="unmount" isOpen={open}>
           <MenuButton
+            id="mobile-menu-button"
             as={IconButton}
             aria-label="Mobile Menu"
             icon={menuIcon()}
-            onClick={() => setOpen(!open)}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
             display={{
               base: "inline-flex",
               lg: "none"
             }}
-            variant="mobileNav"
             bg={transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"}
-            type="button"
             border={transparentNavbar ? "1px solid #0068ff" : "none"}
-            id="mobile-menu-button"
+            variant="mobileNav"
+            type="button"
+            onClick={() => setOpen(!open)}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
           />
           <MobileNav updateOpen={setOpen} />
         </Menu>
