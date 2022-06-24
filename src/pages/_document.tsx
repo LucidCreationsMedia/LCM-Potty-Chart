@@ -5,7 +5,7 @@ import AppTheme from "../theme/AppTheme";
 
 const description =
   // "Behavior and progress tracker for ABDLs and babyfurs alike. Track multiple littles and create any trackers you would like.";
-  "Alpha preview of a, calender like, 'start chart' behavior and progress tracker for ABDLs and babyfurs.";
+  "Beta preview of a, calender like, 'star chart' behavior and progress tracker for ABDLs, diaperfurs, and babyfurs.";
 
 const logo = "images/logo.svg";
 const logoOG = "/images/logo.png";
