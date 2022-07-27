@@ -16,7 +16,7 @@
     "pretty": "prettier --write ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.2.1",
+    "@chakra-ui/react": "<=2.2.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@iconify/react": "^3.2.2",

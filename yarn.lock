@@ -610,7 +610,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/react@npm:^2.2.1":
+"@chakra-ui/react@npm:<=2.2.1":
   version: 2.2.1
   resolution: "@chakra-ui/react@npm:2.2.1"
   dependencies:
@@ -3807,7 +3807,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "lucid-creations-media-potty-chart@workspace:."
   dependencies:
-    "@chakra-ui/react": ^2.2.1
+    "@chakra-ui/react": <=2.2.1
     "@emotion/react": ^11.9.3
     "@emotion/styled": ^11.9.3
     "@iconify/react": ^3.2.2
