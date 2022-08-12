@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {
-  darken,
-  mode,
-  StyleFunctionProps,
-  whiten
-} from "@chakra-ui/theme-tools";
+import { darken, mode, whiten } from "@chakra-ui/theme-tools";
 import { Dict } from "@chakra-ui/utils";
 
 const buttonStyles = {
@@ -14,7 +9,7 @@ const buttonStyles = {
   sizes: {},
   // styles for different visual variants ("outline", "solid")
   variants: {
-    primary: (props: Dict<never> | StyleFunctionProps) => ({
+    primary: (props: Dict<never>) => ({
       bg: "brand.primary",
       fontSize: "xl",
       py: 3,
@@ -27,7 +22,7 @@ const buttonStyles = {
         )(props)
       }
     }),
-    secondary: (props: Dict<never> | StyleFunctionProps) => ({
+    secondary: (props: Dict<never>) => ({
       bg: "brand.secondary",
       fontSize: "xl",
       py: 3,
@@ -40,7 +35,7 @@ const buttonStyles = {
         )(props)
       }
     }),
-    skip: (props: Dict<never> | StyleFunctionProps) => ({
+    skip: (props: Dict<never>) => ({
       bg: "transparent",
       fontSize: "xl",
       py: 3,
@@ -51,7 +46,7 @@ const buttonStyles = {
         color: "whiteAlpha.900"
       }
     }),
-    stickerButton: (props: Dict<never> | StyleFunctionProps) => ({
+    stickerButton: (props: Dict<never>) => ({
       bg: "transparent",
       fontSize: "4rem",
       px: 2,
@@ -63,7 +58,7 @@ const buttonStyles = {
         )(props)
       }
     }),
-    nav: (props: Dict<never> | StyleFunctionProps) => ({
+    nav: (props: Dict<never>) => ({
       bg: "transparent",
       fontSize: "md",
       px: 2,
@@ -82,7 +77,7 @@ const buttonStyles = {
         textDecoration: "underline"
       }
     }),
-    footer: (props: Dict<never> | StyleFunctionProps) => ({
+    footer: (props: Dict<never>) => ({
       bg: "brand.main",
       fontSize: "lg",
       py: 3,
@@ -92,7 +87,7 @@ const buttonStyles = {
         bg: mode(whiten("brand.main", 20), darken("brand.main", 20))(props)
       }
     }),
-    backToTop: (props: Dict<never> | StyleFunctionProps) => ({
+    backToTop: (props: Dict<never>) => ({
       bg: "rgba(23, 25, 35, 0.5)",
       fontSize: "lg",
       py: 2,
@@ -112,7 +107,7 @@ const buttonStyles = {
         border: "1px solid rgba(0, 134, 255, 1)"
       }
     }),
-    submit: (props: Dict<never> | StyleFunctionProps) => ({
+    submit: (props: Dict<never>) => ({
       fontSize: "lg",
       py: 2,
       px: 4,
@@ -131,7 +126,7 @@ const buttonStyles = {
         }
       }
     }),
-    mobileNav: (props: Dict<never> | StyleFunctionProps) => ({
+    mobileNav: (props: Dict<never>) => ({
       // bg: "transparent",
       fontSize: "md",
       px: 2,
@@ -152,7 +147,7 @@ const buttonStyles = {
         border: "1px solid #0068ff"
       }
     }),
-    patreon: (props: Dict<never> | StyleFunctionProps) => ({
+    patreon: (props: Dict<never>) => ({
       bg: "brand.patreon",
       fontSize: "lg",
       p: 3,
@@ -164,7 +159,7 @@ const buttonStyles = {
         )(props)
       }
     }),
-    twitter: (props: Dict<never> | StyleFunctionProps) => ({
+    twitter: (props: Dict<never>) => ({
       bg: "brand.twitter",
       fontSize: "lg",
       py: 3,
