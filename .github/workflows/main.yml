@@ -6,9 +6,7 @@ name: Node.js CI
 on:
   # Trigger the workflow on push or pull request,
   push:
-    branches:
-      # All branches
-      - 'main'
+    branches: [ master, stable ]
   pull_request:
     # These types of PRs
     types: [opened, synchronize, reopened]
