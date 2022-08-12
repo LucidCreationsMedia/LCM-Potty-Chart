@@ -20,7 +20,7 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@iconify/react": "^3.2.2",
-    "@reduxjs/toolkit": "^1.8.3",
+    "@reduxjs/toolkit": "^1.8.4",
     "date-fns": "^2.29.1",
     "formik": "^2.2.9",
     "framer-motion": "^7.1.0",
