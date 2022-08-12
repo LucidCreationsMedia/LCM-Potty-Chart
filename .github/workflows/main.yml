@@ -6,14 +6,13 @@ name: Node.js CI
 on:
   # Trigger the workflow on push or pull request,
   push:
-    branches: [ master, stable ]
+    branches: [main, stable]
   pull_request:
     # These types of PRs
     types: [opened, synchronize, reopened]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
