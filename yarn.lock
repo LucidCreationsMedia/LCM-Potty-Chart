@@ -1410,12 +1410,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iconify/react@npm:^3.2.2":
-  version: 3.2.2
-  resolution: "@iconify/react@npm:3.2.2"
+"@iconify/react@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@iconify/react@npm:4.0.0"
+  dependencies:
+    "@iconify/types": ^2.0.0
   peerDependencies:
     react: ">=16"
-  checksum: 8b52e1291d7e6c9422ab49eabd6c3bbb29cb852578c08616dd66a2b0e64aad4579ea3e8a6a3881d9d25d363eada16940e78477806fa36cfd98c0cd79778d7d0f
+  checksum: 8f6644ea6467fa2dc622a231bbb4705cc840e5f756c9a00b9d1deb4bf9cf122c03e654724335684f9a00b9c1fd2253cc2ca560e06285e65c09b8da50b3e0d06a
+  languageName: node
+  linkType: hard
+
+"@iconify/types@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@iconify/types@npm:2.0.0"
+  checksum: 029f58542c160e9d4a746869cf2e475b603424d3adf3994c5cc8d0406c47e6e04a3b898b2707840c1c5b9bd5563a1660a34b110d89fce43923baca5222f4e597
   languageName: node
   linkType: hard
 
@@ -3979,7 +3988,7 @@ __metadata:
     "@chakra-ui/react": ^2.3.2
     "@emotion/react": ^11.10.4
     "@emotion/styled": ^11.10.4
-    "@iconify/react": ^3.2.2
+    "@iconify/react": ^4.0.0
     "@reduxjs/toolkit": ^1.8.5
     "@types/node": ^18.7.16
     "@types/react": ^18.0.18
@@ -4000,7 +4009,7 @@ __metadata:
     react-dom: ^18.2.0
     react-redux: ^8.0.2
     sharp: ^0.31.0
-    typescript: ^4.8.2
+    typescript: ^4.8.3
   languageName: unknown
   linkType: soft
 
@@ -5467,23 +5476,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.2":
-  version: 4.8.2
-  resolution: "typescript@npm:4.8.2"
+"typescript@npm:^4.8.3":
+  version: 4.8.3
+  resolution: "typescript@npm:4.8.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 7f5b81d0d558c9067f952c7af52ab7f19c2e70a916817929e4a5b256c93990bf3178eccb1ac8a850bc75df35f6781b6f4cb3370ce20d8b1ded92ed462348f628
+  checksum: 8286a5edcaf3d68e65c451aa1e7150ad1cf53ee0813c07ec35b7abdfdb10f355ecaa13c6a226a694ae7a67785fd7eeebf89f845da0b4f7e4a35561ddc459aba0
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.2#~builtin<compat/typescript>":
-  version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=f456af"
+"typescript@patch:typescript@^4.8.3#~builtin<compat/typescript>":
+  version: 4.8.3
+  resolution: "typescript@patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=f456af"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 6f49363af8af2fe480da1d5fa68712644438785208b06690a3cbe5e7365fd652c3a0f1e587bc8684d78fb69de3dde4de185c0bad7bb4f3664ddfc813ce8caad6
+  checksum: 0404a09c625df01934ef774b45ce1ca57ccae41cd625fcdbb82056715320d9329e70d9d75c2c732ec6ef947444ca978c189a332b71fa21f5c1437d5a83e24906
   languageName: node
   linkType: hard
 
