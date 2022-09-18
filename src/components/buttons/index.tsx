@@ -2,7 +2,7 @@ import React from "react";
 import { Box, HStack, VStack } from "@chakra-ui/react";
 import CustomButton from "./Custom";
 import links, { LinkObj } from "./data/links";
-import Patreon from "./Patreon";
+import KoFi from "./KoFi";
 import Twitter from "./Twitter";
 
 const Buttons = (): JSX.Element => {
@@ -30,8 +30,8 @@ const Buttons = (): JSX.Element => {
             );
           }
 
-          if (type === "patreon") {
-            return <Patreon key={type} />;
+          if (type === "ko-fi") {
+            return <KoFi key={type} />;
           }
 
           if (type === "twitter") {
@@ -61,8 +61,8 @@ const Buttons = (): JSX.Element => {
             );
           }
 
-          if (type === "patreon") {
-            return <Patreon key={type} />;
+          if (type === "ko-fi") {
+            return <KoFi key={type} />;
           }
 
           if (type === "twitter") {
