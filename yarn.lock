@@ -2492,10 +2492,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.29.2":
-  version: 2.29.2
-  resolution: "date-fns@npm:2.29.2"
-  checksum: 08bebcceb0a5dbadae4c55e6592b9d5c07dbd7833433c7e9a1d4a424300db32589b8b48e5979b32863c9b00a48d9bab6663e580c2a4f9f203d46cbf9113b5664
+"date-fns@npm:^2.29.3":
+  version: 2.29.3
+  resolution: "date-fns@npm:2.29.3"
+  checksum: e01cf5b62af04e05dfff921bb9c9933310ed0e1ae9a81eb8653452e64dc841acf7f6e01e1a5ae5644d0337e9a7f936175fd2cb6819dc122fdd9c5e86c56be484
   languageName: node
   linkType: hard
 
@@ -3191,9 +3191,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^7.3.2":
-  version: 7.3.2
-  resolution: "framer-motion@npm:7.3.2"
+"framer-motion@npm:^7.3.5":
+  version: 7.3.5
+  resolution: "framer-motion@npm:7.3.5"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     "@motionone/dom": 10.13.1
@@ -3208,7 +3208,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: 357e358a220a39e7aa770a67e86a3366c59c46a5d334cf8602e3a630880d185f47571286650474a4f65c53264791e02b9712688813104070466c01d3e1191163
+  checksum: cf424759774baec082d4ab6912d5dedb97fa3e2fcf53bd8948b7dc9f22d296d1411c4de7b0608a5dcb95e4664856a8dcfbcd5ada6b5a005a1e3acd9781d7348f
   languageName: node
   linkType: hard
 
@@ -3994,7 +3994,7 @@ __metadata:
     "@types/react": ^18.0.18
     "@types/react-redux": ^7.1.24
     "@typescript-eslint/eslint-plugin": ^5.36.2
-    date-fns: ^2.29.2
+    date-fns: ^2.29.3
     eslint: ^8.23.0
     eslint-config-next: ^12.3.0
     eslint-config-prettier: ^8.5.0
@@ -4002,7 +4002,7 @@ __metadata:
     eslint-plugin-react: ^7.31.8
     eslint-plugin-react-hooks: ^4.6.0
     formik: ^2.2.9
-    framer-motion: ^7.3.2
+    framer-motion: ^7.3.5
     next: 12.3.0
     prettier: ^2.7.1
     react: ^18.2.0
