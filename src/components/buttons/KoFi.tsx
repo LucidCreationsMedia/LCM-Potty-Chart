@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 
 const MotionBox = motion<BoxProps>(Box);
 
-const Patreon = (): JSX.Element => {
+const KoFi = (): JSX.Element => {
   return (
     <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <Link
-        href="https://www.patreon.com/bePatron?u=15380906"
+        href="https://ko-fi.com/lucidcreationsmedia"
         target="_blank"
         rel="noopener"
       >
-        <Button variant="patreon" leftIcon={<Icon icon="ri:patreon-fill" />}>
+        <Button variant="patreon" leftIcon={<Icon icon="cib:ko-fi" />}>
           {"Fund The App"}
         </Button>
       </Link>
@@ -21,4 +21,4 @@ const Patreon = (): JSX.Element => {
   );
 };
 
-export default Patreon;
+export default KoFi;
