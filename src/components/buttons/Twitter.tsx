@@ -9,7 +9,7 @@ const Twitter = (): JSX.Element => {
   return (
     <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <Link
-        href="https://www.patreon.com/bePatron?u=15380906"
+        href="https://twitter.com/LCMDevelopment"
         target="_blank"
         rel="noopener"
       >

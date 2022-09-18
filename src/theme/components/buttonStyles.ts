@@ -147,16 +147,13 @@ const buttonStyles = {
         border: "1px solid #0068ff"
       }
     }),
-    patreon: (props: Dict<never>) => ({
-      bg: "brand.patreon",
+    kofi: (props: Dict<never>) => ({
+      bg: "brand.kofi",
       fontSize: "lg",
       p: 3,
       color: "whiteAlpha",
       _hover: {
-        bg: mode(
-          whiten("brand.patreon", 20),
-          darken("brand.patreon", 20)
-        )(props)
+        bg: mode(whiten("brand.kofi", 20), darken("brand.kofi", 20))(props)
       }
     }),
     twitter: (props: Dict<never>) => ({

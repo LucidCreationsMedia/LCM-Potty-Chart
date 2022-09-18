@@ -13,7 +13,7 @@ const KoFi = (): JSX.Element => {
         target="_blank"
         rel="noopener"
       >
-        <Button variant="patreon" leftIcon={<Icon icon="cib:ko-fi" />}>
+        <Button variant="kofi" leftIcon={<Icon icon="cib:ko-fi" />}>
           {"Fund The App"}
         </Button>
       </Link>
