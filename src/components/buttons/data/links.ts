@@ -13,8 +13,8 @@ const links: Links = [
     type: "secondary"
   },
   {
-    href: "https://lucidcreations.media/introducing-code-name-potty-chart/",
-    name: "Original Announcement",
+    href: "https://lucidcreations.media/lcm-potty-chart/",
+    name: "Official Announcement",
     type: "secondary"
   },
   {
