@@ -1,6 +1,6 @@
 import { HStack, Button, VStack, Checkbox } from "@chakra-ui/react";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import {
   setTutorialCompleted,
   setTempTutorialComplete,
