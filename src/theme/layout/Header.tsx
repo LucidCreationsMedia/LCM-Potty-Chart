@@ -84,8 +84,8 @@ const Header = (): JSX.Element => {
         open
           ? "brand.main"
           : transparentNavbar
-          ? "rgba(49, 56, 220, 0.9)"
-          : "brand.main"
+            ? "rgba(49, 56, 220, 0.9)"
+            : "brand.main"
       }
       transition=".5s ease"
       borderRadius="0px 0px 10px 10px"
@@ -115,7 +115,7 @@ const Header = (): JSX.Element => {
           cursor: "default"
         }}
       >
-        <Image height="30px" width="30px" src={appLogo} alt="App Logo" />
+        <Image height="30" width="30" src={appLogo} alt="App Logo" />
 
         <Heading as="h1" size="md">
           {appName}
@@ -150,7 +150,7 @@ const Header = (): JSX.Element => {
                 cursor: "default"
               }}
             >
-              <Image height="30px" width="30px" src={appLogo} alt="App Logo" />
+              <Image height="30" width="30" src={appLogo} alt="App Logo" />
               <Heading as="h1" size="md">
                 {appName}
               </Heading>
