@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
-import { store } from "../../app/store";
+import { store } from "../../redux/store";
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
