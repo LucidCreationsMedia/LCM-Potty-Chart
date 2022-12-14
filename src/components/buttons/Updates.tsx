@@ -5,17 +5,17 @@ import { motion } from "framer-motion";
 
 const MotionBox = motion<BoxProps>(Box);
 
-const Twitter = (): JSX.Element => {
+const Updates = (): JSX.Element => {
   return (
     <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <Link
-        href="https://twitter.com/LCMDevelopment"
+        href="https://t.me/LucidCreationsMedia"
         target="_blank"
         rel="noopener"
       >
         <Button
-          variant="twitter"
-          leftIcon={<Icon icon="akar-icons:twitter-fill" />}
+          variant="primary"
+          leftIcon={<Icon icon="bi:info-lg" />}
         >
           {"Dev Updates"}
         </Button>
@@ -24,4 +24,4 @@ const Twitter = (): JSX.Element => {
   );
 };
 
-export default Twitter;
+export default Updates;
