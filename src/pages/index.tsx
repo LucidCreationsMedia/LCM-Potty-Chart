@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { store } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { updateLoading } from "../features/calender";
 import {
   clearTutorialCompleted,

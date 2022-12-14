@@ -115,7 +115,7 @@ const Header = (): JSX.Element => {
           cursor: "default"
         }}
       >
-        <Image height="30px" width="30px" src={appLogo} alt="App Logo" />
+        <Image height="30" width="30" src={appLogo} alt="App Logo" />
 
         <Heading as="h1" size="md">
           {appName}
@@ -150,7 +150,7 @@ const Header = (): JSX.Element => {
                 cursor: "default"
               }}
             >
-              <Image height="30px" width="30px" src={appLogo} alt="App Logo" />
+              <Image height="30" width="30" src={appLogo} alt="App Logo" />
               <Heading as="h1" size="md">
                 {appName}
               </Heading>

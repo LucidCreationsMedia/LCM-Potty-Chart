@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { updateCurrDate, updateMonth } from "../../features/calender";
 import { Box, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { isSameDay, format } from "date-fns";

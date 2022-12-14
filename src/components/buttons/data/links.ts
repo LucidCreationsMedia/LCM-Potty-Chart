@@ -1,7 +1,7 @@
 export interface LinkObj {
   href?: string;
   name?: string;
-  type: "primary" | "secondary" | "twitter" | "ko-fi";
+  type: "primary" | "secondary" | "updates" | "ko-fi";
 }
 
 type Links = LinkObj[];
@@ -21,7 +21,9 @@ const links: Links = [
     type: "ko-fi"
   },
   {
-    type: "twitter"
+    href: "https://t.me/LucidCreationsMedia",
+    name: "Dev Updates",
+    type: "secondary"
   }
 ];
 
