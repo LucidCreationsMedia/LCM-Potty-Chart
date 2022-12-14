@@ -3,7 +3,6 @@ import { Box, HStack, VStack } from "@chakra-ui/react";
 import CustomButton from "./Custom";
 import links, { LinkObj } from "./data/links";
 import KoFi from "./KoFi";
-import Updates from "./Updates";
 
 const Buttons = (): JSX.Element => {
   return (
