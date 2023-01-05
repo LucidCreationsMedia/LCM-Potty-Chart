@@ -1817,10 +1817,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.15":
-  version: 18.11.15
-  resolution: "@types/node@npm:18.11.15"
-  checksum: cae8692a5cee0316f93ee0342237eb921f70c51afb37c661c711a925a4642654ae7e404c5a80899d481c0cfaff3a6891ef04bacd330a2e72734192bfc91dc2d8
+"@types/node@npm:^18.11.18":
+  version: 18.11.18
+  resolution: "@types/node@npm:18.11.18"
+  checksum: 03f17f9480f8d775c8a72da5ea7e9383db5f6d85aa5fefde90dd953a1449bd5e4ffde376f139da4f3744b4c83942166d2a7603969a6f8ea826edfb16e6e3b49d
   languageName: node
   linkType: hard
 
@@ -1838,15 +1838,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-redux@npm:^7.1.24":
-  version: 7.1.24
-  resolution: "@types/react-redux@npm:7.1.24"
+"@types/react-redux@npm:^7.1.25":
+  version: 7.1.25
+  resolution: "@types/react-redux@npm:7.1.25"
   dependencies:
     "@types/hoist-non-react-statics": ^3.3.0
     "@types/react": "*"
     hoist-non-react-statics: ^3.3.0
     redux: ^4.0.0
-  checksum: 6582246581331ac7fbbd44aa1f1c136c8a9c8febbcf462432ac81302263308c21e1a2e7868beb7f73bbcb52a8e67935d133cb37f5bdcb6564eaff3a811805101
+  checksum: a61ec25cbf8bb3720850402d3c49493fcff4afb73ad447d161460b5d4c600c984ad48708e8564d2fd32052eaa3c3b3f655c5b300ce813429637cce9e5958329f
   languageName: node
   linkType: hard
 
@@ -4270,9 +4270,9 @@ __metadata:
     "@emotion/styled": ^11.10.5
     "@iconify/react": ^4.0.1
     "@reduxjs/toolkit": ^1.9.1
-    "@types/node": ^18.11.15
+    "@types/node": ^18.11.18
     "@types/react": ^18.0.26
-    "@types/react-redux": ^7.1.24
+    "@types/react-redux": ^7.1.25
     "@typescript-eslint/eslint-plugin": ^5.46.1
     date-fns: ^2.29.3
     eslint: ^8.29.0
