@@ -16,15 +16,15 @@
     "pretty": "prettier --write ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.4.6",
+    "@chakra-ui/react": "^2.4.8",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@iconify/react": "^4.0.1",
     "@reduxjs/toolkit": "^1.9.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
-    "framer-motion": "^8.1.9",
-    "next": "13.1.1",
+    "framer-motion": "^8.4.3",
+    "next": "13.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
