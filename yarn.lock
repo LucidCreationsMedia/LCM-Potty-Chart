@@ -1463,14 +1463,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iconify/react@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@iconify/react@npm:4.0.1"
+"@iconify/react@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@iconify/react@npm:4.1.0"
   dependencies:
     "@iconify/types": ^2.0.0
   peerDependencies:
     react: ">=16"
-  checksum: db4d991b81b9412228b418ee3592d8589aabca973b2784423951b1caf7a42411d41d60d1949ee024eb9bc4a61cc691fa1dadabff94fb9a1eb5166fcccf1b5b01
+  checksum: 50de9d5bf191bc4a002c1a6763c7a8294fb88d5509cf347e8f037bf903ec344dded6ed0c50a190d18ca7c6b5293d4b7d950f636f3e1471115feffc3845b585f9
   languageName: node
   linkType: hard
 
@@ -1739,10 +1739,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.18":
-  version: 18.11.18
-  resolution: "@types/node@npm:18.11.18"
-  checksum: 03f17f9480f8d775c8a72da5ea7e9383db5f6d85aa5fefde90dd953a1449bd5e4ffde376f139da4f3744b4c83942166d2a7603969a6f8ea826edfb16e6e3b49d
+"@types/node@npm:^18.15.2":
+  version: 18.15.2
+  resolution: "@types/node@npm:18.15.2"
+  checksum: 6db83062d295f9da63e7b24477f734b497170a577b21e0c13637d6f355d53713f875536e52ff02938221330d919700b5ed787dc493e32624a3ecb6c86105cfc8
   languageName: node
   linkType: hard
 
@@ -4393,10 +4393,10 @@ __metadata:
     "@chakra-ui/react": ^2.5.1
     "@emotion/react": ^11.10.6
     "@emotion/styled": ^11.10.6
-    "@iconify/react": ^4.0.1
+    "@iconify/react": ^4.1.0
     "@reduxjs/toolkit": ^1.9.1
-    "@types/node": ^18.11.18
-    "@types/react": ^18.0.26
+    "@types/node": ^18.15.2
+    "@types/react": ^18.0.28
     "@types/react-redux": ^7.1.25
     "@typescript-eslint/eslint-plugin": ^5.48.1
     date-fns: ^2.29.3

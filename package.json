@@ -19,7 +19,7 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@iconify/react": "^4.0.1",
+    "@iconify/react": "^4.1.0",
     "@reduxjs/toolkit": "^1.9.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
@@ -31,8 +31,8 @@
     "sharp": "^0.31.3"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.26",
+    "@types/node": "^18.15.2",
+    "@types/react": "^18.0.28",
     "@types/react-redux": "^7.1.25",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "eslint": "^8.31.0",
