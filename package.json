@@ -16,19 +16,19 @@
     "pretty": "prettier --write ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.5.1",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
     "@iconify/react": "^4.1.0",
     "@reduxjs/toolkit": "^1.9.3",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
     "formik": "^2.2.9",
-    "framer-motion": "^10.2.5",
-    "next": "13.2.4",
+    "framer-motion": "^10.12.8",
+    "next": "13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "sharp": "^0.31.3"
+    "sharp": "^0.32.1"
   },
   "devDependencies": {
     "@types/node": "^18.15.2",
