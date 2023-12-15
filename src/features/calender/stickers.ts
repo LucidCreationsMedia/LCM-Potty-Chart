@@ -35,8 +35,8 @@ const stickersSlice = createSlice({
       const edited = currSticker.edited
         ? true
         : isSameDay(new Date(stickerDate), new Date())
-        ? false
-        : true;
+          ? false
+          : true;
       currSticker.edited = edited;
 
       // TODO: Add manually added here.

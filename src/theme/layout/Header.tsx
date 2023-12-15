@@ -84,8 +84,8 @@ const Header = (): JSX.Element => {
         open
           ? "brand.main"
           : transparentNavbar
-          ? "rgba(49, 56, 220, 0.9)"
-          : "brand.main"
+            ? "rgba(49, 56, 220, 0.9)"
+            : "brand.main"
       }
       transition=".5s ease"
       borderRadius="0px 0px 10px 10px"
