@@ -17,9 +17,9 @@ const links: Links = [
     name: "Official Announcement",
     type: "secondary"
   },
-  {
-    type: "ko-fi"
-  },
+  // {
+  //   type: "ko-fi"
+  // },
   {
     href: "https://t.me/LucidCreationsMedia",
     name: "Dev Updates",
